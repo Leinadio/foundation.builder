@@ -1,0 +1,599 @@
+{
+  "metadata": {
+    "title": "Test your business idea before wasting time (or money)",
+    "description": "Our AI analyzes your idea from all angles – market, target, problem, solution, business model – and provides you with clear, fast, and visual validation.",
+    "siteName": "Womi - Business Idea Validation"
+  },
+  "navbar": {
+    "howItWorks": "How it works?",
+    "pricing": "Pricing",
+    "whatYouGet": "What you'll get",
+    "faq": "FAQ",
+    "contact": "Contact"
+  },
+  "workflowHeader": {
+    "breadcrumb": "Explore business ideas",
+    "toast": {
+      "title": "Report unlocked",
+      "description": "All report sections are now available."
+    }
+  },
+  "hero": {
+    "title": "Test your business idea before wasting time (or money)",
+    "description": "Our AI analyzes your idea from all angles – market, target, problem, solution, business model – and provides you with clear, fast, and visual validation.",
+    "ctaText": "Validate my idea now"
+  },
+  "howItWorks": {
+    "title": "How does it work?",
+    "steps": {
+      "step1": {
+        "label": "Step 1",
+        "title": "Describe your idea",
+        "description1": "No need to have a business plan in mind, or even a perfectly clear concept. You can enter a simple idea, an intuition, a desire — like \"an app to exchange clothes between neighbors\" or \"a solution to help freelancers better manage their income\".",
+        "description2": "The AI understands your intention, even if it's vague. And if you're short on inspiration? No problem: it can also suggest coherent and original ideas to explore.",
+        "objective": "🎯 Objective: Start without pressure, whether you're a beginner or experienced.",
+        "questions": [
+          "Describe your business or project idea in detail",
+          "Where do you want to deploy your idea?",
+          "What problem does your idea solve for your potential customers?",
+          "Who are your target customers?",
+          "How would your idea generate revenue?",
+          "What is the name of your idea?"
+        ],
+        "placeholders": [
+          "Example: A mobile app that allows dog owners to find nearby dog walkers...",
+          "Example: Paris, New York, London, France etc.",
+          "Example: Help dog owners find nearby dog walkers",
+          "Example: Young parents, dog owners, elderly people, etc.",
+          "Example: Monthly subscription, commissions, online booking, one-time payment, etc.",
+          "Example: Lukli"
+        ]
+      },
+      "step2": {
+        "label": "Step 2",
+        "title": "AI analyzes and structures your idea",
+        "description1": "As soon as your idea is entered, the AI gets to work. It thinks like a business analyst, product expert, marketer, and investor combined. It identifies your market segment, potential customer profile, the problem you're solving, and the relevance of your solution.",
+        "description2": "It will also propose a logical business model, a strategy to acquire your first users, and identify the strengths and weaknesses of your idea. All of this is generated with global coherence: each element is connected to the others.",
+        "objective": "💡 In seconds, you have a complete vision of your project, far beyond simple brainstorming.",
+        "questions": [
+          "Describe your business or project idea in detail",
+          "Where do you want to deploy your idea?",
+          "What problem does your idea solve for your potential customers?",
+          "Who are your target customers?",
+          "How would your idea generate revenue?",
+          "What is the name of your idea?"
+        ],
+        "placeholders": [
+          "Example: A mobile app that allows dog owners to find nearby dog walkers...",
+          "Example: Paris, New York, London, France etc.",
+          "Example: Help dog owners find nearby dog walkers",
+          "Example: Young parents, dog owners, elderly people, etc.",
+          "Example: Monthly subscription, commissions, online booking, one-time payment, etc.",
+          "Example: Lukli"
+        ]
+      },
+      "step3": {
+        "label": "Step 3",
+        "title": "Explore",
+        "description1": "Your report is a reflection base. It allows you to take a step back, challenge your convictions and identify the most promising levers.",
+        "description2": "Each section of the report is clear, structured and designed to be actionable. You can read, compare, adjust mentally or in writing. Need a new perspective? Generate another version from a different angle, a different niche or a related problem.",
+        "objective": "🧠 It's like a quick reflection tool designed to help you clarify, iterate and move forward.",
+        "questions": [
+          "Describe your business or project idea in detail",
+          "Where do you want to deploy your idea?",
+          "What problem does your idea solve for your potential customers?",
+          "Who are your target customers?",
+          "How would your idea generate revenue?",
+          "What is the name of your idea?"
+        ],
+        "placeholders": [
+          "Example: A mobile app that allows dog owners to find nearby dog walkers...",
+          "Example: Paris, New York, London, France etc.",
+          "Example: Help dog owners find nearby dog walkers",
+          "Example: Young parents, dog owners, elderly people, etc.",
+          "Example: Monthly subscription, commissions, online booking, one-time payment, etc.",
+          "Example: Lukli"
+        ]
+      },
+      "step4": {
+        "label": "Step 4",
+        "title": "Get a clear, actionable, validated result",
+        "description1": "In minutes, you leave with: ✅ A clear, structured idea, ready to be pitched ✅ A validation score calculated from key criteria (coherence, clarity, viability) ✅ A complete sheet that you can export, rework or present",
+        "description2": "No more uncertainty, no more doubts, no more blockages. You have a solid foundation to move forward, make decisions, or simply know if your idea deserves your energy.",
+        "questions": [
+          "Describe your business or project idea in detail",
+          "Where do you want to deploy your idea?",
+          "What problem does your idea solve for your potential customers?",
+          "Who are your target customers?",
+          "How would your idea generate revenue?",
+          "What is the name of your idea?"
+        ],
+        "placeholders": [
+          "Example: A mobile app that allows dog owners to find nearby dog walkers...",
+          "Example: Paris, New York, London, France etc.",
+          "Example: Help dog owners find nearby dog walkers",
+          "Example: Young parents, dog owners, elderly people, etc.",
+          "Example: Monthly subscription, commissions, online booking, one-time payment, etc.",
+          "Example: Lukli"
+        ]
+      }
+    }
+  },
+  "features": {
+    "title": "Features",
+    "items": {
+      "marketSegment": "Market segment & target",
+      "problem": "Problem to solve",
+      "solution": "Actionable solution",
+      "businessModel": "Business model",
+      "acquisition": "Acquisition strategy",
+      "valueProposition": "Value proposition",
+      "risks": "Limitations & risks",
+      "validationScore": "Validation score"
+    }
+  },
+  "pricing": {
+    "title": "An offer adapted to each stage of your project",
+    "subtitle": "Validate your ideas with a one-time payment, no subscription. Different bundles for different needs.",
+    "featuresIncluded": "Features included:",
+    "featuresNotIncluded": "Features not included:",
+    "plans": {
+      "discovery": {
+        "title": "Discovery Plan",
+        "price": "Free",
+        "period": "forever"
+      },
+      "plus": {
+        "title": "Standard Bundle",
+        "price": "39€",
+        "period": "one-time payment"
+      },
+      "pro": {
+        "title": "Premium Bundle",
+        "price": "49€",
+        "period": "one-time payment"
+      }
+    },
+    "completeReport": {
+      "popular": "POPULAR",
+      "oneTimePayment": "ONE-TIME PAYMENT",
+      "title": "1 Complete Report",
+      "price": "29€",
+      "period": "one-time payment",
+      "description": "Validate a specific idea with all the necessary analysis to make an informed decision.",
+      "guarantee": "Money-back guarantee if not satisfied",
+      "benefits": {
+        "title": "What you get:",
+        "items": [
+          "<strong>1 full report</strong>",
+          "All sections unlocked"
+        ]
+      }
+    },
+    "orChooseSubscription": "Or choose a more complete bundle",
+    "billingToggle": {
+      "monthly": "Monthly",
+      "annual": "Annual",
+      "discount": "Save 20%"
+    },
+    "startingPlan": "STARTER",
+    "subscriptionPlan": "ONE-TIME PAYMENT",
+    "perMonth": "/month",
+    "discoveryDescription": "Test the concept without commitment and get a first overview of your idea.",
+    "discoveryFeatures": [
+      "<strong>Unlimited partial report</strong>",
+      "Project overview",
+      "\"Validate the idea\" section"
+    ],
+    "discoveryFeaturesNotIncluded": {
+      "title": "Features not included:",
+      "items": [
+        "Complete reports",
+        "In-depth market analysis",
+        "Priority support"
+      ]
+    },
+    "startFree": "Start for free",
+    "noCard": "No credit card required",
+    "plusDescription": "For creators exploring multiple ideas and wanting to validate their concepts.",
+    "plusFeatures": [
+      "<strong>5 complete reports</strong>",
+      "All the features of the Discovery plan",
+      "All sections unlocked"
+    ],
+    "proDescription": "For serious entrepreneurs who want to systematize and optimize their validation process.",
+    "proFeatures": [
+      "<strong>10 complete reports</strong>",
+      "All the features of the Discovery plan",
+      "All sections unlocked"
+    ],
+    "subscribe": "Buy now",
+    "subscribeOneTimePayment": "Buy now",
+    "subscribeAnnual": "Buy now",
+    "oneTimePaymentPrice": "29€ (one-time payment)",
+    "plusAnnualPrice": "39€ (one-time payment)",
+    "proAnnualPrice": "49€ (one-time payment)",
+    "plusAnnualDiscount": "Unlimited access for 1 year",
+    "proAnnualDiscount": "Unlimited access for 1 year",
+    "nonRefundable": "Non-refundable purchase - By purchasing, you accept this condition"
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "questions": {
+      "q1": {
+        "question": "Does AI replace real market research?",
+        "answer": "No. The tool uses artificial intelligence (GPT from OpenAI) to provide a structured and strategic reading of your idea, but it doesn't replace on-the-ground market research.\nIt's a fast validation step, designed for early-stage creators who want to assess their idea before investing too much time or money.\nThink of it as having a strategic mentor at your fingertips."
+      },
+      "q2": {
+        "question": "What is the process?",
+        "answer": "1. You answer 6 simple questions about your business idea (problem, target, solution, revenue, etc.)\n2. An expert AI (based on OpenAI's GPT models) analyzes your answers and generates a structured report\n3. You get a clear overview of your project, with recommendations, validation signals, and red flags\n4. You can then adjust, regenerate, or explore variations to refine your idea and take action quickly"
+      },
+      "q3": {
+        "question": "Is my data confidential?",
+        "answer": "Yes, your data is confidential.\nIt is never sold, shared, or used for commercial purposes.\nThe answers you provide are only used to generate your personalized report, and are not permanently stored or analyzed for any other purpose.\nWe respect your privacy and apply best security practices."
+      },
+      "q4": {
+        "question": "How accurate is the data?",
+        "answer": "The analyses are generated based on your input, combined with advanced language models (GPT from OpenAI), trained on millions of business cases, market trends, and entrepreneurial strategies.\nIt's not absolute truth, but rather a powerful strategic thinking tool that helps you gain clarity, identify weak signals, and avoid common pitfalls.\nThe more precise your answers are, the more useful, concrete, and actionable your report will be."
+      },
+      "q5": {
+        "question": "Can I get a refund?",
+        "answer": "No, purchases are non-refundable.\nDue to the nature of the service — immediate and personalized report generation — each purchase is considered final.\nWe encourage you to review examples and explanations carefully before making a payment."
+      }
+    }
+  },
+  "whatYouGet": {
+    "title": "What you'll get",
+    "subtitle": "A complete, structured, and directly usable report",
+    "description": "Starting from a simple idea, you get a detailed report that transforms intuition into a solid concept. The goal: save you time, prevent building in a vacuum, and give you a clear vision of your project's potential.",
+    "listTitle": "Here's everything you'll find in your report:",
+    "items": {
+      "audience": {
+        "title": "Audience & market segment",
+        "description": "You discover exactly who your idea is for. The AI identifies a precise segment, with clear characteristics (age, behavior, consumption patterns) to help you target effectively."
+      },
+      "marketAnalysis": {
+        "title": "Market analysis",
+        "description": "You understand the environment you're entering. Market size, dynamics, maturity, saturation or opportunities: AI helps you see if you're entering a promising or risky space."
+      },
+      "realProblem": {
+        "title": "Real problem",
+        "description": "An idea is only valuable if it solves a real problem. AI helps you formulate your target's main pain point precisely. You'll know what your product needs to solve concretely."
+      },
+      "adaptedSolution": {
+        "title": "Adapted solution",
+        "description": "A relevant solution doesn't come out of nowhere. AI proposes a response coherent with the problem and target, designed to be actionable, credible, and simple to test."
+      },
+      "businessModel": {
+        "title": "Viable business model",
+        "description": "Without monetization, there's no business. Your report includes the revenue strategy best suited to your project: subscription, commission, one-shot, freemium model, etc."
+      },
+      "acquisition": {
+        "title": "Acquisition strategy",
+        "description": "Having an idea is good. Knowing how to find your first users is better. AI suggests channels adapted to your target, whether it's SEO, partnerships, content, or communities."
+      },
+      "valueProposition": {
+        "title": "Unique value proposition",
+        "description": "Why should people choose your idea? A clear and differentiating formula that summarizes how your solution is better or different from what already exists."
+      },
+      "competition": {
+        "title": "Competition & alternatives",
+        "description": "Just because you're the only one thinking about it doesn't mean you're alone in the market. AI identifies players close to your idea and shows you where you can differentiate intelligently."
+      },
+      "risks": {
+        "title": "Limitations and risks",
+        "description": "Every idea has flaws. Knowing them in advance gives you a head start. You receive an analysis of potential blockers (technical, adoption, market...) to better anticipate."
+      },
+      "validationScore": {
+        "title": "Global validation score",
+        "description": "A simple and visual score that helps you know if your idea deserves to be developed now. Based on coherence, problem relevance, business model solidity, and market maturity."
+      }
+    }
+  },
+  "story": {
+    "intro": "Let me tell you a story...",
+    "title": "I had an idea. But I didn't know if it really held up.",
+    "content": {
+      "intro": "I'm Daniel. I'm a developer, and like many, I've often had business ideas.",
+      "p1": "One day, I had one that seemed promising.",
+      "p2": "I wrote it down, started imagining the features, the design, even a domain name...",
+      "p3": "But quickly, a doubt blocked me:",
+      "doubts": [
+        "Does this idea address a real need?",
+        "Would people be willing to pay for this?",
+        "Am I wasting my time?"
+      ],
+      "p4": "I didn't want to code in a vacuum.",
+      "p5": "I wanted to be sure before committing.",
+      "p6": "That's why I created this tool.",
+      "p7": "An AI that takes a raw idea and transforms it into a structured, validated, and actionable concept.",
+      "p8": "Today, I use it for myself. And now, you can too.",
+      "signature": {
+        "name": "Daniel Dupont",
+        "title": "Passionate Developer & Entrepreneur"
+      }
+    }
+  },
+  "footer": {
+    "legal": {
+      "title": "LEGAL",
+      "links": ["Terms of use", "Privacy policy"]
+    },
+    "links": {
+      "title": "PLATFORM",
+      "links": [
+        "Pricing",
+        "Why WOMI",
+        "Validate for free",
+        "Help center",
+        "Partners & integrations",
+        "Become a partner",
+        "Security"
+      ]
+    },
+    "contact": {
+      "title": "Contact",
+      "email": "support@womi-validateidea.com"
+    }
+  },
+  "cta": {
+    "title": "Your idea deserves better than doubt",
+    "description": "Test it in a few clicks. Get clear validation and take action today.",
+    "button": "Validate my idea now"
+  },
+  "planChoice": {
+    "title": "Which bundle to choose?",
+    "options": [
+      {
+        "title": "Start with the Discovery plan if:",
+        "description": "You're curious, want to test the tool, or simply explore a first idea without commitment."
+      },
+      {
+        "title": "Go for the Complete Report if:",
+        "description": "You have a specific idea to validate and want a complete analysis to make a decision immediately."
+      },
+      {
+        "title": "Choose the Standard Bundle if:",
+        "description": "You're in a creative phase, exploring several ideas, and need to validate up to 5 concepts with in-depth analyses."
+      },
+      {
+        "title": "Upgrade to the Premium Bundle if:",
+        "description": "You're in a structured approach, needing to systematically compare many ideas or work on multiple projects in parallel."
+      }
+    ]
+  },
+  "targetProfiles": {
+    "title": "Who is it for?",
+    "description": "Our tool is designed for anyone with ideas who wants to validate their viability before fully committing.",
+    "profiles": {
+      "developers": {
+        "title": "Developers & Side Project Creators",
+        "question": "You have a cool idea, you could code it this weekend... but you don't know if anyone would be interested?",
+        "action": "Validate it before opening VS Code."
+      },
+      "students": {
+        "title": "Students",
+        "question": "Want to get started but don't know where to begin?",
+        "action": "AI helps you lay the foundations for a structured, clear, and credible project."
+      },
+      "freelancers": {
+        "title": "Freelancers",
+        "question": "Want to create an additional offer or service?",
+        "action": "Use the tool to test its relevance, market, and added value before launching."
+      },
+      "entrepreneurs": {
+        "title": "Project Leaders & Aspiring Entrepreneurs",
+        "question": "Want to start your business but hesitating between several ideas?",
+        "action": "You can test them, compare them, and move forward with the most solid one."
+      },
+      "curious": {
+        "title": "Even Curious Minds & Idea Tinkerers",
+        "question": "No need to be \"serious\" to start.",
+        "action": "Sometimes, a simple validated idea can change your daily life (or your career)."
+      }
+    }
+  },
+  "authDialog": {
+    "login": {
+      "title": "Welcome back",
+      "subtitle": "Enter your credentials to access your account",
+      "email": "Email",
+      "password": "Password",
+      "forgotPassword": "Forgot password?",
+      "loginButton": "Log in",
+      "loginLoading": "Logging in...",
+      "noAccount": "Don't have an account?",
+      "register": "Sign up",
+      "googleButton": "Sign in with Google"
+    },
+    "register": {
+      "title": "Get started now",
+      "subtitle": "Enter your credentials to access your account",
+      "name": "Full name",
+      "email": "Email",
+      "password": "Password",
+      "passwordPlaceholder": "min 8 characters",
+      "terms": "I agree to the",
+      "termsLink": "Terms of Use",
+      "registerButton": "Sign up",
+      "registerLoading": "Signing up...",
+      "hasAccount": "Already have an account?",
+      "login": "Log in",
+      "googleButton": "Sign up with Google"
+    },
+    "forgotPassword": {
+      "title": "Forgot password",
+      "subtitle": "Enter your email to receive a reset link",
+      "email": "Email",
+      "resetButton": "Send reset link",
+      "resetLoading": "Sending...",
+      "backToLogin": "Back to login",
+      "resetSuccess": "A reset email has been sent to {email}. Please check your inbox."
+    },
+    "common": {
+      "or": "or",
+      "emailPlaceholder": "Enter your email",
+      "namePlaceholder": "Enter your name"
+    },
+    "errors": {
+      "emailRequired": "Please enter your email",
+      "passwordRequired": "Please enter your password",
+      "nameRequired": "Please enter your name",
+      "termsRequired": "Please accept the terms of use",
+      "passwordLength": "Password must be at least 8 characters long",
+      "emailInUse": "This email is already in use",
+      "invalidEmail": "Invalid email format",
+      "weakPassword": "Password is too weak",
+      "userNotFound": "No account found with this email",
+      "wrongPassword": "Incorrect password",
+      "invalidCredentials": "Incorrect email or password",
+      "tooManyRequests": "Too many attempts. Please try again later",
+      "unknown": "An error occurred during login",
+      "unknownRegistration": "An error occurred during registration",
+      "unknownReset": "An error occurred, please try again later",
+      "googleAuthFailed": "Google sign-in failed. Please try again."
+    },
+    "toast": {
+      "loginSuccess": "You have been successfully logged in"
+    }
+  },
+  "appSidebar": {
+    "createReport": "Create a report",
+    "reports": "Complete reports available",
+    "available": "available",
+    "myReports": "My reports",
+    "noReports": "No reports available",
+    "faq": "FAQ",
+    "contact": "Contact / Support",
+    "user": "User",
+    "buyReports": "Buy reports",
+    "logout": "Logout",
+    "dashboard": "Dashboard",
+    "toast": {
+      "logoutSuccess": "You have been successfully logged out"
+    }
+  },
+  "homeContent": {
+    "description": "\"Validate my idea\" allows you to validate your business idea by submitting it to a thorough evaluation. This option is ideal if you already have a specific idea in mind and want to receive expert advice on its viability.",
+    "steps": {
+      "title": "Step {currentStep} of {totalSteps}",
+      "questions": [
+        "Describe your business or project idea in detail",
+        "Where do you want to deploy your idea?",
+        "What problem does your idea solve for your potential customers?",
+        "Who are your target customers?",
+        "How would your idea generate revenue?",
+        "What is the name of your idea?"
+      ],
+      "placeholders": [
+        "Example: A mobile app that allows dog owners to find nearby dog walkers...",
+        "Example: Paris, New York, London, France etc.",
+        "Example: Help dog owners find nearby dog walkers",
+        "Example: Young parents, dog owners, elderly people, etc.",
+        "Example: Monthly subscription, commissions, online booking, one-time payment, etc.",
+        "Example: Lukli"
+      ]
+    },
+    "tooltip": {
+      "why_info": "Why these informations?",
+      "content": "These informations are essential to personalize our analysis and provide you with relevant recommendations tailored to your unique situation."
+    },
+    "buttons": {
+      "start": "Start",
+      "loading": "Loading",
+      "next": "Next",
+      "previous": "Previous"
+    },
+    "inputError": "This field is required to continue."
+  },
+  "unlockReport": {
+    "button": "Unlock full report",
+    "limitReached": "You have reached your report limit.",
+    "buyMore": "Buy more reports",
+    "dialog": {
+      "title": "Unlock full report",
+      "description": "You are about to use 1 complete report out of your {reports} available reports.",
+      "remainingReports": "After this operation, you will have {count} report(s) remaining.",
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "unlocking": "Unlocking..."
+    }
+  },
+  "toolSidebar": {
+    "summary": "Summary",
+    "general": "General",
+    "overview": "Overview",
+    "sections": {
+      "validateIdea": {
+        "title": "Validate the idea",
+        "items": {
+          "identified_problem": "Real problem identified",
+          "target_audience": "Who is the target?",
+          "target_existing_solutions": "How does the target solve this problem today?",
+          "why_now": "Why now? (timing of opportunity)",
+          "early_signs_of_interest": "Early signs of potential interest",
+          "risk_of_false_positive": "Risk of it being just a \"false good idea\"",
+          "key_advice_before_next_step": "Advice before the next step"
+        }
+      },
+      "buildAndLaunch": {
+        "title": "Build & launch fast",
+        "items": {
+          "simplest_mvp_version": "Simplest MVP version",
+          "core_feature_to_build": "Most important feature to build",
+          "what_to_ignore_initially": "What you can ignore at first"
+        }
+      },
+      "findUsers": {
+        "title": "Find your first users",
+        "items": {
+          "where_to_find_target": "Where is your target? (identified channels)",
+          "hook_to_test": "Hook / message to test",
+          "where_to_launch": "Where to publish your project? (X, Reddit, PH, Discord, etc.)",
+          "marketing_strategy": "Marketing strategy",
+          "direct_outreach_strategy": "Direct outreach strategy (DM, messages)"
+        }
+      },
+      "monetization": {
+        "title": "Monetization",
+        "items": {
+          "pricing_strategy": "Pricing strategy",
+          "natural_business_model": "Natural business model",
+          "psychological_pricing": "Suggested psychological pricing",
+          "key_purchase_trigger": "Key trigger for purchase",
+          "existing_solutions_comparison": "Comparison with existing solutions"
+        }
+      },
+      "improveAndIterate": {
+        "title": "Improve and iterate",
+        "items": {
+          "expected_user_feedback": "Expected feedback from first users",
+          "adoption_barriers": "Elements that might hinder adoption",
+          "what_to_keep_or_kill": "How to know what to keep / remove?",
+          "minimal_feedback_tracking": "Minimal feedback tracking to implement",
+          "light_pivot_idea": "Pivot idea if poor traction",
+          "mid_term_vision": "Possible medium-term vision"
+        }
+      }
+    }
+  },
+  "workflowClient": {
+    "workflowNotFound": "No workflow found",
+    "sections": {
+      "general": "General",
+      "validate_idea": "Validate the idea",
+      "build_and_launch": "Build & launch",
+      "find_users": "Find users",
+      "monetize": "Monetization",
+      "improve": "Improve & iterate"
+    }
+  },
+  "support": {
+    "title": "Support",
+    "messagePlaceholder": "Your message...",
+    "submit": "Send",
+    "success": "Your message has been sent successfully. We will get back to you shortly.",
+    "error": "An error occurred while sending your message. Please try again.",
+    "sending": "Sending..."
+  }
+}
