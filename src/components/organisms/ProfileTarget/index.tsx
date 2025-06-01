@@ -5,6 +5,7 @@ import {
   Rocket,
   Coffee,
 } from "lucide-react";
+import { Card } from "@/components/ui/card";
 
 interface ProfileTargetProps {
   title: string;
@@ -44,8 +45,8 @@ export const ProfileTarget = ({
   profiles,
 }: ProfileTargetProps) => {
   return (
-    <section className="py-16 ">
-      <div className="container mx-auto max-w-7xl border-2 border-amber-300 rounded-2xl p-16">
+    <section className="py-16">
+      <Card className="container mx-auto max-w-7xl border-2 p-16 py-16">
         <h2 className="text-4xl font-bold text-center mb-6">
           {title}
         </h2>
@@ -62,10 +63,10 @@ export const ProfileTarget = ({
             <h3 className="text-xl font-bold text-center mb-4">
               {profiles.developers.title}
             </h3>
-            <p className="text-gray-600 text-center mb-2">
+            <p className="text-center mb-2">
               {profiles.developers.question}
             </p>
-            <p className="font-medium text-gray-800 text-center">
+            <p className="font-medium text-center">
               {profiles.developers.action}
             </p>
           </div>
@@ -78,10 +79,10 @@ export const ProfileTarget = ({
             <h3 className="text-xl font-bold text-center mb-4">
               {profiles.students.title}
             </h3>
-            <p className="text-gray-600 text-center mb-2">
+            <p className="text-center mb-2">
               {profiles.students.question}
             </p>
-            <p className="font-medium text-gray-800 text-center">
+            <p className="font-medium text-center">
               {profiles.students.action}
             </p>
           </div>
@@ -94,10 +95,10 @@ export const ProfileTarget = ({
             <h3 className="text-xl font-bold text-center mb-4">
               {profiles.freelancers.title}
             </h3>
-            <p className="text-gray-600 text-center mb-2">
+            <p className="text-center mb-2">
               {profiles.freelancers.question}
             </p>
-            <p className="font-medium text-gray-800 text-center">
+            <p className="font-medium text-center">
               {profiles.freelancers.action}
             </p>
           </div>
@@ -110,10 +111,10 @@ export const ProfileTarget = ({
             <h3 className="text-xl font-bold text-center mb-4">
               {profiles.entrepreneurs.title}
             </h3>
-            <p className="text-gray-600 text-center mb-2">
+            <p className="text-center mb-2">
               {profiles.entrepreneurs.question}
             </p>
-            <p className="font-medium text-gray-800 text-center">
+            <p className="font-medium text-center">
               {profiles.entrepreneurs.action}
             </p>
           </div>
@@ -126,15 +127,15 @@ export const ProfileTarget = ({
             <h3 className="text-xl font-bold text-center mb-4">
               {profiles.curious.title}
             </h3>
-            <p className="text-gray-600 text-center mb-2">
+            <p className="text-center mb-2">
               {profiles.curious.question}
             </p>
-            <p className="font-medium text-gray-800 text-center">
+            <p className="font-medium text-center">
               {profiles.curious.action}
             </p>
           </div>
         </div>
-      </div>
+      </Card>
     </section>
   );
 };

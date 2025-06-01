@@ -36,15 +36,13 @@ const LeftSideStep = ({
       {/* Étape côté gauche */}
       <div className="flex flex-col items-center md:flex-row gap-10 md:gap-24">
         <div className="flex-1">
-          <div className="inline-block px-4 py-1 rounded-full bg-primary text-primary-content font-medium text-sm mb-6">
+          <div className="inline-block px-4 py-1 rounded-full text-primary-foreground bg-primary font-medium text-sm mb-6">
             {label}
           </div>
           <h2 className="text-4xl font-bold mb-6">
             {title}
           </h2>
-          <p className="text-gray-600 text-lg mb-8">
-            {description}
-          </p>
+          <p className="text-lg mb-8">{description}</p>
 
           <p className="text-lg font-medium">{objective}</p>
         </div>
@@ -90,15 +88,13 @@ const RightSideStep = ({
       {/* Étape côté droit */}
       <div className="flex flex-col items-center md:flex-row-reverse gap-10 md:gap-24">
         <div className="flex-1">
-          <div className="inline-block px-4 py-1 rounded-full bg-primary text-primary-content font-medium text-sm mb-6">
+          <div className="inline-block px-4 py-1 rounded-full bg-primary text-primary-foreground font-medium text-sm mb-6">
             {label}
           </div>
           <h2 className="text-4xl font-bold mb-6">
             {title}
           </h2>
-          <p className="text-gray-600 text-lg mb-8">
-            {description}
-          </p>
+          <p className="text-lg mb-8">{description}</p>
           <p className="text-lg font-medium">{objective}</p>
         </div>
         <div className="hidden md:block flex-1 mt-8 md:mt-0">

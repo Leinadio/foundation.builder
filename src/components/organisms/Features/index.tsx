@@ -29,7 +29,7 @@ export const Features = ({
   items,
 }: FeaturesProps) => {
   return (
-    <section className="py-16 bg-[#FDF8F6]">
+    <section className="py-16 bg-secondary">
       <div className="container mx-auto px-4">
         <h2 className="text-4xl font-bold text-center mb-4">
           {title}
@@ -39,9 +39,9 @@ export const Features = ({
           <Card className="bg-transparent border-none shadow-none text-center">
             <CardContent className="pt-6">
               <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                <Target className="w-10 h-10 text-primary" />
+                <Target className="w-10 h-10 text-secondary-foreground" />
               </div>
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-secondary-foreground">
                 {items.marketSegment}
               </p>
             </CardContent>
@@ -50,9 +50,9 @@ export const Features = ({
           <Card className="bg-transparent border-none shadow-none text-center">
             <CardContent className="pt-6">
               <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                <Lightbulb className="w-10 h-10 text-primary" />
+                <Lightbulb className="w-10 h-10 text-secondary-foreground" />
               </div>
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-secondary-foreground">
                 {items.problem}
               </p>
             </CardContent>
@@ -61,9 +61,9 @@ export const Features = ({
           <Card className="bg-transparent border-none shadow-none text-center">
             <CardContent className="pt-6">
               <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                <Rocket className="w-10 h-10 text-primary" />
+                <Rocket className="w-10 h-10 text-secondary-foreground" />
               </div>
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-secondary-foreground">
                 {items.solution}
               </p>
             </CardContent>
@@ -72,9 +72,9 @@ export const Features = ({
           <Card className="bg-transparent border-none shadow-none text-center">
             <CardContent className="pt-6">
               <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                <BarChart3 className="w-10 h-10 text-primary" />
+                <BarChart3 className="w-10 h-10 text-secondary-foreground" />
               </div>
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-secondary-foreground">
                 {items.businessModel}
               </p>
             </CardContent>
@@ -83,9 +83,9 @@ export const Features = ({
           <Card className="bg-transparent border-none shadow-none text-center">
             <CardContent className="pt-6">
               <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                <LineChart className="w-10 h-10 text-primary" />
+                <LineChart className="w-10 h-10 text-secondary-foreground" />
               </div>
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-secondary-foreground">
                 {items.acquisition}
               </p>
             </CardContent>
@@ -94,9 +94,9 @@ export const Features = ({
           <Card className="bg-transparent border-none shadow-none text-center">
             <CardContent className="pt-6">
               <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                <Zap className="w-10 h-10 text-primary" />
+                <Zap className="w-10 h-10 text-secondary-foreground" />
               </div>
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-secondary-foreground">
                 {items.valueProposition}
               </p>
             </CardContent>
@@ -105,9 +105,9 @@ export const Features = ({
           <Card className="bg-transparent border-none shadow-none text-center">
             <CardContent className="pt-6">
               <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                <AlertTriangle className="w-10 h-10 text-primary" />
+                <AlertTriangle className="w-10 h-10 text-secondary-foreground" />
               </div>
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-secondary-foreground">
                 {items.risks}
               </p>
             </CardContent>
@@ -116,9 +116,9 @@ export const Features = ({
           <Card className="bg-transparent border-none shadow-none text-center">
             <CardContent className="pt-6">
               <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                <Award className="w-10 h-10 text-primary" />
+                <Award className="w-10 h-10 text-secondary-foreground" />
               </div>
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-secondary-foreground">
                 {items.validationScore}
               </p>
             </CardContent>

@@ -17,7 +17,7 @@ export const Pricing = async ({
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
           {/* Plan Découverte */}
           <div className="flex flex-col h-full rounded-xl border-2 border-gray-200 transition-all duration-300 hover:border-primary hover:shadow-lg">
-            <div className="p-6 flex flex-col flex-grow">
+            <div className="p-6 flex flex-col grow">
               <div className="flex flex-col">
                 <div className="bg-primary-lightest text-primary text-xs font-medium px-3 py-1 rounded-full self-start mb-4">
                   {
@@ -45,7 +45,7 @@ export const Pricing = async ({
                 <p className="text-sm font-medium mb-2 mt-4 border-t border-gray-100 pt-4">
                   {dict.pricing.featuresIncluded}
                 </p>
-                <ul className="space-y-3 mb-8 flex-grow">
+                <ul className="space-y-3 mb-8 grow">
                   {dict.pricing.completeReport.benefits.items.map(
                     (feature, index) => (
                       <li
@@ -92,7 +92,7 @@ export const Pricing = async ({
             <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-primary text-white text-sm font-bold px-4 py-1 rounded-full">
               {dict.pricing.completeReport.popular}
             </div>
-            <div className="p-6 flex flex-col flex-grow justify-between">
+            <div className="p-6 flex flex-col grow justify-between">
               <div className="flex flex-col">
                 <div className="bg-primary-light text-primary text-xs font-medium px-3 py-1 rounded-full self-start mb-4">
                   {dict.pricing.subscriptionPlan}
@@ -117,7 +117,7 @@ export const Pricing = async ({
                 <p className="text-sm font-medium mb-2 mt-4 border-t border-gray-100 pt-4">
                   {dict.pricing.featuresIncluded}
                 </p>
-                <ul className="space-y-3 mb-8 flex-grow">
+                <ul className="space-y-3 mb-8 grow">
                   {dict.pricing.plusFeatures.map(
                     (feature, index) => (
                       <li
@@ -164,7 +164,7 @@ export const Pricing = async ({
             {/* <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-primary text-white text-sm font-bold px-4 py-1 rounded-full">
               {dict.pricing.completeReport.popular}
             </div> */}
-            <div className="p-6 flex flex-col flex-grow">
+            <div className="p-6 flex flex-col grow">
               <div className="bg-primary-light text-primary text-xs font-medium px-3 py-1 rounded-full self-start mb-4">
                 {dict.pricing.subscriptionPlan}
               </div>
@@ -186,7 +186,7 @@ export const Pricing = async ({
               <p className="text-sm font-medium mb-2 mt-4 border-t border-gray-100 pt-4">
                 {dict.pricing.featuresIncluded}
               </p>
-              <ul className="space-y-3 mb-8 flex-grow">
+              <ul className="space-y-3 mb-8 grow">
                 {dict.pricing.proFeatures.map(
                   (feature, index) => (
                     <li

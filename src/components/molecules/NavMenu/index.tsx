@@ -7,6 +7,7 @@ import {
   NavigationMenuLink,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
+import { cn } from "@/lib/utils";
 
 export interface MenuItem {
   title: string;
@@ -28,14 +29,17 @@ export function NavMenu({
   avatarDropdown,
 }: NavigationMenuProps) {
   return (
-    <NavigationMenu>
+    <NavigationMenu className="hidden md:flex">
       <NavigationMenuList>
         {menuItems.map((item: MenuItem) => (
           <NavigationMenuItem key={item.title}>
             <NavigationMenuLink
               href={`#${item.sectionId}`}
               onClick={onItemClick}
-              className={navigationMenuTriggerStyle()}
+              className={cn(
+                navigationMenuTriggerStyle(),
+                "text-md"
+              )}
             >
               {item.title}
             </NavigationMenuLink>

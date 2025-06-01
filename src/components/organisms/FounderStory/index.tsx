@@ -84,7 +84,7 @@ export const FounderStory = ({
                 {content.signature.title}
               </div>
             </div>
-            <Avatar className="w-24 h-24 ring ring-primary ring-offset-base-100 ring-offset-2">
+            <Avatar className="w-24 h-24 ring-3 ring-primary ring-offset-base-100 ring-offset-2">
               <AvatarImage
                 src="/images/portrait_2.png"
                 alt="Daniel, créateur de WOMI"

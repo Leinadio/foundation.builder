@@ -37,7 +37,7 @@ export const ButtonAuth = ({
     <>
       <Button
         size="lg"
-        className="hover:bg-amber-200 w-full"
+        className="w-full cursor-pointer"
         onClick={() => handleClick()}
       >
         {children}

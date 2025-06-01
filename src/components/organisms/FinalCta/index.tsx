@@ -15,7 +15,7 @@ export const FinalCta = ({
   lang,
 }: FinalCtaProps) => {
   return (
-    <section className="py-16 text-primary-content">
+    <section className="py-16 text-primary-content flex justify-center items-center">
       <div className="hero">
         <div className="hero-content text-center">
           <div className="max-w-3xl">

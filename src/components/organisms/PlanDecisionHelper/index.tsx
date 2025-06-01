@@ -11,10 +11,10 @@ export const PlanDecisionHelper = ({
   options,
 }: PlanDecisionHelperProps) => {
   return (
-    <div className="mb-16 max-w-3xl mx-auto p-8 bg-gray-50 rounded-xl">
+    <div className="mb-16 max-w-3xl mx-auto p-8 border-2 border-primary rounded-xl">
       <h3 className="text-xl font-bold mb-4">{title}</h3>
       <ul className="space-y-4">
-        <li className="flex items-start">
+        <li className="flex items-start mb-6">
           <div className="bg-primary-light text-primary rounded-full w-6 h-6 flex items-center justify-center mr-3 mt-0.5">
             1
           </div>
@@ -27,7 +27,7 @@ export const PlanDecisionHelper = ({
             </p>
           </div>
         </li>
-        <li className="flex items-start">
+        <li className="flex items-start mb-6">
           <div className="bg-primary-light text-primary rounded-full w-6 h-6 flex items-center justify-center mr-3 mt-0.5">
             2
           </div>
@@ -40,7 +40,7 @@ export const PlanDecisionHelper = ({
             </p>
           </div>
         </li>
-        <li className="flex items-start">
+        <li className="flex items-start mb-6">
           <div className="bg-primary-light text-primary rounded-full w-6 h-6 flex items-center justify-center mr-3 mt-0.5">
             3
           </div>
@@ -53,7 +53,7 @@ export const PlanDecisionHelper = ({
             </p>
           </div>
         </li>
-        <li className="flex items-start">
+        <li className="flex items-start mb-6">
           <div className="bg-primary-light text-primary rounded-full w-6 h-6 flex items-center justify-center mr-3 mt-0.5">
             4
           </div>

@@ -1,3 +1,10 @@
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from "@/components/ui/card";
+
 interface WhatYouWillGetProps {
   title: string;
   subtitle: string;
@@ -54,6 +61,19 @@ export const WhatYouWillGet = ({
   listTitle,
   items,
 }: WhatYouWillGetProps) => {
+  const itemsArray = [
+    { ...items.audience, icon: "🎯" },
+    { ...items.marketAnalysis, icon: "📈" },
+    { ...items.realProblem, icon: "🧠" },
+    { ...items.adaptedSolution, icon: "💡" },
+    { ...items.businessModel, icon: "💰" },
+    { ...items.acquisition, icon: "🧲" },
+    { ...items.valueProposition, icon: "🔥" },
+    { ...items.competition, icon: "⚔️" },
+    { ...items.risks, icon: "⚠️" },
+    { ...items.validationScore, icon: "📊" },
+  ];
+
   return (
     <section className="pb-32" id="whatYouGet">
       <div className="container mx-auto px-4 max-w-6xl">
@@ -74,115 +94,22 @@ export const WhatYouWillGet = ({
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
-          {/* Item 1 */}
-          <div className="border-2 border-gray-100 rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow">
-            <div className="text-3xl mb-4">🎯</div>
-            <h4 className="text-xl font-bold mb-3">
-              {items.audience.title}
-            </h4>
-            <p className="text-gray-600">
-              {items.audience.description}
-            </p>
-          </div>
-
-          {/* Item 2 */}
-          <div className="border-2 border-gray-100 rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow">
-            <div className="text-3xl mb-4">📈</div>
-            <h4 className="text-xl font-bold mb-3">
-              {items.marketAnalysis.title}
-            </h4>
-            <p className="text-gray-600">
-              {items.marketAnalysis.description}
-            </p>
-          </div>
-
-          {/* Item 3 */}
-          <div className="border-2 border-gray-100 rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow">
-            <div className="text-3xl mb-4">🧠</div>
-            <h4 className="text-xl font-bold mb-3">
-              {items.realProblem.title}
-            </h4>
-            <p className="text-gray-600">
-              {items.realProblem.description}
-            </p>
-          </div>
-
-          {/* Item 4 */}
-          <div className="border-2 border-gray-100 rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow">
-            <div className="text-3xl mb-4">💡</div>
-            <h4 className="text-xl font-bold mb-3">
-              {items.adaptedSolution.title}
-            </h4>
-            <p className="text-gray-600">
-              {items.adaptedSolution.description}
-            </p>
-          </div>
-
-          {/* Item 5 */}
-          <div className="border-2 border-gray-100 rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow">
-            <div className="text-3xl mb-4">💰</div>
-            <h4 className="text-xl font-bold mb-3">
-              {items.businessModel.title}
-            </h4>
-            <p className="text-gray-600">
-              {items.businessModel.description}
-            </p>
-          </div>
-
-          {/* Item 6 */}
-          <div className="border-2 border-gray-100 rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow">
-            <div className="text-3xl mb-4">🧲</div>
-            <h4 className="text-xl font-bold mb-3">
-              {items.acquisition.title}
-            </h4>
-            <p className="text-gray-600">
-              {items.acquisition.description}
-            </p>
-          </div>
-
-          {/* Item 7 */}
-          <div className="border-2 border-gray-100 rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow">
-            <div className="text-3xl mb-4">🔥</div>
-            <h4 className="text-xl font-bold mb-3">
-              {items.valueProposition.title}
-            </h4>
-            <p className="text-gray-600">
-              {items.valueProposition.description}
-            </p>
-          </div>
-
-          {/* Item 8 */}
-          <div className="border-2 border-gray-100 rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow">
-            <div className="text-3xl mb-4">⚔️</div>
-            <h4 className="text-xl font-bold mb-3">
-              {items.competition.title}
-            </h4>
-            <p className="text-gray-600">
-              {items.competition.description}
-            </p>
-          </div>
-
-          {/* Item 9 */}
-          <div className="border-2 border-gray-100 rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow">
-            <div className="text-3xl mb-4">⚠️</div>
-            <h4 className="text-xl font-bold mb-3">
-              {items.risks.title}
-            </h4>
-            <p className="text-gray-600">
-              {items.risks.description}
-            </p>
-          </div>
-
-          {/* Item 10 */}
-          <div className="border-2 border-gray-100 rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow">
-            <div className="text-3xl mb-4">📊</div>
-            <h4 className="text-xl font-bold mb-3">
-              {items.validationScore.title}
-            </h4>
-            <p className="text-gray-600">
-              {items.validationScore.description}
-            </p>
-          </div>
+          {itemsArray.map((item, index) => (
+            <Card
+              key={index}
+              // className="border-2 border-gray-100 rounded-xl p-8 shadow-xs hover:shadow-md transition-shadow"
+            >
+              <CardHeader>
+                <div className="text-3xl mb-4">
+                  {item.icon}
+                </div>
+                <CardTitle>{item.title}</CardTitle>
+                <CardDescription>
+                  {item.description}
+                </CardDescription>
+              </CardHeader>
+            </Card>
+          ))}
         </div>
       </div>
     </section>

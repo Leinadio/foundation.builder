@@ -28,7 +28,6 @@ export function Header({
       <Logo logoUrl={logoUrl} />
       <NavMenu
         menuItems={menuItems}
-        className="hidden md:flex"
         avatarDropdown={
           <AvatarDropdown
             userSectionItems={userSectionItems}

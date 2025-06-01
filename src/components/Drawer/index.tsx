@@ -59,7 +59,7 @@ export function Drawer({
             asChild
             className="w-8 cursor-pointer"
           >
-            <X size={6} className="!mt-0" />
+            <X size={6} className="mt-0!" />
           </Button>
         </SheetHeader>
         {children}

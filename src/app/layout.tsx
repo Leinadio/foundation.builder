@@ -11,7 +11,10 @@ export default async function RootLayout({
   const { lang } = await params;
 
   return (
-    <html lang={lang} className="h-full w-full">
+    <html
+      lang={lang}
+      className="h-full w-full scroll-smooth"
+    >
       <head>
         <link rel="icon" href="./favicon.ico" sizes="any" />
         <script
