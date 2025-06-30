@@ -26,7 +26,7 @@ Ce projet est une construction d'un boilerplate en Next.js qui suit les principe
 - Utiliser des types stricts (TypeScript)
 - Utilise toujours des class dans le src/core/services et src/repositories
 - Utilise la composition plutôt que l'héritage
-<!-- - Le dossier app/ et hook/ ne doit jamais appeler directement le dossier repositories, mais toujours appeler le  -->
+- L'application ne doit jamais appeler directement le dossier repositories, mais toujours passer par le src/core/ports/in qui appellera src/core/services/
 
 ## Nommage des class 
 Services : [Entity]Service (ex: UserService, OrderService)
