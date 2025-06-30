@@ -1,34 +1,57 @@
 "use client";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
+type User = { id: string; name: string; email: string };
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState("");
-  const [formData, setFormData] = useState({
-    id: "",
-    name: "",
-    email: "",
-  });
+  const [formData, setFormData] = useState({ id: "", name: "", email: "" });
+  const [users, setUsers] = useState<User[]>([]);
+  const [editMode, setEditMode] = useState(false);
+  const [searchId, setSearchId] = useState("");
+  const [searchedUser, setSearchedUser] = useState<User | null>(null);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  // Charger la liste des utilisateurs
+  const fetchUsers = async () => {
+    setIsLoading(true);
+    try {
+      const res = await fetch("/api/users");
+      const data = await res.json();
+      setUsers(Array.isArray(data) ? data : []);
+    } catch {
+      setMessage("Erreur lors du chargement des utilisateurs.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchUsers();
+  }, []);
+
+  // Création ou modification
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
     setMessage("");
-
     try {
-      const response = await fetch(`/api/users/${formData.id}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
+      const url = editMode ? `/api/users/${formData.id}` : "/api/users";
+      const method = editMode ? "PUT" : "POST";
+      const res = await fetch(url, {
+        method,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
       });
-
-      if (response.ok) {
-        setMessage("Utilisateur créé avec succès !");
+      const data = await res.json();
+      if (res.ok) {
+        setMessage(editMode ? "Utilisateur modifié !" : "Utilisateur créé !");
         setFormData({ id: "", name: "", email: "" });
+        setEditMode(false);
+        fetchUsers();
       } else {
-        setMessage("Erreur lors de la création de l'utilisateur.");
+        setMessage(data.error || "Erreur lors de l'opération.");
       }
     } catch {
       setMessage("Erreur de connexion.");
@@ -37,26 +60,65 @@ export default function Home() {
     }
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+  // Suppression
+  const handleDelete = async (id: string) => {
+    if (!confirm("Supprimer cet utilisateur ?")) return;
+    setIsLoading(true);
+    setMessage("");
+    try {
+      const res = await fetch(`/api/users/${id}`, { method: "DELETE" });
+      const data = await res.json();
+      if (res.ok) {
+        setMessage("Utilisateur supprimé !");
+        fetchUsers();
+      } else {
+        setMessage(data.error || "Erreur lors de la suppression.");
+      }
+    } catch {
+      setMessage("Erreur de connexion.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Pré-remplir pour édition
+  const handleEdit = (user: User) => {
+    setFormData(user);
+    setEditMode(true);
+    setMessage("");
+  };
+
+  // Recherche par ID
+  const handleSearch = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setSearchedUser(null);
+    setMessage("");
+    try {
+      const res = await fetch(`/api/users/${searchId}`);
+      const data = await res.json();
+      if (res.ok) {
+        setSearchedUser(data);
+      } else {
+        setMessage(data.error || "Utilisateur non trouvé.");
+      }
+    } catch {
+      setMessage("Erreur de connexion.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
+      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start w-full max-w-2xl">
         <Image className="dark:invert" src="/next.svg" alt="Next.js logo" width={180} height={38} priority />
-
-        {/* Formulaire pour créer un utilisateur */}
+        {/* Formulaire création/modification */}
         <div className="w-full max-w-md">
-          <h2 className="text-2xl font-bold mb-4 text-center">Créer un utilisateur</h2>
-
+          <h2 className="text-2xl font-bold mb-4 text-center">{editMode ? "Modifier un utilisateur" : "Créer un utilisateur"}</h2>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label htmlFor="name" className="block text-sm font-medium mb-1">
+              <label htmlFor="id" className="block text-sm font-medium mb-1">
                 ID
               </label>
               <input
@@ -64,13 +126,13 @@ export default function Home() {
                 id="id"
                 name="id"
                 value={formData.id}
-                onChange={handleInputChange}
+                onChange={(e) => setFormData((f) => ({ ...f, id: e.target.value }))}
                 required
+                disabled={editMode}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:text-white"
-                placeholder="Entrez votre id"
+                placeholder="Entrez l'id"
               />
             </div>
-
             <div>
               <label htmlFor="name" className="block text-sm font-medium mb-1">
                 Nom
@@ -80,13 +142,12 @@ export default function Home() {
                 id="name"
                 name="name"
                 value={formData.name}
-                onChange={handleInputChange}
+                onChange={(e) => setFormData((f) => ({ ...f, name: e.target.value }))}
                 required
                 className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:text-white"
-                placeholder="Entrez votre nom"
+                placeholder="Entrez le nom"
               />
             </div>
-
             <div>
               <label htmlFor="email" className="block text-sm font-medium mb-1">
                 Email
@@ -96,62 +157,119 @@ export default function Home() {
                 id="email"
                 name="email"
                 value={formData.email}
-                onChange={handleInputChange}
+                onChange={(e) => setFormData((f) => ({ ...f, email: e.target.value }))}
                 required
                 className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:text-white"
-                placeholder="Entrez votre email"
+                placeholder="Entrez l'email"
               />
             </div>
-
             <button
               type="submit"
               disabled={isLoading}
               className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
-              {isLoading ? "Création en cours..." : "Créer utilisateur"}
+              {isLoading ? (editMode ? "Modification..." : "Création...") : editMode ? "Modifier" : "Créer utilisateur"}
+            </button>
+            {editMode && (
+              <button
+                type="button"
+                onClick={() => {
+                  setEditMode(false);
+                  setFormData({ id: "", name: "", email: "" });
+                }}
+                className="w-full mt-2 bg-gray-400 text-white py-2 px-4 rounded-md hover:bg-gray-500"
+              >
+                Annuler la modification
+              </button>
+            )}
+          </form>
+        </div>
+        {/* Recherche par ID */}
+        <div className="w-full max-w-md mt-4">
+          <h3 className="text-lg font-semibold mb-2">Rechercher un utilisateur par ID</h3>
+          <form onSubmit={handleSearch} className="flex gap-2">
+            <input
+              type="text"
+              value={searchId}
+              onChange={(e) => setSearchId(e.target.value)}
+              placeholder="ID utilisateur"
+              className="flex-1 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:text-white"
+            />
+            <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
+              Rechercher
             </button>
           </form>
-
-          {message && (
-            <div
-              className={`mt-4 p-3 rounded-md text-center ${
-                message.includes("succès")
-                  ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
-                  : "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200"
-              }`}
-            >
-              {message}
+          {searchedUser && (
+            <div className="mt-2 p-2 border rounded bg-gray-50 dark:bg-gray-800">
+              <div>
+                <b>ID :</b> {searchedUser.id}
+              </div>
+              <div>
+                <b>Nom :</b> {searchedUser.name}
+              </div>
+              <div>
+                <b>Email :</b> {searchedUser.email}
+              </div>
             </div>
           )}
         </div>
-
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            {"Utilisez le formulaire ci-dessus pour tester l'API"}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">/api/users</code>.
-          </li>
-          <li className="tracking-[-.01em]">Les données sont envoyées via POST à la route API.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image className="dark:invert" src="/vercel.svg" alt="Vercel logomark" width={20} height={20} />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+        {/* Liste des utilisateurs */}
+        <div className="w-full mt-8">
+          <div className="flex justify-between items-center mb-2">
+            <h3 className="text-lg font-semibold">Liste des utilisateurs</h3>
+            <button onClick={fetchUsers} className="bg-gray-200 px-3 py-1 rounded hover:bg-gray-300">
+              Rafraîchir
+            </button>
+          </div>
+          <div className="overflow-x-auto">
+            <table className="min-w-full border text-sm">
+              <thead>
+                <tr className="bg-gray-100 dark:bg-gray-700">
+                  <th className="px-2 py-1 border">ID</th>
+                  <th className="px-2 py-1 border">Nom</th>
+                  <th className="px-2 py-1 border">Email</th>
+                  <th className="px-2 py-1 border">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {users.length === 0 && (
+                  <tr>
+                    <td colSpan={4} className="text-center py-2">
+                      Aucun utilisateur
+                    </td>
+                  </tr>
+                )}
+                {users.map((user) => (
+                  <tr key={user.email}>
+                    <td className="border px-2 py-1">{user.id}</td>
+                    <td className="border px-2 py-1">{user.name}</td>
+                    <td className="border px-2 py-1">{user.email}</td>
+                    <td className="border px-2 py-1 flex gap-2 justify-center">
+                      <button onClick={() => handleEdit(user)} className="bg-yellow-400 px-2 py-1 rounded hover:bg-yellow-500">
+                        Éditer
+                      </button>
+                      <button onClick={() => handleDelete(user.id)} className="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600">
+                        Supprimer
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
+        {/* Message d'état */}
+        {message && (
+          <div
+            className={`mt-4 p-3 rounded-md text-center ${
+              /(succès|créé|modifié|supprimé|!)/i.test(message)
+                ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
+                : "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200"
+            }`}
+          >
+            {message}
+          </div>
+        )}
       </main>
       <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
         <a

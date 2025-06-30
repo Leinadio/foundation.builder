@@ -1,6 +1,9 @@
-import { User } from "@/core/domain/user";
+import { User } from "@/core/models/user";
 
 export interface UserRepository {
-  save(user: User): Promise<void>;
-  findById(id: string): Promise<User | null>;
+  getUser(id: string): Promise<User | null>;
+  getAllUsers(): Promise<User[]>;
+  createUser(user: User): Promise<void>;
+  updateUser(user: User): Promise<void>;
+  deleteUser(id: string): Promise<void>;
 }
