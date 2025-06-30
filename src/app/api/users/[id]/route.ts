@@ -1,9 +1,10 @@
 import { userServiceInstance } from "@/lib/di-container";
 import { NextResponse } from "next/server";
 
-export async function GET(_request: Request, { params }: { params: { id: string } }) {
+export async function GET(_: Request, { params }: { params: { id: string } }) {
   try {
-    const user = await userServiceInstance.getUser(params.id);
+    const { id } = await params;
+    const user = await userServiceInstance.getUser(id);
     if (!user) {
       return NextResponse.json({ error: "Utilisateur non trouvé" }, { status: 404 });
     }
@@ -16,8 +17,9 @@ export async function GET(_request: Request, { params }: { params: { id: string 
 
 export async function PUT(request: Request, { params }: { params: { id: string } }) {
   try {
+    const { id } = await params;
     const data = await request.json();
-    await userServiceInstance.updateUser({ ...data, id: params.id });
+    await userServiceInstance.updateUser({ ...data, id });
     return NextResponse.json({ message: "Utilisateur mis à jour" });
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : "Erreur inconnue";
@@ -25,9 +27,10 @@ export async function PUT(request: Request, { params }: { params: { id: string }
   }
 }
 
-export async function DELETE(_request: Request, { params }: { params: { id: string } }) {
+export async function DELETE(_: Request, { params }: { params: { id: string } }) {
   try {
-    await userServiceInstance.deleteUser(params.id);
+    const { id } = await params;
+    await userServiceInstance.deleteUser(id);
     return NextResponse.json({ message: "Utilisateur supprimé" });
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : "Erreur inconnue";

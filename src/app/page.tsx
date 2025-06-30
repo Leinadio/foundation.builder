@@ -1,13 +1,15 @@
 "use client";
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import { useUserSubscription } from "@/hooks/useUserSubscription";
+import { User } from "@/core/models/user";
 
-type User = { id: string; name: string; email: string };
+// type User = { id: string; name: string; email: string };
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState("");
-  const [formData, setFormData] = useState({ id: "", name: "", email: "" });
+  const [formData, setFormData] = useState({ id: "", displayName: "", email: "" });
   const [users, setUsers] = useState<User[]>([]);
   const [editMode, setEditMode] = useState(false);
   const [searchId, setSearchId] = useState("");
@@ -47,7 +49,7 @@ export default function Home() {
       const data = await res.json();
       if (res.ok) {
         setMessage(editMode ? "Utilisateur modifié !" : "Utilisateur créé !");
-        setFormData({ id: "", name: "", email: "" });
+        setFormData({ id: "", displayName: "", email: "" });
         setEditMode(false);
         fetchUsers();
       } else {
@@ -109,13 +111,19 @@ export default function Home() {
     }
   };
 
+  // Utilisation du hook temps réel pour l'utilisateur recherché
+  const { user: realtimeUser, error: realtimeError } = useUserSubscription(searchedUser ? searchedUser.id : null);
+  console.log("realtimeUser", realtimeUser);
+
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start w-full max-w-2xl">
         <Image className="dark:invert" src="/next.svg" alt="Next.js logo" width={180} height={38} priority />
         {/* Formulaire création/modification */}
         <div className="w-full max-w-md">
-          <h2 className="text-2xl font-bold mb-4 text-center">{editMode ? "Modifier un utilisateur" : "Créer un utilisateur"}</h2>
+          <h2 className="text-2xl font-bold mb-4 text-center">
+            {editMode ? "Modifier un utilisateur" : "Créer un utilisateur"}
+          </h2>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label htmlFor="id" className="block text-sm font-medium mb-1">
@@ -141,8 +149,8 @@ export default function Home() {
                 type="text"
                 id="name"
                 name="name"
-                value={formData.name}
-                onChange={(e) => setFormData((f) => ({ ...f, name: e.target.value }))}
+                value={formData.displayName}
+                onChange={(e) => setFormData((f) => ({ ...f, displayName: e.target.value }))}
                 required
                 className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:text-white"
                 placeholder="Entrez le nom"
@@ -175,7 +183,7 @@ export default function Home() {
                 type="button"
                 onClick={() => {
                   setEditMode(false);
-                  setFormData({ id: "", name: "", email: "" });
+                  setFormData({ id: "", displayName: "", email: "" });
                 }}
                 className="w-full mt-2 bg-gray-400 text-white py-2 px-4 rounded-md hover:bg-gray-500"
               >
@@ -205,10 +213,30 @@ export default function Home() {
                 <b>ID :</b> {searchedUser.id}
               </div>
               <div>
-                <b>Nom :</b> {searchedUser.name}
+                <b>Nom :</b> {searchedUser.displayName}
               </div>
               <div>
                 <b>Email :</b> {searchedUser.email}
+              </div>
+              {/* Affichage temps réel Firestore */}
+              <div className="mt-2">
+                <b>Temps réel Firestore :</b>
+                {realtimeError && <div className="text-red-600">Erreur : {realtimeError.message}</div>}
+                {realtimeUser ? (
+                  <div>
+                    <div>
+                      <b>ID (RT) :</b> {realtimeUser.id}
+                    </div>
+                    <div>
+                      <b>Nom (RT) :</b> {realtimeUser.displayName}
+                    </div>
+                    <div>
+                      <b>Email (RT) :</b> {realtimeUser.email}
+                    </div>
+                  </div>
+                ) : (
+                  <div className="text-gray-500">Aucune donnée temps réel</div>
+                )}
               </div>
             </div>
           )}
@@ -242,13 +270,19 @@ export default function Home() {
                 {users.map((user) => (
                   <tr key={user.email}>
                     <td className="border px-2 py-1">{user.id}</td>
-                    <td className="border px-2 py-1">{user.name}</td>
+                    <td className="border px-2 py-1">{user.displayName}</td>
                     <td className="border px-2 py-1">{user.email}</td>
                     <td className="border px-2 py-1 flex gap-2 justify-center">
-                      <button onClick={() => handleEdit(user)} className="bg-yellow-400 px-2 py-1 rounded hover:bg-yellow-500">
+                      <button
+                        onClick={() => handleEdit(user)}
+                        className="bg-yellow-400 px-2 py-1 rounded hover:bg-yellow-500"
+                      >
                         Éditer
                       </button>
-                      <button onClick={() => handleDelete(user.id)} className="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600">
+                      <button
+                        onClick={() => handleDelete(user.id)}
+                        className="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600"
+                      >
                         Supprimer
                       </button>
                     </td>

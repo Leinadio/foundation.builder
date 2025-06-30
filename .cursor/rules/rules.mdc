@@ -4,7 +4,7 @@ globs:
 alwaysApply: true
 ---
 ## Context
-Ce projet suit les principes de l'architecture hexagonale (Clean Architecture / Ports & Adapters). L'objectif est de séparer clairement la logique métier des détails techniques et des dépendances externes.
+Ce projet est une construction d'un boilerplate en Next.js qui suit les principes de l'architecture hexagonale (Clean Architecture / Ports & Adapters). L'objectif est de séparer clairement la logique métier des détails techniques et des dépendances externes.
 
 ## Structure des dossiers
 - src/core/services : Contient la logique métier de l'application (use cases, business rules)
@@ -13,6 +13,7 @@ Ce projet suit les principes de l'architecture hexagonale (Clean Architecture / 
 - src/core/models : Contient les entités métiers
 - src/repositories : Implémentations concrètes des interfaces définies dans ports/out. 
 - src/lib/di-container : Utiliser l'injection de dépendances pour inverser le contrôle
+- src/hooks: Les custom hooks de React
 
 ## Règle de codage
 - Les repositories doivent retourner une interface correspondant aux interfaces dans src/core/ports/out
@@ -23,6 +24,9 @@ Ce projet suit les principes de l'architecture hexagonale (Clean Architecture / 
 - Privilégier l'immutabilité dans le src/core
 - Gérer les erreurs de manière explicite
 - Utiliser des types stricts (TypeScript)
+- Utilise toujours des class dans le src/core/services et src/repositories
+- Utilise la composition plutôt que l'héritage
+<!-- - Le dossier app/ et hook/ ne doit jamais appeler directement le dossier repositories, mais toujours appeler le  -->
 
 ## Nommage des class 
 Services : [Entity]Service (ex: UserService, OrderService)
