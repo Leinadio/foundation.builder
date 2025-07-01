@@ -1,7 +1,7 @@
 import { AuthRepository } from "@/core/ports/out/auth.repository";
 import { User } from "@/core/models/user";
 import { auth, googleProvider } from "@/lib/firebase-client";
-import { firebaseUserToUser } from "@/lib/firebase.utils";
+import { User as FirebaseUser } from "firebase/auth";
 import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
@@ -18,17 +18,17 @@ export class FirebaseAuthRepositoryImpl implements AuthRepository {
       return null;
     }
 
-    return firebaseUserToUser(result.user);
+    return this.firebaseUserToUser(result.user);
   }
 
   public async registerWithEmail(email: string, password: string): Promise<User | null> {
     const result = await createUserWithEmailAndPassword(auth, email, password);
-    return firebaseUserToUser(result.user);
+    return this.firebaseUserToUser(result.user);
   }
 
   public async loginWithGoogle(): Promise<User | null> {
     const result = await signInWithPopup(auth, googleProvider);
-    return firebaseUserToUser(result.user);
+    return this.firebaseUserToUser(result.user);
   }
 
   public async logout(): Promise<void> {
@@ -37,8 +37,21 @@ export class FirebaseAuthRepositoryImpl implements AuthRepository {
 
   public onAuthStateChanged(callback: (user: User | null) => void): void {
     firebaseOnAuthStateChanged(auth, (firebaseUser) => {
-      const user = firebaseUserToUser(firebaseUser);
+      const user = this.firebaseUserToUser(firebaseUser);
       callback(user);
     });
+  }
+
+  private firebaseUserToUser(firebaseUser: FirebaseUser | null): User | null {
+    if (!firebaseUser) return null;
+    return {
+      id: firebaseUser.uid,
+      email: firebaseUser.email || "",
+      displayName: firebaseUser.displayName || "",
+      photoURL: firebaseUser.photoURL || "",
+      purchasedReports: 0,
+      updatedAt: new Date().toISOString(),
+      usedReports: 0,
+    };
   }
 }
