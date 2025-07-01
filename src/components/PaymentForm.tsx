@@ -18,7 +18,8 @@ function CheckoutForm() {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
-    if (!stripe || !elements || paymentLoading) {
+    const isPaymentDisabled = !stripe || !elements || paymentLoading;
+    if (isPaymentDisabled) {
       return;
     }
 
@@ -26,7 +27,6 @@ function CheckoutForm() {
     setPaymentStatus(null);
 
     try {
-      // 1. Créer un PaymentIntent
       const paymentIntent = await createPaymentIntent({
         amount,
         currency,
@@ -38,23 +38,40 @@ function CheckoutForm() {
         return;
       }
 
-      // 2. Confirmer le paiement avec la carte
-      const { error } = await stripe.confirmCardPayment(paymentIntent.clientSecret, {
+      const result = await stripe.confirmCardPayment(paymentIntent.clientSecret, {
         payment_method: {
           card: elements.getElement(CardElement)!,
         },
       });
 
-      if (error) {
-        setPaymentStatus(`Erreur: ${error.message}`);
-      } else {
-        setPaymentStatus("Paiement réussi !");
+      const hasError = result.error;
+      if (hasError) {
+        setPaymentStatus(`Erreur: ${result.error.message}`);
+        return;
       }
+
+      setPaymentStatus("Paiement réussi !");
     } catch {
       setPaymentStatus("Erreur lors du paiement");
     } finally {
       setIsProcessing(false);
     }
+  };
+
+  const getButtonText = () => {
+    if (isProcessing) {
+      return "Traitement...";
+    }
+    return `Payer ${amount / 100}€`;
+  };
+
+  const getPaymentStatusClassName = () => {
+    const baseClasses = "mt-4 p-3 rounded-md";
+    const isSuccess = paymentStatus?.includes("réussi");
+    if (isSuccess) {
+      return `${baseClasses} bg-green-100 text-green-700`;
+    }
+    return `${baseClasses} bg-red-100 text-red-700`;
   };
 
   return (
@@ -101,21 +118,13 @@ function CheckoutForm() {
           disabled={!stripe || isProcessing || paymentLoading}
           className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          {isProcessing ? "Traitement..." : `Payer ${amount / 100}€`}
+          {getButtonText()}
         </button>
       </form>
 
       {paymentError && <div className="mt-4 p-3 bg-red-100 text-red-700 rounded-md">{paymentError}</div>}
 
-      {paymentStatus && (
-        <div
-          className={`mt-4 p-3 rounded-md ${
-            paymentStatus.includes("réussi") ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"
-          }`}
-        >
-          {paymentStatus}
-        </div>
-      )}
+      {paymentStatus && <div className={getPaymentStatusClassName()}>{paymentStatus}</div>}
     </div>
   );
 }

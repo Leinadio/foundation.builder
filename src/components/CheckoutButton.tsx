@@ -29,6 +29,25 @@ export default function CheckoutButton() {
     }
   };
 
+  const getButtonLabel = (): string => {
+    if (loading) {
+      return "Redirection...";
+    }
+    return `Payer ${amount / 100}€ avec Checkout`;
+  };
+
+  if (error) {
+    return (
+      <div className="max-w-md mx-auto p-6 bg-white border rounded-lg shadow-md">
+        <h3 className="text-xl font-semibold mb-4">Stripe Checkout</h3>
+        <div className="mt-4 p-3 bg-red-100 text-red-700 rounded-md">{error}</div>
+        <div className="mt-4 text-sm text-gray-600">
+          <p>Cette méthode vous redirige vers la page de paiement sécurisée de Stripe.</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="max-w-md mx-auto p-6 bg-white border rounded-lg shadow-md">
       <h3 className="text-xl font-semibold mb-4">Stripe Checkout</h3>
@@ -54,11 +73,9 @@ export default function CheckoutButton() {
           disabled={loading}
           className="w-full bg-purple-600 text-white py-3 px-4 rounded-md hover:bg-purple-700 disabled:opacity-50 disabled:cursor-not-allowed font-medium"
         >
-          {loading ? "Redirection..." : `Payer ${amount / 100}€ avec Checkout`}
+          {getButtonLabel()}
         </button>
       </div>
-
-      {error && <div className="mt-4 p-3 bg-red-100 text-red-700 rounded-md">{error}</div>}
 
       <div className="mt-4 text-sm text-gray-600">
         <p>Cette méthode vous redirige vers la page de paiement sécurisée de Stripe.</p>

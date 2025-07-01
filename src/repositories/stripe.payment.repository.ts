@@ -134,8 +134,8 @@ export class StripePaymentRepositoryImpl implements PaymentRepository {
   private logStripeError(context: string, error: unknown): void {
     if (error instanceof Error) {
       console.error(`Erreur lors de la ${context}:`, error.message);
-    } else {
-      console.error(`Erreur inconnue lors de la ${context}:`, error);
+      return;
     }
+    console.error(`Erreur inconnue lors de la ${context}:`, error);
   }
 }

@@ -22,11 +22,10 @@ Ce projet est une construction d'un boilerplate en Next.js qui suit les principe
 - L'application (src/app, src/hooks, src/components) ne doit jamais appeler directement le dossier repositories, mais toujours passer par le src/core/ports/in qui appellera src/core/services/
 - L'implémentation des dépendances externes doit toujours et uniquement se faire dans repositories
 
-
 ## Règle de codage
 - Respecter le principe de responsabilité unique
 - Découpe toujours les fonctions en petites fonctions
-- Ne jamais faire de "if / else" ou de "if / else if / else", toujours privilégier les "return early"
+- Ne jamais faire de "if {} else {}" ou de "if {} else if {} else", toujours privilégier les "return early"
 - Privilégier l'immutabilité dans le src/core
 - Gérer les erreurs de manière explicite
 - Utiliser des types stricts (TypeScript)
@@ -35,6 +34,27 @@ Ce projet est une construction d'un boilerplate en Next.js qui suit les principe
 - N'utilise jamais de ternaires
 - Toujours utiliser l'immutabilité
 - Dans les class toujours, indiqué modificateur d'accès
+
+## Règle de codage - Processus de refactorisation
+- **AVANT** de commencer toute modification, faire une recherche exhaustive de TOUS les patterns interdits dans le fichier
+- **Rechercher systématiquement** : `if.*{.*}.*else`, `if.*{.*}.*else if`, `.*\?.*:.*` (ternaires)
+- **Vérifier chaque ligne** du fichier pour identifier tous les cas à corriger
+- **Ne jamais faire de modifications partielles** - corriger TOUS les patterns interdits en une seule fois
+- **Prioriser la correction complète** plutôt que la correction visible
+
+## Règle de codage - Méthodologie
+- **Étape 1** : Identifier tous les patterns interdits (if/else, ternaires)
+- **Étape 2** : Planifier toutes les corrections nécessaires
+- **Étape 3** : Appliquer toutes les corrections en une seule modification
+- **Étape 4** : Vérifier qu'aucun pattern interdit ne reste
+
+## Règle de codage - Vérification
+- **Après chaque modification**, relire le fichier complet pour s'assurer qu'aucun pattern interdit n'a été oublié
+- **Ne jamais considérer une modification comme terminée** tant que tous les patterns interdits n'ont pas été corrigés
+
+## Règle de codage spécifique à Next.js
+- Lors de la création d'un composant, privélégie la création d'un server component
+- Si le composant est un client component, ajoute le "use client" en haut du fichier
 
 ## Nommage des class 
 Services : [Entity]Service (ex: UserService, OrderService)
