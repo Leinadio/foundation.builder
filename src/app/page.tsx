@@ -292,6 +292,25 @@ export default function Home() {
             </table>
           </div>
         </div>
+        {/* Navigation vers les démonstrations */}
+        <div className="w-full mt-8">
+          <h3 className="text-lg font-semibold mb-4 text-center">🎯 Pages de démonstration</h3>
+          <div className="flex gap-4 justify-center flex-wrap">
+            <a
+              href="/auth-demo"
+              className="bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700 transition-colors"
+            >
+              📝 Démo Authentification
+            </a>
+            <a
+              href="/payment-demo"
+              className="bg-purple-600 text-white px-6 py-3 rounded-md hover:bg-purple-700 transition-colors"
+            >
+              💳 Démo Paiements Stripe
+            </a>
+          </div>
+        </div>
+
         {/* Message d'état */}
         {message && (
           <div

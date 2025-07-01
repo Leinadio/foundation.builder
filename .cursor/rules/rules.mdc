@@ -15,18 +15,26 @@ Ce projet est une construction d'un boilerplate en Next.js qui suit les principe
 - src/lib/di-container : Utiliser l'injection de dépendances pour inverser le contrôle
 - src/hooks: Les custom hooks de React
 
-## Règle de codage
+## Règle spécifique à l'architecture hexagonale
 - Les repositories doivent retourner une interface correspondant aux interfaces dans src/core/ports/out
-- Le dossier adapters/out qui est l'implémentation concrète correspond au dossier src/repositories/ 
+- Le dossier adapters/out n'exite pas, il est remplacé par l'implémentation concrète correspond au dossier src/repositories/ 
 - Le dossier adapters/in n'existe pas
+- L'application (src/app, src/hooks, src/components) ne doit jamais appeler directement le dossier repositories, mais toujours passer par le src/core/ports/in qui appellera src/core/services/
+- L'implémentation des dépendances externes doit toujours et uniquement se faire dans repositories
+
+
+## Règle de codage
 - Respecter le principe de responsabilité unique
-- Ne faire de "if/else", toujours privilégier les "return early"
+- Découpe toujours les fonctions en petites fonctions
+- Ne jamais faire de "if / else" ou de "if / else if / else", toujours privilégier les "return early"
 - Privilégier l'immutabilité dans le src/core
 - Gérer les erreurs de manière explicite
 - Utiliser des types stricts (TypeScript)
 - Utilise toujours des class dans le src/core/services et src/repositories
 - Utilise la composition plutôt que l'héritage
-- L'application ne doit jamais appeler directement le dossier repositories, mais toujours passer par le src/core/ports/in qui appellera src/core/services/
+- N'utilise jamais de ternaires
+- Toujours utiliser l'immutabilité
+- Dans les class toujours, indiqué modificateur d'accès
 
 ## Nommage des class 
 Services : [Entity]Service (ex: UserService, OrderService)
