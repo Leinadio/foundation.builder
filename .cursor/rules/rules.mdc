@@ -6,6 +6,11 @@ alwaysApply: true
 ## Context
 Ce projet est une construction d'un boilerplate en Next.js qui suit les principes de l'architecture hexagonale (Clean Architecture / Ports & Adapters). L'objectif est de séparer clairement la logique métier des détails techniques et des dépendances externes.
 
+## Lexique
+- l'utilisateur: Désigne la personne final qui intéragit avec l'application
+- application: Désigne le dossier src/app, il s'agit du front-end que l'utilisateur voient
+- les composants: Désigne le dossier (src/components), il s'agit des briques d'interface graphiques
+
 ## Structure des dossiers
 - src/core/services : Contient la logique métier de l'application (use cases, business rules)
 - src/core/ports/in : Interfaces de contrat pour les cas d'usage entrants (application)
@@ -34,6 +39,11 @@ Ce projet est une construction d'un boilerplate en Next.js qui suit les principe
 - N'utilise jamais de ternaires
 - Toujours utiliser l'immutabilité
 - Dans les class toujours, indiqué modificateur d'accès
+- L'application doit toujours appeler les abstractions venant de src/core
+- L'application ne doit jamais appelé une implémentations direct 
+- Ne créer pas de custom hook, appelle directement src/services via son port src/ports/in
+- Les pages de l'application doivent toujours être des server components
+
 
 ## Règle de codage - Processus de refactorisation
 - **AVANT** de commencer toute modification, faire une recherche exhaustive de TOUS les patterns interdits dans le fichier
