@@ -44,6 +44,11 @@ Ce projet est une construction d'un boilerplate en Next.js qui suit les principe
 - Ne créer pas de custom hook, appelle directement src/services via son port src/ports/in
 - Les pages de l'application doivent toujours être des server components
 
+## Règle de codage pour l'UI
+- Respecte l'atomic design par type de composant (atoms, molecules, organisms, templates) et non feature
+- Les composants de l'atomic design ne doivent jamais appelé directement le métier (src/services). Ce sont des composants pures
+- Utilise shadcn en l'intégrant dans l'atomic design
+- Il faut faire une abstraction des librairies UI exterieur en le wrappant dans l'atomic design
 
 ## Règle de codage - Processus de refactorisation
 - **AVANT** de commencer toute modification, faire une recherche exhaustive de TOUS les patterns interdits dans le fichier

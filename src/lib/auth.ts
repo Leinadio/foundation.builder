@@ -1,13 +1,13 @@
 import { betterAuth } from "better-auth";
 import { Resend } from "resend";
+import { Pool } from "pg";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export const auth = betterAuth({
-  database: {
-    provider: "sqlite",
-    url: process.env.DATABASE_URL || "file:./sqlite.db",
-  },
+  database: new Pool({
+    connectionString: process.env.DATABASE_URL,
+  }),
   emailAndPassword: {
     enabled: true,
     requireEmailVerification: true,
