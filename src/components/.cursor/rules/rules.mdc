@@ -1,0 +1,19 @@
+---
+alwaysApply: true
+---
+
+## Règle de codage
+
+Toujours créer un Server Component pour la structure statique et un Client Component minimal pour l'interactivité
+
+Toute logique métier (ex. : accès aux bases de données, appels à des API, traitement de données) doit être exécutée dans des Server Components en passant par src/core/ports/in. Évite d’exposer cette logique dans les Client Components.
+
+Créer des Clients Components uniquement si tu as besoin d'intéractivité
+
+Toujours utiliser Shadcn
+
+Les noms des fichiers des composants doivent être les mêmes que les noms des class
+
+Ne créer pas index.ts
+
+Toujours appeler les abstractions venant de src/core, si il y a besoin des dépendances externes

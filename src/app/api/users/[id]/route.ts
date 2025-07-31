@@ -1,4 +1,4 @@
-import { userServiceInstance } from "@/lib/di-container";
+import { userServiceInstance } from "@/lib/di-container-server";
 import { NextResponse } from "next/server";
 
 export async function GET(_: Request, { params }: { params: Promise<{ id: string }> }) {

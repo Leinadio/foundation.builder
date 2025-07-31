@@ -1,0 +1,19 @@
+---
+alwaysApply: true
+---
+
+## Règle de codage
+
+- Toujours utiliser des class
+- Toujours indiqué les modificateurs d'accès dans les class
+- Les repositories doivent retourner une interface correspondant aux interfaces dans src/core/ports/out
+- Le dossier adapters/out n'exite pas, il est remplacé par l'implémentation concrète correspond au dossier src/repositories/
+- L'implémentation des dépendances externes doit toujours et uniquement se faire dans repositories
+
+## Nommage du fichier
+
+Repositories : [Technology].[Entity].repository.ts
+
+## Nommage de la class
+
+Repositories : [Technology][Entity]RepositoryImpl (ex: FirestoreUserRepositoryImpl)

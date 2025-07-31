@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback } from "react";
 import { User } from "@/core/models/user";
-import { authServiceInstance } from "@/lib/di-container";
+import { authServiceInstance } from "@/lib/di-container-server";
 
 export function useAuth() {
   const [user, setUser] = useState<User | null>(null);

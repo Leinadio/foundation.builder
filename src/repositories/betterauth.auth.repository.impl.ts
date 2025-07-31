@@ -1,6 +1,6 @@
 import { AuthRepository } from "@/core/ports/out/auth.repository";
 import { User } from "@/core/models/user";
-import { authClient } from "@/lib/auth-client";
+import { authClient } from "@/lib/better-auth-client";
 
 interface BetterAuthUser {
   id: string;
@@ -96,12 +96,12 @@ export class BetterAuthRepositoryImpl implements AuthRepository {
         redirectTo: "/reset-password",
       });
     } catch (error) {
-      ("Erreur lors de la demande de réinitialisation:", error);
+      console.error("Erreur lors de la demande de réinitialisation:", error);
       throw new Error("Erreur lors de l'envoi de l'email de réinitialisation");
     }
   }
 
-  public async resetPassword(token: string, password: string): Promise<boolean> {
+  public async resetPassword(_token: string, password: string): Promise<boolean> {
     try {
       const result = await authClient.resetPassword({
         newPassword: password,

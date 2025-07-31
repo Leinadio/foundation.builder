@@ -12,23 +12,28 @@ export const auth = betterAuth({
     enabled: true,
     requireEmailVerification: true,
     sendResetPassword: async ({ user, url }) => {
-      await resend.emails.send({
+      const a = await resend.emails.send({
         from: process.env.RESEND_FROM_EMAIL || "noreply@example.com",
         to: [user.email],
         subject: "Réinitialiser votre mot de passe",
         html: getPasswordResetEmailTemplate(user.name || "Utilisateur", url),
       });
+      console.log("email sendResetPassword : ", a);
     },
   },
   emailVerification: {
     sendOnSignUp: true,
     sendVerificationEmail: async ({ user, url }) => {
-      await resend.emails.send({
+      // Modifier l'URL pour rediriger vers notre page après vérification
+      const verificationUrl = url.replace(/\/api\/auth\/verify-email/, "/verify-email");
+
+      const b = await resend.emails.send({
         from: process.env.RESEND_FROM_EMAIL || "noreply@example.com",
         to: [user.email],
         subject: "Vérifiez votre adresse email",
-        html: getVerificationEmailTemplate(user.name || "Utilisateur", url),
+        html: getVerificationEmailTemplate(user.name || "Utilisateur", verificationUrl),
       });
+      console.log("email sendVerificationEmail : ", b);
     },
   },
   socialProviders: {

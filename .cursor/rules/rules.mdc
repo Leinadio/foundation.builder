@@ -1,85 +1,43 @@
 ---
-description: 
-globs: 
+description:
+globs:
 alwaysApply: true
 ---
+
 ## Context
+
 Ce projet est une construction d'un boilerplate en Next.js qui suit les principes de l'architecture hexagonale (Clean Architecture / Ports & Adapters). L'objectif est de séparer clairement la logique métier des détails techniques et des dépendances externes.
 
 ## Lexique
+
 - l'utilisateur: Désigne la personne final qui intéragit avec l'application
 - application: Désigne le dossier src/app, il s'agit du front-end que l'utilisateur voient
 - les composants: Désigne le dossier (src/components), il s'agit des briques d'interface graphiques
 
 ## Structure des dossiers
+
 - src/core/services : Contient la logique métier de l'application (use cases, business rules)
 - src/core/ports/in : Interfaces de contrat pour les cas d'usage entrants (application)
 - src/core/ports/out : Interfaces de contrat pour les dépendances sortantes (base de données, services externes)
 - src/core/models : Contient les entités métiers
-- src/repositories : Implémentations concrètes des interfaces définies dans ports/out. 
+- src/repositories : Implémentations concrètes des interfaces définies dans ports/out.
 - src/lib/di-container : Utiliser l'injection de dépendances pour inverser le contrôle
 - src/hooks: Les custom hooks de React
 
 ## Règle spécifique à l'architecture hexagonale
-- Les repositories doivent retourner une interface correspondant aux interfaces dans src/core/ports/out
-- Le dossier adapters/out n'exite pas, il est remplacé par l'implémentation concrète correspond au dossier src/repositories/ 
+
 - Le dossier adapters/in n'existe pas
-- L'application (src/app, src/hooks, src/components) ne doit jamais appeler directement le dossier repositories, mais toujours passer par le src/core/ports/in qui appellera src/core/services/
-- L'implémentation des dépendances externes doit toujours et uniquement se faire dans repositories
 
 ## Règle de codage
+
 - Respecter le principe de responsabilité unique
-- Découpe toujours les fonctions en petites fonctions
+- Les fonctions doivent être le plus petit
 - Ne jamais faire de "if {} else {}" ou de "if {} else if {} else", toujours privilégier les "return early"
-- Privilégier l'immutabilité dans le src/core
+- Aucune imbrication de code est autorisés
+- N'utilise jamais de ternaires
+- Pas d'opérateurs conditionnels comme &&
+- Toujours utiliser l'immutabilité
 - Gérer les erreurs de manière explicite
 - Utiliser des types stricts (TypeScript)
-- Utilise toujours des class dans le src/core/services et src/repositories
 - Utilise la composition plutôt que l'héritage
-- N'utilise jamais de ternaires
-- Toujours utiliser l'immutabilité
-- Dans les class toujours, indiqué modificateur d'accès
-- L'application doit toujours appeler les abstractions venant de src/core
-- L'application ne doit jamais appelé une implémentations direct 
-- Ne créer pas de custom hook, appelle directement src/services via son port src/ports/in
-- Les pages de l'application doivent toujours être des server components
-
-## Règle de codage pour l'UI
-- Respecte l'atomic design par type de composant (atoms, molecules, organisms, templates) et non feature
-- Les composants de l'atomic design ne doivent jamais appelé directement le métier (src/services). Ce sont des composants pures
-- Utilise shadcn en l'intégrant dans l'atomic design
-- Il faut faire une abstraction des librairies UI exterieur en le wrappant dans l'atomic design
-
-## Règle de codage - Processus de refactorisation
-- **AVANT** de commencer toute modification, faire une recherche exhaustive de TOUS les patterns interdits dans le fichier
-- **Rechercher systématiquement** : `if.*{.*}.*else`, `if.*{.*}.*else if`, `.*\?.*:.*` (ternaires)
-- **Vérifier chaque ligne** du fichier pour identifier tous les cas à corriger
-- **Ne jamais faire de modifications partielles** - corriger TOUS les patterns interdits en une seule fois
-- **Prioriser la correction complète** plutôt que la correction visible
-
-## Règle de codage - Méthodologie
-- **Étape 1** : Identifier tous les patterns interdits (if/else, ternaires)
-- **Étape 2** : Planifier toutes les corrections nécessaires
-- **Étape 3** : Appliquer toutes les corrections en une seule modification
-- **Étape 4** : Vérifier qu'aucun pattern interdit ne reste
-
-## Règle de codage - Vérification
-- **Après chaque modification**, relire le fichier complet pour s'assurer qu'aucun pattern interdit n'a été oublié
-- **Ne jamais considérer une modification comme terminée** tant que tous les patterns interdits n'ont pas été corrigés
-
-## Règle de codage spécifique à Next.js
-- Lors de la création d'un composant, privélégie la création d'un server component
-- Si le composant est un client component, ajoute le "use client" en haut du fichier
-
-## Nommage des class 
-Services : [Entity]Service (ex: UserService, OrderService)
-Ports in : [Entity]PortIn (ex: UserPortIn)
-Ports out : [Entity]Repository (ex: UserRepository)
-Repositories : [Technology][Entity]RepositoryImpl (ex: FirestoreUserRepositoryImpl)
-
-## Nommage des fichiers
-Services : [Entity].service.ts (ex: user.service.ts)
-Ports in : [Entity].port.ts (ex: user.port.ts)
-Ports out : [Entity].repository.ts (ex: user.repository.ts)
-Models : [Entity].ts (ex: user.ts)
-Repositories : [Technology].[Entity].repository.ts
+- Aucune fonction ne doit être définie dans une fonction

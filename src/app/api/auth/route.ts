@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { authServiceInstance } from "@/lib/di-container";
+import { authServiceInstance } from "@/lib/di-container-server";
 
 export async function POST(request: Request) {
   try {
