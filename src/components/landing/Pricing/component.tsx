@@ -56,7 +56,7 @@ const pricingPlans = [
 
 function PricingCards({ isYearly }: { isYearly: boolean }) {
   return (
-    <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+    <div className="grid md:grid-cols-3 gap-8 mx-auto">
       {pricingPlans.map((plan, index) => {
         const price = isYearly ? plan.yearlyPrice : plan.monthlyPrice;
         const period = isYearly ? "an" : "mois";
@@ -120,8 +120,8 @@ function PricingCards({ isYearly }: { isYearly: boolean }) {
 
 export function Component() {
   return (
-    <section className="py-20 px-4">
-      <div className="max-w-7xl mx-auto">
+    <section className="py-20">
+      <div className="mx-auto">
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold mb-4">Choisissez votre plan</h2>

@@ -3,7 +3,7 @@ import Image from "next/image";
 export function HowItWork() {
   return (
     <section className="pt-36" id="howItWorks">
-      <div className="container mx-auto px-4 max-w-6xl">
+      <div className="mx-auto">
         <h2 className="text-3xl font-bold text-center mb-8">{"Comment ça marche ?"}</h2>
 
         {/* Étape 1 */}
