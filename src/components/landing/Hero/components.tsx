@@ -30,9 +30,7 @@ export function Hero() {
               </Button>
             </AuthDialog>
           </div>
-          <div className="max-w-2xl mx-auto relative flex justify-center">
-            <Icons variant={Variant.ArrowDown4} color="var(--primary)" />
-          </div>
+          <Icons variant={Variant.ArrowDown4} color="var(--primary)" className="w-36 h-36 mt-6" />
         </div>
       </div>
     </section>

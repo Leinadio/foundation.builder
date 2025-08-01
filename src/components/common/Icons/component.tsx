@@ -18,7 +18,7 @@ interface IconsProps {
   className?: string;
 }
 
-export function Component({ variant, width = 40, height = 200, color = "var(--primary)", className }: IconsProps) {
+export function Component({ variant, width, height, color = "var(--primary)", className }: IconsProps) {
   if (variant === Variant.ArrowDown1) {
     return (
       <svg
