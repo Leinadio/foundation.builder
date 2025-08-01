@@ -1,10 +1,11 @@
 import Image from "next/image";
+import { Icons, Variant } from "@/components/common/Icons";
 
 export function HowItWork() {
   return (
-    <section className="pt-36" id="howItWorks">
+    <section id="howItWorks">
       <div className="mx-auto">
-        <h2 className="text-3xl font-bold text-center mb-8">{"Comment ça marche ?"}</h2>
+        <h2 className="text-3xl font-bold text-center pb-24">{"Comment ça marche ?"}</h2>
 
         {/* Étape 1 */}
         <div className="flex flex-col items-center md:flex-row gap-10 md:gap-24">
@@ -39,14 +40,8 @@ export function HowItWork() {
         </div>
 
         {/* Flèche décorative après Étape 1 */}
-        <div className=" flex justify-center my-12 w-full">
-          <Image
-            src="/icon/arrow_7.svg"
-            alt="Flèche décorative"
-            width={80}
-            height={230}
-            className="relative right-10"
-          />
+        <div className="flex justify-center md:my-4 w-full">
+          <Icons variant={Variant.ArrowDown7} width={80} height={230} className="relative right-20 md:right-10" />
         </div>
 
         {/* Étape 2 */}
@@ -87,8 +82,8 @@ export function HowItWork() {
         </div>
 
         {/* Flèche décorative après Étape 2 */}
-        <div className="relative flex justify-center my-12 w-full">
-          <Image src="/icon/arrow_6.svg" alt="Flèche décorative" width={80} height={230} className="relative left-16" />
+        <div className="relative flex justify-center md:my-4 w-full">
+          <Icons variant={Variant.ArrowDown6} width={80} height={230} className="relative left-0 md:left-16" />
         </div>
 
         {/* Étape 3 */}
@@ -127,14 +122,8 @@ export function HowItWork() {
         </div>
 
         {/* Flèche décorative après Étape 3 */}
-        <div className="relative flex justify-center my-12 w-full">
-          <Image
-            src="/icon/arrow_7.svg"
-            alt="Flèche décorative"
-            width={80}
-            height={230}
-            className="relative right-11"
-          />
+        <div className="relative flex justify-center md:my-4 w-full">
+          <Icons variant={Variant.ArrowDown7} width={80} height={230} className="relative right-0 md:right-11" />
         </div>
       </div>
     </section>

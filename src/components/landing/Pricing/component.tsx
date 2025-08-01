@@ -64,10 +64,7 @@ function PricingCards({ isYearly }: { isYearly: boolean }) {
           isYearly && plan.name !== "Gratuit" ? Math.round(parseInt(plan.yearlyPrice) / 12) : null;
 
         return (
-          <Card
-            key={plan.name}
-            className={`relative ${plan.popular ? "border-primary shadow-lg scale-105" : "border-border"}`}
-          >
+          <Card key={plan.name} className={`relative ${plan.popular ? "border-primary shadow-lg" : "border-border"}`}>
             {plan.popular && (
               <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2" variant="default">
                 Le plus populaire
@@ -120,7 +117,7 @@ function PricingCards({ isYearly }: { isYearly: boolean }) {
 
 export function Component() {
   return (
-    <section className="py-20">
+    <section>
       <div className="mx-auto">
         {/* Header */}
         <div className="text-center mb-16">

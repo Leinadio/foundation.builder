@@ -26,7 +26,7 @@ function Feature() {
   };
 
   return (
-    <div className="w-full py-20 lg:py-40">
+    <div className="w-full">
       <div className="mx-auto">
         <div className="flex flex-col gap-4">
           <div>
