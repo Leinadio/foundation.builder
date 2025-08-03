@@ -8,7 +8,7 @@ import { FeatureSectionWithBento } from "@/components/landing/FeatureSectionWith
 import { FeatureSectionWithHoverEffects } from "@/components/landing/FeatureSectionWithHoverEffects";
 import { WithWithout } from "@/components/landing/WithWithout";
 import { Problem } from "@/components/landing/Problem";
-import { Solution } from "@/components/landing/Solution";
+import { Solution } from "@/components/landing/Profit";
 
 export default function Home() {
   return (
@@ -45,3 +45,4 @@ export default function Home() {
 // mieux vaut mettre seulement les comoposants du sidebar car la sidebar est une section de la page
 // au même titre que le header
 // TODO: Gérer l'espacement entre les sections
+// TODO: Pour le composant ForWho, regarder un caroussel

@@ -26,15 +26,12 @@ export default function Component() {
       <Headline
         title="Transformez le chaos en efficacité"
         description="L'efficacité retrouvée avec notre plateforme"
-        badge="SOLUTION"
+        badge="Bénéfices"
       />
 
-      <div className="space-y-12 flex flex-col gap-6">
-        {/* Section Solution */}
+      <div className="flex flex-col gap-6">
         <div className="space-y-6">
-          {/* Grille de fonctionnalités principales */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            {/* Centralisation des tâches */}
             <Card className="border-green-200 bg-green-50 hover:shadow-lg transition-shadow">
               <CardHeader className="relative">
                 <div className="mb-4 flex justify-center">
