@@ -7,21 +7,28 @@ import { ShowcaseBlog } from "@/components/landing/ShowcaseBlog";
 import { FeatureSectionWithBento } from "@/components/landing/FeatureSectionWithBento";
 import { FeatureSectionWithHoverEffects } from "@/components/landing/FeatureSectionWithHoverEffects";
 import { WithWithout } from "@/components/landing/WithWithout";
+import { Problem } from "@/components/landing/Problem";
+import { Solution } from "@/components/landing/Solution";
 
 export default function Home() {
   return (
     <div>
       <Hero />
-      <div className="px-4 md:px-0 mx-auto max-w-5xl flex flex-col mt-12 gap-12">
+      <div className={`px-4 md:px-0 mx-auto max-w-6xl flex flex-col mt-32 gap-32`}>
+        <Problem />
+        <Solution />
         <HowItWork />
+        <ForWho />
+
         <FeatureSectionWithHoverEffects />
         <FeatureSectionWithBento />
         <WithWithout />
         <Feature />
-        <ForWho />
         <Pricing />
       </div>
-      <ShowcaseBlog />
+      <div className={`mt-32`}>
+        <ShowcaseBlog />
+      </div>
     </div>
   );
 }
@@ -29,9 +36,12 @@ export default function Home() {
 // Terminé
 // TODO: Chercher des composants Landing Page sur V0x
 // TODO: Schématiser sur excalidraw le DI-Container-Client et DI-Container-Server
+// TODO: Gérer la taille de l'image en essayant d'enlever la width et height qui sont dynamiques pour le composant HowItWorks
+// TODO: Créer un composant problème
+// TODO: Créer un composant solution
 
 // En cours
 // TODO: Plutôt que de mettre la sidebar entière dans storybook,
 // mieux vaut mettre seulement les comoposants du sidebar car la sidebar est une section de la page
 // au même titre que le header
-// TODO: Gérer la taille de l'image en essayant d'enlever la width et height qui sont dynamiques
+// TODO: Gérer l'espacement entre les sections

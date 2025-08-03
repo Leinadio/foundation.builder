@@ -7,32 +7,24 @@ import { Icons, Variant } from "@/components/common/Icons";
 
 export function Hero() {
   return (
-    <section className="hero px-8 pt-4 md:pt-48 flex justify-center items-center">
-      <div className="hero-content text-center max-w-3xl flex flex-col items-center gap-4">
-        <div className="max-w-3xl flex flex-col items-center gap-4">
-          <div className="inline-flex">
-            <Badge variant="default">{"🚀 Nouveau - Validation d'idée par IA"}</Badge>
-          </div>
-          <ProductHungBadge />
-          <h1 className="text-3xl md:text-5xl font-bold text-gray-800 py-6">
-            {"Testez votre idée de business avant de perdre du temps (ou de l'argent)"}
-          </h1>
-          <p className="text-xl text-gray-800">
-            {
-              "Notre IA analyse votre idée sous tous les angles – marché, cible, problème, solution, business model – et vous fournit une validation claire, rapide et visuelle."
-            }
-          </p>
-          <div className="flex justify-center">
-            <AuthDialog>
-              <Button size="lg">
-                {"Testez votre idée"}
-                <CircleChevronRight className="w-4 h-4" />
-              </Button>
-            </AuthDialog>
-          </div>
-          <Icons variant={Variant.ArrowDown4} color="var(--primary)" className="w-36 h-36 mt-6" />
-        </div>
-      </div>
+    <section className="px-8 pt-4 md:pt-48 justify-center text-center flex flex-col mx-auto max-w-5xl items-center gap-5">
+      <Badge variant="default">{"🚀 Nouveau - Validation d'idée par IA"}</Badge>
+      <ProductHungBadge />
+      <h1 className="text-4xl md:text-6xl font-bold text-foreground">
+        {"Testez votre idée de business avant de perdre du temps (ou de l'argent)"}
+      </h1>
+      <p className="text-lg text-muted-foreground max-w-3xl">
+        {
+          "Notre IA analyse votre idée sous tous les angles – marché, cible, problème, solution, business model – et vous fournit une validation claire, rapide et visuelle."
+        }
+      </p>
+      <AuthDialog>
+        <Button size="lg">
+          {"Testez votre idée"}
+          <CircleChevronRight className="w-4 h-4" />
+        </Button>
+      </AuthDialog>
+      <Icons variant={Variant.ArrowDown4} color="var(--primary)" className="w-36 h-36 mt-6" />
     </section>
   );
 }
