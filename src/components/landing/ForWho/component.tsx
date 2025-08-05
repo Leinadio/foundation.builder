@@ -1,114 +1,129 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Headline } from "@/components/common/Headline";
 
-interface TargetAudience {
+interface CompanySize {
   id: string;
   title: string;
   description: string;
-  badge: string;
-  benefits: string[];
-  icon: string;
 }
 
-const targetAudiences: TargetAudience[] = [
+const companySizes: CompanySize[] = [
   {
-    id: "entrepreneurs",
-    title: "Entrepreneurs & Startups",
-    description: "Vous lancez votre projet et avez besoin d'une base solide pour développer rapidement",
-    badge: "Démarrage rapide",
-    benefits: [
-      "Architecture prête à l'emploi pour un MVP",
-      "Gain de temps de développement considérable",
-      "Bonnes pratiques intégrées dès le départ",
-      "Évolutivité garantie pour la croissance",
-    ],
-    icon: "🚀",
-  },
-  {
-    id: "developers",
-    title: "Développeurs Expérimentés",
-    description: "Vous cherchez une architecture clean et moderne pour vos projets Next.js",
-    badge: "Architecture avancée",
-    benefits: [
-      "Architecture hexagonale implémentée",
-      "Séparation claire des responsabilités",
-      "Code maintenable et testable",
-      "Patterns avancés prêts à utiliser",
-    ],
-    icon: "👨‍💻",
+    id: "startups",
+    title: "For startups & scaleups",
+    description:
+      "In-house banner production made easy. Generate on-brand banners and scale your marketing efforts as you grow.",
   },
   {
     id: "agencies",
-    title: "Agences & Équipes",
-    description: "Vous développez plusieurs projets et voulez standardiser vos pratiques",
-    badge: "Standardisation",
-    benefits: [
-      "Base commune pour tous vos projets",
-      "Onboarding facilité des nouveaux développeurs",
-      "Cohérence entre les équipes",
-      "Réduction des coûts de maintenance",
-    ],
-    icon: "🏢",
+    title: "For agencies",
+    description:
+      "Easily manage assets and banners for multiple brands, and create professional banners that impress your clients every time.",
   },
   {
-    id: "learners",
-    title: "Apprenants & Étudiants",
-    description: "Vous voulez apprendre les meilleures pratiques de développement moderne",
-    badge: "Apprentissage",
-    benefits: [
-      "Exemple concret d'architecture clean",
-      "Code documenté et explicatif",
-      "Patterns modernes à étudier",
-      "Base pour vos projets d'apprentissage",
-    ],
-    icon: "🎓",
+    id: "ecommerce",
+    title: "For eCommerce",
+    description:
+      "Boost your Facebook Dynamic Product Ads campaigns with custom banners for your entire product catalog.",
   },
 ];
 
 export function Component() {
   return (
-    <section className=" flex flex-col gap-8 md:gap-12">
+    <section className="flex flex-col gap-8 md:gap-10">
       <Headline
-        title="Pour qui est fait ce boilerplate ?"
-        description="Que vous soyez entrepreneur, développeur expérimenté, ou en phase d'apprentissage, notre solution s'adapte à vos besoins spécifiques."
-        badge="Qui ?"
+        title="Built for all company sizes"
+        description="Empower your entire team to create engaging banners in 3 minutes or less. No design skills required."
+        badge="FOR WHO"
       />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {targetAudiences.map((audience) => (
-          <Card
-            key={audience.id}
-            className="relative overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
-          >
-            <CardHeader className="pb-4">
-              <div className="flex items-start justify-between mb-2">
-                <div className="text-4xl mb-2">{audience.icon}</div>
-                <Badge variant="secondary" className="ml-2">
-                  {audience.badge}
-                </Badge>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        {/* Image à gauche */}
+        <div className="relative">
+          <div className="bg-gradient-to-br from-slate-50 to-slate-100 rounded-2xl p-8 relative overflow-hidden">
+            {/* Interface mockup */}
+            <div className="bg-white rounded-lg shadow-lg p-6 relative z-10">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                <div className="w-3 h-3 bg-green-500 rounded-full"></div>
               </div>
-              <CardTitle className="text-xl mb-2">{audience.title}</CardTitle>
-              <CardDescription className="text-base">{audience.description}</CardDescription>
-            </CardHeader>
 
-            <CardContent>
-              <div className="space-y-3">
-                <h4 className="font-semibold text-sm uppercase tracking-wide text-muted-foreground mb-3">
-                  Ce que vous obtenez :
-                </h4>
-                <ul className="space-y-2">
-                  {audience.benefits.map((benefit, index) => (
-                    <li key={index} className="flex items-start gap-2 text-sm">
-                      <span className="text-primary font-bold mt-0.5">✓</span>
-                      <span>{benefit}</span>
-                    </li>
-                  ))}
-                </ul>
+              {/* Search bar */}
+              <div className="flex items-center gap-2 p-3 bg-slate-50 rounded-lg mb-4">
+                <span className="text-slate-400">+</span>
+                <span className="text-slate-500 text-sm">Search within organization</span>
               </div>
-            </CardContent>
-          </Card>
-        ))}
+
+              {/* Organization info */}
+              <div className="flex items-center gap-2 mb-4">
+                <span className="text-slate-400">▼</span>
+                <span className="text-slate-500 text-sm">25 people in this organization</span>
+              </div>
+
+              <div className="space-y-3">
+                <div className="flex items-center gap-3 p-3 bg-slate-50 rounded-lg">
+                  <div className="w-8 h-8 bg-slate-800 rounded-full flex items-center justify-center">
+                    <span className="text-white text-sm font-semibold">DR</span>
+                  </div>
+                  <div className="flex-1">
+                    <div className="text-sm font-medium">Dylan Roberts</div>
+                    <div className="text-xs text-slate-500">dylan@tulado.com</div>
+                  </div>
+                  <div className="text-xs bg-slate-200 text-slate-700 px-2 py-1 rounded">Administrator</div>
+                  <div className="w-4 h-4 text-slate-400">✏️</div>
+                </div>
+
+                <div className="flex items-center gap-3 p-3 hover:bg-slate-50 rounded-lg">
+                  <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
+                    <span className="text-white text-sm font-semibold">OW</span>
+                  </div>
+                  <div className="flex-1">
+                    <div className="text-sm font-medium">Olivia Williams</div>
+                    <div className="text-xs text-slate-500">olivia@tulado.com</div>
+                  </div>
+                  <div className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center">
+                    <span className="text-white text-xs">✓</span>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-3 p-3 hover:bg-slate-50 rounded-lg">
+                  <div className="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center">
+                    <span className="text-white text-sm font-semibold">IJ</span>
+                  </div>
+                  <div className="flex-1">
+                    <div className="text-sm font-medium">Isabella Johnson</div>
+                    <div className="text-xs text-slate-500">isabella@tulado.com</div>
+                  </div>
+                  <div className="w-6 h-6 border-2 border-slate-300 rounded-full flex items-center justify-center">
+                    <span className="text-slate-400 text-xs">+</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Avatars flottants */}
+            <div className="absolute top-4 right-4 w-12 h-12 bg-blue-500 rounded-full border-4 border-white shadow-lg flex items-center justify-center">
+              <span className="text-white font-semibold text-sm">JS</span>
+            </div>
+            <div className="absolute bottom-4 left-4 w-10 h-10 bg-slate-400 rounded-full border-4 border-white shadow-lg"></div>
+            <div className="absolute top-20 left-8 w-8 h-8 bg-slate-300 rounded-full border-4 border-white shadow-lg"></div>
+            <div className="absolute bottom-20 right-8 w-10 h-10 bg-slate-600 rounded-full border-4 border-white shadow-lg"></div>
+            <div className="absolute bottom-32 right-16 w-12 h-12 bg-orange-400 rounded-full border-4 border-white shadow-lg"></div>
+          </div>
+        </div>
+
+        {/* Contenu à droite */}
+        <div className="space-y-8">
+          {companySizes.map((size) => (
+            <div key={size.id} className="flex gap-4">
+              <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
+              <div>
+                <h3 className="text-xl font-semibold text-slate-800 mb-2">{size.title}</h3>
+                <p className="text-slate-600 leading-relaxed">{size.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

@@ -10,7 +10,7 @@ export function Hero() {
     <section className="px-8 pt-4 md:pt-48 justify-center text-center flex flex-col mx-auto max-w-5xl items-center gap-5">
       <Badge variant="default">{"🚀 Nouveau - Validation d'idée par IA"}</Badge>
       <ProductHungBadge />
-      <h1 className="text-4xl md:text-6xl font-bold text-foreground">
+      <h1 className="text-4xl md:text-6xl font-semibold text-foreground">
         {"Testez votre idée de business avant de perdre du temps (ou de l'argent)"}
       </h1>
       <p className="text-lg text-muted-foreground max-w-3xl">

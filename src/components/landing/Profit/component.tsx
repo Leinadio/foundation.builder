@@ -22,7 +22,7 @@ export default function Component() {
   };
 
   return (
-    <section className="flex flex-col gap-8 md:gap-12">
+    <section className="flex flex-col gap-8 md:gap-10">
       <Headline
         title="Transformez le chaos en efficacité"
         description="L'efficacité retrouvée avec notre plateforme"

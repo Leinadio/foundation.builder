@@ -22,7 +22,7 @@ export default function Component() {
   };
 
   return (
-    <section className="flex flex-col gap-8 md:gap-12">
+    <section className="flex flex-col gap-8 md:gap-10">
       <Headline
         title="Transformez le chaos en efficacité"
         description="Découvrez comment notre solution révolutionne la gestion de projet en équipe"
@@ -30,7 +30,7 @@ export default function Component() {
       />
 
       <div className="grid md:grid-cols-2 gap-5">
-        <Card className="border-destructive/10 bg-destructive/10">
+        <Card className="border-destructive/10">
           <CardHeader>
             <CardTitle className="text-foreground flex items-center gap-2">
               <XCircle className="w-6 h-6" />

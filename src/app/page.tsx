@@ -9,17 +9,18 @@ import { FeatureSectionWithHoverEffects } from "@/components/landing/FeatureSect
 import { WithWithout } from "@/components/landing/WithWithout";
 import { Problem } from "@/components/landing/Problem";
 import { Solution } from "@/components/landing/Profit";
+import { FeatureBentoGrid } from "@/components/landing/FeatureBentoGrid";
 
 export default function Home() {
   return (
     <div>
       <Hero />
       <div className={`px-4 md:px-0 mx-auto max-w-6xl flex flex-col mt-32 gap-32`}>
+        <FeatureBentoGrid />
         <Problem />
         <Solution />
         <HowItWork />
         <ForWho />
-
         <FeatureSectionWithHoverEffects />
         <FeatureSectionWithBento />
         <WithWithout />
