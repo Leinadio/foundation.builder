@@ -10,13 +10,15 @@ import { WithWithout } from "@/components/landing/WithWithout";
 import { Problem } from "@/components/landing/Problem";
 import { Solution } from "@/components/landing/Profit";
 import { FeatureBentoGrid } from "@/components/landing/FeatureBentoGrid";
+import { StartupStruggles } from "@/components/landing/StartupStruggles";
 
 export default function Home() {
   return (
     <div>
       <Hero />
-      <div className={`px-4 md:px-0 mx-auto max-w-6xl flex flex-col mt-32 gap-32`}>
+      <div className={`px-5 md:px-0 mx-auto max-w-6xl flex flex-col mt-32 gap-32`}>
         <FeatureBentoGrid />
+        <StartupStruggles />
         <Problem />
         <Solution />
         <HowItWork />
@@ -47,3 +49,4 @@ export default function Home() {
 // au même titre que le header
 // TODO: Gérer l'espacement entre les sections
 // TODO: Pour le composant ForWho, regarder un caroussel
+// TODO: Transformer Profit en problem solution en un seul bloc
