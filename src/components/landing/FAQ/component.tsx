@@ -63,7 +63,7 @@ const faqItems = [
 
 export function Component({ items = faqItems }: Faq3Props) {
   return (
-    <section className="container space-y-16 flex gap-16">
+    <section className="container flex flex-col md:flex-row gap-8 md:gap-16">
       <div className="mx-auto flex max-w-3xl flex-col text-left">
         <Badge variant="default" className="mb-4 w-fit">
           {"FAQ"}
