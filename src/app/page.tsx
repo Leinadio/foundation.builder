@@ -7,7 +7,7 @@ import { ShowcaseBlog } from "@/components/landing/ShowcaseBlog";
 import { FeatureSectionWithBento } from "@/components/landing/FeatureSectionWithBento";
 import { FeatureSectionWithHoverEffects } from "@/components/landing/FeatureSectionWithHoverEffects";
 import { WithWithout } from "@/components/landing/WithWithout";
-import { Problem } from "@/components/landing/Problem";
+import { SuccessPath } from "@/components/landing/SuccessPath";
 import { Solution } from "@/components/landing/Profit";
 import { FeatureBentoGrid } from "@/components/landing/FeatureBentoGrid";
 import { StartupStruggles } from "@/components/landing/StartupStruggles";
@@ -16,10 +16,10 @@ export default function Home() {
   return (
     <div>
       <Hero />
-      <div className={`px-5 md:px-0 mx-auto max-w-6xl flex flex-col mt-32 gap-32`}>
+      <div className={`px-5 lg:px-0 mx-auto max-w-6xl flex flex-col mt-32 gap-32`}>
         <FeatureBentoGrid />
         <StartupStruggles />
-        <Problem />
+        <SuccessPath />
         <Solution />
         <HowItWork />
         <ForWho />
@@ -50,3 +50,5 @@ export default function Home() {
 // TODO: Gérer l'espacement entre les sections
 // TODO: Pour le composant ForWho, regarder un caroussel
 // TODO: Transformer Profit en problem solution en un seul bloc
+
+// TODO: StartupStruggles doit ressembler a SuccessPath

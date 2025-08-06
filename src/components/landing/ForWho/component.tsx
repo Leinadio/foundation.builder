@@ -33,7 +33,7 @@ export function Component() {
       <Headline
         title="Built for all company sizes"
         description="Empower your entire team to create engaging banners in 3 minutes or less. No design skills required."
-        badge="FOR WHO"
+        badge={{ text: "FOR WHO", isBadge: false }}
       />
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">

@@ -43,7 +43,7 @@ export function HowItWork() {
       <Headline
         title="Transformez le chaos en efficacité"
         description="L'efficacité retrouvée avec notre plateforme"
-        badge="COMMENT ÇA MARCHE ?"
+        badge={{ text: "COMMENT ÇA MARCHE ?", isBadge: false }}
       />
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20">

@@ -321,11 +321,11 @@ const items = [
 
 export const Component = () => {
   return (
-    <section className="w-full flex flex-col gap-8 md:gap-10">
+    <section className="w-full flex flex-col gap-8 md:gap-24">
       <Headline
         title="What you can do with AI"
         description="AI is a powerful tool that can help you with your work."
-        badge="AI"
+        badge={{ text: "AI", isBadge: false }}
       />
       <BentoGrid>
         {items.map((item, i) => (

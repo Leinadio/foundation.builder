@@ -1,11 +1,16 @@
 import { Component } from "./component";
+import { ReactNode } from "react";
 
 interface HeadlineProps {
-  title: string;
+  title: ReactNode;
   description: string;
-  badge: string;
+  badge: {
+    text: string;
+    isBadge: boolean;
+  };
+  color?: string;
 }
 
-export const Headline = ({ title, description, badge }: HeadlineProps) => {
-  return <Component title={title} description={description} badge={badge} />;
+export const Headline = ({ title, description, badge, color }: HeadlineProps) => {
+  return <Component title={title} description={description} badge={badge} color={color} />;
 };
