@@ -8,6 +8,7 @@ import { SuccessPath } from "@/components/landing/SuccessPath";
 import { FeatureBentoGrid } from "@/components/landing/FeatureBentoGrid";
 import { StartupStruggles } from "@/components/landing/StartupStruggles";
 import { Footer } from "@/components/common/Footer";
+import { FAQ } from "@/components/landing/FAQ";
 
 export default function Home() {
   return (
@@ -25,6 +26,7 @@ export default function Home() {
         {/* <WithWithout /> */}
         {/* <Feature /> */}
         <Pricing />
+        <FAQ />
       </div>
       <div className={`mt-32`}>
         <ShowcaseBlog />
