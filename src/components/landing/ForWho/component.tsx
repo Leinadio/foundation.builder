@@ -118,8 +118,8 @@ export function Component() {
             <div key={size.id} className="flex gap-4">
               <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
               <div>
-                <h3 className="text-xl font-semibold text-slate-800 mb-2">{size.title}</h3>
-                <p className="text-slate-600 leading-relaxed">{size.description}</p>
+                <h3 className="text-xl font-semibold mb-2">{size.title}</h3>
+                <p className="leading-relaxed text-muted-foreground">{size.description}</p>
               </div>
             </div>
           ))}

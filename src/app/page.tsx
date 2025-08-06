@@ -1,36 +1,36 @@
 import { Hero } from "@/components/landing/Hero";
 import { HowItWork } from "@/components/landing/HowItWork";
-import { Feature } from "@/components/ui/feature-with-image-comparison";
 import { ForWho } from "@/components/landing/ForWho";
 import { Pricing } from "@/components/landing/Pricing";
 import { ShowcaseBlog } from "@/components/landing/ShowcaseBlog";
-import { FeatureSectionWithBento } from "@/components/landing/FeatureSectionWithBento";
-import { FeatureSectionWithHoverEffects } from "@/components/landing/FeatureSectionWithHoverEffects";
-import { WithWithout } from "@/components/landing/WithWithout";
+// import { FeatureSectionWithHoverEffects } from "@/components/landing/FeatureSectionWithHoverEffects";
 import { SuccessPath } from "@/components/landing/SuccessPath";
-import { Solution } from "@/components/landing/Profit";
 import { FeatureBentoGrid } from "@/components/landing/FeatureBentoGrid";
 import { StartupStruggles } from "@/components/landing/StartupStruggles";
+import { Footer } from "@/components/common/Footer";
 
 export default function Home() {
   return (
     <div>
       <Hero />
       <div className={`px-5 lg:px-0 mx-auto max-w-6xl flex flex-col mt-32 gap-32`}>
-        <FeatureBentoGrid />
         <StartupStruggles />
         <SuccessPath />
-        <Solution />
+        {/* <Solution /> */}
         <HowItWork />
+        <FeatureBentoGrid />
         <ForWho />
-        <FeatureSectionWithHoverEffects />
-        <FeatureSectionWithBento />
-        <WithWithout />
-        <Feature />
+        {/* <FeatureSectionWithHoverEffects /> */}
+        {/* <FeatureSectionWithBento /> */}
+        {/* <WithWithout /> */}
+        {/* <Feature /> */}
         <Pricing />
       </div>
       <div className={`mt-32`}>
         <ShowcaseBlog />
+      </div>
+      <div className={`mt-32`}>
+        <Footer />
       </div>
     </div>
   );

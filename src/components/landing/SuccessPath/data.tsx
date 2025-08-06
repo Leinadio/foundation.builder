@@ -24,7 +24,7 @@ export const data = [
             <span className="text-base font-medium">Communication centralisée</span>
           </div>
         </div>
-        <div className="mt-6 p-4 bg-green-200 rounded-lg">
+        <div className="mt-6 p-4 bg-green-200 dark:bg-green-900 rounded-lg">
           <div className="flex items-center gap-2 mb-2">
             <TrendingUp className="w-4 h-4 text-green-600" />
             <span className="text-base font-semibold text-green-900 dark:text-green-200">Résultat</span>
@@ -65,7 +65,7 @@ export const data = [
             </p>
           </div>
         </div>
-        <div className="mt-6 p-4 bg-green-200 rounded-lg">
+        <div className="mt-6 p-4 bg-green-200 dark:bg-green-900 rounded-lg">
           <div className="flex items-center gap-2 mb-2">
             <TrendingUp className="w-4 h-4 text-green-600" />
             <span className="text-base font-semibold text-green-800 dark:text-green-200">Impact</span>
@@ -102,7 +102,7 @@ export const data = [
             ✅ Investisseurs confiants
           </div>
         </div>
-        <div className="mt-6 p-4 bg-green-200 rounded-lg">
+        <div className="mt-6 p-4 bg-green-200 dark:bg-green-900 rounded-lg">
           <div className="flex items-center gap-2 mb-2">
             <TrendingUp className="w-4 h-4 text-green-600" />
             <span className="text-sm font-semibold text-green-800 dark:text-green-200">Transformation</span>

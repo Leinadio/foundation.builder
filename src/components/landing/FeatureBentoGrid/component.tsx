@@ -9,6 +9,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid";
 import { Headline } from "@/components/common/Headline";
+import { FeaturesSectionWithHoverEffects } from "@/components/ui/feature-section-with-hover-effects";
 
 const SkeletonOne = () => {
   const variants = {
@@ -339,6 +340,7 @@ export const Component = () => {
           />
         ))}
       </BentoGrid>
+      <FeaturesSectionWithHoverEffects />
     </section>
   );
 };
