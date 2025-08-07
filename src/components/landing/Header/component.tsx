@@ -30,9 +30,6 @@ interface NavLink {
 }
 
 const navigationLinks: NavLink[] = [
-  { id: "probleme", label: "Problème", href: "#probleme" },
-  { id: "solution", label: "Solution", href: "#solution" },
-  { id: "fonctionnement", label: "Comment ça marche", href: "#fonctionnement" },
   { id: "fonctionnalites", label: "Fonctionnalités", href: "#fonctionnalites" },
   { id: "tarifs", label: "Tarifs", href: "#tarifs" },
   { id: "faq", label: "FAQ", href: "#faq" },
@@ -67,34 +64,32 @@ function NavigationLinks() {
   };
 
   return (
-    <NavigationMenu className="hidden md:flex">
-      <NavigationMenuList>
-        {navigationLinks.map((link) => (
-          <NavigationMenuItem key={link.id}>
-            <NavigationMenuLink
-              className={cn(navigationMenuTriggerStyle(), "cursor-pointer")}
-              onClick={() => handleScrollToSection(link.href)}
-            >
-              {link.label}
-            </NavigationMenuLink>
-          </NavigationMenuItem>
-        ))}
-      </NavigationMenuList>
-    </NavigationMenu>
-  );
-}
+    <div className="hidden md:flex items-center justify-end flex-1 gap-4">
+      <NavigationMenu>
+        <NavigationMenuList>
+          {navigationLinks.map((link) => (
+            <NavigationMenuItem key={link.id}>
+              <NavigationMenuLink
+                className={cn(navigationMenuTriggerStyle(), "cursor-pointer", "bg-background text-foreground")}
+                onClick={() => handleScrollToSection(link.href)}
+              >
+                {link.label}
+              </NavigationMenuLink>
+            </NavigationMenuItem>
+          ))}
+        </NavigationMenuList>
+      </NavigationMenu>
 
-function AuthButtons() {
-  return (
-    <div className="flex items-center space-x-4">
-      <AuthDialog>
-        <Button variant="outline" size="sm">
-          Se connecter
-        </Button>
-      </AuthDialog>
-      <AuthDialog>
-        <Button size="sm">Commencer</Button>
-      </AuthDialog>
+      <div className="flex items-center gap-4">
+        <AuthDialog>
+          <Button variant="outline" size="sm">
+            Se connecter
+          </Button>
+        </AuthDialog>
+        <AuthDialog>
+          <Button size="sm">Commencer</Button>
+        </AuthDialog>
+      </div>
     </div>
   );
 }
@@ -168,8 +163,12 @@ export function Component() {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
+    let lastScrollY = window.scrollY;
+
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
+      const currentScrollY = window.scrollY;
+      setIsScrolled(currentScrollY > 10 && currentScrollY > lastScrollY);
+      lastScrollY = currentScrollY;
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -178,17 +177,22 @@ export function Component() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-200 ${
-        isScrolled ? "bg-background backdrop-blur-md border-b border-border shadow-sm" : "bg-transparent"
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-background ${
+        isScrolled ? "backdrop-blur-md border-b border-border shadow-sm py-0" : "py-2"
       }`}
     >
-      <div className="container mx-auto px-4 h-20 flex items-center justify-between">
-        <Logo />
-        <NavigationLinks />
-        <div className="hidden md:block">
-          <AuthButtons />
+      <div
+        className={`container max-w-6xl mx-auto px-4 lg:px-0 flex items-center justify-between transition-all duration-300 h-16`}
+      >
+        <div className="transition-transform duration-300">
+          <Logo />
         </div>
-        <MobileMenu />
+        <div className={`transition-all duration-300`}>
+          <NavigationLinks />
+        </div>
+        <div className="md:hidden ml-auto">
+          <MobileMenu />
+        </div>
       </div>
     </header>
   );
