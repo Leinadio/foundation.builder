@@ -1,53 +1,43 @@
-import { Header } from "@/components/landing/Header";
-import { Hero } from "@/components/landing/Hero";
-import { HowItWork } from "@/components/landing/HowItWork";
-import { ForWho } from "@/components/landing/ForWho";
-import { Pricing } from "@/components/landing/Pricing";
-import { ShowcaseBlog } from "@/components/landing/ShowcaseBlog";
-// import { FeatureSectionWithHoverEffects } from "@/components/landing/FeatureSectionWithHoverEffects";
-import { SuccessPath } from "@/components/landing/SuccessPath";
-import { FeatureBentoGrid } from "@/components/landing/FeatureBentoGrid";
-import { StartupStruggles } from "@/components/landing/StartupStruggles";
-import { Footer } from "@/components/common/Footer";
-import { FAQ } from "@/components/landing/FAQ";
+import { DynamicRenderer } from "@/components/common/DynamicRenderer";
+import { loadPageConfig, SectionConfig } from "@/lib/load-page-config";
 
-export default function Home() {
+export default async function Home() {
+  // Chargement de la configuration de page
+  const pageConfig = await loadPageConfig();
+
+  // Fonction pour rendre une section en fonction de son type
+  const renderSection = (section: SectionConfig, index: number) => {
+    if (section.type === "header") {
+      return <DynamicRenderer key={`header-${index}`} config={section.components} />;
+    }
+
+    if (section.type === "section") {
+      return (
+        <div key={`section-${index}`} className={`px-5 lg:px-0 mx-auto max-w-6xl flex flex-col mt-32 gap-32`}>
+          <DynamicRenderer config={section.components} />
+        </div>
+      );
+    }
+
+    if (section.type === "section-full-width") {
+      return (
+        <div key={`full-width-${index}`} className={`w-full flex flex-col mt-32 gap-32`}>
+          <DynamicRenderer config={section.components} />
+        </div>
+      );
+    }
+
+    if (section.type === "footer") {
+      return <DynamicRenderer key={`footer-${index}`} config={section.components} />;
+    }
+
+    return null;
+  };
+
   return (
     <div>
-      <Header />
-      <Hero />
-      <div className={`px-5 lg:px-0 mx-auto max-w-6xl flex flex-col mt-32 gap-32`}>
-        <section id="probleme">
-          <StartupStruggles />
-        </section>
-        <section id="solution">
-          <SuccessPath />
-        </section>
-        {/* <Solution /> */}
-        <section id="fonctionnement">
-          <HowItWork />
-        </section>
-        <section id="fonctionnalites">
-          <FeatureBentoGrid />
-        </section>
-        <ForWho />
-        {/* <FeatureSectionWithHoverEffects /> */}
-        {/* <FeatureSectionWithBento /> */}
-        {/* <WithWithout /> */}
-        {/* <Feature /> */}
-        <section id="tarifs">
-          <Pricing />
-        </section>
-        <section id="faq">
-          <FAQ />
-        </section>
-      </div>
-      <div className={`mt-32`}>
-        <ShowcaseBlog />
-      </div>
-      <div className={`mt-32`}>
-        <Footer />
-      </div>
+      {/* Rendu de toutes les sections dans l'ordre défini dans la configuration */}
+      {pageConfig.map((section, index) => renderSection(section, index))}
     </div>
   );
 }
@@ -63,8 +53,4 @@ export default function Home() {
 // TODO: Plutôt que de mettre la sidebar entière dans storybook,
 // mieux vaut mettre seulement les comoposants du sidebar car la sidebar est une section de la page
 // au même titre que le header
-// TODO: Gérer l'espacement entre les sections
-// TODO: Pour le composant ForWho, regarder un caroussel
-// TODO: Transformer Profit en problem solution en un seul bloc
-
-// TODO: StartupStruggles doit ressembler a SuccessPath
+// TODO: Gérer les div et container différentes dans page.tsx notamment ligne 14

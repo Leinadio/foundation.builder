@@ -1,0 +1,79 @@
+[
+  {
+    "type": "header",
+    "components": [
+      {
+        "component": "Header",
+        "props": {}
+      },
+      {
+        "component": "Hero",
+        "props": {}
+      }
+    ]
+  },
+  {
+    "type": "section",
+    "components": [
+      {
+        "section": "probleme",
+        "component": "StartupStruggles",
+        "props": {}
+      },
+      {
+        "section": "solution",
+        "component": "SuccessPath",
+        "props": {}
+      },
+      {
+        "section": "fonctionnement",
+        "component": "HowItWork",
+        "props": {}
+      },
+      {
+        "section": "fonctionnalites",
+        "component": "FeatureBentoGrid",
+        "props": {}
+      }
+    ]
+  },
+  {
+    "type": "section-full-width",
+    "components": [
+      {
+        "component": "ForWho",
+        "props": {}
+      }
+    ]
+  },
+  {
+    "type": "section",
+    "components": [
+      {
+        "section": "tarifs",
+        "component": "Pricing",
+        "props": {}
+      },
+      {
+        "section": "faq",
+        "component": "FAQ",
+        "props": {}
+      }
+    ]
+  },
+  {
+    "type": "footer",
+    "components": [
+      {
+        "component": "ShowcaseBlog",
+        "props": {},
+        "wrapperClass": "mt-32"
+      },
+      {
+        "component": "Footer",
+        "props": {},
+        "wrapperClass": "mt-32"
+      }
+    ]
+  }
+]
