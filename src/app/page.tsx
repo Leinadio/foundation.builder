@@ -1,3 +1,4 @@
+import { Header } from "@/components/landing/Header";
 import { Hero } from "@/components/landing/Hero";
 import { HowItWork } from "@/components/landing/HowItWork";
 import { ForWho } from "@/components/landing/ForWho";
@@ -13,20 +14,33 @@ import { FAQ } from "@/components/landing/FAQ";
 export default function Home() {
   return (
     <div>
+      <Header />
       <Hero />
       <div className={`px-5 lg:px-0 mx-auto max-w-6xl flex flex-col mt-32 gap-32`}>
-        <StartupStruggles />
-        <SuccessPath />
+        <section id="probleme">
+          <StartupStruggles />
+        </section>
+        <section id="solution">
+          <SuccessPath />
+        </section>
         {/* <Solution /> */}
-        <HowItWork />
-        <FeatureBentoGrid />
+        <section id="fonctionnement">
+          <HowItWork />
+        </section>
+        <section id="fonctionnalites">
+          <FeatureBentoGrid />
+        </section>
         <ForWho />
         {/* <FeatureSectionWithHoverEffects /> */}
         {/* <FeatureSectionWithBento /> */}
         {/* <WithWithout /> */}
         {/* <Feature /> */}
-        <Pricing />
-        <FAQ />
+        <section id="tarifs">
+          <Pricing />
+        </section>
+        <section id="faq">
+          <FAQ />
+        </section>
       </div>
       <div className={`mt-32`}>
         <ShowcaseBlog />

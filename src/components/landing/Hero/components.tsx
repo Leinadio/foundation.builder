@@ -7,7 +7,7 @@ import { Icons, Variant } from "@/components/common/Icons";
 
 export function Hero() {
   return (
-    <section className="px-8 pt-4 md:pt-48 justify-center text-center flex flex-col mx-auto max-w-5xl items-center gap-5">
+    <section className="px-8 pt-24 md:pt-56 justify-center text-center flex flex-col mx-auto max-w-5xl items-center gap-5">
       <Badge variant="default">{"🚀 Nouveau - Validation d'idée par IA"}</Badge>
       <ProductHungBadge />
       <h1 className="text-4xl md:text-6xl font-semibold text-foreground">
