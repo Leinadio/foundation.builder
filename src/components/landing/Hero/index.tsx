@@ -1,5 +1,5 @@
-import { Hero as HeroComponent } from "./components";
+import { Hero as HeroComponent, HeroProps } from "./components";
 
-export function Hero() {
-  return <HeroComponent />;
+export function Hero(props: HeroProps) {
+  return <HeroComponent {...props} />;
 }

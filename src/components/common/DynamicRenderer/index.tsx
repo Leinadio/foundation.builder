@@ -22,7 +22,8 @@ export type ComponentConfig = {
 };
 
 // Mapping des composants
-const componentsMap: Record<string, React.ComponentType<Record<string, unknown>>> = {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const componentsMap: Record<string, React.ComponentType<any>> = {
   Header,
   Hero,
   HowItWork,

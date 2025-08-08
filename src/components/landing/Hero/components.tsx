@@ -5,22 +5,23 @@ import { AuthDialog } from "@/components/common/AuthDialog";
 import { ProductHungBadge } from "@/components/common/ProductHungBadge";
 import { Icons, Variant } from "@/components/common/Icons";
 
-export function Hero() {
+export interface HeroProps {
+  badge: string;
+  title: string;
+  description: string;
+  buttonText: string;
+}
+
+export function Hero({ badge, title, description, buttonText }: HeroProps) {
   return (
     <section className="px-8 pt-24 md:pt-56 justify-center text-center flex flex-col mx-auto max-w-5xl items-center gap-5">
-      <Badge variant="default">{"🚀 Nouveau - Validation d'idée par IA"}</Badge>
+      <Badge variant="default">{badge}</Badge>
       <ProductHungBadge />
-      <h1 className="text-4xl md:text-6xl font-semibold text-foreground">
-        {"Testez votre idée de business avant de perdre du temps (ou de l'argent)"}
-      </h1>
-      <p className="text-lg text-muted-foreground max-w-3xl">
-        {
-          "Notre IA analyse votre idée sous tous les angles – marché, cible, problème, solution, business model – et vous fournit une validation claire, rapide et visuelle."
-        }
-      </p>
+      <h1 className="text-4xl md:text-6xl font-semibold text-foreground">{title}</h1>
+      <p className="text-lg text-muted-foreground max-w-3xl">{description}</p>
       <AuthDialog>
         <Button size="lg">
-          {"Testez votre idée"}
+          {buttonText}
           <CircleChevronRight className="w-4 h-4" />
         </Button>
       </AuthDialog>
