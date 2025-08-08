@@ -6,13 +6,13 @@ import { ProductHungBadge } from "@/components/common/ProductHungBadge";
 import { Icons, Variant } from "@/components/common/Icons";
 
 export interface HeroProps {
-  badge: string;
   title: string;
+  badge: string;
   description: string;
   buttonText: string;
 }
 
-export function Hero({ badge, title, description, buttonText }: HeroProps) {
+export function Hero({ title, badge, description, buttonText }: HeroProps) {
   return (
     <section className="px-8 pt-24 md:pt-56 justify-center text-center flex flex-col mx-auto max-w-5xl items-center gap-5">
       <Badge variant="default">{badge}</Badge>

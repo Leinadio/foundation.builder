@@ -29,11 +29,9 @@ interface NavLink {
   href: string;
 }
 
-const navigationLinks: NavLink[] = [
-  { id: "fonctionnalites", label: "Fonctionnalités", href: "#fonctionnalites" },
-  { id: "tarifs", label: "Tarifs", href: "#tarifs" },
-  { id: "faq", label: "FAQ", href: "#faq" },
-];
+export interface HeaderProps {
+  navigationLinks: NavLink[];
+}
 
 function Logo() {
   return (
@@ -46,7 +44,7 @@ function Logo() {
   );
 }
 
-function NavigationLinks() {
+function NavigationLinks({ navigationLinks }: { navigationLinks: NavLink[] }) {
   const handleScrollToSection = (href: string) => {
     const element = document.querySelector(href);
     if (!element) {
@@ -94,7 +92,7 @@ function NavigationLinks() {
   );
 }
 
-function MobileMenu() {
+function MobileMenu({ navigationLinks }: { navigationLinks: NavLink[] }) {
   const handleScrollToSection = (href: string) => {
     const element = document.querySelector(href);
     if (!element) {
@@ -159,7 +157,7 @@ function MobileMenu() {
   );
 }
 
-export function Component() {
+export function Component({ navigationLinks }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -188,10 +186,10 @@ export function Component() {
           <Logo />
         </div>
         <div className={`transition-all duration-300`}>
-          <NavigationLinks />
+          <NavigationLinks navigationLinks={navigationLinks} />
         </div>
         <div className="md:hidden ml-auto">
-          <MobileMenu />
+          <MobileMenu navigationLinks={navigationLinks} />
         </div>
       </div>
     </header>

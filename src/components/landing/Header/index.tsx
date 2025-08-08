@@ -1,5 +1,5 @@
-import { Component } from "./component";
+import { Component, HeaderProps } from "./component";
 
-export function Header() {
-  return <Component />;
+export function Header(props: HeaderProps) {
+  return <Component {...props} />;
 }
