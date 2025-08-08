@@ -1,43 +1,16 @@
+import { loadPageConfig } from "@/lib/load-page-config";
 import { DynamicRenderer } from "@/components/common/DynamicRenderer";
-import { loadPageConfig, SectionConfig } from "@/lib/load-page-config";
 
 export default async function Home() {
   // Chargement de la configuration de page
   const pageConfig = await loadPageConfig();
 
-  // Fonction pour rendre une section en fonction de son type
-  const renderSection = (section: SectionConfig, index: number) => {
-    if (section.type === "header") {
-      return <DynamicRenderer key={`header-${index}`} config={section.components} />;
-    }
-
-    if (section.type === "section") {
-      return (
-        <div key={`section-${index}`} className={`px-5 lg:px-0 mx-auto max-w-6xl flex flex-col mt-32 gap-32`}>
-          <DynamicRenderer config={section.components} />
-        </div>
-      );
-    }
-
-    if (section.type === "section-full-width") {
-      return (
-        <div key={`full-width-${index}`} className={`w-full flex flex-col mt-32 gap-32`}>
-          <DynamicRenderer config={section.components} />
-        </div>
-      );
-    }
-
-    if (section.type === "footer") {
-      return <DynamicRenderer key={`footer-${index}`} config={section.components} />;
-    }
-
-    return null;
-  };
+  // Logique de rendu centralisée dans lib/load-page-config
 
   return (
     <div>
       {/* Rendu de toutes les sections dans l'ordre défini dans la configuration */}
-      {pageConfig.map((section, index) => renderSection(section, index))}
+      <DynamicRenderer sections={pageConfig} />
     </div>
   );
 }

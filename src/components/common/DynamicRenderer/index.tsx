@@ -1,7 +1,4 @@
-"use client";
-
-import { ReactNode } from "react";
-import dynamic from "next/dynamic";
+import React, { ReactNode } from "react";
 
 // Importation des composants
 import { Header } from "@/components/landing/Header";
@@ -19,13 +16,13 @@ import { FAQ } from "@/components/landing/FAQ";
 // Définition du type pour la configuration
 export type ComponentConfig = {
   component: string;
-  props: Record<string, any>;
-  section?: string;
+  props: Record<string, unknown>;
+  id?: string;
   wrapperClass?: string;
 };
 
 // Mapping des composants
-const componentsMap: Record<string, React.ComponentType<any>> = {
+const componentsMap: Record<string, React.ComponentType<Record<string, unknown>>> = {
   Header,
   Hero,
   HowItWork,
@@ -39,40 +36,72 @@ const componentsMap: Record<string, React.ComponentType<any>> = {
   FAQ,
 };
 
-export function DynamicRenderer({ config }: { config: ComponentConfig[] }): ReactNode {
+export type SectionConfig = {
+  type: "header" | "section" | "section-full-width" | "footer";
+  components: ComponentConfig[];
+};
+
+export function DynamicRenderer({ sections }: { sections: SectionConfig[] }): ReactNode {
   return (
     <>
-      {config.map((block, index) => {
-        const Component = componentsMap[block.component];
-
-        if (!Component) {
-          console.warn(`Composant "${block.component}" non trouvé dans le mapping`);
-          return null;
-        }
-
-        // Rendu du composant
-        const renderedComponent = <Component key={`component-${index}`} {...block.props} />;
-
-        // Si le composant doit être dans une section
-        if (block.section) {
+      {sections.map((section, sectionIndex) => {
+        if (section.type === "header") {
           return (
-            <section key={`section-${index}`} id={block.section}>
-              {renderedComponent}
-            </section>
+            <React.Fragment key={`header-${sectionIndex}`}>
+              {section.components.map((config, index) => {
+                const Component = componentsMap[config.component];
+                if (!Component) return null;
+                return <Component key={`header-${sectionIndex}-component-${index}`} {...config.props} />;
+              })}
+            </React.Fragment>
           );
         }
 
-        // Si le composant a une classe wrapper
-        if (block.wrapperClass) {
+        if (section.type === "section") {
           return (
-            <div key={`wrapper-${index}`} className={block.wrapperClass}>
-              {renderedComponent}
+            <div key={`section-${sectionIndex}`} className="px-5 lg:px-0 mx-auto max-w-6xl flex flex-col mt-32 gap-32">
+              {section.components.map((config, index) => {
+                const Component = componentsMap[config.component];
+                if (!Component) return null;
+                return (
+                  <section key={`section-${sectionIndex}-component-${index}`} id={config.id}>
+                    <Component {...config.props} />
+                  </section>
+                );
+              })}
             </div>
           );
         }
 
-        // Sinon, rendu simple du composant
-        return renderedComponent;
+        if (section.type === "section-full-width") {
+          return (
+            <div key={`full-width-${sectionIndex}`} className="w-full flex flex-col mt-32 gap-32">
+              {section.components.map((config, index) => {
+                const Component = componentsMap[config.component];
+                if (!Component) return null;
+                return (
+                  <section key={`full-width-${sectionIndex}-component-${index}`} id={config.id}>
+                    <Component {...config.props} />
+                  </section>
+                );
+              })}
+            </div>
+          );
+        }
+
+        if (section.type === "footer") {
+          return (
+            <div key={`footer-${sectionIndex}`} className="mt-32">
+              {section.components.map((config, index) => {
+                const Component = componentsMap[config.component];
+                if (!Component) return null;
+                return <Component key={`footer-${sectionIndex}-component-${index}`} {...config.props} />;
+              })}
+            </div>
+          );
+        }
+
+        return null;
       })}
     </>
   );

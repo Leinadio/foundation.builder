@@ -16,23 +16,38 @@
     "type": "section",
     "components": [
       {
-        "section": "probleme",
+        "id": "probleme",
         "component": "StartupStruggles",
         "props": {}
       },
       {
-        "section": "solution",
+        "id": "solution",
         "component": "SuccessPath",
         "props": {}
       },
       {
-        "section": "fonctionnement",
+        "id": "fonctionnement",
         "component": "HowItWork",
         "props": {}
       },
       {
-        "section": "fonctionnalites",
+        "id": "fonctionnalites",
         "component": "FeatureBentoGrid",
+        "props": {}
+      },
+      {
+        "id": "for-who",
+        "component": "ForWho",
+        "props": {}
+      },
+      {
+        "id": "tarifs",
+        "component": "Pricing",
+        "props": {}
+      },
+      {
+        "id": "faq",
+        "component": "FAQ",
         "props": {}
       }
     ]
@@ -41,22 +56,8 @@
     "type": "section-full-width",
     "components": [
       {
-        "component": "ForWho",
-        "props": {}
-      }
-    ]
-  },
-  {
-    "type": "section",
-    "components": [
-      {
-        "section": "tarifs",
-        "component": "Pricing",
-        "props": {}
-      },
-      {
-        "section": "faq",
-        "component": "FAQ",
+        "id": "showcase-blog",
+        "component": "ShowcaseBlog",
         "props": {}
       }
     ]
@@ -65,14 +66,9 @@
     "type": "footer",
     "components": [
       {
-        "component": "ShowcaseBlog",
-        "props": {},
-        "wrapperClass": "mt-32"
-      },
-      {
+        "id": "footer",
         "component": "Footer",
-        "props": {},
-        "wrapperClass": "mt-32"
+        "props": {}
       }
     ]
   }
