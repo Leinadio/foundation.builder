@@ -2,10 +2,11 @@ import { Timeline } from "@/components/ui/timeline";
 import { Headline } from "@/components/common/Headline";
 import { ReactNode } from "react";
 import { CheckCircle, TrendingUp, Users, Zap } from "lucide-react";
+import { TaskList, CardList, BulletsList, Default } from "./components";
 
 type IconName = "CheckCircle" | "Users" | "Zap" | "TrendingUp";
 
-const iconMap: Record<IconName, React.ComponentType<{ className?: string }>> = {
+export const iconMap: Record<IconName, React.ComponentType<{ className?: string }>> = {
   CheckCircle,
   Users,
   Zap,
@@ -115,130 +116,49 @@ export function Component({
   viaColor = "emerald-500",
   data = defaultData,
 }: SuccessPathProps) {
-  const timelineData = data.map((entry) => {
-    console.log('entry', entry)
-
-    const featuresContent = (entry.features ?? []).map((feature, idx) => {
-      const Icon = feature.icon ? iconMap[feature.icon] : undefined;
-      return (
-        <div
-          key={`f-${idx}`}
-          className={
-            entry.featuresLayout === "grid"
-              ? "p-4 border border-green-200 dark:border-green-800 rounded-lg"
-              : "flex items-center gap-3 p-3 bg-green-50 dark:bg-green-900/20 border-green-200 border rounded-lg"
-          }
-        >
-          {Icon ? <Icon className="w-5 h-5 text-green-600 flex-shrink-0" /> : null}
-          <span className="text-base font-medium">{feature.text}</span>
-        </div>
-      );
-    });
-
-    const bulletsContent = (entry.bullets ?? []).map((text, idx) => (
-      <div key={`b-${idx}`} className="flex items-center gap-2 text-base text-green-700 dark:text-green-300">
-        ✅ {text}
-      </div>
-    ));
-
-    const SummaryIcon = entry.summary?.icon ? iconMap[entry.summary.icon] : undefined;
-    
-    if (entry.type === "task-list") {
-      return {
-        title: entry.title,
-        content: (
-          <div>
-          {(entry.paragraphs ?? []).length > 0 ? (
-            <p className="mb-8 text-sm md:text-lg">{entry.paragraphs?.[0]}</p>
-          ) : null}
-          {featuresContent.length > 0 ? (
-            <div className={"space-y-4"}>{featuresContent}</div>
-          ) : null}
-          {entry.summary ? (
-            <div className="mt-6 p-4 bg-green-200 dark:bg-green-900 rounded-lg">
-              <div className="flex items-center gap-2 mb-2">
-                {SummaryIcon ? <SummaryIcon className="w-4 h-4 text-green-600" /> : null}
-                <span className="text-base font-semibold text-green-900 dark:text-green-200">{entry.summary.label}</span>
-              </div>
-              <p className="text-base text-green-800 dark:text-green-300">{entry.summary.text}</p>
-            </div>
-          ) : null}
-        </div>
-        )
-      };
+  const renderEntryContent = (entry: SuccessPathItem): ReactNode => {
+    switch (entry.type) {
+      case "task-list":
+        return (
+          <TaskList
+            paragraphs={entry.paragraphs}
+            features={entry.features}
+            summary={entry.summary}
+          />
+        );
+      case "card-list":
+        return (
+          <CardList
+            paragraphs={entry.paragraphs}
+            features={entry.features}
+            summary={entry.summary}
+          />
+        );
+      case "bullets-list":
+        return (
+          <BulletsList
+            paragraphs={entry.paragraphs}
+            bullets={entry.bullets}
+            summary={entry.summary}
+          />
+        );
+      default:
+        return (
+          <Default
+            paragraphs={entry.paragraphs}
+            features={entry.features}
+            featuresLayout={entry.featuresLayout}
+            bullets={entry.bullets}
+            summary={entry.summary}
+          />
+        );
     }
+  };
 
-    if (entry.type === "card-list") {
-      return {
-        title: entry.title,
-        content: (
-          <div>
-          {(entry.paragraphs ?? []).length > 0 ? (
-            <p className="mb-8 text-sm md:text-lg">{entry.paragraphs?.[0]}</p>
-          ) : null}
-          {featuresContent.length > 0 ? (
-            <div className={"grid grid-cols-1 gap-4"}>{featuresContent}</div>
-          ) : null}
-          {entry.summary ? (
-            <div className="mt-6 p-4 bg-green-200 dark:bg-green-900 rounded-lg">
-              <div className="flex items-center gap-2 mb-2">
-                {SummaryIcon ? <SummaryIcon className="w-4 h-4 text-green-600" /> : null}
-                <span className="text-base font-semibold text-green-900 dark:text-green-200">{entry.summary.label}</span>
-              </div>
-              <p className="text-base text-green-800 dark:text-green-300">{entry.summary.text}</p>
-            </div>
-          ) : null}
-        </div>
-        )
-      };
-    }
-    if (entry.type === "bullets-list") {
-      return {
-        title: entry.title,
-        content: (
-          <div>
-          {(entry.paragraphs ?? []).length > 0 ? (
-            <p className="mb-8 text-sm md:text-lg">{entry.paragraphs?.[0]}</p>
-          ) : null}
-          {bulletsContent.length > 0 ? <div className="space-y-3">{bulletsContent}</div> : null}
-          {entry.summary ? (
-            <div className="mt-6 p-4 bg-green-200 dark:bg-green-900 rounded-lg">
-              <div className="flex items-center gap-2 mb-2">
-                {SummaryIcon ? <SummaryIcon className="w-4 h-4 text-green-600" /> : null}
-                <span className="text-base font-semibold text-green-900 dark:text-green-200">{entry.summary.label}</span>
-              </div>
-              <p className="text-base text-green-800 dark:text-green-300">{entry.summary.text}</p>
-            </div>
-          ) : null}
-        </div>
-        )
-      };
-    }
-
-    return {
-      title: entry.title,
-      content: (
-        <div>
-          {(entry.paragraphs ?? []).length > 0 ? (
-            <p className="mb-8 text-sm md:text-lg">{entry.paragraphs?.[0]}</p>
-          ) : null}
-          {featuresContent.length > 0 ? (
-            <div className={entry.featuresLayout === "grid" ? "grid grid-cols-1 gap-4" : "space-y-4"}>{featuresContent}</div>
-          ) : null}
-          {bulletsContent.length > 0 ? <div className="space-y-3">{bulletsContent}</div> : null}
-          {entry.summary ? (
-            <div className="mt-6 p-4 bg-green-200 dark:bg-green-900 rounded-lg">
-              <div className="flex items-center gap-2 mb-2">
-                {SummaryIcon ? <SummaryIcon className="w-4 h-4 text-green-600" /> : null}
-                <span className="text-base font-semibold text-green-900 dark:text-green-200">{entry.summary.label}</span>
-              </div>
-              <p className="text-base text-green-800 dark:text-green-300">{entry.summary.text}</p>
-            </div>
-          ) : null}
-        </div>
-      ),
-    };
-  });
+  const timelineData = data.map((entry) => ({
+    title: entry.title,
+    content: renderEntryContent(entry),
+  }));
 
   return (
     <section className="flex flex-col gap-20 md:gap-24">
