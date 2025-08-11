@@ -27,3 +27,6 @@ export default async function Home() {
 // mieux vaut mettre seulement les comoposants du sidebar car la sidebar est une section de la page
 // au même titre que le header
 // TODO: Gérer les div et container différentes dans page.tsx notamment ligne 14
+// TODO: Comprendre TS pour builder foundation.ui
+
+// TODO: Prendre un à un les composants de page-config.json et les mettre dans foundation.ui

@@ -1,5 +1,5 @@
-import { Component } from "./component";
+import { Component, StartupStrugglesProps } from "./component";
 
-export function StartupStruggles() {
-  return <Component />;
+export function StartupStruggles(props: StartupStrugglesProps) {
+  return <Component {...props} />;
 }

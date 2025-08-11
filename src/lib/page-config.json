@@ -29,7 +29,55 @@
       {
         "id": "probleme",
         "component": "StartupStruggles",
-        "props": {}
+        "props": {
+          "title": "85% des startups échouent car les fondateurs abandonnent",
+          "description": "Entre la technique, le business et les deadlines... Il y a tant de choses à gérer qu'on finit par perdre de vue l'essentiel.",
+          "badge": { "text": "RÉALITÉ DU TERRAIN", "isBadge": true },
+          "color": "red",
+          "fromColor": "red-600",
+          "viaColor": "red-900",
+          "data": [
+            {
+              "title": "Manque de temps",
+              "paragraphs": [
+                "Entre les réunions, les deadlines et la gestion quotidienne, il devient impossible de se concentrer sur l'essentiel : développer son produit et sa vision."
+              ],
+              "image": {
+                "src": "/illu/late_1-destructive.svg",
+                "alt": "Illustration représentant la gestion du temps et des rendez-vous",
+                "className": "w-8/12 mx-auto block",
+                "width": 1,
+                "height": 1
+              }
+            },
+            {
+              "title": "Complexité technique",
+              "paragraphs": [
+                "Les développeurs sont confrontés à des défis techniques complexes, notamment en matière de sécurité, de performance et d'intégration avec les autres services."
+              ],
+              "image": {
+                "src": "/illu/headache-destructive.svg",
+                "alt": "Illustration représentant la gestion du temps et des rendez-vous",
+                "className": "w-8/12 mx-auto block",
+                "width": 1,
+                "height": 1
+              }
+            },
+            {
+              "title": "Ressources limitées",
+              "paragraphs": [
+                "Budget serré, équipe réduite, temps limité : chaque décision compte et il faut faire plus avec moins pour réussir à lancer son produit."
+              ],
+              "image": {
+                "src": "/illu/limited_ressource-destructive.svg",
+                "alt": "Illustration représentant la gestion du temps et des rendez-vous",
+                "className": "w-8/12 mx-auto block",
+                "width": 1,
+                "height": 1
+              }
+            }
+          ]
+        }
       },
       {
         "id": "solution",
