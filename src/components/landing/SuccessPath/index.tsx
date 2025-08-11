@@ -1,7 +1,7 @@
-import { Component } from "./component";
+import { Component, SuccessPathProps } from "./component";
 
-export function SuccessPath() {
-  return <Component />;
+export function SuccessPath(props: SuccessPathProps) {
+  return <Component {...props} />;
 }
 
 export default SuccessPath;

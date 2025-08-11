@@ -55,7 +55,6 @@ export function getComponentProps(componentName: string, sectionType?: string): 
 export function getComponentContent(componentName: string, propName: string, fallback?: string): unknown {
   const props = getComponentProps(componentName);
   const value = props[propName];
-  console.log("value : ", value);
 
   if (!value) {
     return fallback || propName;

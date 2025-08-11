@@ -82,7 +82,62 @@
       {
         "id": "solution",
         "component": "SuccessPath",
-        "props": {}
+        "props": {
+          "title": "90% des startups qui s'organisent atteignent leurs objectifs",
+          "description": "Découvrez comment transformer le chaos en machine à succès. Voici le chemin que suivent les fondateurs qui réussissent.",
+          "badge": { "text": "TRANSFORMATION RÉUSSIE", "isBadge": true },
+          "color": "green",
+          "fromColor": "green-600",
+          "viaColor": "emerald-500",
+          "data": [
+            {
+              "type": "task-list",
+              "title": "Organisation claire",
+              "paragraphs": [
+                "Avec une structure organisée, chaque tâche trouve sa place et chaque membre de l'équipe sait exactement quoi faire et quand."
+              ],
+              "features": [
+                { "icon": "CheckCircle", "text": "Tâches priorisées automatiquement" },
+                { "icon": "CheckCircle", "text": "Délais respectés à 95%" },
+                { "icon": "CheckCircle", "text": "Communication centralisée" }
+              ],
+              "featuresLayout": "list",
+              "summary": { "icon": "TrendingUp", "label": "Résultat", "text": "+65% de productivité en équipe dès la première semaine" }
+            },
+            {
+              "type": "card-list",
+              "title": "Collaboration fluide",
+              "paragraphs": [
+                "Fini les malentendus et les tâches dupliquées. L'équipe travaille en harmonie avec une visibilité complète sur l'avancement."
+              ],
+              "features": [
+                { "icon": "Users", "text": "Équipe synchronisée" },
+                { "icon": "Zap", "text": "Réactivité maximale" }
+              ],
+              "featuresLayout": "grid",
+              "summary": { "icon": "TrendingUp", "label": "Impact", "text": "Réduction de 80% des réunions inutiles et des emails de suivi" }
+            },
+            {
+              "type": "bullets-list",
+              "title": "Croissance accélérée",
+              "paragraphs": [
+                "Avec les bonnes fondations, votre startup peut enfin se concentrer sur ce qui compte : créer de la valeur et grandir."
+              ],
+              "bullets": [
+                "Focus retrouvé sur le produit",
+                "Équipe motivée et alignée",
+                "Livraisons dans les temps",
+                "Clients satisfaits et fidèles",
+                "Investisseurs confiants"
+              ],
+              "summary": {
+                "icon": "TrendingUp",
+                "label": "Transformation",
+                "text": "De 85% d'échecs à 90% de réussite : rejoignez les startups qui réussissent"
+              }
+            }
+          ]
+        }
       },
       {
         "id": "fonctionnement",

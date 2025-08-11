@@ -17,7 +17,6 @@ export function AuthDialog({ children }: AuthDialogProps) {
       return;
     }
     setIsOpen(open);
-    console.log("open", open);
   }
 
   async function handleLogin(data: { email: string; password: string }) {
