@@ -1,5 +1,5 @@
-import { HowItWork as HowItWorkComponent } from "./component";
+import { HowItWork as HowItWorkComponent, HowItWorkProps } from "./component";
 
-export function HowItWork() {
-  return <HowItWorkComponent />;
+export function HowItWork(props: HowItWorkProps) {
+  return <HowItWorkComponent {...props} />;
 }

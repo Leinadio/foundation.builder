@@ -142,7 +142,37 @@
       {
         "id": "fonctionnement",
         "component": "HowItWork",
-        "props": {}
+        "props": {
+          "title": "Transformez le chaos en efficacité",
+          "description": "L'efficacité retrouvée avec notre plateforme",
+          "badge": { "text": "COMMENT ÇA MARCHE ?", "isBadge": false },
+          "steps": [
+            {
+              "step": "Étape 1",
+              "title": "Créer un projet",
+              "description": "Pas besoin d'avoir un business plan en tête, ni même un concept parfaitement clair. Vous pouvez entrer une simple idée, une intuition, une envie — comme 'une app pour échanger des vêtements entre voisins' ou 'une solution pour aider les freelances à mieux gérer leurs revenus'.",
+              "objective": "🎯 Objectif : Démarrer sans pression, que vous soyez débutant ou expérimenté.",
+              "image": { "src": "/images/step1_fr.png", "alt": "Étape 1 - Description de votre projet" },
+              "layout": "text-image"
+            },
+            {
+              "step": "Étape 2",
+              "title": "Analyser votre projet",
+              "description": "Dès que votre idée est saisie, l'IA se met au travail. Elle réfléchit comme un analyste business, un expert produit, un marketer et un investisseur réunis. Elle identifie votre segment de marché, le profil des clients potentiels, la problématique que vous résolvez et la pertinence de votre solution.",
+              "objective": "💡 En quelques secondes, vous avez une vision complète de votre projet, bien au-delà d'un simple brainstorming.",
+              "image": { "src": "/images/step2_fr.png", "alt": "Étape 2 - Analyse de votre projet" },
+              "layout": "image-text"
+            },
+            {
+              "step": "Étape 3",
+              "title": "Développer votre projet",
+              "description": "Chaque section du rapport est claire, structurée et conçue pour être actionnable. Vous pouvez relire, comparer, ajuster mentalement ou à l'écrit. Besoin d'une nouvelle perspective ? Générez une autre version à partir d'un angle différent, d'une autre niche ou d'un problème connexe.",
+              "objective": "🧠 C'est comme un outil de réflexion rapide, pensé pour vous aider à clarifier, itérer et avancer.",
+              "image": { "src": "/images/step3_fr.png", "alt": "Étape 3 - Développer votre projet" },
+              "layout": "text-image"
+            }
+          ]
+        }
       },
       {
         "id": "fonctionnalites",
