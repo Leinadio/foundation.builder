@@ -1,17 +1,12 @@
-import pageConfig from "./page-config.json";
+import { pageConfig } from "./page-renderer-config";
 
-type ComponentConfig = {
-  component: string;
-  props: Record<string, unknown>;
-  id?: string;
-};
+// type ComponentConfig = {
+//   component: string;
+//   props: Record<string, unknown>;
+//   id?: string;
+// };
 
-type SectionConfig = {
-  type: string;
-  components: ComponentConfig[];
-};
 
-type PageConfig = SectionConfig[];
 
 export function getContent(path: string, fallback?: string): string {
   const keys = path.split(".");
@@ -34,7 +29,7 @@ export function getContent(path: string, fallback?: string): string {
 
 // Fonction spécifique pour récupérer les props d'un composant
 export function getComponentProps(componentName: string, sectionType?: string): Record<string, unknown> {
-  const config = pageConfig as PageConfig;
+  const config = pageConfig;
 
   for (const section of config) {
     if (sectionType && section.type !== sectionType) {

@@ -1,6 +1,5 @@
-// Pas d'usage direct de React ici
 import { SectionConfig } from "@/components/common/DynamicRenderer";
-import defaultConfig from "./page-config.json";
+import { pageConfig } from "./page-renderer-config";
 
 export type PageConfig = SectionConfig[];
 
@@ -9,7 +8,7 @@ export type PageConfig = SectionConfig[];
  */
 export async function loadPageConfig(configId?: string): Promise<PageConfig> {
   if (!configId) {
-    return defaultConfig as PageConfig;
+    return pageConfig;
   }
 
   try {
@@ -18,16 +17,16 @@ export async function loadPageConfig(configId?: string): Promise<PageConfig> {
     // if (!response.ok) throw new Error(`Erreur lors du chargement de la configuration ${configId}`);
     // return (await response.json()) as PageConfig;
 
-    return defaultConfig as PageConfig;
+    return pageConfig;
   } catch (error) {
     console.error(`Erreur lors du chargement de la configuration ${configId}:`, error);
-    return defaultConfig as PageConfig;
+    return pageConfig;
   }
 }
 
 /** Version synchrone pour utilisation côté client */
 export function getPageConfig(): PageConfig {
-  return defaultConfig as PageConfig;
+  return pageConfig;
 }
 
 // La logique de rendu par section est maintenant fusionnée dans DynamicRenderer
