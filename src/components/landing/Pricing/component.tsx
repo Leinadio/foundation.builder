@@ -5,56 +5,26 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { ReactNode } from "react";
 
-const pricingPlans = [
-  {
-    name: "Gratuit",
-    monthlyPrice: "0",
-    yearlyPrice: "0",
-    description: "Parfait pour commencer",
-    features: ["Jusqu'à 3 projets", "5 GB de stockage", "Support communautaire", "Fonctionnalités de base"],
-    limitations: ["Pas de support prioritaire", "Fonctionnalités avancées limitées"],
-    buttonText: "Commencer gratuitement",
-    popular: false,
-  },
-  {
-    name: "Pro",
-    monthlyPrice: "29",
-    yearlyPrice: "290",
-    description: "Pour les professionnels",
-    features: [
-      "Projets illimités",
-      "100 GB de stockage",
-      "Support prioritaire",
-      "Toutes les fonctionnalités",
-      "Analytics avancées",
-      "Intégrations API",
-    ],
-    limitations: [],
-    buttonText: "Choisir Pro",
-    popular: true,
-  },
-  {
-    name: "Enterprise",
-    monthlyPrice: "99",
-    yearlyPrice: "990",
-    description: "Pour les grandes équipes",
-    features: [
-      "Tout du plan Pro",
-      "Stockage illimité",
-      "Support dédié 24/7",
-      "Sécurité avancée",
-      "SSO et SAML",
-      "Audit et conformité",
-      "Formation personnalisée",
-    ],
-    limitations: [],
-    buttonText: "Contacter les ventes",
-    popular: false,
-  },
-];
+export interface PricingPlan {
+  name: string;
+  monthlyPrice: string;
+  yearlyPrice: string;
+  description: string;
+  features: string[];
+  limitations: string[];
+  buttonText: string;
+  popular: boolean;
+}
 
-function PricingCards({ isYearly }: { isYearly: boolean }) {
+export interface PricingProps {
+  title?: string | ReactNode;
+  description?: string;
+  pricingPlans?: PricingPlan[];
+}
+
+function PricingCards({ isYearly, pricingPlans }: { isYearly: boolean; pricingPlans: PricingPlan[] }) {
   return (
     <div className="grid md:grid-cols-3 gap-8 mx-auto">
       {pricingPlans.map((plan, index) => {
@@ -115,16 +85,67 @@ function PricingCards({ isYearly }: { isYearly: boolean }) {
   );
 }
 
-export function Component() {
+const defaultPricingPlans: PricingPlan[] = [
+  {
+    name: "Gratuit",
+    monthlyPrice: "0",
+    yearlyPrice: "0",
+    description: "Parfait pour commencer",
+    features: ["Jusqu'à 3 projets", "5 GB de stockage", "Support communautaire", "Fonctionnalités de base"],
+    limitations: ["Pas de support prioritaire", "Fonctionnalités avancées limitées"],
+    buttonText: "Commencer gratuitement",
+    popular: false,
+  },
+  {
+    name: "Pro",
+    monthlyPrice: "29",
+    yearlyPrice: "290",
+    description: "Pour les professionnels",
+    features: [
+      "Projets illimités",
+      "100 GB de stockage",
+      "Support prioritaire",
+      "Toutes les fonctionnalités",
+      "Analytics avancées",
+      "Intégrations API",
+    ],
+    limitations: [],
+    buttonText: "Choisir Pro",
+    popular: true,
+  },
+  {
+    name: "Enterprise",
+    monthlyPrice: "99",
+    yearlyPrice: "990",
+    description: "Pour les grandes équipes",
+    features: [
+      "Tout du plan Pro",
+      "Stockage illimité",
+      "Support dédié 24/7",
+      "Sécurité avancée",
+      "SSO et SAML",
+      "Audit et conformité",
+      "Formation personnalisée",
+    ],
+    limitations: [],
+    buttonText: "Contacter les ventes",
+    popular: false,
+  },
+];
+
+export function Component({
+  title = "Choisissez votre plan",
+  description = "Des tarifs simples et transparents qui s'adaptent à vos besoins. Commencez gratuitement et évoluez selon votre croissance.",
+  pricingPlans = defaultPricingPlans,
+}: PricingProps) {
   return (
     <section>
       <div className="mx-auto">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold mb-4">Choisissez votre plan</h2>
+          <h2 className="text-4xl font-bold mb-4">{title}</h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Des tarifs simples et transparents qui s&apos;adaptent à vos besoins. Commencez gratuitement et évoluez
-            selon votre croissance.
+            {description}
           </p>
         </div>
 
@@ -142,11 +163,11 @@ export function Component() {
           </div>
 
           <TabsContent value="monthly" className="mt-0">
-            <PricingCards isYearly={false} />
+            <PricingCards isYearly={false} pricingPlans={pricingPlans} />
           </TabsContent>
 
           <TabsContent value="yearly" className="mt-0">
-            <PricingCards isYearly={true} />
+            <PricingCards isYearly={true} pricingPlans={pricingPlans} />
           </TabsContent>
         </Tabs>
 

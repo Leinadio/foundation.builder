@@ -303,7 +303,57 @@ export const pageConfig: SectionConfig[] = [
       {
         id: "tarifs",
         component: "Pricing",
-        props: {}
+        props: {
+          title: "Choisissez votre plan",
+          description: "Des tarifs simples et transparents qui s'adaptent à vos besoins. Commencez gratuitement et évoluez selon votre croissance.",
+          pricingPlans: [
+            {
+              name: "Gratuit",
+              monthlyPrice: "0",
+              yearlyPrice: "0",
+              description: "Parfait pour commencer",
+              features: ["Jusqu'à 3 projets", "5 GB de stockage", "Support communautaire", "Fonctionnalités de base"],
+              limitations: ["Pas de support prioritaire", "Fonctionnalités avancées limitées"],
+              buttonText: "Commencer gratuitement",
+              popular: false,
+            },
+            {
+              name: "Pro",
+              monthlyPrice: "29",
+              yearlyPrice: "290",
+              description: "Pour les professionnels",
+              features: [
+                "Projets illimités",
+                "100 GB de stockage",
+                "Support prioritaire",
+                "Toutes les fonctionnalités",
+                "Analytics avancées",
+                "Intégrations API",
+              ],
+              limitations: [],
+              buttonText: "Choisir Pro",
+              popular: true,
+            },
+            {
+              name: "Enterprise",
+              monthlyPrice: "99",
+              yearlyPrice: "990",
+              description: "Pour les grandes équipes",
+              features: [
+                "Tout du plan Pro",
+                "Stockage illimité",
+                "Support dédié 24/7",
+                "Sécurité avancée",
+                "SSO et SAML",
+                "Audit et conformité",
+                "Formation personnalisée",
+              ],
+              limitations: [],
+              buttonText: "Contacter les ventes",
+              popular: false,
+            }
+          ]
+        }
       },
       {
         id: "faq",

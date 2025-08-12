@@ -1,5 +1,5 @@
-import { Component as PricingComponent } from "./component";
+import { Component as PricingComponent, PricingProps } from "./component";
 
-export function Pricing() {
-  return <PricingComponent />;
+export function Pricing(props: PricingProps) {
+  return <PricingComponent {...props} />;
 }
