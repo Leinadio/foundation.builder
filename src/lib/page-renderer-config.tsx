@@ -277,7 +277,28 @@ export const pageConfig: SectionConfig[] = [
       {
         id: "for-who",
         component: "ForWho",
-        props: {}
+        props: {
+          title: "Conçu pour toutes les tailles d'entreprise",
+          description: "Donnez à toute votre équipe le pouvoir de valider des idées en 3 minutes ou moins. Aucune compétence en business plan requise.",
+          badge: { text: "POUR QUI", isBadge: false },
+          companySizes: [
+            {
+              id: "startups",
+              title: "Pour les startups & scaleups",
+              description: "Validation d'idées simplifiée. Testez vos concepts rapidement et validez votre marché avant d'investir."
+            },
+            {
+              id: "agencies",
+              title: "Pour les agences",
+              description: "Gérez facilement la validation d'idées pour plusieurs clients et créez des rapports professionnels qui impressionnent."
+            },
+            {
+              id: "ecommerce",
+              title: "Pour l'e-commerce",
+              description: "Boostez vos campagnes marketing avec une validation d'idées claire pour vos nouveaux produits et services."
+            }
+          ]
+        }
       },
       {
         id: "tarifs",

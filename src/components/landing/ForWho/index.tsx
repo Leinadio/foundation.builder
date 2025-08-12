@@ -1,5 +1,5 @@
-import { Component } from "./component";
+import { Component, ForWhoProps } from "./component";
 
-export function ForWho() {
-  return <Component />;
+export function ForWho(props: ForWhoProps) {
+  return <Component {...props} />;
 }

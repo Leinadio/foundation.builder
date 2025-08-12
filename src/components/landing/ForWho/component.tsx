@@ -1,40 +1,49 @@
 import { Headline } from "@/components/common/Headline";
+import { ReactNode } from "react";
 
-interface CompanySize {
+export interface CompanySize {
   id: string;
   title: string;
   description: string;
 }
 
-const companySizes: CompanySize[] = [
+export interface ForWhoProps {
+  title?: string | ReactNode;
+  description?: string;
+  badge?: { text: string; isBadge: boolean };
+  companySizes?: CompanySize[];
+}
+
+const defaultCompanySizes: CompanySize[] = [
   {
     id: "startups",
-    title: "For startups & scaleups",
+    title: "Pour les startups & scaleups",
     description:
-      "In-house banner production made easy. Generate on-brand banners and scale your marketing efforts as you grow.",
+      "Validation d'idées simplifiée. Testez vos concepts rapidement et validez votre marché avant d'investir.",
   },
   {
     id: "agencies",
-    title: "For agencies",
+    title: "Pour les agences",
     description:
-      "Easily manage assets and banners for multiple brands, and create professional banners that impress your clients every time.",
+      "Gérez facilement la validation d'idées pour plusieurs clients et créez des rapports professionnels qui impressionnent.",
   },
   {
     id: "ecommerce",
-    title: "For eCommerce",
+    title: "Pour l'e-commerce",
     description:
-      "Boost your Facebook Dynamic Product Ads campaigns with custom banners for your entire product catalog.",
+      "Boostez vos campagnes marketing avec une validation d'idées claire pour vos nouveaux produits et services.",
   },
 ];
 
-export function Component() {
+export function Component({
+  title = "Conçu pour toutes les tailles d'entreprise",
+  description = "Donnez à toute votre équipe le pouvoir de valider des idées en 3 minutes ou moins. Aucune compétence en business plan requise.",
+  badge = { text: "POUR QUI", isBadge: false },
+  companySizes = defaultCompanySizes,
+}: ForWhoProps) {
   return (
     <section className="flex flex-col gap-8 md:gap-10">
-      <Headline
-        title="Built for all company sizes"
-        description="Empower your entire team to create engaging banners in 3 minutes or less. No design skills required."
-        badge={{ text: "FOR WHO", isBadge: false }}
-      />
+      <Headline title={title} description={description} badge={badge} />
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         {/* Image à gauche */}
