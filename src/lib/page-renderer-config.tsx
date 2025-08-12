@@ -189,7 +189,90 @@ export const pageConfig: SectionConfig[] = [
       {
         id: "fonctionnalites",
         component: "FeatureBentoGrid",
-        props: {}
+        props: {
+          title: "Ce que vous pouvez faire avec l'IA",
+          description: "L'IA est un outil puissant qui peut vous aider dans votre travail de validation d'idées.",
+          badge: { text: "FONCTIONNALITÉS", isBadge: false },
+          bentoItems: [
+            {
+              title: "Génération de contenu IA",
+              description: "Découvrez la puissance de l'IA pour générer du contenu unique et pertinent.",
+              skeleton: "SkeletonOne",
+              className: "md:col-span-1",
+              icon: "IconClipboardCopy"
+            },
+            {
+              title: "Correction automatique",
+              description: "Laissez l'IA gérer la correction et l'amélioration de vos documents.",
+              skeleton: "SkeletonTwo",
+              className: "md:col-span-1",
+              icon: "IconFileBroken"
+            },
+            {
+              title: "Suggestions contextuelles",
+              description: "Obtenez des suggestions alimentées par l'IA basées sur votre contexte d'écriture.",
+              skeleton: "SkeletonThree",
+              className: "md:col-span-1",
+              icon: "IconSignature"
+            },
+            {
+              title: "Analyse de sentiment",
+              description: "Comprenez le sentiment de votre texte grâce à l'analyse IA.",
+              skeleton: "SkeletonFour",
+              className: "md:col-span-2",
+              icon: "IconTableColumn"
+            },
+            {
+              title: "Résumé de texte",
+              description: "Résumez vos longs documents avec la technologie IA.",
+              skeleton: "SkeletonFive",
+              className: "md:col-span-1",
+              icon: "IconBoxAlignRightFilled"
+            }
+          ],
+          hoverFeatures: [
+            {
+              title: "Conçu pour les entrepreneurs",
+              description: "Conçu pour les entrepreneurs, les innovateurs, les rêveurs et les créateurs d'entreprise.",
+              icon: "IconTerminal2"
+            },
+            {
+              title: "Facilité d'utilisation",
+              description: "C'est aussi facile à utiliser qu'un iPhone, et aussi efficace qu'un consultant expert.",
+              icon: "IconEaseInOut"
+            },
+            {
+              title: "Prix imbattable",
+              description: "Nos prix sont les meilleurs du marché. Pas de frais cachés, pas de verrouillage.",
+              icon: "IconCurrencyDollar"
+            },
+            {
+              title: "Disponibilité 100%",
+              description: "Notre plateforme est toujours disponible quand vous en avez besoin.",
+              icon: "IconCloud"
+            },
+            {
+              title: "Architecture multi-projets",
+              description: "Gérez plusieurs projets simultanément avec une interface unifiée.",
+              icon: "IconRouteAltLeft"
+            },
+            {
+              title: "Support 24/7",
+              description: "Nous sommes disponibles 100% du temps. Du moins, nos agents IA le sont.",
+              icon: "IconHelp"
+            },
+            {
+              title: "Garantie satisfait ou remboursé",
+              description: "Si vous n'aimez pas notre plateforme, nous vous convaincrons de l'aimer.",
+              icon: "IconAdjustmentsBolt"
+            },
+            {
+              title: "Et bien plus encore",
+              description: "Je n'ai plus d'idées de copy. Acceptez mes sincères excuses.",
+              icon: "IconHeart"
+            }
+          ]
+        }
       },
       {
         id: "for-who",

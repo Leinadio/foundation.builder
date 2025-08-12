@@ -9,7 +9,8 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid";
 import { Headline } from "@/components/common/Headline";
-import { FeaturesSectionWithHoverEffects } from "@/components/ui/feature-section-with-hover-effects";
+import { FeaturesSectionWithHoverEffects, FeatureHoverItem } from "@/components/ui/feature-section-with-hover-effects";
+import { ReactNode } from "react";
 
 const SkeletonOne = () => {
   const variants = {
@@ -281,66 +282,108 @@ const SkeletonFive = () => {
   );
 };
 
-const items = [
+type BentoIconName = "IconClipboardCopy" | "IconFileBroken" | "IconSignature" | "IconTableColumn" | "IconBoxAlignRightFilled";
+
+const bentoIconMap: Record<BentoIconName, React.ComponentType<{ className?: string }>> = {
+  IconClipboardCopy,
+  IconFileBroken,
+  IconSignature,
+  IconTableColumn,
+  IconBoxAlignRightFilled,
+};
+
+type SkeletonName = "SkeletonOne" | "SkeletonTwo" | "SkeletonThree" | "SkeletonFour" | "SkeletonFive";
+
+const skeletonMap: Record<SkeletonName, React.ComponentType> = {
+  SkeletonOne,
+  SkeletonTwo,
+  SkeletonThree,
+  SkeletonFour,
+  SkeletonFive,
+};
+
+export interface BentoGridItemData {
+  title: string;
+  description: string;
+  skeleton: SkeletonName;
+  className?: string;
+  icon?: BentoIconName;
+}
+
+export interface FeatureBentoGridProps {
+  title?: string | ReactNode;
+  description?: string;
+  badge?: { text: string; isBadge: boolean };
+  bentoItems?: BentoGridItemData[];
+  hoverFeatures?: FeatureHoverItem[];
+}
+
+const defaultBentoItems: BentoGridItemData[] = [
   {
     title: "AI Content Generation",
-    description: <span className="text-sm">Experience the power of AI in generating unique content.</span>,
-    header: <SkeletonOne />,
+    description: "Experience the power of AI in generating unique content.",
+    skeleton: "SkeletonOne",
     className: "md:col-span-1",
-    icon: <IconClipboardCopy className="h-4 w-4 text-neutral-500" />,
+    icon: "IconClipboardCopy",
   },
   {
     title: "Automated Proofreading",
-    description: <span className="text-sm">Let AI handle the proofreading of your documents.</span>,
-    header: <SkeletonTwo />,
+    description: "Let AI handle the proofreading of your documents.",
+    skeleton: "SkeletonTwo",
     className: "md:col-span-1",
-    icon: <IconFileBroken className="h-4 w-4 text-neutral-500" />,
+    icon: "IconFileBroken",
   },
   {
     title: "Contextual Suggestions",
-    description: <span className="text-sm">Get AI-powered suggestions based on your writing context.</span>,
-    header: <SkeletonThree />,
+    description: "Get AI-powered suggestions based on your writing context.",
+    skeleton: "SkeletonThree",
     className: "md:col-span-1",
-    icon: <IconSignature className="h-4 w-4 text-neutral-500" />,
+    icon: "IconSignature",
   },
   {
     title: "Sentiment Analysis",
-    description: <span className="text-sm">Understand the sentiment of your text with AI analysis.</span>,
-    header: <SkeletonFour />,
+    description: "Understand the sentiment of your text with AI analysis.",
+    skeleton: "SkeletonFour",
     className: "md:col-span-2",
-    icon: <IconTableColumn className="h-4 w-4 text-neutral-500" />,
+    icon: "IconTableColumn",
   },
-
   {
     title: "Text Summarization",
-    description: <span className="text-sm">Summarize your lengthy documents with AI technology.</span>,
-    header: <SkeletonFive />,
+    description: "Summarize your lengthy documents with AI technology.",
+    skeleton: "SkeletonFive",
     className: "md:col-span-1",
-    icon: <IconBoxAlignRightFilled className="h-4 w-4 text-neutral-500" />,
+    icon: "IconBoxAlignRightFilled",
   },
 ];
 
-export const Component = () => {
+export const Component = ({
+  title = "What you can do with AI",
+  description = "AI is a powerful tool that can help you with your work.",
+  badge = { text: "AI", isBadge: false },
+  bentoItems = defaultBentoItems,
+  hoverFeatures,
+}: FeatureBentoGridProps) => {
   return (
     <section className="w-full flex flex-col gap-8 md:gap-24">
-      <Headline
-        title="What you can do with AI"
-        description="AI is a powerful tool that can help you with your work."
-        badge={{ text: "AI", isBadge: false }}
-      />
+      <Headline title={title} description={description} badge={badge} />
       <BentoGrid>
-        {items.map((item, i) => (
-          <BentoGridItem
-            key={i}
-            title={item.title}
-            description={item.description}
-            header={item.header}
-            icon={item.icon}
-            className={i === 3 || i === 6 ? "md:col-span-2" : ""}
-          />
-        ))}
+        {bentoItems.map((item, i) => {
+          const SkeletonComponent = skeletonMap[item.skeleton];
+          const IconComponent = item.icon ? bentoIconMap[item.icon] : null;
+          
+          return (
+            <BentoGridItem
+              key={i}
+              title={item.title}
+              description={<span className="text-sm">{item.description}</span>}
+              header={<SkeletonComponent />}
+              icon={IconComponent ? <IconComponent className="h-4 w-4 text-neutral-500" /> : undefined}
+              className={item.className || ""}
+            />
+          );
+        })}
       </BentoGrid>
-      <FeaturesSectionWithHoverEffects />
+      <FeaturesSectionWithHoverEffects features={hoverFeatures} />
     </section>
   );
 };

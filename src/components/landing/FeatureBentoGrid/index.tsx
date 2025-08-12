@@ -1,7 +1,5 @@
-import { Component } from "./component";
+import { Component, FeatureBentoGridProps } from "./component";
 
-export function FeatureBentoGrid() {
-  // TODO: ici qu'on appeler getcontent
-  // TODO: component doit aller dans Storybook dans block
-  return <Component />;
+export function FeatureBentoGrid(props: FeatureBentoGridProps) {
+  return <Component {...props} />;
 }
