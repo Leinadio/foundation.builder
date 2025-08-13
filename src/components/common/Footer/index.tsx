@@ -1,5 +1,5 @@
-import { Component } from "./component";
+import { Component, FooterProps } from "./component";
 
-export function Footer() {
-  return <Component />;
+export function Footer(props: FooterProps) {
+  return <Component {...props} />;
 }

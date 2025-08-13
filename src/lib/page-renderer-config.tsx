@@ -471,7 +471,65 @@ export const pageConfig: SectionConfig[] = [
       {
         id: "footer",
         component: "Footer",
-        props: {}
+        props: {
+          callToAction: {
+            badge: "🚀 Prêt à commencer ?",
+            title: "Transformez vos idées en succès",
+            description: "Rejoignez des milliers d'entrepreneurs qui utilisent notre plateforme pour valider et développer leurs projets.",
+            primaryButtonText: "Commencer gratuitement",
+            secondaryButtonText: "Voir la démo"
+          },
+          footerLinks: {
+            product: {
+              title: "Produit",
+              links: [
+                { name: "Fonctionnalités", href: "#features" },
+                { name: "Tarifs", href: "#pricing" },
+                { name: "Documentation", href: "#docs" },
+                { name: "API", href: "#api" }
+              ]
+            },
+            company: {
+              title: "Entreprise",
+              links: [
+                { name: "À propos", href: "#about" },
+                { name: "Blog", href: "#blog" },
+                { name: "Carrières", href: "#careers" },
+                { name: "Contact", href: "#contact" }
+              ]
+            },
+            support: {
+              title: "Support",
+              links: [
+                { name: "Centre d'aide", href: "#help" },
+                { name: "Communauté", href: "#community" },
+                { name: "Statut", href: "#status" },
+                { name: "Feedback", href: "#feedback" }
+              ]
+            },
+            legal: {
+              title: "Légal",
+              links: [
+                { name: "Conditions d'utilisation", href: "/terms" },
+                { name: "Politique de confidentialité", href: "/privacy" },
+                { name: "Cookies", href: "/cookies" },
+                { name: "RGPD", href: "/gdpr" }
+              ]
+            }
+          },
+          socialLinks: [
+            { name: "Twitter", href: "#" },
+            { name: "Facebook", href: "#" },
+            { name: "LinkedIn", href: "#" },
+            { name: "Instagram", href: "#" },
+            { name: "GitHub", href: "#" }
+          ],
+          companyInfo: {
+            name: "Foundation",
+            logo: "F",
+            copyright: "Foundation Builder. Tous droits réservés."
+          }
+        }
       }
     ]
   }
