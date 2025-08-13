@@ -1,18 +1,8 @@
-import { loadPageConfig } from "@/lib/load-page-config";
+import { pageConfig } from "@/lib/page-renderer-config";
 import { DynamicRenderer } from "@/components/common/DynamicRenderer";
 
 export default async function Home() {
-  // Chargement de la configuration de page
-  const pageConfig = await loadPageConfig();
-
-  // Logique de rendu centralisée dans lib/load-page-config
-
-  return (
-    <div>
-      {/* Rendu de toutes les sections dans l'ordre défini dans la configuration */}
-      <DynamicRenderer sections={pageConfig} />
-    </div>
-  );
+  return <DynamicRenderer sections={pageConfig} />;
 }
 
 // Terminé
@@ -27,7 +17,8 @@ export default async function Home() {
 // TODO: Comprendre TS pour builder foundation.ui
 
 
-// TODO: Prendre un à un les composants de page-config.json et les mettre dans foundation.ui
+
 // TODO: Regarder la vidéo Cursor 
+// TODO: Ajouter les composants de foundation.builder dans foundation.ui
 // TODO: Créer la CI/CD pour foundation.ui
 // TODO: Créer la CI/CD pour foundation.builder

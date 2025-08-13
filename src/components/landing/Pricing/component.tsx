@@ -170,37 +170,6 @@ export function Component({
             <PricingCards isYearly={true} pricingPlans={pricingPlans} />
           </TabsContent>
         </Tabs>
-
-        {/* FAQ Section */}
-        {/* <div className="mt-20 text-center">
-          <h3 className="text-2xl font-bold mb-8">{"Questions fréquentes"}</h3>
-          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto text-left">
-            <div>
-              <h4 className="font-semibold mb-2">{"Puis-je changer de plan à tout moment ?"}</h4>
-              <p className="text-muted-foreground text-sm">
-                {`Oui, vous pouvez upgrader ou downgrader votre plan à tout moment. Les changements prennent effet immédiatement.`}
-              </p>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-2">{"Y a-t-il une période d'essai gratuite ?"}</h4>
-              <p className="text-muted-foreground text-sm">
-                {`Tous les plans payants incluent une période d'essai gratuite de 14 jours. Aucune carte de crédit requise.`}
-              </p>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-2">{"Que se passe-t-il si j'annule ?"}</h4>
-              <p className="text-muted-foreground text-sm">
-                {`Vous pouvez annuler à tout moment. Vos données restent accessibles jusqu'à la fin de votre période de facturation.`}
-              </p>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-2">{"Proposez-vous des remises pour les équipes ?"}</h4>
-              <p className="text-muted-foreground text-sm">
-                {`Oui, nous offrons des remises pour les équipes de plus de 10 utilisateurs. Contactez-nous pour un devis personnalisé.`}
-              </p>
-            </div>
-          </div>
-        </div> */}
       </div>
     </section>
   );

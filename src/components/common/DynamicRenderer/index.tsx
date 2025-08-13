@@ -1,6 +1,4 @@
 import React, { ReactNode } from "react";
-
-// Importation des composants
 import { Header } from "@/components/landing/Header";
 import { Hero } from "@/components/landing/Hero";
 import { HowItWork } from "@/components/landing/HowItWork";
@@ -13,12 +11,16 @@ import { StartupStruggles } from "@/components/landing/StartupStruggles";
 import { Footer } from "@/components/common/Footer";
 import { FAQ } from "@/components/landing/FAQ";
 
-// Définition du type pour la configuration
 export type ComponentConfig = {
   component: string;
   props: Record<string, unknown>;
   id?: string;
   wrapperClass?: string;
+};
+
+export type SectionConfig = {
+  type: "header" | "section" | "section-full-width" | "footer";
+  components: ComponentConfig[];
 };
 
 // Mapping des composants
@@ -35,11 +37,6 @@ const componentsMap: Record<string, React.ComponentType<any>> = {
   StartupStruggles,
   Footer,
   FAQ,
-};
-
-export type SectionConfig = {
-  type: "header" | "section" | "section-full-width" | "footer";
-  components: ComponentConfig[];
 };
 
 export function DynamicRenderer({ sections }: { sections: SectionConfig[] }): ReactNode {
