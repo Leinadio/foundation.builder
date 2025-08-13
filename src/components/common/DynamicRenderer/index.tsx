@@ -8,7 +8,7 @@ import { ShowcaseBlog } from "@/components/landing/ShowcaseBlog";
 import { SuccessPath } from "@/components/landing/SuccessPath";
 import { FeatureBentoGrid } from "@/components/landing/FeatureBentoGrid";
 import { StartupStruggles } from "@/components/landing/StartupStruggles";
-import { Footer } from "@/components/common/Footer";
+import { Footer } from "@/components/landing/Footer";
 import { FAQ } from "@/components/landing/FAQ";
 
 export type ComponentConfig = {
