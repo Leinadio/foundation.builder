@@ -1,5 +1,10 @@
-import { Component, StartupStrugglesProps } from "./component";
+"use client";
+
+import {
+  StartupStruggles as StartupStrugglesComponent,
+  StartupStrugglesProps,
+} from "@leinad.io/foundation.ui/startupStruggles";
 
 export function StartupStruggles(props: StartupStrugglesProps) {
-  return <Component {...props} />;
+  return <StartupStrugglesComponent {...props} />;
 }

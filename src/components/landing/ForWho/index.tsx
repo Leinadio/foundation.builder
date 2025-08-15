@@ -1,5 +1,5 @@
-import { Component, ForWhoProps } from "./component";
+import { ForWho as ForWhoComponent, ForWhoProps } from "@leinad.io/foundation.ui/forWho";
 
 export function ForWho(props: ForWhoProps) {
-  return <Component {...props} />;
+  return <ForWhoComponent {...props} />;
 }

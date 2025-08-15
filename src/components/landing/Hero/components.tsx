@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { CircleChevronRight } from "lucide-react";
