@@ -1,5 +1,5 @@
-import { HowItWork as HowItWorkComponent, HowItWorkProps } from "@leinad.io/foundation.ui/howItWork";
+import { HowItWork as Component, HowItWorkProps } from "@/components/ui/how-it-work";
 
 export function HowItWork(props: HowItWorkProps) {
-  return <HowItWorkComponent {...props} />;
+  return <Component {...props} />;
 }

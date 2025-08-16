@@ -1,7 +1,7 @@
 import Image from "next/image";
-import { Icons, Variant } from "@/components/common/Icons";
+import { Icons, Variant } from "@/components/ui/icons";
 import { Badge } from "@/components/ui/badge";
-import { Headline } from "@/components/common/Headline";
+import { Headline } from "@/components/ui/headline";
 import { ReactNode } from "react";
 
 interface TextSectionProps {
@@ -73,7 +73,8 @@ const defaultSteps: HowItWorkStep[] = [
     title: "Analyser votre projet",
     description:
       "Dès que votre idée est saisie, l'IA se met au travail. Elle réfléchit comme un analyste business, un expert produit, un marketer et un investisseur réunis. Elle identifie votre segment de marché, le profil des clients potentiels, la problématique que vous résolvez et la pertinence de votre solution.",
-    objective: "💡 En quelques secondes, vous avez une vision complète de votre projet, bien au-delà d'un simple brainstorming.",
+    objective:
+      "💡 En quelques secondes, vous avez une vision complète de votre projet, bien au-delà d'un simple brainstorming.",
     image: { src: "/images/step2_fr.png", alt: "Étape 2 - Analyse de votre projet" },
     layout: "image-text",
   },
@@ -108,13 +109,23 @@ function makeRowImageText(step: HowItWorkStep, index: number): ReactNode {
 
 function iconForIndex(index: number, total: number): ReactNode | null {
   if (index === 0) {
-    return <Icons key={`icon-${index}`} variant={Variant.ArrowDown7} className="w-36 h-36 flex justify-center mx-auto" />;
+    return (
+      <Icons key={`icon-${index}`} variant={Variant.ArrowDown7} className="w-36 h-36 flex justify-center mx-auto" />
+    );
   }
   if (index === 1) {
-    return <Icons key={`icon-${index}`} variant={Variant.ArrowDown6} className="w-36 h-36 flex justify-center mx-auto" />;
+    return (
+      <Icons key={`icon-${index}`} variant={Variant.ArrowDown6} className="w-36 h-36 flex justify-center mx-auto" />
+    );
   }
   if (index === total - 1) {
-    return <Icons key={`icon-last-${index}`} variant={Variant.ArrowDown7} className="w-36 h-36 flex justify-center mx-auto" />;
+    return (
+      <Icons
+        key={`icon-last-${index}`}
+        variant={Variant.ArrowDown7}
+        className="w-36 h-36 flex justify-center mx-auto"
+      />
+    );
   }
   return null;
 }

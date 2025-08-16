@@ -19,31 +19,34 @@ const defaultItems: FaqItem[] = [
   {
     id: "faq-1",
     question: "Qu'est-ce qu'une FAQ ?",
-    answer: "Une FAQ est une liste de questions fréquemment posées et de leurs réponses sur un sujet particulier."
+    answer: "Une FAQ est une liste de questions fréquemment posées et de leurs réponses sur un sujet particulier.",
   },
   {
     id: "faq-2",
     question: "Quel est le but d'une FAQ ?",
-    answer: "Le but d'une FAQ est de fournir des réponses aux questions courantes et d'aider les utilisateurs à trouver rapidement et facilement les informations dont ils ont besoin."
+    answer:
+      "Le but d'une FAQ est de fournir des réponses aux questions courantes et d'aider les utilisateurs à trouver rapidement et facilement les informations dont ils ont besoin.",
   },
   {
     id: "faq-3",
     question: "Comment créer une FAQ ?",
-    answer: "Pour créer une FAQ, vous devez compiler une liste de questions et réponses courantes sur un sujet particulier et les organiser dans un format clair et facile à naviguer."
+    answer:
+      "Pour créer une FAQ, vous devez compiler une liste de questions et réponses courantes sur un sujet particulier et les organiser dans un format clair et facile à naviguer.",
   },
   {
     id: "faq-4",
     question: "Quels sont les avantages d'une FAQ ?",
-    answer: "Les avantages d'une FAQ incluent un accès rapide et facile à l'information, la réduction du nombre de demandes de support, et l'amélioration de l'expérience utilisateur globale."
-  }
+    answer:
+      "Les avantages d'une FAQ incluent un accès rapide et facile à l'information, la réduction du nombre de demandes de support, et l'amélioration de l'expérience utilisateur globale.",
+  },
 ];
 
-export function Component({ 
+export function Faq({
   items = defaultItems,
   heading = "Besoin d'aide ?",
   description = "Vous avez encore des questions ? N'hésitez pas à me contacter sur mon email : contact@foundation.builder",
   badge = "FAQ",
-  headingHighlight = "Nous avons les réponses."
+  headingHighlight = "Nous avons les réponses.",
 }: FaqProps) {
   return (
     <section className="container flex flex-col md:flex-row gap-8 md:gap-16">

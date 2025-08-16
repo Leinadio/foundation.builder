@@ -1,5 +1,5 @@
-import { Component as PricingComponent, PricingProps } from "./component";
+import { Component as Component, PricingProps } from "@/components/ui/pricing";
 
 export function Pricing(props: PricingProps) {
-  return <PricingComponent {...props} />;
+  return <Component {...props} />;
 }

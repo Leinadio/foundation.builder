@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { CircleChevronRight, Facebook, Twitter, Linkedin, Instagram, Github } from "lucide-react";
-import { AuthDialog } from "@/components/common/AuthDialog";
 
 export interface FooterLink {
   name: string;
@@ -88,7 +87,7 @@ const defaultSocialLinks = [
   { name: "GitHub", href: "#", icon: Github },
 ];
 
-function CallToActionSection({ callToAction }: { callToAction?: FooterProps['callToAction'] }) {
+function CallToActionSection({ callToAction }: { callToAction?: FooterProps["callToAction"] }) {
   return (
     <div className="bg-gradient-to-r from-primary/10 to-primary/5 border-t">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -100,15 +99,22 @@ function CallToActionSection({ callToAction }: { callToAction?: FooterProps['cal
             {callToAction?.title || "Transformez vos idées en succès"}
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
-            {callToAction?.description || "Rejoignez des milliers d'entrepreneurs qui utilisent notre plateforme pour valider et développer leurs projets."}
+            {callToAction?.description ||
+              "Rejoignez des milliers d'entrepreneurs qui utilisent notre plateforme pour valider et développer leurs projets."}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <AuthDialog>
-              <Button size="lg" className="px-8">
-                {callToAction?.primaryButtonText || "Commencer gratuitement"}
-                <CircleChevronRight className="w-4 h-4 ml-2" />
-              </Button>
-            </AuthDialog>
+            {/* <AuthDialog
+              trigger={
+                <Button size="lg" className="px-8">
+                  {callToAction?.primaryButtonText || "Commencer gratuitement"}
+                  <CircleChevronRight className="w-4 h-4 ml-2" />
+                </Button>
+              }
+            /> */}
+            <Button size="lg" className="px-8">
+              {callToAction?.primaryButtonText || "Commencer gratuitement"}
+              <CircleChevronRight className="w-4 h-4 ml-2" />
+            </Button>
             <Button variant="outline" size="lg" className="px-8">
               {callToAction?.secondaryButtonText || "Voir la démo"}
             </Button>
@@ -119,9 +125,9 @@ function CallToActionSection({ callToAction }: { callToAction?: FooterProps['cal
   );
 }
 
-function FooterLinks({ footerLinks }: { footerLinks?: FooterProps['footerLinks'] }) {
+function FooterLinks({ footerLinks }: { footerLinks?: FooterProps["footerLinks"] }) {
   const links = footerLinks || defaultFooterLinks;
-  
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -144,15 +150,15 @@ function FooterLinks({ footerLinks }: { footerLinks?: FooterProps['footerLinks']
   );
 }
 
-function SocialLinks({ socialLinks }: { socialLinks?: FooterProps['socialLinks'] }) {
+function SocialLinks({ socialLinks }: { socialLinks?: FooterProps["socialLinks"] }) {
   const links = socialLinks || defaultSocialLinks;
-  
+
   return (
     <div className="flex space-x-6">
       {links.map((social) => {
         const IconComponent = social.icon;
         if (!IconComponent) return null;
-        
+
         return (
           <a
             key={social.name}
@@ -168,7 +174,13 @@ function SocialLinks({ socialLinks }: { socialLinks?: FooterProps['socialLinks']
   );
 }
 
-function FooterBottom({ companyInfo, socialLinks }: { companyInfo?: FooterProps['companyInfo']; socialLinks?: FooterProps['socialLinks'] }) {
+function FooterBottom({
+  companyInfo,
+  socialLinks,
+}: {
+  companyInfo?: FooterProps["companyInfo"];
+  socialLinks?: FooterProps["socialLinks"];
+}) {
   const currentYear = new Date().getFullYear();
 
   return (
@@ -207,12 +219,7 @@ function FooterBottom({ companyInfo, socialLinks }: { companyInfo?: FooterProps[
   );
 }
 
-export function Component({
-  callToAction,
-  footerLinks,
-  socialLinks,
-  companyInfo,
-}: FooterProps = {}) {
+export function Footer({ callToAction, footerLinks, socialLinks, companyInfo }: FooterProps = {}) {
   return (
     <footer className="bg-background">
       <CallToActionSection callToAction={callToAction} />

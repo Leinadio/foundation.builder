@@ -8,11 +8,11 @@ import { IconBoxAlignRightFilled } from "@tabler/icons-react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid";
-import { Headline } from "@/components/common/Headline";
-import { FeaturesSectionWithHoverEffects, FeatureHoverItem } from "@/components/ui/feature-section-with-hover-effects";
+import { Headline } from "@/components/ui/headline";
+import { FeatureHoverItem, FeaturesSectionWithHoverEffects } from "@/components/ui/feature-section-with-hover-effects";
 import { ReactNode } from "react";
 
-const SkeletonOne = () => {
+export const SkeletonOne = () => {
   const variants = {
     initial: {
       x: 0,
@@ -69,7 +69,7 @@ const SkeletonOne = () => {
   );
 };
 
-const SkeletonTwo = () => {
+export const SkeletonTwo = () => {
   const variants = {
     initial: {
       width: 0,
@@ -111,7 +111,7 @@ const SkeletonTwo = () => {
   );
 };
 
-const SkeletonThree = () => {
+export const SkeletonThree = () => {
   const variants = {
     initial: {
       backgroundPosition: "0 50%",
@@ -141,7 +141,7 @@ const SkeletonThree = () => {
   );
 };
 
-const SkeletonFour = () => {
+export const SkeletonFour = () => {
   const first = {
     initial: {
       x: 20,
@@ -224,7 +224,7 @@ const SkeletonFour = () => {
   );
 };
 
-const SkeletonFive = () => {
+export const SkeletonFive = () => {
   const variants = {
     initial: {
       x: 0,
@@ -282,7 +282,12 @@ const SkeletonFive = () => {
   );
 };
 
-type BentoIconName = "IconClipboardCopy" | "IconFileBroken" | "IconSignature" | "IconTableColumn" | "IconBoxAlignRightFilled";
+type BentoIconName =
+  | "IconClipboardCopy"
+  | "IconFileBroken"
+  | "IconSignature"
+  | "IconTableColumn"
+  | "IconBoxAlignRightFilled";
 
 const bentoIconMap: Record<BentoIconName, React.ComponentType<{ className?: string }>> = {
   IconClipboardCopy,
@@ -294,7 +299,7 @@ const bentoIconMap: Record<BentoIconName, React.ComponentType<{ className?: stri
 
 type SkeletonName = "SkeletonOne" | "SkeletonTwo" | "SkeletonThree" | "SkeletonFour" | "SkeletonFive";
 
-const skeletonMap: Record<SkeletonName, React.ComponentType> = {
+export const skeletonMap: Record<SkeletonName, React.ComponentType> = {
   SkeletonOne,
   SkeletonTwo,
   SkeletonThree,
@@ -317,6 +322,49 @@ export interface FeatureBentoGridProps {
   bentoItems?: BentoGridItemData[];
   hoverFeatures?: FeatureHoverItem[];
 }
+
+const defaultHoverFeatures: FeatureHoverItem[] = [
+  {
+    title: "Built for developers",
+    description: "Built for engineers, developers, dreamers, thinkers and doers.",
+    icon: "IconTerminal2",
+  },
+  {
+    title: "Ease of use",
+    description: "It's as easy as using an Apple, and as expensive as buying one.",
+    icon: "IconEaseInOut",
+  },
+  {
+    title: "Pricing like no other",
+    description: "Our prices are best in the market. No cap, no lock, no credit card required.",
+    icon: "IconCurrencyDollar",
+  },
+  {
+    title: "100% Uptime guarantee",
+    description: "We just cannot be taken down by anyone.",
+    icon: "IconCloud",
+  },
+  {
+    title: "Multi-tenant Architecture",
+    description: "You can simply share passwords instead of buying new seats",
+    icon: "IconRouteAltLeft",
+  },
+  {
+    title: "24/7 Customer Support",
+    description: "We are available a 100% of the time. Atleast our AI Agents are.",
+    icon: "IconHelp",
+  },
+  {
+    title: "Money back guarantee",
+    description: "If you donot like EveryAI, we will convince you to like us.",
+    icon: "IconAdjustmentsBolt",
+  },
+  {
+    title: "And everything else",
+    description: "I just ran out of copy ideas. Accept my sincere apologies",
+    icon: "IconHeart",
+  },
+];
 
 const defaultBentoItems: BentoGridItemData[] = [
   {
@@ -356,13 +404,13 @@ const defaultBentoItems: BentoGridItemData[] = [
   },
 ];
 
-export const Component = ({
+export function FeatureBentoGrid({
   title = "What you can do with AI",
   description = "AI is a powerful tool that can help you with your work.",
   badge = { text: "AI", isBadge: false },
   bentoItems = defaultBentoItems,
-  hoverFeatures,
-}: FeatureBentoGridProps) => {
+  hoverFeatures = defaultHoverFeatures,
+}: FeatureBentoGridProps) {
   return (
     <section className="w-full flex flex-col gap-8 md:gap-24">
       <Headline title={title} description={description} badge={badge} />
@@ -370,7 +418,7 @@ export const Component = ({
         {bentoItems.map((item, i) => {
           const SkeletonComponent = skeletonMap[item.skeleton];
           const IconComponent = item.icon ? bentoIconMap[item.icon] : null;
-          
+
           return (
             <BentoGridItem
               key={i}
@@ -386,4 +434,4 @@ export const Component = ({
       <FeaturesSectionWithHoverEffects features={hoverFeatures} />
     </section>
   );
-};
+}

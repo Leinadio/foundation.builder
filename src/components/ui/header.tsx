@@ -1,7 +1,6 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { AuthDialog } from "@/components/common/AuthDialog";
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -79,14 +78,11 @@ function NavigationLinks({ navigationLinks }: { navigationLinks: NavLink[] }) {
       </NavigationMenu>
 
       <div className="flex items-center gap-4">
-        <AuthDialog>
-          <Button variant="outline" size="sm">
-            Se connecter
-          </Button>
-        </AuthDialog>
-        <AuthDialog>
-          <Button size="sm">Commencer</Button>
-        </AuthDialog>
+        <Button variant="outline" size="sm">
+          Se connecter
+        </Button>
+
+        <Button size="sm">Commencer</Button>
       </div>
     </div>
   );
@@ -142,14 +138,11 @@ function MobileMenu({ navigationLinks }: { navigationLinks: NavLink[] }) {
             Authentification
           </Badge>
           <div className="flex flex-col space-y-3">
-            <AuthDialog>
-              <Button variant="outline" className="w-full justify-start">
-                Se connecter
-              </Button>
-            </AuthDialog>
-            <AuthDialog>
-              <Button className="w-full justify-start">Commencer</Button>
-            </AuthDialog>
+            <Button variant="outline" className="w-full justify-start">
+              Se connecter
+            </Button>
+
+            <Button className="w-full justify-start">Commencer</Button>
           </div>
         </div>
       </SheetContent>
@@ -157,7 +150,7 @@ function MobileMenu({ navigationLinks }: { navigationLinks: NavLink[] }) {
   );
 }
 
-export function Component({ navigationLinks }: HeaderProps) {
+export function Header({ navigationLinks }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {

@@ -1,4 +1,4 @@
-import { Headline } from "@/components/common/Headline";
+import { Headline } from "@/components/ui/headline";
 import { ReactNode } from "react";
 
 export interface CompanySize {
@@ -35,7 +35,7 @@ const defaultCompanySizes: CompanySize[] = [
   },
 ];
 
-export function Component({
+export function ForWho({
   title = "Conçu pour toutes les tailles d'entreprise",
   description = "Donnez à toute votre équipe le pouvoir de valider des idées en 3 minutes ou moins. Aucune compétence en business plan requise.",
   badge = { text: "POUR QUI", isBadge: false },

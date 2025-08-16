@@ -1,5 +1,5 @@
 import { Timeline } from "@/components/ui/timeline";
-import { Headline } from "@/components/common/Headline";
+import { Headline } from "@/components/ui/headline";
 import Image from "next/image";
 import { ReactNode } from "react";
 
@@ -27,15 +27,14 @@ export interface StartupStrugglesProps {
   data?: StartupStrugglesItem[];
 }
 
-export function Component({
+export function StartupStruggles({
   title = (
     <>
       <span className="text-red-600">85%</span> des startups échouent car les{" "}
       <span className="text-red-600">fondateurs abandonnent</span>
     </>
   ),
-  description =
-    "Entre la technique, le business et les deadlines... Il y a tant de choses à gérer qu'on finit par perdre de vue l'essentiel.",
+  description = "Entre la technique, le business et les deadlines... Il y a tant de choses à gérer qu'on finit par perdre de vue l'essentiel.",
   badge = { text: "RÉALITÉ DU TERRAIN", isBadge: true },
   color = "red",
   fromColor = "red-600",

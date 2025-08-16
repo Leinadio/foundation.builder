@@ -16,9 +16,8 @@ export default async function Home() {
 // TODO: Plutôt que de mettre la sidebar entière dans storybook, mieux vaut mettre seulement les comoposants du sidebar car la sidebar est une section de la page au même titre que le header
 // TODO: Comprendre TS pour builder foundation.ui
 
-
-
-// TODO: Regarder la vidéo Cursor 
+// TODO: Mettre tout les composants dans registry shadcn
+// TODO: Regarder la vidéo Cursor
 // TODO: Ajouter les composants de foundation.builder dans foundation.ui
 // TODO: Créer la CI/CD pour foundation.ui
 // TODO: Créer la CI/CD pour foundation.builder
