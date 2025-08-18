@@ -3,13 +3,18 @@
 import { Button } from "@/components/ui/button";
 import { AuthDialog } from "../AuthDialog";
 import { authClient } from "@/lib/better-auth-client";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export function HeaderUserActions() {
-  const { data: session } = authClient.useSession();
+  const { data: session, isPending } = authClient.useSession();
 
   const handleLogout = async () => {
     await authClient.signOut();
   };
+
+  if (isPending) {
+    return <Skeleton className="h-7 w-[110px]" />;
+  }
 
   if (session) {
     return (

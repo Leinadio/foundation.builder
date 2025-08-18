@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -18,8 +19,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Menu } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { ReactNode, ReactElement, Children, isValidElement } from "react";
-import React from "react";
+import { getChildrenByType } from "@/lib/get-children-by-type";
 
 interface NavLink {
   id: string;
@@ -40,7 +40,6 @@ interface HeaderAuthSectionMobileProps {
   children: ReactNode;
 }
 
-// Composants marqueurs pour identifier les sections
 function HeaderAuthSection({ children }: HeaderAuthSectionProps) {
   return <>{children}</>;
 }
@@ -49,28 +48,10 @@ function HeaderAuthSectionMobile({ children }: HeaderAuthSectionMobileProps) {
   return <>{children}</>;
 }
 
-function getChildrenByType<T>(children: ReactNode, targetType: React.ComponentType<T>): ReactElement<T> | undefined {
-  const childrenArray = Children.toArray(children);
-
-  const matchingChild = childrenArray.find((child) => {
-    if (!isValidElement(child)) {
-      return false;
-    }
-
-    return child.type === targetType;
-  });
-
-  if (!matchingChild) {
-    return undefined;
-  }
-
-  return matchingChild as ReactElement<T>;
-}
-
 export function Header({ navigationLinks, children }: HeaderProps) {
-  // Extraction des sections d'authentification
   const authSection = getChildrenByType<HeaderAuthSectionProps>(children, HeaderAuthSection);
   const authSectionMobile = getChildrenByType<HeaderAuthSectionMobileProps>(children, HeaderAuthSectionMobile);
+
   return (
     <header className="top-0 left-0 right-0 z-50 transition-all duration-300 bg-background py-2">
       <div className="container max-w-6xl mx-auto px-4 lg:px-0 flex items-center justify-between transition-all duration-300 h-16">
@@ -140,6 +121,5 @@ export function Header({ navigationLinks, children }: HeaderProps) {
   );
 }
 
-// Attachement des composants enfants au composant principal
 Header.AuthSection = HeaderAuthSection;
 Header.AuthSectionMobile = HeaderAuthSectionMobile;

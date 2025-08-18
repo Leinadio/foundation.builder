@@ -21,7 +21,6 @@ export const pageConfig: SectionConfig[] = [
           title: "Testez votre idée de business avant de perdre du temps (ou de l'argent)",
           description:
             "Notre IA analyse votre idée sous tous les angles – marché, cible, problème, solution, business model – et vous fournit une validation claire, rapide et visuelle.",
-          buttonText: "Testez votre idée",
         },
       },
     ],

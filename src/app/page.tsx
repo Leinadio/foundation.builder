@@ -24,3 +24,4 @@ export default async function Home() {
 
 // TODO: Brancher l'authentification dans foundation.builder avec AuthDialog
 // TODO: Créer les composants du dashboard
+// TODO: Les types doivent correspondre dans page-renderer-config.tsx et les composants de la landing page
