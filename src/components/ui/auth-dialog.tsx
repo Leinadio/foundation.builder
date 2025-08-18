@@ -16,7 +16,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 
 interface AuthDialogProps {
   children?: React.ReactNode;
-  open?: boolean;
+  isOpen?: boolean;
   onOpenChange?: (open: boolean) => void;
   defaultTab?: "login" | "register";
   onLogin?: (data: { email: string; password: string }) => void;
@@ -26,7 +26,7 @@ interface AuthDialogProps {
 
 export function AuthDialog({
   children = <Button variant="outline">Se connecter</Button>,
-  open,
+  isOpen,
   onOpenChange,
   defaultTab = "login",
   onLogin,
@@ -56,7 +56,7 @@ export function AuthDialog({
   };
 
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
+    <Dialog open={isOpen} onOpenChange={onOpenChange}>
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>

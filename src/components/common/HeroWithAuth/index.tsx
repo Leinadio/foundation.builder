@@ -1,23 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { AuthDialog as AuthDialogComponent } from "@/components/ui/auth-dialog";
+import { Hero, HeroProps } from "@/components/ui/hero";
 import { clientAuthServiceInstance } from "@/lib/di-container-client";
 
-interface AuthDialogProps {
-  children?: React.ReactNode;
-}
-
-export function AuthDialog({ children }: AuthDialogProps) {
+export function HeroWithAuth(props: HeroProps) {
   const [isLoading, setIsLoading] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
-
-  function handleOpenChange(open: boolean) {
-    if (!open && isLoading) {
-      return;
-    }
-    setIsOpen(open);
-  }
+  const [, setIsOpen] = useState(false);
 
   async function handleLogin(data: { email: string; password: string }) {
     setIsLoading(true);
@@ -78,14 +67,12 @@ export function AuthDialog({ children }: AuthDialogProps) {
   }
 
   return (
-    <AuthDialogComponent
-      isOpen={isOpen}
-      onOpenChange={handleOpenChange}
-      onRegister={handleRegister}
+    <Hero
+      {...props}
+      authDialogIsLoading={isLoading}
+      authDialogDefaultTab="login"
       onLogin={handleLogin}
-      isLoading={isLoading}
-    >
-      {children}
-    </AuthDialogComponent>
+      onRegister={handleRegister}
+    />
   );
 }

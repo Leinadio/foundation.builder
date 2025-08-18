@@ -1,5 +1,6 @@
-import { Hero as Component, HeroProps } from "@/components/ui/hero";
+import { HeroWithAuth } from "@/components/common/HeroWithAuth";
+import { HeroProps } from "@/components/ui/hero";
 
 export function Hero(props: HeroProps) {
-  return <Component {...props} />;
+  return <HeroWithAuth {...props} />;
 }

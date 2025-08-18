@@ -21,3 +21,6 @@ export default async function Home() {
 // TODO: Ajouter les composants de foundation.builder dans foundation.ui
 // TODO: Créer la CI/CD pour foundation.ui
 // TODO: Créer la CI/CD pour foundation.builder
+
+// TODO: Brancher l'authentification dans foundation.builder avec AuthDialog
+// TODO: Créer les composants du dashboard

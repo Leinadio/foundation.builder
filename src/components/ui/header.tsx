@@ -1,6 +1,3 @@
-"use client";
-
-import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -18,9 +15,11 @@ import {
   SheetClose,
 } from "@/components/ui/sheet";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Menu } from "lucide-react";
-import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
+import { ReactNode, ReactElement, Children, isValidElement } from "react";
+import React from "react";
 
 interface NavLink {
   id: string;
@@ -30,161 +29,117 @@ interface NavLink {
 
 export interface HeaderProps {
   navigationLinks: NavLink[];
+  children: ReactNode;
 }
 
-function Logo() {
-  return (
-    <div className="flex items-center space-x-2">
-      <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-        <span className="text-primary-foreground font-bold text-sm">F</span>
-      </div>
-      <span className="font-bold text-xl text-foreground">Foundation Builder</span>
-    </div>
-  );
+interface HeaderAuthSectionProps {
+  children: ReactNode;
 }
 
-function NavigationLinks({ navigationLinks }: { navigationLinks: NavLink[] }) {
-  const handleScrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    if (!element) {
-      return;
+interface HeaderAuthSectionMobileProps {
+  children: ReactNode;
+}
+
+// Composants marqueurs pour identifier les sections
+function HeaderAuthSection({ children }: HeaderAuthSectionProps) {
+  return <>{children}</>;
+}
+
+function HeaderAuthSectionMobile({ children }: HeaderAuthSectionMobileProps) {
+  return <>{children}</>;
+}
+
+function getChildrenByType<T>(children: ReactNode, targetType: React.ComponentType<T>): ReactElement<T> | undefined {
+  const childrenArray = Children.toArray(children);
+
+  const matchingChild = childrenArray.find((child) => {
+    if (!isValidElement(child)) {
+      return false;
     }
 
-    const headerHeight = 80; // Hauteur approximative du header
-    const elementPosition = element.getBoundingClientRect().top;
-    const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
+    return child.type === targetType;
+  });
 
-    window.scrollTo({
-      top: offsetPosition,
-      behavior: "smooth",
-    });
-  };
+  if (!matchingChild) {
+    return undefined;
+  }
 
-  return (
-    <div className="hidden md:flex items-center justify-end flex-1 gap-4">
-      <NavigationMenu>
-        <NavigationMenuList>
-          {navigationLinks.map((link) => (
-            <NavigationMenuItem key={link.id}>
-              <NavigationMenuLink
-                className={cn(navigationMenuTriggerStyle(), "cursor-pointer", "bg-background text-foreground")}
-                onClick={() => handleScrollToSection(link.href)}
-              >
-                {link.label}
-              </NavigationMenuLink>
-            </NavigationMenuItem>
-          ))}
-        </NavigationMenuList>
-      </NavigationMenu>
-
-      <div className="flex items-center gap-4">
-        <Button variant="outline" size="sm">
-          Se connecter
-        </Button>
-
-        <Button size="sm">Commencer</Button>
-      </div>
-    </div>
-  );
+  return matchingChild as ReactElement<T>;
 }
 
-function MobileMenu({ navigationLinks }: { navigationLinks: NavLink[] }) {
-  const handleScrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    if (!element) {
-      return;
-    }
-
-    const headerHeight = 80;
-    const elementPosition = element.getBoundingClientRect().top;
-    const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
-
-    window.scrollTo({
-      top: offsetPosition,
-      behavior: "smooth",
-    });
-  };
-
+export function Header({ navigationLinks, children }: HeaderProps) {
+  // Extraction des sections d'authentification
+  const authSection = getChildrenByType<HeaderAuthSectionProps>(children, HeaderAuthSection);
+  const authSectionMobile = getChildrenByType<HeaderAuthSectionMobileProps>(children, HeaderAuthSectionMobile);
   return (
-    <Sheet>
-      <SheetTrigger asChild className="md:hidden">
-        <Button variant="ghost" size="sm" className="p-2">
-          <Menu className="h-5 w-5" />
-          <span className="sr-only">Ouvrir le menu</span>
-        </Button>
-      </SheetTrigger>
-      <SheetContent side="right" className="w-[300px] sm:w-[400px]">
-        <SheetHeader>
-          <SheetTitle className="text-left">Navigation</SheetTitle>
-          <SheetDescription className="text-left">Accédez rapidement aux différentes sections</SheetDescription>
-        </SheetHeader>
-
-        <nav className="flex flex-col space-y-4 mt-8">
-          {navigationLinks.map((link) => (
-            <SheetClose asChild key={link.id}>
-              <Button
-                variant="ghost"
-                className="justify-start text-left h-auto p-3"
-                onClick={() => handleScrollToSection(link.href)}
-              >
-                {link.label}
-              </Button>
-            </SheetClose>
-          ))}
-        </nav>
-
-        <div className="mt-8 pt-8 border-t border-border space-y-4">
-          <Badge variant="secondary" className="w-fit">
-            Authentification
-          </Badge>
-          <div className="flex flex-col space-y-3">
-            <Button variant="outline" className="w-full justify-start">
-              Se connecter
-            </Button>
-
-            <Button className="w-full justify-start">Commencer</Button>
+    <header className="top-0 left-0 right-0 z-50 transition-all duration-300 bg-background py-2">
+      <div className="container max-w-6xl mx-auto px-4 lg:px-0 flex items-center justify-between transition-all duration-300 h-16">
+        <div className="transition-transform duration-300">
+          <div className="flex items-center space-x-2">
+            <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+              <span className="text-primary-foreground font-bold text-sm">F</span>
+            </div>
+            <span className="font-bold text-xl text-foreground">Foundation Builder</span>
           </div>
         </div>
-      </SheetContent>
-    </Sheet>
-  );
-}
 
-export function Header({ navigationLinks }: HeaderProps) {
-  const [isScrolled, setIsScrolled] = useState(false);
+        <div className="hidden md:flex items-center justify-end flex-1 gap-4">
+          <NavigationMenu>
+            <NavigationMenuList>
+              {navigationLinks.map((link) => (
+                <NavigationMenuItem key={link.id}>
+                  <NavigationMenuLink
+                    className={cn(navigationMenuTriggerStyle(), "cursor-pointer", "bg-background text-foreground")}
+                    href={link.href}
+                  >
+                    {link.label}
+                  </NavigationMenuLink>
+                </NavigationMenuItem>
+              ))}
+            </NavigationMenuList>
+          </NavigationMenu>
 
-  useEffect(() => {
-    let lastScrollY = window.scrollY;
-
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      setIsScrolled(currentScrollY > 10 && currentScrollY > lastScrollY);
-      lastScrollY = currentScrollY;
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-background ${
-        isScrolled ? "backdrop-blur-md border-b border-border shadow-sm py-0" : "py-2"
-      }`}
-    >
-      <div
-        className={`container max-w-6xl mx-auto px-4 lg:px-0 flex items-center justify-between transition-all duration-300 h-16`}
-      >
-        <div className="transition-transform duration-300">
-          <Logo />
+          <div className="flex items-center gap-4">{authSection?.props.children}</div>
         </div>
-        <div className={`transition-all duration-300`}>
-          <NavigationLinks navigationLinks={navigationLinks} />
-        </div>
+
         <div className="md:hidden ml-auto">
-          <MobileMenu navigationLinks={navigationLinks} />
+          <Sheet>
+            <SheetTrigger asChild className="md:hidden">
+              <Button variant="ghost" size="sm" className="p-2">
+                <Menu className="h-5 w-5" />
+                <span className="sr-only">Ouvrir le menu</span>
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="w-[300px] sm:w-[400px]">
+              <SheetHeader>
+                <SheetTitle className="text-left">Navigation</SheetTitle>
+                <SheetDescription className="text-left">Accédez rapidement aux différentes sections</SheetDescription>
+              </SheetHeader>
+
+              <nav className="flex flex-col space-y-4 mt-8">
+                {navigationLinks.map((link) => (
+                  <SheetClose asChild key={link.id}>
+                    <Button variant="ghost" className="justify-start text-left h-auto p-3" asChild>
+                      <a href={link.href}>{link.label}</a>
+                    </Button>
+                  </SheetClose>
+                ))}
+              </nav>
+
+              <div className="mt-8 pt-8 border-t border-border space-y-4">
+                <Badge variant="secondary" className="w-fit">
+                  Authentification
+                </Badge>
+                <div className="flex flex-col space-y-3">{authSectionMobile?.props.children}</div>
+              </div>
+            </SheetContent>
+          </Sheet>
         </div>
       </div>
     </header>
   );
 }
+
+// Attachement des composants enfants au composant principal
+Header.AuthSection = HeaderAuthSection;
+Header.AuthSectionMobile = HeaderAuthSectionMobile;
