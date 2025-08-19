@@ -26,3 +26,4 @@ export default async function Home() {
 // TODO: Créer les composants du dashboard
 // TODO: Les types doivent correspondre dans page-renderer-config.tsx et les composants de la landing page
 // TODO: Même paramètre nommé sur les fonction que dans les interfaces
+// TODO: Gérer la taille de l'auth dialog

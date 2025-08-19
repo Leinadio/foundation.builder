@@ -133,7 +133,7 @@ export function AuthDialog({
                     : "Connectez-vous avec votre email et mot de passe."}
                 </CardDescription>
               </CardHeader>
-              <CardContent className="space-y-4">
+              <CardContent className="space-y-4 h-[560px]">
                 {showResetPassword ? (
                   <form onSubmit={handleResetPasswordSubmit} className="space-y-4">
                     <div className="space-y-2">
@@ -234,7 +234,7 @@ export function AuthDialog({
                 <CardTitle>Inscription</CardTitle>
                 <CardDescription>Créez votre compte en remplissant les informations ci-dessous.</CardDescription>
               </CardHeader>
-              <CardContent className="space-y-4">
+              <CardContent className="space-y-4 h-[540px]">
                 <div className="space-y-3">
                   <Button
                     type="button"
