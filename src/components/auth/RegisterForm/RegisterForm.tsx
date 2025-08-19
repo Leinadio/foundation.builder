@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -34,50 +33,50 @@ const GithubIcon = () => (
   </svg>
 );
 
-interface LoginFormProps {
-  onShowResetPassword: () => void;
+interface RegisterFormProps {
+  onRegisterSubmit: (data: { name: string; email: string; password: string; confirmPassword: string }) => Promise<void>;
+  onGoogleAuth: () => Promise<void>;
+  onGithubAuth: () => Promise<void>;
+  isLoading: boolean;
 }
 
-export function LoginForm({ onShowResetPassword }: LoginFormProps) {
-  const [isLoading] = useState(false);
-
-  function handleLoginSubmit(e: React.FormEvent<HTMLFormElement>) {
+export function RegisterForm({ onRegisterSubmit, onGoogleAuth, onGithubAuth, isLoading }: RegisterFormProps) {
+  function handleRegisterSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const data = {
+      name: formData.get("name") as string,
       email: formData.get("email") as string,
       password: formData.get("password") as string,
+      confirmPassword: formData.get("confirmPassword") as string,
     };
-    console.log("Login data:", data);
-    // Ici la logique métier sera gérée par les services
+    onRegisterSubmit(data);
   }
 
   function handleGoogleAuth() {
-    console.log("Google auth clicked");
-    // Ici la logique métier sera gérée par les services
+    onGoogleAuth();
   }
 
   function handleGithubAuth() {
-    console.log("Github auth clicked");
-    // Ici la logique métier sera gérée par les services
+    onGithubAuth();
   }
 
   return (
     <>
       <div className="text-center space-y-2">
-        <h1 className="text-3xl font-bold">Bon retour !</h1>
-        <p className="text-muted-foreground">Connectez-vous à votre compte</p>
+        <h1 className="text-3xl font-bold">Créer votre compte gratuit</h1>
+        <p className="text-muted-foreground">{"Rejoignez-nous dès aujourd'hui"}</p>
       </div>
 
       <div className="space-y-6">
         <div className="space-y-3">
           <Button type="button" variant="outline" className="w-full" onClick={handleGoogleAuth} disabled={isLoading}>
             <GoogleIcon />
-            <span className="ml-2">Continuer avec Google</span>
+            <span className="ml-2">{"S'inscrire avec Google"}</span>
           </Button>
           <Button type="button" variant="outline" className="w-full" onClick={handleGithubAuth} disabled={isLoading}>
             <GithubIcon />
-            <span className="ml-2">Continuer avec Github</span>
+            <span className="ml-2">{"S'inscrire avec Github"}</span>
           </Button>
         </div>
 
@@ -86,15 +85,19 @@ export function LoginForm({ onShowResetPassword }: LoginFormProps) {
             <span className="w-full border-t" />
           </div>
           <div className="relative flex justify-center text-xs uppercase">
-            <span className="bg-background px-2 text-muted-foreground">Ou continuer avec</span>
+            <span className="bg-background px-2 text-muted-foreground">{"Ou s'inscrire avec"}</span>
           </div>
         </div>
 
-        <form onSubmit={handleLoginSubmit} className="space-y-4">
+        <form onSubmit={handleRegisterSubmit} className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="login-email">Email</Label>
+            <Label htmlFor="register-name">Nom complet</Label>
+            <Input id="register-name" name="name" type="text" placeholder="Votre nom" required disabled={isLoading} />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="register-email">Email</Label>
             <Input
-              id="login-email"
+              id="register-email"
               name="email"
               type="email"
               placeholder="votre@email.com"
@@ -103,9 +106,9 @@ export function LoginForm({ onShowResetPassword }: LoginFormProps) {
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="login-password">Mot de passe</Label>
+            <Label htmlFor="register-password">Mot de passe</Label>
             <Input
-              id="login-password"
+              id="register-password"
               name="password"
               type="password"
               placeholder="••••••••"
@@ -113,25 +116,26 @@ export function LoginForm({ onShowResetPassword }: LoginFormProps) {
               disabled={isLoading}
             />
           </div>
-          <Button type="submit" className="w-full" disabled={isLoading}>
-            {isLoading ? "Connexion..." : "Se connecter"}
-          </Button>
-          <div className="text-center">
-            <button
-              type="button"
-              className="text-sm text-muted-foreground hover:text-primary underline-offset-4 hover:underline"
-              onClick={onShowResetPassword}
+          <div className="space-y-2">
+            <Label htmlFor="register-confirm-password">Confirmer le mot de passe</Label>
+            <Input
+              id="register-confirm-password"
+              name="confirmPassword"
+              type="password"
+              placeholder="••••••••"
+              required
               disabled={isLoading}
-            >
-              {"Mot de passe oublié ?"}
-            </button>
+            />
           </div>
+          <Button type="submit" className="w-full" disabled={isLoading}>
+            {isLoading ? "Inscription..." : "S'inscrire"}
+          </Button>
         </form>
 
         <div className="text-center text-sm text-muted-foreground">
-          {"Pas encore de compte ? "}
-          <Link href="/sign-up" className="text-primary hover:underline">
-            {"Créer un compte"}
+          {"Déjà un compte ? "}
+          <Link href="/sign-in" className="text-primary hover:underline">
+            {"Se connecter"}
           </Link>
         </div>
       </div>

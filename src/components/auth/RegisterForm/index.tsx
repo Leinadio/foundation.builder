@@ -1,49 +1,18 @@
 "use client";
 
 import { useState } from "react";
-import { AuthDialog as AuthDialogComponent } from "@/components/ui/auth-dialog";
 import { clientAuthServiceInstance } from "@/lib/di-container-client";
+import { RegisterForm } from "./RegisterForm";
 
-interface AuthDialogProps {
-  children?: React.ReactNode;
-}
-
-export function AuthDialog({ children }: AuthDialogProps) {
+export function RegisterFormContainer() {
   const [isLoading, setIsLoading] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
 
-  function handleOpenChange(open: boolean) {
-    const shouldPreventClose = !open && isLoading;
-    if (shouldPreventClose) {
-      return;
-    }
-    setIsOpen(open);
-  }
-
-  async function handleLogin(data: { email: string; password: string }) {
-    setIsLoading(true);
-
-    try {
-      const user = await clientAuthServiceInstance.loginWithEmail(data.email, data.password);
-
-      const isLoginFailed = !user;
-      if (isLoginFailed) {
-        console.error("Échec de la connexion");
-        return;
-      }
-
-      console.log("Connexion réussie:", user);
-      setIsOpen(false);
-      return;
-    } catch (error) {
-      console.error("Erreur lors de la connexion:", error);
-      return;
-    } finally {
-      setIsLoading(false);
-    }
-  }
-
-  async function handleRegister(data: { name: string; email: string; password: string; confirmPassword: string }) {
+  async function handleRegisterSubmit(data: {
+    name: string;
+    email: string;
+    password: string;
+    confirmPassword: string;
+  }) {
     setIsLoading(true);
 
     const isPasswordMismatch = data.password !== data.confirmPassword;
@@ -68,7 +37,6 @@ export function AuthDialog({ children }: AuthDialogProps) {
         console.log("Vérification d'email requise");
       }
 
-      setIsOpen(false);
       return;
     } catch (error) {
       console.error("Erreur lors de l'inscription:", error);
@@ -91,7 +59,6 @@ export function AuthDialog({ children }: AuthDialogProps) {
       }
 
       console.log("Connexion Google réussie:", user);
-      setIsOpen(false);
       return;
     } catch (error) {
       console.error("Erreur lors de la connexion Google:", error);
@@ -114,7 +81,6 @@ export function AuthDialog({ children }: AuthDialogProps) {
       }
 
       console.log("Connexion GitHub réussie:", user);
-      setIsOpen(false);
       return;
     } catch (error) {
       console.error("Erreur lors de la connexion GitHub:", error);
@@ -124,33 +90,15 @@ export function AuthDialog({ children }: AuthDialogProps) {
     }
   }
 
-  async function handleResetPassword(data: { email: string }) {
-    setIsLoading(true);
-
-    try {
-      await clientAuthServiceInstance.forgotPassword(data.email);
-      console.log("Email de réinitialisation envoyé avec succès");
-      return;
-    } catch (error) {
-      console.error("Erreur lors de l'envoi de l'email de réinitialisation:", error);
-      return;
-    } finally {
-      setIsLoading(false);
-    }
-  }
-
   return (
-    <AuthDialogComponent
-      isOpen={isOpen}
-      onOpenChange={handleOpenChange}
-      onRegister={handleRegister}
-      onLogin={handleLogin}
+    <RegisterForm
+      onRegisterSubmit={handleRegisterSubmit}
       onGoogleAuth={handleGoogleAuth}
       onGithubAuth={handleGithubAuth}
-      onResetPassword={handleResetPassword}
       isLoading={isLoading}
-    >
-      {children}
-    </AuthDialogComponent>
+    />
   );
 }
+
+// Export pour maintenir la compatibilité
+export { RegisterFormContainer as RegisterForm };

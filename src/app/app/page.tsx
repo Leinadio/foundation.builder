@@ -8,7 +8,7 @@ export default async function App() {
   });
 
   if (!session) {
-    redirect("/");
+    redirect("/sign-in");
   }
 
   return (

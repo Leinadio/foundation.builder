@@ -9,3 +9,5 @@ Toujours créer un Server Component pour la structure statique et un Client Comp
 Créer des Clients Components uniquement si tu as besoin d'intéractivité
 
 Toujours utiliser Shadcn
+
+Ne pas créer de hooks pour la logique métier

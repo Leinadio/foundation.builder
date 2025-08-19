@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -8,19 +7,18 @@ import { ArrowLeft } from "lucide-react";
 
 interface ResetPasswordFormProps {
   onBack: () => void;
+  onResetPasswordSubmit: (data: { email: string }) => Promise<void>;
+  isLoading: boolean;
 }
 
-export function ResetPasswordForm({ onBack }: ResetPasswordFormProps) {
-  const [isLoading] = useState(false);
-
+export function ResetPasswordForm({ onBack, onResetPasswordSubmit, isLoading }: ResetPasswordFormProps) {
   function handleResetPasswordSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const data = {
       email: formData.get("email") as string,
     };
-    console.log("Reset password data:", data);
-    // Ici la logique métier sera gérée par les services
+    onResetPasswordSubmit(data);
   }
 
   return (

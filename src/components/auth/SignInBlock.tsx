@@ -4,8 +4,8 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
-import { ResetPasswordForm } from "./ResetPasswordForm";
-import { LoginForm } from "./LoginForm";
+import { ResetPasswordForm } from "@/components/auth/ResetPasswordForm";
+import { LoginForm } from "@/components/auth/LoginForm";
 
 export function SignInForm() {
   const [showResetPassword, setShowResetPassword] = useState(false);

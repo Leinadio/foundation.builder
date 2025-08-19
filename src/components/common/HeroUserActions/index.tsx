@@ -1,8 +1,8 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { AuthDialog } from "../AuthDialog";
 import { authClient } from "@/lib/better-auth-client";
+import Link from "next/link";
 
 interface HeroUserActionsProps {
   url: string;
@@ -14,13 +14,13 @@ export function HeroUserActions({ url }: HeroUserActionsProps) {
   if (session) {
     return (
       <Button size="lg" asChild>
-        <a href={url}>Commencer</a>
+        <Link href={url}>Commencer</Link>
       </Button>
     );
   }
   return (
-    <AuthDialog>
-      <Button size="lg">Commencer</Button>
-    </AuthDialog>
+    <Button size="lg" asChild>
+      <Link href="/sign-in">Commencer</Link>
+    </Button>
   );
 }

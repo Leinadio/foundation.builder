@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -34,48 +33,55 @@ const GithubIcon = () => (
   </svg>
 );
 
-export function RegisterForm() {
-  const [isLoading] = useState(false);
+interface LoginFormProps {
+  onShowResetPassword: () => void;
+  onLoginSubmit: (data: { email: string; password: string }) => Promise<void>;
+  onGoogleAuth: () => Promise<void>;
+  onGithubAuth: () => Promise<void>;
+  isLoading: boolean;
+}
 
-  function handleRegisterSubmit(e: React.FormEvent<HTMLFormElement>) {
+export function LoginForm({
+  onShowResetPassword,
+  onLoginSubmit,
+  onGoogleAuth,
+  onGithubAuth,
+  isLoading,
+}: LoginFormProps) {
+  function handleLoginSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const data = {
-      name: formData.get("name") as string,
       email: formData.get("email") as string,
       password: formData.get("password") as string,
-      confirmPassword: formData.get("confirmPassword") as string,
     };
-    console.log("Register data:", data);
-    // Ici la logique métier sera gérée par les services
+    onLoginSubmit(data);
   }
 
   function handleGoogleAuth() {
-    console.log("Google auth clicked");
-    // Ici la logique métier sera gérée par les services
+    onGoogleAuth();
   }
 
   function handleGithubAuth() {
-    console.log("Github auth clicked");
-    // Ici la logique métier sera gérée par les services
+    onGithubAuth();
   }
 
   return (
     <>
       <div className="text-center space-y-2">
-        <h1 className="text-3xl font-bold">Créer votre compte gratuit</h1>
-        <p className="text-muted-foreground">{"Rejoignez-nous dès aujourd'hui"}</p>
+        <h1 className="text-3xl font-bold">Bon retour !</h1>
+        <p className="text-muted-foreground">Connectez-vous à votre compte</p>
       </div>
 
       <div className="space-y-6">
         <div className="space-y-3">
           <Button type="button" variant="outline" className="w-full" onClick={handleGoogleAuth} disabled={isLoading}>
             <GoogleIcon />
-            <span className="ml-2">{"S'inscrire avec Google"}</span>
+            <span className="ml-2">Continuer avec Google</span>
           </Button>
           <Button type="button" variant="outline" className="w-full" onClick={handleGithubAuth} disabled={isLoading}>
             <GithubIcon />
-            <span className="ml-2">{"S'inscrire avec Github"}</span>
+            <span className="ml-2">Continuer avec Github</span>
           </Button>
         </div>
 
@@ -84,19 +90,15 @@ export function RegisterForm() {
             <span className="w-full border-t" />
           </div>
           <div className="relative flex justify-center text-xs uppercase">
-            <span className="bg-background px-2 text-muted-foreground">{"Ou s'inscrire avec"}</span>
+            <span className="bg-background px-2 text-muted-foreground">Ou continuer avec</span>
           </div>
         </div>
 
-        <form onSubmit={handleRegisterSubmit} className="space-y-4">
+        <form onSubmit={handleLoginSubmit} className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="register-name">Nom complet</Label>
-            <Input id="register-name" name="name" type="text" placeholder="Votre nom" required disabled={isLoading} />
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="register-email">Email</Label>
+            <Label htmlFor="login-email">Email</Label>
             <Input
-              id="register-email"
+              id="login-email"
               name="email"
               type="email"
               placeholder="votre@email.com"
@@ -105,9 +107,9 @@ export function RegisterForm() {
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="register-password">Mot de passe</Label>
+            <Label htmlFor="login-password">Mot de passe</Label>
             <Input
-              id="register-password"
+              id="login-password"
               name="password"
               type="password"
               placeholder="••••••••"
@@ -115,26 +117,25 @@ export function RegisterForm() {
               disabled={isLoading}
             />
           </div>
-          <div className="space-y-2">
-            <Label htmlFor="register-confirm-password">Confirmer le mot de passe</Label>
-            <Input
-              id="register-confirm-password"
-              name="confirmPassword"
-              type="password"
-              placeholder="••••••••"
-              required
-              disabled={isLoading}
-            />
-          </div>
           <Button type="submit" className="w-full" disabled={isLoading}>
-            {isLoading ? "Inscription..." : "S'inscrire"}
+            {isLoading ? "Connexion..." : "Se connecter"}
           </Button>
+          <div className="text-center">
+            <button
+              type="button"
+              className="text-sm text-muted-foreground hover:text-primary underline-offset-4 hover:underline"
+              onClick={onShowResetPassword}
+              disabled={isLoading}
+            >
+              {"Mot de passe oublié ?"}
+            </button>
+          </div>
         </form>
 
         <div className="text-center text-sm text-muted-foreground">
-          {"Déjà un compte ? "}
-          <Link href="/sign-in" className="text-primary hover:underline">
-            {"Se connecter"}
+          {"Pas encore de compte ? "}
+          <Link href="/sign-up" className="text-primary hover:underline">
+            {"Créer un compte"}
           </Link>
         </div>
       </div>
