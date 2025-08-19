@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 import { clientAuthServiceInstance } from "@/lib/di-container-client";
 import { LoginForm } from "./LoginForm";
 
@@ -10,6 +12,7 @@ interface LoginFormContainerProps {
 
 export function LoginFormContainer({ onShowResetPassword }: LoginFormContainerProps) {
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   async function handleLoginSubmit(data: { email: string; password: string }) {
     setIsLoading(true);
@@ -20,13 +23,23 @@ export function LoginFormContainer({ onShowResetPassword }: LoginFormContainerPr
       const isLoginFailed = !user;
       if (isLoginFailed) {
         console.error("Échec de la connexion");
+        toast.error("Échec de la connexion", {
+          description: "Vérifiez vos identifiants et réessayez.",
+        });
         return;
       }
 
       console.log("Connexion réussie:", user);
+      toast.success("Connexion réussie", {
+        description: "Redirection en cours...",
+      });
+      router.push("/app");
       return;
     } catch (error) {
       console.error("Erreur lors de la connexion:", error);
+      toast.error("Erreur de connexion", {
+        description: "Une erreur inattendue s'est produite. Veuillez réessayer.",
+      });
       return;
     } finally {
       setIsLoading(false);
@@ -46,6 +59,7 @@ export function LoginFormContainer({ onShowResetPassword }: LoginFormContainerPr
       }
 
       console.log("Connexion Google réussie:", user);
+      router.push("/app");
       return;
     } catch (error) {
       console.error("Erreur lors de la connexion Google:", error);
@@ -68,6 +82,7 @@ export function LoginFormContainer({ onShowResetPassword }: LoginFormContainerPr
       }
 
       console.log("Connexion GitHub réussie:", user);
+      router.push("/app");
       return;
     } catch (error) {
       console.error("Erreur lors de la connexion GitHub:", error);
