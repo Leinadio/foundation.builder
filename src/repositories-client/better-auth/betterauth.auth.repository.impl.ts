@@ -1,6 +1,6 @@
 import { AuthRepository } from "@/core/ports/out/auth.repository";
 import { User } from "@/core/models/user";
-import { authClient } from "@/lib/better-auth-client";
+import { authClient } from "@/repositories-client/better-auth/config";
 
 interface BetterAuthUser {
   id: string;
@@ -62,13 +62,6 @@ export class BetterAuthRepositoryImpl implements AuthRepository {
         callbackURL: "/app",
       });
       return null;
-      // console.log("result", result.data);
-
-      // if (!result.data?.user) {
-      //   return null;
-      // }
-
-      // return this.betterAuthUserToUser(result.data.user);
     } catch (error) {
       console.error("Erreur lors de la connexion Google:", error);
       return null;

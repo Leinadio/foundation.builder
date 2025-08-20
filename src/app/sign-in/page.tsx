@@ -1,5 +1,5 @@
 import { SignInForm } from "@/components/auth";
-import { auth } from "@/lib/better-auth";
+import { auth } from "@/repositories/better-auth/config";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 

@@ -1,4 +1,4 @@
-import { pageConfig } from "@/lib/page-renderer-config";
+import { pageConfig } from "@/utils/page-renderer-config";
 import { DynamicRenderer } from "@/components/common/DynamicRenderer";
 
 export default async function Home() {
@@ -6,14 +6,9 @@ export default async function Home() {
 }
 
 // Terminé
-// TODO: Chercher des composants Landing Page sur V0x
-// TODO: Schématiser sur excalidraw le DI-Container-Client et DI-Container-Server
-// TODO: Gérer la taille de l'image en essayant d'enlever la width et height qui sont dynamiques pour le composant HowItWorks
-// TODO: Créer un composant problème
-// TODO: Créer un composant solution
+// TODO: Vérifier le schéma sur excalidraw
 
 // En cours
-// TODO: Vérifier le schéma sur excalidraw
 // TODO: Ajouter les sections de la sidebar dans foundation.ui
 // TODO: Se renseigner sur Claude Code
 // TODO: Créer la CI/CD pour foundation.ui

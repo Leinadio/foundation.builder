@@ -1,10 +1,8 @@
-import { UserService } from "@/core/services/user.service";
 import { EmailService } from "@/core/services/email.service";
 import { PaymentService } from "@/core/services/payment.service";
 
-import { FirestoreUserRepositoryImpl } from "@/repositories/firestore.user.repository.impl";
-import { StripePaymentRepositoryImpl } from "@/repositories/stripe.payment.repository";
-import { ResendEmailRepositoryImpl } from "@/repositories/resend.email.repository";
+import { StripePaymentRepositoryImpl } from "@/repositories/stripe/stripe.payment.repository";
+import { ResendEmailRepositoryImpl } from "@/repositories/resend/resend.email.repository";
 
 import { PaymentPortIn } from "@/core/ports/in/payment.port";
 import { AuthPortIn } from "@/core/ports/in/auth.port";
@@ -27,16 +25,13 @@ class DIContainer {
 
   private initializeServices() {
     // Repositories
-    const userRepository = new FirestoreUserRepositoryImpl();
     const paymentRepository = new StripePaymentRepositoryImpl();
     const emailRepository = new ResendEmailRepositoryImpl();
 
     // Services
-    const userService = new UserService(userRepository);
     const paymentService = new PaymentService(paymentRepository);
     const emailService = new EmailService(emailRepository);
 
-    this.services.set("UserService", userService);
     this.services.set("PaymentService", paymentService);
     this.services.set("EmailService", emailService);
   }

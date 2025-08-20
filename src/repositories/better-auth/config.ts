@@ -1,6 +1,6 @@
 import { betterAuth } from "better-auth";
 import { Pool } from "pg";
-import { emailServiceInstance } from "./di-container-server";
+import { emailServiceInstance } from "@/lib/di-container-server";
 
 interface BetterAuthEmailVerification {
   user: {

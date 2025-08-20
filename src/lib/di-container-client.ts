@@ -1,9 +1,15 @@
 import { AuthService } from "@/core/services/auth.service";
+import { UserService } from "@/core/services/user.service";
+
+import { BetterAuthRepositoryImpl } from "@/repositories-client/better-auth/betterauth.auth.repository.impl";
+import { FirestoreUserRepositoryImpl } from "@/repositories-client/firestore/firestore.user.repository.impl";
+
 import { AuthPortIn } from "@/core/ports/in/auth.port";
-import { BetterAuthRepositoryImpl } from "@/repositories/betterauth.auth.repository.impl";
+import { UserPortIn } from "@/core/ports/in/user.port";
 
 export type ClientServiceMap = {
   AuthService: AuthPortIn;
+  UserService: UserPortIn;
 };
 
 class ClientDIContainer {
@@ -16,11 +22,14 @@ class ClientDIContainer {
   private initializeClientServices() {
     // Repositories
     const authRepository = new BetterAuthRepositoryImpl();
+    const userRepository = new FirestoreUserRepositoryImpl();
 
     // Services
     const authService = new AuthService(authRepository);
+    const userService = new UserService(userRepository);
 
     this.services.set("AuthService", authService);
+    this.services.set("UserService", userService);
   }
 
   public get<K extends keyof ClientServiceMap>(serviceName: K): ClientServiceMap[K] {

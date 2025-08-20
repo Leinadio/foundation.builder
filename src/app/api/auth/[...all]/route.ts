@@ -1,4 +1,4 @@
-import { auth } from "@/lib/better-auth";
+import { auth } from "@/repositories/better-auth/config";
 
 const handler = auth.handler;
 

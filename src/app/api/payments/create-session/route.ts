@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { PaymentService } from "@/core/services/payment.service";
-import { StripePaymentRepositoryImpl } from "@/repositories/stripe.payment.repository";
+import { StripePaymentRepositoryImpl } from "@/repositories/stripe/stripe.payment.repository";
 
 export async function POST(request: Request) {
   try {

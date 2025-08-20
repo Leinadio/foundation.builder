@@ -1,6 +1,6 @@
 import { User } from "@/core/models/user";
 import { UserRepository } from "@/core/ports/out/user.repository";
-import { supabase } from "@/lib/supabase-client";
+import { supabase } from "@/repositories-client/supabase/config";
 import { RealtimeChannel, REALTIME_SUBSCRIBE_STATES } from "@supabase/supabase-js";
 
 export class SupabaseUserRepositoryImpl implements UserRepository {

@@ -1,6 +1,6 @@
 import { AuthRepository } from "@/core/ports/out/auth.repository";
 import { User } from "@/core/models/user";
-import { auth, googleProvider } from "@/lib/firebase-client";
+import { auth, googleProvider } from "@/repositories-client/firebase/config";
 import { User as FirebaseUser } from "firebase/auth";
 import {
   signInWithEmailAndPassword,
@@ -11,6 +11,28 @@ import {
 } from "firebase/auth";
 
 export class FirebaseAuthRepositoryImpl implements AuthRepository {
+  public async forgotPassword(email: string): Promise<void> {
+    console.log("forgotPassword", email);
+  }
+
+  public async resetPassword(token: string, password: string): Promise<boolean> {
+    console.log("resetPassword", token, password);
+    return true;
+  }
+
+  public async verifyEmail(token: string): Promise<boolean> {
+    console.log("verifyEmail", token);
+    return true;
+  }
+
+  public async resendVerificationEmail(email: string): Promise<void> {
+    console.log("resendVerificationEmail", email);
+  }
+
+  getCurrentUser(): Promise<User | null> {
+    throw new Error("Method not implemented.");
+  }
+
   public async loginWithEmail(email: string, password: string): Promise<User | null> {
     const result = await signInWithEmailAndPassword(auth, email, password);
 
@@ -21,14 +43,23 @@ export class FirebaseAuthRepositoryImpl implements AuthRepository {
     return this.firebaseUserToUser(result.user);
   }
 
-  public async registerWithEmail(email: string, password: string): Promise<User | null> {
+  public async registerWithEmail(
+    email: string,
+    password: string,
+    name: string
+  ): Promise<{ user: User | null; requiresVerification: boolean }> {
+    console.log("registerWithEmail", email, password, name);
     const result = await createUserWithEmailAndPassword(auth, email, password);
-    return this.firebaseUserToUser(result.user);
+    return { user: this.firebaseUserToUser(result.user), requiresVerification: false };
   }
 
-  public async loginWithGoogle(): Promise<User | null> {
-    const result = await signInWithPopup(auth, googleProvider);
-    return this.firebaseUserToUser(result.user);
+  public async loginWithGoogle(): Promise<null> {
+    await signInWithPopup(auth, googleProvider);
+    return null;
+  }
+
+  public async loginWithGithub(): Promise<null> {
+    return null;
   }
 
   public async logout(): Promise<void> {

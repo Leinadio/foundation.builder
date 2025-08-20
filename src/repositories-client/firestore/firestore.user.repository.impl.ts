@@ -1,6 +1,6 @@
 import { User } from "@/core/models/user";
 import { UserRepository } from "@/core/ports/out/user.repository";
-import { db } from "@/lib/firebase-client";
+import { db } from "@/repositories-client/firebase/config";
 import {
   doc,
   getDoc,

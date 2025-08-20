@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { authClient } from "@/lib/better-auth-client";
+import { authClient } from "@/repositories-client/better-auth/config";
 import Link from "next/link";
 
 interface HeroUserActionsProps {
