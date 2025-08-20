@@ -3,8 +3,8 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import { clientAuthServiceInstance } from "@/lib/di-container-client";
-import { LoginForm } from "./LoginForm";
+import { clientAuthServiceInstance } from "@/core/client/di-container-client";
+import { LoginForm } from "@/components/auth/LoginForm/LoginForm";
 
 interface LoginFormContainerProps {
   onShowResetPassword: () => void;

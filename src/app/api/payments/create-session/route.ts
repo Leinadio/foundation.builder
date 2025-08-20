@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
-import { PaymentService } from "@/core/services/payment.service";
-import { StripePaymentRepositoryImpl } from "@/repositories/stripe/stripe.payment.repository";
+import { paymentServiceInstance } from "@/core/server/di-container-server";
 
 export async function POST(request: Request) {
   try {
@@ -10,8 +9,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "URLs de succès et d'annulation requises" }, { status: 400 });
     }
 
-    const paymentService = new PaymentService(new StripePaymentRepositoryImpl());
-    const session = await paymentService.createCheckoutSession({
+    const session = await paymentServiceInstance.createCheckoutSession({
       priceId,
       amount,
       currency,

@@ -1,6 +1,6 @@
 "use server";
 
-import { paymentServiceInstance } from "@/lib/di-container-server";
+import { paymentServiceInstance } from "@/core/server/di-container-server";
 
 type CheckoutSessionParams = {
   priceId?: string;

@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
-import { RegisterForm } from "./RegisterForm";
+import { RegisterForm } from "@/components/auth/RegisterForm";
 
 export function SignUpBlock() {
   return (

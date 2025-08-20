@@ -1,15 +1,13 @@
 import { SignUpBlock } from "@/components/auth";
-import { auth } from "@/repositories/better-auth/config";
-import { headers } from "next/headers";
+import { authServiceInstance } from "@/core/server/di-container-server";
 import { redirect } from "next/navigation";
 
 export default async function SignUpPage() {
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
+  const session = await authServiceInstance.getSession();
 
   if (session) {
     redirect("/app");
   }
+
   return <SignUpBlock />;
 }

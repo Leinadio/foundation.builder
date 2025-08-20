@@ -9,6 +9,7 @@ export default async function Home() {
 // TODO: Vérifier le schéma sur excalidraw
 
 // En cours
+// TODO: Créer la double structure server et client
 // TODO: Ajouter les sections de la sidebar dans foundation.ui
 // TODO: Se renseigner sur Claude Code
 // TODO: Créer la CI/CD pour foundation.ui

@@ -1,8 +1,8 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { AuthDialog } from "../AuthDialog";
-import { authClient } from "@/repositories-client/better-auth/config";
+import { AuthDialog } from "@/components/common/AuthDialog";
+import { authClient } from "@/core/client/repositories/better-auth/config";
 import { Skeleton } from "@/components/ui/skeleton";
 
 export function HeaderUserActions() {

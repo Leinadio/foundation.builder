@@ -1,11 +1,8 @@
-import { auth } from "@/repositories/better-auth/config";
-import { headers } from "next/headers";
+import { authServiceInstance } from "@/core/server/di-container-server";
 import { redirect } from "next/navigation";
 
 export default async function App() {
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
+  const session = await authServiceInstance.getSession();
 
   if (!session) {
     redirect("/sign-in");
@@ -13,7 +10,7 @@ export default async function App() {
 
   return (
     <div>
-      <h1>Welcome {session.user.name}</h1>
+      <h1>Welcome </h1>
     </div>
   );
 }

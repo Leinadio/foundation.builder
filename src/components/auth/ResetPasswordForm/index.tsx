@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { toast } from "sonner";
-import { clientAuthServiceInstance } from "@/lib/di-container-client";
-import { ResetPasswordForm } from "./ResetPasswordForm";
+import { clientAuthServiceInstance } from "@/core/client/di-container-client";
+import { ResetPasswordForm } from "@/components/auth/ResetPasswordForm/ResetPasswordForm";
 
 interface ResetPasswordFormContainerProps {
   onBack: () => void;

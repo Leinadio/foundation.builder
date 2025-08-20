@@ -3,10 +3,10 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import { clientAuthServiceInstance } from "@/lib/di-container-client";
-import { RegisterForm } from "./RegisterForm";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Mail } from "lucide-react";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { clientAuthServiceInstance } from "@/core/client/di-container-client";
+import { RegisterForm } from "@/components/auth/RegisterForm/RegisterForm";
 
 export function RegisterFormContainer() {
   const [isLoading, setIsLoading] = useState(false);

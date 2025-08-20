@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { User } from "@/core/models/user";
-import { userServiceInstance } from "@/lib/di-container-server";
+import { userServiceInstance } from "@/core/server/di-container-server";
 
 export function useUserSubscription(userId: string | null) {
   const [user, setUser] = useState<User | null>(null);

@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { AuthDialog as AuthDialogComponent } from "@/components/ui/auth-dialog";
-import { clientAuthServiceInstance } from "@/lib/di-container-client";
+import { clientAuthServiceInstance } from "@/core/client/di-container-client";
 
 interface AuthDialogProps {
   children?: React.ReactNode;

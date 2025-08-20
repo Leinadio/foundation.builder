@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { auth } from "@/repositories/better-auth/config";
+import { auth } from "@/core/server/repositories/better-auth/config";
 
 export async function GET(request: NextRequest) {
   try {

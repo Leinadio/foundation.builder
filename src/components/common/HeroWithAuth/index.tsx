@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Hero, HeroProps } from "@/components/ui/hero";
-import { clientAuthServiceInstance } from "@/lib/di-container-client";
+import { clientAuthServiceInstance } from "@/core/client/di-container-client";
 
 export function HeroWithAuth(props: HeroProps) {
   const [isLoading, setIsLoading] = useState(false);

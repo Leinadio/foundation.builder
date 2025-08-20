@@ -1,4 +1,4 @@
-import { Component } from "./component";
+import { Component } from "@/components/common/Headline/component";
 import { ReactNode } from "react";
 
 interface HeadlineProps {
