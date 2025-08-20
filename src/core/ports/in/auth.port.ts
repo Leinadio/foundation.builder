@@ -10,8 +10,8 @@ export interface AuthPortIn {
   ): Promise<{ user: User | null; requiresVerification: boolean }>;
 
   // Connexion sociale
-  loginWithGoogle(): Promise<User | null>;
-  loginWithGithub(): Promise<User | null>;
+  loginWithGoogle(): Promise<null>;
+  loginWithGithub(): Promise<null>;
 
   // Gestion des mots de passe
   forgotPassword(email: string): Promise<void>;

@@ -1,5 +1,4 @@
 import { betterAuth } from "better-auth";
-// import { Resend } from "resend";
 import { Pool } from "pg";
 import { emailServiceInstance } from "./di-container-server";
 
@@ -29,12 +28,6 @@ export const auth = betterAuth({
         name: user.name || "Utilisateur",
         url,
       });
-      // await resend.emails.send({
-      //   from: process.env.RESEND_FROM_EMAIL || "noreply@example.com",
-      //   to: [user.email],
-      //   subject: "Réinitialiser votre mot de passe",
-      //   html: getPasswordResetEmailTemplate(user.name || "Utilisateur", url),
-      // });
     },
   },
   emailVerification: {

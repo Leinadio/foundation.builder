@@ -19,7 +19,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Menu } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { getChildrenByType } from "@/lib/get-children-by-type";
+import { getChildrenByType } from "@/utils/get-children-by-type";
 
 interface NavLink {
   id: string;

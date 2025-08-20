@@ -21,11 +21,11 @@ export class AuthService implements AuthPortIn {
     return this.authRepo.registerWithEmail(email, password, name);
   }
 
-  public async loginWithGoogle(): Promise<User | null> {
+  public async loginWithGoogle(): Promise<null> {
     return this.authRepo.loginWithGoogle();
   }
 
-  public async loginWithGithub(): Promise<User | null> {
+  public async loginWithGithub(): Promise<null> {
     return this.authRepo.loginWithGithub();
   }
 

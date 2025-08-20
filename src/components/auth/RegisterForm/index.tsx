@@ -71,16 +71,7 @@ export function RegisterFormContainer() {
     setIsLoading(true);
 
     try {
-      const user = await clientAuthServiceInstance.loginWithGoogle();
-
-      const isLoginFailed = !user;
-      if (isLoginFailed) {
-        console.error("Échec de la connexion Google");
-        return;
-      }
-
-      console.log("Connexion Google réussie:", user);
-      router.push("/app");
+      await clientAuthServiceInstance.loginWithGoogle();
       return;
     } catch (error) {
       console.error("Erreur lors de la connexion Google:", error);
@@ -94,16 +85,7 @@ export function RegisterFormContainer() {
     setIsLoading(true);
 
     try {
-      const user = await clientAuthServiceInstance.loginWithGithub();
-
-      const isLoginFailed = !user;
-      if (isLoginFailed) {
-        console.error("Échec de la connexion GitHub");
-        return;
-      }
-
-      console.log("Connexion GitHub réussie:", user);
-      router.push("/app");
+      await clientAuthServiceInstance.loginWithGithub();
       return;
     } catch (error) {
       console.error("Erreur lors de la connexion GitHub:", error);

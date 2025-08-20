@@ -52,7 +52,6 @@ class DIContainer {
 
 const diContainerServer = new DIContainer();
 
-// Export des instances pour la compatibilité
 export const userServiceInstance: UserPortIn = diContainerServer.get("UserService");
 export const paymentServiceInstance: PaymentPortIn = diContainerServer.get("PaymentService");
 export const emailServiceInstance: EmailPortIn = diContainerServer.get("EmailService");

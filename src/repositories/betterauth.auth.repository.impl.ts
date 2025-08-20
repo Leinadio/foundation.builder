@@ -55,34 +55,33 @@ export class BetterAuthRepositoryImpl implements AuthRepository {
     }
   }
 
-  public async loginWithGoogle(): Promise<User | null> {
+  public async loginWithGoogle(): Promise<null> {
     try {
-      const result = await authClient.signIn.social({
+      await authClient.signIn.social({
         provider: "google",
+        callbackURL: "/app",
       });
+      return null;
+      // console.log("result", result.data);
 
-      if (!result.data?.user) {
-        return null;
-      }
+      // if (!result.data?.user) {
+      //   return null;
+      // }
 
-      return this.betterAuthUserToUser(result.data.user);
+      // return this.betterAuthUserToUser(result.data.user);
     } catch (error) {
       console.error("Erreur lors de la connexion Google:", error);
       return null;
     }
   }
 
-  public async loginWithGithub(): Promise<User | null> {
+  public async loginWithGithub(): Promise<null> {
     try {
-      const result = await authClient.signIn.social({
+      await authClient.signIn.social({
         provider: "github",
+        callbackURL: "/app",
       });
-
-      if (!result.data?.user) {
-        return null;
-      }
-
-      return this.betterAuthUserToUser(result.data.user);
+      return null;
     } catch (error) {
       console.error("Erreur lors de la connexion GitHub:", error);
       return null;
