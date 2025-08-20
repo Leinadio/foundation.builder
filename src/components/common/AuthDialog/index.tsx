@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { AuthDialog as AuthDialogComponent } from "@/components/ui/auth-dialog";
-import { clientAuthServiceInstance } from "@/core/client/di-container-client";
+import { authServiceInstance } from "@/core/client/di-container-client";
 
 interface AuthDialogProps {
   children?: React.ReactNode;
@@ -27,7 +27,7 @@ export function AuthDialog({ children }: AuthDialogProps) {
     setIsLoading(true);
 
     try {
-      const user = await clientAuthServiceInstance.loginWithEmail(data.email, data.password);
+      const user = await authServiceInstance.loginWithEmail(data.email, data.password);
 
       const isLoginFailed = !user;
       if (isLoginFailed) {
@@ -58,7 +58,7 @@ export function AuthDialog({ children }: AuthDialogProps) {
     }
 
     try {
-      const result = await clientAuthServiceInstance.registerWithEmail(data.email, data.password, data.name);
+      const result = await authServiceInstance.registerWithEmail(data.email, data.password, data.name);
 
       const isRegistrationFailed = !result.user;
       if (isRegistrationFailed) {
@@ -92,7 +92,7 @@ export function AuthDialog({ children }: AuthDialogProps) {
     setIsLoading(true);
 
     try {
-      const user = await clientAuthServiceInstance.loginWithGoogle();
+      const user = await authServiceInstance.loginWithGoogle();
 
       const isLoginFailed = !user;
       if (isLoginFailed) {
@@ -116,7 +116,7 @@ export function AuthDialog({ children }: AuthDialogProps) {
     setIsLoading(true);
 
     try {
-      const user = await clientAuthServiceInstance.loginWithGithub();
+      const user = await authServiceInstance.loginWithGithub();
 
       const isLoginFailed = !user;
       if (isLoginFailed) {
@@ -140,7 +140,7 @@ export function AuthDialog({ children }: AuthDialogProps) {
     setIsLoading(true);
 
     try {
-      await clientAuthServiceInstance.forgotPassword(data.email);
+      await authServiceInstance.forgotPassword(data.email);
       console.log("Email de réinitialisation envoyé avec succès");
       toast.success("Email de réinitialisation envoyé", {
         description: "Vérifiez votre boîte email pour réinitialiser votre mot de passe.",

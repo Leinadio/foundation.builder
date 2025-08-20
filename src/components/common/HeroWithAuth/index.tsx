@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Hero, HeroProps } from "@/components/ui/hero";
-import { clientAuthServiceInstance } from "@/core/client/di-container-client";
+import { authServiceInstance } from "@/core/client/di-container-client";
 
 export function HeroWithAuth(props: HeroProps) {
   const [isLoading, setIsLoading] = useState(false);
@@ -12,7 +12,7 @@ export function HeroWithAuth(props: HeroProps) {
     setIsLoading(true);
 
     try {
-      const user = await clientAuthServiceInstance.loginWithEmail(data.email, data.password);
+      const user = await authServiceInstance.loginWithEmail(data.email, data.password);
 
       const isLoginFailed = !user;
       if (isLoginFailed) {
@@ -42,7 +42,7 @@ export function HeroWithAuth(props: HeroProps) {
     }
 
     try {
-      const result = await clientAuthServiceInstance.registerWithEmail(data.email, data.password, data.name);
+      const result = await authServiceInstance.registerWithEmail(data.email, data.password, data.name);
 
       const isRegistrationFailed = !result.user;
       if (isRegistrationFailed) {

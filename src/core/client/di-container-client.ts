@@ -41,4 +41,5 @@ class ClientDIContainer {
 
 const diContainerClient = new ClientDIContainer();
 
-export const clientAuthServiceInstance: AuthPortIn = diContainerClient.get("AuthService");
+export const authServiceInstance: AuthPortIn = diContainerClient.get("AuthService");
+export const userServiceInstance: UserPortIn = diContainerClient.get("UserService");

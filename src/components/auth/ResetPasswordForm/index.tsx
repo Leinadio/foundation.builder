@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { toast } from "sonner";
-import { clientAuthServiceInstance } from "@/core/client/di-container-client";
+import { authServiceInstance } from "@/core/client/di-container-client";
 import { ResetPasswordForm } from "@/components/auth/ResetPasswordForm/ResetPasswordForm";
 
 interface ResetPasswordFormContainerProps {
@@ -16,7 +16,7 @@ export function ResetPasswordFormContainer({ onBack }: ResetPasswordFormContaine
     setIsLoading(true);
 
     try {
-      await clientAuthServiceInstance.forgotPassword(data.email);
+      await authServiceInstance.forgotPassword(data.email);
       console.log("Email de réinitialisation envoyé avec succès");
       toast.success("Email de réinitialisation envoyé", {
         description: "Vérifiez votre boîte email pour réinitialiser votre mot de passe.",

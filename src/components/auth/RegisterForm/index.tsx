@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { Mail } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { clientAuthServiceInstance } from "@/core/client/di-container-client";
+import { authServiceInstance } from "@/core/client/di-container-client";
 import { RegisterForm } from "@/components/auth/RegisterForm/RegisterForm";
 
 export function RegisterFormContainer() {
@@ -32,7 +32,7 @@ export function RegisterFormContainer() {
     }
 
     try {
-      const result = await clientAuthServiceInstance.registerWithEmail(data.email, data.password, data.name);
+      const result = await authServiceInstance.registerWithEmail(data.email, data.password, data.name);
 
       const isRegistrationFailed = !result.user;
       if (isRegistrationFailed) {
@@ -71,7 +71,7 @@ export function RegisterFormContainer() {
     setIsLoading(true);
 
     try {
-      await clientAuthServiceInstance.loginWithGoogle();
+      await authServiceInstance.loginWithGoogle();
       return;
     } catch (error) {
       console.error("Erreur lors de la connexion Google:", error);
@@ -85,7 +85,7 @@ export function RegisterFormContainer() {
     setIsLoading(true);
 
     try {
-      await clientAuthServiceInstance.loginWithGithub();
+      await authServiceInstance.loginWithGithub();
       return;
     } catch (error) {
       console.error("Erreur lors de la connexion GitHub:", error);

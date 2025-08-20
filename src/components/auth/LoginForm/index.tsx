@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import { clientAuthServiceInstance } from "@/core/client/di-container-client";
+import { authServiceInstance } from "@/core/client/di-container-client";
 import { LoginForm } from "@/components/auth/LoginForm/LoginForm";
 
 interface LoginFormContainerProps {
@@ -18,7 +18,7 @@ export function LoginFormContainer({ onShowResetPassword }: LoginFormContainerPr
     setIsLoading(true);
 
     try {
-      const user = await clientAuthServiceInstance.loginWithEmail(data.email, data.password);
+      const user = await authServiceInstance.loginWithEmail(data.email, data.password);
 
       const isLoginFailed = !user;
       if (isLoginFailed) {
@@ -50,7 +50,7 @@ export function LoginFormContainer({ onShowResetPassword }: LoginFormContainerPr
     setIsLoading(true);
 
     try {
-      await clientAuthServiceInstance.loginWithGoogle();
+      await authServiceInstance.loginWithGoogle();
       return;
     } catch (error) {
       console.error("Erreur lors de la connexion Google:", error);
@@ -64,7 +64,7 @@ export function LoginFormContainer({ onShowResetPassword }: LoginFormContainerPr
     setIsLoading(true);
 
     try {
-      await clientAuthServiceInstance.loginWithGithub();
+      await authServiceInstance.loginWithGithub();
       return;
     } catch (error) {
       console.error("Erreur lors de la connexion GitHub:", error);
