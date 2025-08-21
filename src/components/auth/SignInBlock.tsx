@@ -1,23 +1,11 @@
 "use client";
 
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
-import { ResetPasswordForm } from "@/components/auth/ResetPasswordForm";
 import { LoginForm } from "@/components/auth/LoginForm";
+import { Button } from "@/components/ui/button";
 
-export function SignInForm() {
-  const [showResetPassword, setShowResetPassword] = useState(false);
-
-  function handleBackToLogin() {
-    setShowResetPassword(false);
-  }
-
-  function handleShowResetPassword() {
-    setShowResetPassword(true);
-  }
-
+export function SignInBlock() {
   return (
     <div className="min-h-screen flex">
       {/* Bouton retour en haut à gauche */}
@@ -33,11 +21,7 @@ export function SignInForm() {
       {/* Colonne de gauche - Formulaire de connexion */}
       <div className="w-1/2 flex items-center justify-center p-8">
         <div className="w-full max-w-md space-y-6">
-          {showResetPassword ? (
-            <ResetPasswordForm onBack={handleBackToLogin} />
-          ) : (
-            <LoginForm onShowResetPassword={handleShowResetPassword} />
-          )}
+          <LoginForm />
         </div>
       </div>
 

@@ -4,13 +4,9 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { authServiceInstance } from "@/core/client/di-container-client";
-import { LoginForm } from "@/components/auth/LoginForm/LoginForm";
+import { LoginForm } from "@/components/ui/login-form";
 
-interface LoginFormContainerProps {
-  onShowResetPassword: () => void;
-}
-
-export function LoginFormContainer({ onShowResetPassword }: LoginFormContainerProps) {
+export function LoginFormContainer() {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
@@ -76,7 +72,6 @@ export function LoginFormContainer({ onShowResetPassword }: LoginFormContainerPr
 
   return (
     <LoginForm
-      onShowResetPassword={onShowResetPassword}
       onLoginSubmit={handleLoginSubmit}
       onGoogleAuth={handleGoogleAuth}
       onGithubAuth={handleGithubAuth}

@@ -1,9 +1,11 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
-import { RegisterForm } from "@/components/auth/RegisterForm";
+import { ResetPasswordForm } from "@/components/auth/ResetPasswordForm";
 
-export function SignUpBlock() {
+export function ResetPasswordBlock() {
   return (
     <div className="min-h-screen flex">
       {/* Bouton retour en haut à gauche */}
@@ -16,10 +18,10 @@ export function SignUpBlock() {
         </Link>
       </div>
 
-      {/* Colonne de gauche - Formulaire d'inscription */}
+      {/* Colonne de gauche - Formulaire de connexion */}
       <div className="w-1/2 flex items-center justify-center p-8">
         <div className="w-full max-w-md space-y-6">
-          <RegisterForm />
+          <ResetPasswordForm />
         </div>
       </div>
 
@@ -30,31 +32,29 @@ export function SignUpBlock() {
             <div className="w-64 h-64 mx-auto bg-gradient-to-br from-primary/20 to-secondary/20 rounded-full flex items-center justify-center">
               <div className="w-32 h-32 bg-primary/10 rounded-full flex items-center justify-center">
                 <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                  <circle cx="9" cy="7" r="4" />
-                  <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
-                  <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                  <path d="M9 12l2 2 4-4" />
+                  <circle cx="12" cy="12" r="9" />
                 </svg>
               </div>
             </div>
           </div>
 
           <div className="space-y-4">
-            <h2 className="text-2xl font-bold text-foreground">{"Rejoignez des milliers d'utilisateurs"}</h2>
+            <h2 className="text-2xl font-bold text-foreground">Bon retour parmi nous !</h2>
             <p className="text-muted-foreground text-lg leading-relaxed">
-              {"Découvrez une nouvelle façon de gérer vos projets et boostez votre productivité dès aujourd'hui."}
+              {"Retrouvez tous vos projets et continuez là où vous vous êtes arrêté."}
             </p>
             <div className="flex items-center justify-center space-x-2 text-sm text-muted-foreground">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <polyline points="20,6 9,17 4,12" />
               </svg>
-              <span>{"Configuration en moins de 2 minutes"}</span>
+              <span>{"Accès instantané à vos données"}</span>
             </div>
             <div className="flex items-center justify-center space-x-2 text-sm text-muted-foreground">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
               </svg>
-              <span>{"Sécurisé et confidentiel"}</span>
+              <span>{"Connexion sécurisée"}</span>
             </div>
           </div>
         </div>

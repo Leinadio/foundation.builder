@@ -34,20 +34,13 @@ const GithubIcon = () => (
 );
 
 interface LoginFormProps {
-  onShowResetPassword: () => void;
   onLoginSubmit: (data: { email: string; password: string }) => Promise<void>;
   onGoogleAuth: () => Promise<void>;
   onGithubAuth: () => Promise<void>;
   isLoading: boolean;
 }
 
-export function LoginForm({
-  onShowResetPassword,
-  onLoginSubmit,
-  onGoogleAuth,
-  onGithubAuth,
-  isLoading,
-}: LoginFormProps) {
+export function LoginForm({ onLoginSubmit, onGoogleAuth, onGithubAuth, isLoading }: LoginFormProps) {
   function handleLoginSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -121,14 +114,15 @@ export function LoginForm({
             {isLoading ? "Connexion..." : "Se connecter"}
           </Button>
           <div className="text-center">
-            <button
-              type="button"
-              className="text-sm text-muted-foreground hover:text-primary underline-offset-4 hover:underline"
-              onClick={onShowResetPassword}
+            <Button
+              asChild
+              variant="link"
+              size="sm"
+              className="h-auto p-0 text-sm text-muted-foreground hover:text-primary underline-offset-4"
               disabled={isLoading}
             >
-              {"Mot de passe oublié ?"}
-            </button>
+              <Link href="/reset-password">{"Mot de passe oublié ?"}</Link>
+            </Button>
           </div>
         </form>
 

@@ -6,7 +6,7 @@ import { toast } from "sonner";
 import { Mail } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { authServiceInstance } from "@/core/client/di-container-client";
-import { RegisterForm } from "@/components/auth/RegisterForm/RegisterForm";
+import { RegisterForm } from "@/components/ui/register-form";
 
 export function RegisterFormContainer() {
   const [isLoading, setIsLoading] = useState(false);

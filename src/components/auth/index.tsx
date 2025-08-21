@@ -1,4 +1,4 @@
-export { SignInForm } from "./SignInBlock";
+export { SignInBlock } from "./SignInBlock";
 export { SignUpBlock } from "./SignUpBlock";
 export { LoginForm } from "./LoginForm";
 export { RegisterForm } from "./RegisterForm";

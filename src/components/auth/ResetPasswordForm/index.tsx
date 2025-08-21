@@ -3,14 +3,12 @@
 import { useState } from "react";
 import { toast } from "sonner";
 import { authServiceInstance } from "@/core/client/di-container-client";
-import { ResetPasswordForm } from "@/components/auth/ResetPasswordForm/ResetPasswordForm";
+import { ResetPasswordForm } from "@/components/ui/reset-password-form";
+import { useRouter } from "next/navigation";
 
-interface ResetPasswordFormContainerProps {
-  onBack: () => void;
-}
-
-export function ResetPasswordFormContainer({ onBack }: ResetPasswordFormContainerProps) {
+export function ResetPasswordFormContainer() {
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   async function handleResetPasswordSubmit(data: { email: string }) {
     setIsLoading(true);
@@ -33,7 +31,13 @@ export function ResetPasswordFormContainer({ onBack }: ResetPasswordFormContaine
     }
   }
 
-  return <ResetPasswordForm onBack={onBack} onResetPasswordSubmit={handleResetPasswordSubmit} isLoading={isLoading} />;
+  function handleBack() {
+    router.push("/sign-in");
+  }
+
+  return (
+    <ResetPasswordForm onBack={handleBack} onResetPasswordSubmit={handleResetPasswordSubmit} isLoading={isLoading} />
+  );
 }
 
 // Export pour maintenir la compatibilité
