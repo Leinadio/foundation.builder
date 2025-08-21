@@ -121,7 +121,7 @@ export function LoginForm({ onLoginSubmit, onGoogleAuth, onGithubAuth, isLoading
               className="h-auto p-0 text-sm text-muted-foreground hover:text-primary underline-offset-4"
               disabled={isLoading}
             >
-              <Link href="/reset-password">{"Mot de passe oublié ?"}</Link>
+              <Link href="/forgot-password">{"Mot de passe oublié ?"}</Link>
             </Button>
           </div>
         </form>

@@ -93,13 +93,22 @@ export class BetterAuthRepositoryImpl implements AuthRepository {
     }
   }
 
-  public async resetPassword(_token: string, password: string): Promise<boolean> {
+  public async resetPassword(token: string, password: string): Promise<boolean> {
     try {
-      const result = await authClient.resetPassword({
-        newPassword: password,
+      const response = await fetch("/api/auth/reset-password", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ token, password }),
       });
 
-      return !!result.data;
+      if (!response.ok) {
+        return false;
+      }
+
+      const result = await response.json();
+      return result.success === true;
     } catch (error) {
       console.error("Erreur lors de la réinitialisation:", error);
       return false;
