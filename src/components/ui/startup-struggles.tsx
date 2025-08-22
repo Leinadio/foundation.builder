@@ -36,9 +36,9 @@ export function StartupStruggles({
   ),
   description = "Entre la technique, le business et les deadlines... Il y a tant de choses à gérer qu'on finit par perdre de vue l'essentiel.",
   badge = { text: "RÉALITÉ DU TERRAIN", isBadge: true },
-  color = "red",
-  fromColor = "red-600",
-  viaColor = "red-900",
+  color = "red-600",
+  fromColor = "from-red-600",
+  viaColor = "via-red-900",
   data = [
     {
       title: "Manque de temps",

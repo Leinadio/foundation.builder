@@ -8,8 +8,10 @@ import { ShowcaseBlog } from "@/components/landing/ShowcaseBlog";
 import { SuccessPath } from "@/components/landing/SuccessPath";
 import { FeatureBentoGrid } from "@/components/landing/FeatureBentoGrid";
 import { StartupStruggles } from "@/components/landing/StartupStruggles";
+import { Problem } from "@/components/landing/Problem";
 import { Footer } from "@/components/landing/Footer";
 import { FAQ } from "@/components/landing/FAQ";
+import { Video } from "@/components/landing/Video";
 
 export type ComponentConfig = {
   component: string;
@@ -19,7 +21,7 @@ export type ComponentConfig = {
 };
 
 export type SectionConfig = {
-  type: "header" | "section" | "section-full-width" | "footer";
+  type: "header" | "section" | "section-full-width" | "section-full-width-with-background" | "footer";
   components: ComponentConfig[];
 };
 
@@ -35,8 +37,10 @@ const componentsMap: Record<string, React.ComponentType<any>> = {
   SuccessPath,
   FeatureBentoGrid,
   StartupStruggles,
+  Problem,
   Footer,
   FAQ,
+  Video,
 };
 
 export function DynamicRenderer({ sections }: { sections: SectionConfig[] }): ReactNode {
@@ -79,6 +83,30 @@ export function DynamicRenderer({ sections }: { sections: SectionConfig[] }): Re
                 if (!Component) return null;
                 return (
                   <section key={`full-width-${sectionIndex}-component-${index}`} id={config.id}>
+                    <Component {...config.props} />
+                  </section>
+                );
+              })}
+            </div>
+          );
+        }
+
+        if (section.type === "section-full-width-with-background") {
+          return (
+            <div
+              key={`full-width-with-background-${sectionIndex}`}
+              className="w-full flex flex-col mt-32 gap-32 bg-muted py-20"
+            >
+              {section.components.map((config, index) => {
+                const Component = componentsMap[config.component];
+                if (!Component) return null;
+
+                return (
+                  <section
+                    key={`full-width-with-background-${sectionIndex}-component-${index}`}
+                    id={config.id}
+                    className="max-w-6xl mx-auto"
+                  >
                     <Component {...config.props} />
                   </section>
                 );

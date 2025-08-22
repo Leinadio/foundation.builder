@@ -12,6 +12,7 @@ export interface ForWhoProps {
   description?: string;
   badge?: { text: string; isBadge: boolean };
   companySizes?: CompanySize[];
+  color?: string;
 }
 
 const defaultCompanySizes: CompanySize[] = [
@@ -40,10 +41,11 @@ export function ForWho({
   description = "Donnez à toute votre équipe le pouvoir de valider des idées en 3 minutes ou moins. Aucune compétence en business plan requise.",
   badge = { text: "POUR QUI", isBadge: false },
   companySizes = defaultCompanySizes,
+  color,
 }: ForWhoProps) {
   return (
     <section className="flex flex-col gap-8 md:gap-10">
-      <Headline title={title} description={description} badge={badge} />
+      <Headline title={title} description={description} badge={badge} color={color} />
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         {/* Image à gauche */}
@@ -125,7 +127,7 @@ export function ForWho({
         <div className="space-y-8">
           {companySizes.map((size) => (
             <div key={size.id} className="flex gap-4">
-              <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
+              <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
               <div>
                 <h3 className="text-xl font-semibold mb-2">{size.title}</h3>
                 <p className="leading-relaxed text-muted-foreground">{size.description}</p>

@@ -29,80 +29,100 @@ export const pageConfig: SectionConfig[] = [
     type: "section",
     components: [
       {
-        id: "probleme",
-        component: "StartupStruggles",
-        props: {
-          title: (
-            <>
-              <span className="text-red-600">85%</span> {"des startups échouent car les "}
-              <span className="text-red-600">fondateurs abandonnent</span>
-            </>
-          ),
-          description:
-            "Entre la technique, le business et les deadlines... Il y a tant de choses à gérer qu'on finit par perdre de vue l'essentiel.",
-          badge: { text: "RÉALITÉ DU TERRAIN", isBadge: true },
-          color: "red",
-          fromColor: "red-600",
-          viaColor: "red-900",
-          data: [
-            {
-              title: "Manque de temps",
-              paragraphs: [
-                "Entre les réunions, les deadlines et la gestion quotidienne, il devient impossible de se concentrer sur l'essentiel : développer son produit et sa vision.",
-              ],
-              image: {
-                src: "/illu/late_1-destructive.svg",
-                alt: "Illustration représentant la gestion du temps et des rendez-vous",
-                className: "w-8/12 mx-auto block",
-                width: 1,
-                height: 1,
-              },
-            },
-            {
-              title: "Complexité technique",
-              paragraphs: [
-                "Les développeurs sont confrontés à des défis techniques complexes, notamment en matière de sécurité, de performance et d'intégration avec les autres services.",
-              ],
-              image: {
-                src: "/illu/headache-destructive.svg",
-                alt: "Illustration représentant la gestion du temps et des rendez-vous",
-                className: "w-8/12 mx-auto block",
-                width: 1,
-                height: 1,
-              },
-            },
-            {
-              title: "Ressources limitées",
-              paragraphs: [
-                "Budget serré, équipe réduite, temps limité : chaque décision compte et il faut faire plus avec moins pour réussir à lancer son produit.",
-              ],
-              image: {
-                src: "/illu/limited_ressource-destructive.svg",
-                alt: "Illustration représentant la gestion du temps et des rendez-vous",
-                className: "w-8/12 mx-auto block",
-                width: 1,
-                height: 1,
-              },
-            },
-          ],
-        },
+        id: "video",
+        component: "Video",
+        props: {},
       },
+    ],
+  },
+  {
+    type: "section-full-width",
+    components: [
+      {
+        id: "problem-overview",
+        component: "Problem",
+        props: {},
+      },
+    ],
+  },
+  {
+    type: "section",
+    components: [
+      // {
+      //   id: "probleme",
+      //   component: "StartupStruggles",
+      //   props: {
+      //     title: (
+      //       <>
+      //         <span className="text-red-600">85%</span> {"des startups échouent car les "}
+      //         <span className="text-red-600">fondateurs abandonnent</span>
+      //       </>
+      //     ),
+      //     description:
+      //       "Entre la technique, le business et les deadlines... Il y a tant de choses à gérer qu'on finit par perdre de vue l'essentiel.",
+      //     badge: { text: "RÉALITÉ DU TERRAIN", isBadge: true },
+      //     color: "red-600",
+      //     fromColor: "from-red-600",
+      //     viaColor: "via-red-900",
+      //     data: [
+      //       {
+      //         title: "Manque de temps",
+      //         paragraphs: [
+      //           "Entre les réunions, les deadlines et la gestion quotidienne, il devient impossible de se concentrer sur l'essentiel : développer son produit et sa vision.",
+      //         ],
+      //         image: {
+      //           src: "/illu/late_1-destructive.svg",
+      //           alt: "Illustration représentant la gestion du temps et des rendez-vous",
+      //           className: "w-8/12 mx-auto block",
+      //           width: 1,
+      //           height: 1,
+      //         },
+      //       },
+      //       {
+      //         title: "Complexité technique",
+      //         paragraphs: [
+      //           "Les développeurs sont confrontés à des défis techniques complexes, notamment en matière de sécurité, de performance et d'intégration avec les autres services.",
+      //         ],
+      //         image: {
+      //           src: "/illu/headache-destructive.svg",
+      //           alt: "Illustration représentant la gestion du temps et des rendez-vous",
+      //           className: "w-8/12 mx-auto block",
+      //           width: 1,
+      //           height: 1,
+      //         },
+      //       },
+      //       {
+      //         title: "Ressources limitées",
+      //         paragraphs: [
+      //           "Budget serré, équipe réduite, temps limité : chaque décision compte et il faut faire plus avec moins pour réussir à lancer son produit.",
+      //         ],
+      //         image: {
+      //           src: "/illu/limited_ressource-destructive.svg",
+      //           alt: "Illustration représentant la gestion du temps et des rendez-vous",
+      //           className: "w-8/12 mx-auto block",
+      //           width: 1,
+      //           height: 1,
+      //         },
+      //       },
+      //     ],
+      //   },
+      // },
       {
         id: "solution",
         component: "SuccessPath",
         props: {
           title: (
             <>
-              <span className="text-green-600">90%</span> {"des startups qui s'organisent "}
-              <span className="text-green-600">atteignent leurs objectifs</span>
+              <span className="text-primary">90%</span> {"des startups qui s'organisent "}
+              <span className="text-primary">atteignent leurs objectifs</span>
             </>
           ),
           description:
             "Découvrez comment transformer le chaos en machine à succès. Voici le chemin que suivent les fondateurs qui réussissent.",
           badge: { text: "TRANSFORMATION RÉUSSIE", isBadge: true },
-          color: "green",
-          fromColor: "green-600",
-          viaColor: "emerald-500",
+          color: "primary",
+          fromColor: "from-primary",
+          viaColor: "via-primary",
           data: [
             {
               type: "task-list",
@@ -167,6 +187,7 @@ export const pageConfig: SectionConfig[] = [
         props: {
           title: "Transformez le chaos en efficacité",
           description: "L'efficacité retrouvée avec notre plateforme",
+          color: "primary",
           badge: { text: "COMMENT ÇA MARCHE ?", isBadge: false },
           steps: [
             {
@@ -208,6 +229,7 @@ export const pageConfig: SectionConfig[] = [
           title: "Ce que vous pouvez faire avec l'IA",
           description: "L'IA est un outil puissant qui peut vous aider dans votre travail de validation d'idées.",
           badge: { text: "FONCTIONNALITÉS", isBadge: false },
+          color: "primary",
           bentoItems: [
             {
               title: "Génération de contenu IA",
@@ -289,6 +311,11 @@ export const pageConfig: SectionConfig[] = [
           ],
         },
       },
+    ],
+  },
+  {
+    type: "section-full-width-with-background",
+    components: [
       {
         id: "for-who",
         component: "ForWho",
@@ -297,6 +324,7 @@ export const pageConfig: SectionConfig[] = [
           description:
             "Donnez à toute votre équipe le pouvoir de valider des idées en 3 minutes ou moins. Aucune compétence en business plan requise.",
           badge: { text: "POUR QUI", isBadge: false },
+          color: "primary",
           companySizes: [
             {
               id: "startups",
@@ -319,6 +347,11 @@ export const pageConfig: SectionConfig[] = [
           ],
         },
       },
+    ],
+  },
+  {
+    type: "section",
+    components: [
       {
         id: "tarifs",
         component: "Pricing",

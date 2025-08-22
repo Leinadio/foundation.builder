@@ -56,6 +56,7 @@ export interface HowItWorkProps {
   description?: string;
   badge?: { text: string; isBadge: boolean };
   steps?: HowItWorkStep[];
+  color?: string;
 }
 
 const defaultSteps: HowItWorkStep[] = [
@@ -157,11 +158,12 @@ export function HowItWork({
   description = "L'efficacité retrouvée avec notre plateforme",
   badge = { text: "COMMENT ÇA MARCHE ?", isBadge: false },
   steps = defaultSteps,
+  color,
 }: HowItWorkProps) {
   const rows = buildRows(steps);
   return (
     <section className="flex flex-col gap-8 md:gap-10">
-      <Headline title={title} description={description} badge={badge} />
+      <Headline title={title} description={description} badge={badge} color={color} />
       {rows}
     </section>
   );

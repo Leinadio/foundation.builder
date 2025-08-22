@@ -321,6 +321,7 @@ export interface FeatureBentoGridProps {
   badge?: { text: string; isBadge: boolean };
   bentoItems?: BentoGridItemData[];
   hoverFeatures?: FeatureHoverItem[];
+  color?: string;
 }
 
 const defaultHoverFeatures: FeatureHoverItem[] = [
@@ -410,10 +411,11 @@ export function FeatureBentoGrid({
   badge = { text: "AI", isBadge: false },
   bentoItems = defaultBentoItems,
   hoverFeatures = defaultHoverFeatures,
+  color,
 }: FeatureBentoGridProps) {
   return (
     <section className="w-full flex flex-col gap-8 md:gap-24">
-      <Headline title={title} description={description} badge={badge} />
+      <Headline title={title} description={description} badge={badge} color={color} />
       <BentoGrid>
         {bentoItems.map((item, i) => {
           const SkeletonComponent = skeletonMap[item.skeleton];
