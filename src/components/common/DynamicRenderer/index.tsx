@@ -12,6 +12,8 @@ import { Problem } from "@/components/landing/Problem";
 import { Footer } from "@/components/landing/Footer";
 import { FAQ } from "@/components/landing/FAQ";
 import { Video } from "@/components/landing/Video";
+import { HeroRowAdvanced } from "@/components/landing/HeroRowAdvanced";
+import { HeroRow } from "@/components/landing/HeroRow";
 
 export type ComponentConfig = {
   component: string;
@@ -30,6 +32,8 @@ export type SectionConfig = {
 const componentsMap: Record<string, React.ComponentType<any>> = {
   Header,
   Hero,
+  HeroRowAdvanced,
+  HeroRow,
   HowItWork,
   ForWho,
   Pricing,
