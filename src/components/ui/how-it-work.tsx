@@ -29,8 +29,15 @@ function TextSection({ step, title, description, objective }: TextSectionProps) 
 function ImageSection({ src, alt }: { src: string; alt: string }) {
   return (
     <div className="hidden relative md:block mt-8 md:mt-0">
-      <div className="absolute inset-0 bg-secondary transform translate-x-4 translate-y-4"></div>
-      <Image src={src} alt={alt} fill className="border-2 border-primary-foreground shadow-md" />
+      <div className="absolute inset-0 bg-secondary transform translate-x-4 translate-y-4 z-0"></div>
+      <Image
+        src={src}
+        alt={alt}
+        width={600}
+        height={600}
+        objectFit="contain"
+        className="border-2 border-primary-foreground shadow-md z-10 relative"
+      />
     </div>
   );
 }

@@ -157,7 +157,7 @@ export const pageConfig: SectionConfig[] = [
               title: "Installez l’extension",
               description: "Disponible sur le Chrome Web Store. L’installation prend moins d’une minute.",
               objective: "🚀 Démarrage rapide et sans friction",
-              image: { src: "/images/install-extension.png", alt: "Installation de l'extension" },
+              image: { src: "/images/step1_fr.png", alt: "Installation de l'extension" },
               layout: "text-image",
             },
             {
@@ -166,7 +166,7 @@ export const pageConfig: SectionConfig[] = [
               description:
                 "L’extension lit uniquement les emails entrants contenant des mots-clés liés aux prestations (ex : devis, freelance, mission...).",
               objective: "🔐 Respect total de votre vie privée",
-              image: { src: "/images/email-detection.png", alt: "Connexion à Gmail" },
+              image: { src: "/images/step2_fr.png", alt: "Connexion à Gmail" },
               layout: "image-text",
             },
             {
@@ -175,7 +175,7 @@ export const pageConfig: SectionConfig[] = [
               description:
                 "Vous recevez une notification et pouvez valider ou ajuster le devis avant l’envoi automatique.",
               objective: "📄 Gain de temps & plus de clients",
-              image: { src: "/images/send-quote.png", alt: "Création de devis automatique" },
+              image: { src: "/images/step3_fr.png", alt: "Création de devis automatique" },
               layout: "text-image",
             },
           ],
