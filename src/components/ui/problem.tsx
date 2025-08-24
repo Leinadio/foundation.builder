@@ -1,4 +1,5 @@
-import { Headline } from "./headline";
+import { ReactNode } from "react";
+import { Headline } from "@/components/ui/headline";
 
 export interface ProblemStep {
   emoji: string;
@@ -8,6 +9,9 @@ export interface ProblemStep {
 
 export interface ProblemProps {
   steps?: ProblemStep[];
+  title: string | ReactNode;
+  description: string;
+  badge: { text: string; isBadge: boolean };
 }
 
 const defaultSteps: ProblemStep[] = [
@@ -55,21 +59,11 @@ function Arrow() {
   );
 }
 
-export function Problem({ steps = defaultSteps }: ProblemProps) {
+export function Problem({ title, description, badge, steps = defaultSteps }: ProblemProps) {
   return (
     <div className="flex flex-col gap-20 bg-muted py-20">
-      <Headline
-        title={
-          <>
-            <span className="text-primary">85%</span> {"des startups échouent car les "}
-            <span className="text-primary">fondateurs abandonnent</span>
-          </>
-        }
-        color="primary"
-        description="Entre la technique, le business et les deadlines... Il y a tant de choses à gérer qu'on finit par perdre de vue l'essentiel."
-        badge={{ text: "RÉALITÉ DU TERRAIN", isBadge: false }}
-      />
-      <div className="py-16 px-8 rounded-xl flex flex-col md:flex-row items-center justify-center">
+      <Headline title={title} description={description} badge={{ text: badge.text, isBadge: badge.isBadge }} />
+      <div className="py-8 rounded-xl flex flex-col md:flex-row items-center justify-center">
         {steps.map((step, index) => (
           <div key={`step-${index}`} className="flex flex-col md:flex-row items-center">
             <ProblemStepCard step={step} />

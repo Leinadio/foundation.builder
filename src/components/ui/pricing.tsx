@@ -22,14 +22,19 @@ export interface PricingPlan {
 export interface PricingProps {
   title?: string | ReactNode;
   description?: string;
-  badge?: { text: string; isBadge: boolean };
-  color?: string;
+  badgeText?: string;
   pricingPlans?: PricingPlan[];
 }
 
 function PricingCards({ isYearly, pricingPlans }: { isYearly: boolean; pricingPlans: PricingPlan[] }) {
+  function getGridColumns() {
+    if (pricingPlans.length === 2) return "md:grid-cols-2";
+    if (pricingPlans.length === 3) return "md:grid-cols-3";
+    return "md:grid-cols-1";
+  }
+
   return (
-    <div className="grid md:grid-cols-3 gap-8 mx-auto">
+    <div className={`grid ${getGridColumns()} gap-8 mx-auto max-w-4xl`}>
       {pricingPlans.map((plan, index) => {
         const price = isYearly ? plan.yearlyPrice : plan.monthlyPrice;
         const period = isYearly ? "an" : "mois";
@@ -139,14 +144,13 @@ const defaultPricingPlans: PricingPlan[] = [
 export function Pricing({
   title = "Choisissez votre plan",
   description = "Des tarifs simples et transparents qui s'adaptent à vos besoins. Commencez gratuitement et évoluez selon votre croissance.",
-  badge = { text: "TARIFS", isBadge: false },
-  color = "primary",
+  badgeText = "TARIFS",
   pricingPlans = defaultPricingPlans,
 }: PricingProps) {
   return (
     <section>
       <div className="mx-auto flex flex-col gap-8">
-        <Headline title={title} description={description} badge={badge} color={color} />
+        <Headline title={title} description={description} badge={{ text: badgeText, isBadge: false }} />
         <Tabs defaultValue="monthly" className="w-full">
           <div className="flex justify-center mb-12">
             <TabsList className="">

@@ -135,7 +135,6 @@ export interface SuccessPathItem {
   title: string;
   paragraphs?: string[];
   features?: SuccessPathFeature[];
-  featuresLayout?: "list" | "grid";
   bullets?: string[];
   summary?: SuccessPathSummary;
 }
@@ -143,7 +142,7 @@ export interface SuccessPathItem {
 export interface SuccessPathProps {
   title?: ReactNode;
   description?: string;
-  badge?: { text: string; isBadge: boolean };
+  badgeText?: string;
   color?: string;
   fromColor?: string;
   viaColor?: string;
@@ -162,7 +161,6 @@ const defaultData: SuccessPathItem[] = [
       { icon: "CheckCircle", text: "Délais respectés à 95%" },
       { icon: "CheckCircle", text: "Communication centralisée" },
     ],
-    featuresLayout: "list",
     summary: {
       icon: "TrendingUp",
       label: "Résultat",
@@ -179,7 +177,6 @@ const defaultData: SuccessPathItem[] = [
       { icon: "Users", text: "Équipe synchronisée" },
       { icon: "Zap", text: "Réactivité maximale" },
     ],
-    featuresLayout: "grid",
     summary: {
       icon: "TrendingUp",
       label: "Impact",
@@ -228,7 +225,7 @@ export function SuccessPath({
     </>
   ),
   description = "Découvrez comment transformer le chaos en machine à succès. Voici le chemin que suivent les fondateurs qui réussissent.",
-  badge = { text: "TRANSFORMATION RÉUSSIE", isBadge: true },
+  badgeText = "TRANSFORMATION RÉUSSIE",
   color = "primary",
   fromColor = "from-primary",
   viaColor = "via-primary/80",
@@ -241,7 +238,15 @@ export function SuccessPath({
 
   return (
     <section className="flex flex-col gap-20 md:gap-24">
-      <Headline title={title} description={description} badge={badge} color={color} />
+      <Headline
+        title={title}
+        description={description}
+        badge={{
+          text: badgeText,
+          isBadge: false,
+        }}
+        color={color}
+      />
 
       <div className="relative w-full overflow-clip">
         <Timeline data={timelineData} fromColor={fromColor} viaColor={viaColor} />

@@ -10,9 +10,8 @@ export interface CompanySize {
 export interface ForWhoProps {
   title?: string | ReactNode;
   description?: string;
-  badge?: { text: string; isBadge: boolean };
+  badgeText?: string;
   companySizes?: CompanySize[];
-  color?: string;
 }
 
 const defaultCompanySizes: CompanySize[] = [
@@ -39,13 +38,12 @@ const defaultCompanySizes: CompanySize[] = [
 export function ForWho({
   title = "Conçu pour toutes les tailles d'entreprise",
   description = "Donnez à toute votre équipe le pouvoir de valider des idées en 3 minutes ou moins. Aucune compétence en business plan requise.",
-  badge = { text: "POUR QUI", isBadge: false },
+  badgeText = "POUR QUI",
   companySizes = defaultCompanySizes,
-  color,
 }: ForWhoProps) {
   return (
     <section className="flex flex-col gap-8 md:gap-10">
-      <Headline title={title} description={description} badge={badge} color={color} />
+      <Headline title={title} description={description} badge={{ text: badgeText, isBadge: false }} />
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         {/* Image à gauche */}

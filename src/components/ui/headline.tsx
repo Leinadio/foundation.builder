@@ -8,19 +8,18 @@ interface HeadlineProps {
     text: string;
     isBadge: boolean;
   };
-  color?: string;
 }
 
-export function Headline({ title, description, badge, color = "red" }: HeadlineProps) {
+export function Headline({ title, description, badge }: HeadlineProps) {
   const displayBadge = () => {
     if (badge.isBadge) {
       return (
-        <Badge variant="outline" className={`text-${color} border-${color}`}>
+        <Badge variant="outline" className={`text-primary border-primary`}>
           {badge.text}
         </Badge>
       );
     }
-    return <p className={`text-sm lg:text-lg text-${color} font-semibold uppercase`}>{badge.text}</p>;
+    return <p className={`text-sm lg:text-lg text-primary font-semibold uppercase`}>{badge.text}</p>;
   };
   return (
     <div className="flex flex-col items-center gap-4 text-center mb-0 max-w-5xl mx-auto">
