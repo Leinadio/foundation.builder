@@ -1,5 +1,5 @@
-import { Timeline } from "@/components/timeline";
-import { Headline } from "@/components/headline";
+import { Timeline } from "@/components/ui/timeline";
+import { Headline } from "@/components/shared/headline";
 import { ReactNode } from "react";
 import { CheckCircle, TrendingUp, Users, Zap } from "lucide-react";
 

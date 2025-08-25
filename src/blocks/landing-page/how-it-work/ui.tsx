@@ -1,7 +1,7 @@
 import Image from "next/image";
-import { Icons, Variant } from "@/components/icons";
+import { Icons, Variant } from "@/components/shared/icons";
 import { Badge } from "@/components/ui/badge";
-import { Headline } from "@/components/headline";
+import { Headline } from "@/components/shared/headline";
 import { ReactNode } from "react";
 
 interface TextSectionProps {

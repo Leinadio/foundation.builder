@@ -1,7 +1,7 @@
 "use client";
 
 import { createCheckoutSessionAction } from "@/app/actions/checkout";
-import { CheckoutButton } from "@/components/checkout-button/ui";
+import { CheckoutButton } from "@/components/payment/checkout-button/ui";
 
 type CheckoutButtonClientProps = {
   priceId?: string;

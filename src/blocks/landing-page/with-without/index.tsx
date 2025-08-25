@@ -1,5 +1,5 @@
-import { WithWithout as UI, WithWithoutProps } from "@/blocks/landing-page/with-without/ui";
+import { WithWithout, WithWithoutProps } from "@/blocks/landing-page/with-without/ui";
 
-export function WithWithout(props: WithWithoutProps) {
-  return <UI {...props} />;
+export function WithWithoutContainer(props: WithWithoutProps) {
+  return <WithWithout {...props} />;
 }

@@ -1,5 +1,5 @@
-import { HeroVideo as HeroVideoComponent, HeroVideoProps } from "@/blocks/landing-page/hero-video/ui";
+import { HeroVideo, HeroVideoProps } from "@/blocks/landing-page/hero-video/ui";
 
-export function HeroVideo(props: HeroVideoProps) {
-  return <HeroVideoComponent {...props} />;
+export function HeroVideoContainer(props: HeroVideoProps) {
+  return <HeroVideo {...props} />;
 }

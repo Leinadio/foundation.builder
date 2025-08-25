@@ -3,9 +3,9 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { Play, XIcon } from "lucide-react";
-import Image from "next/image";
 
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 type AnimationStyle =
   | "from-bottom"

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { GripVertical } from "lucide-react";
-import { Headline } from "@/components/headline";
+import { Headline } from "@/components/shared/headline";
 
 function Feature() {
   const [inset, setInset] = useState<number>(50);

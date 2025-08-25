@@ -1,4 +1,4 @@
-import { SectionConfig } from "@/components/dynamic-renderer";
+import { SectionConfig } from "@/components/config/dynamic-renderer";
 import {
   Clock,
   Frown,
@@ -12,12 +12,12 @@ import {
   UserCheck,
 } from "lucide-react";
 
-export const pageConfig: SectionConfig[] = [
+export const pageRenderConfig: SectionConfig[] = [
   {
     type: "header",
     components: [
       {
-        component: "Header",
+        component: "HeaderContainer",
         props: {
           navigationLinks: [
             { id: "fonctionnalites", label: "Fonctionnalités", href: "#fonctionnalites" },
@@ -27,7 +27,7 @@ export const pageConfig: SectionConfig[] = [
         },
       },
       {
-        component: "HeroRowAdvanced",
+        component: "HeroRowAdvancedContainer",
         props: {
           badge: "💼 Pour les freelances",
           title: "Envoyez un devis automatiquement dès qu'un client vous contacte",
@@ -36,7 +36,7 @@ export const pageConfig: SectionConfig[] = [
         },
       },
       {
-        component: "HeroRow",
+        component: "HeroRowContainer",
         props: {
           badge: "💼 Pour les freelances",
           title: "Envoyez un devis automatiquement dès qu'un client vous contacte",
@@ -45,7 +45,7 @@ export const pageConfig: SectionConfig[] = [
         },
       },
       {
-        component: "Hero",
+        component: "HeroContainer",
         props: {
           badge: "💼 Pour les freelances",
           title: "Envoyez un devis automatiquement dès qu’un client vous contacte",
@@ -60,7 +60,7 @@ export const pageConfig: SectionConfig[] = [
     components: [
       {
         id: "video",
-        component: "HeroVideo",
+        component: "HeroVideoContainer",
         props: {
           videoSrc: "/videos/hero_en.mp4",
           thumbnailSrc: "/videos/hero_en_thumbnail.png",
@@ -74,7 +74,7 @@ export const pageConfig: SectionConfig[] = [
     components: [
       {
         id: "problem-overview",
-        component: "Problem",
+        component: "ProblemContainer",
         props: {
           title: "Le problème",
           description:
@@ -110,7 +110,7 @@ export const pageConfig: SectionConfig[] = [
     components: [
       {
         id: "with-without",
-        component: "WithWithout",
+        component: "WithWithoutContainer",
         props: {
           title: "Transformez votre façon de travailler",
           description: "Découvrez l'impact concret de notre solution sur votre quotidien professionnel",
@@ -178,7 +178,7 @@ export const pageConfig: SectionConfig[] = [
     components: [
       {
         id: "solution",
-        component: "SuccessPath",
+        component: "SuccessPathContainer",
         props: {
           title: (
             <>
@@ -245,7 +245,7 @@ export const pageConfig: SectionConfig[] = [
       },
       {
         id: "fonctionnement",
-        component: "HowItWork",
+        component: "HowItWorkContainer",
         props: {
           title: "Comment ça marche",
           description: "3 étapes simples pour automatiser votre prospection",
@@ -283,12 +283,12 @@ export const pageConfig: SectionConfig[] = [
       },
       {
         id: "image-comparison",
-        component: "ImageComparison",
+        component: "FeatureWithImageComparisonContainer",
         props: {},
       },
       {
         id: "fonctionnalites",
-        component: "FeatureBentoGrid",
+        component: "FeatureBentoGridContainer",
         props: {
           title: "Ce que l’extension peut faire pour vous",
           description: "Tout ce qu’il vous faut pour faire bonne impression, sans effort.",
@@ -362,7 +362,7 @@ export const pageConfig: SectionConfig[] = [
     components: [
       {
         id: "for-who",
-        component: "ForWho",
+        component: "ForWhoContainer",
         props: {
           title: "Conçu pour les freelances, consultants et indépendants",
           description: "Vous échangez avec des clients par email ? L’extension est faite pour vous.",
@@ -394,7 +394,7 @@ export const pageConfig: SectionConfig[] = [
     components: [
       {
         id: "tarifs",
-        component: "Pricing",
+        component: "PricingContainer",
         props: {
           title: "Des tarifs simples, sans surprise",
           description: "Commencez gratuitement, puis passez à Pro quand vous êtes prêt.",
@@ -430,7 +430,7 @@ export const pageConfig: SectionConfig[] = [
       },
       {
         id: "faq",
-        component: "FAQ",
+        component: "FaqContainer",
         props: {
           badge: "FAQ",
           heading: "Des questions ?",
@@ -464,7 +464,7 @@ export const pageConfig: SectionConfig[] = [
     components: [
       {
         id: "footer",
-        component: "Footer",
+        component: "FooterContainer",
         props: {
           callToAction: {
             badge: "🚀 Prêt à automatiser vos devis ?",

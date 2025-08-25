@@ -1,5 +1,5 @@
-import { SuccessPath as Component, SuccessPathProps } from "@/blocks/landing-page/success-path/ui";
+import { SuccessPath, SuccessPathProps } from "@/blocks/landing-page/success-path/ui";
 
-export function SuccessPath(props: SuccessPathProps) {
-  return <Component {...props} />;
+export function SuccessPathContainer(props: SuccessPathProps) {
+  return <SuccessPath {...props} />;
 }

@@ -1,5 +1,5 @@
-import { ForWho as Component, ForWhoProps } from "@/blocks/landing-page/for-who/ui";
+import { ForWho, ForWhoProps } from "@/blocks/landing-page/for-who/ui";
 
-export function ForWho(props: ForWhoProps) {
-  return <Component {...props} />;
+export function ForWhoContainer(props: ForWhoProps) {
+  return <ForWho {...props} />;
 }

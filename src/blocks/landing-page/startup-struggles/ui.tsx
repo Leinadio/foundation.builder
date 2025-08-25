@@ -1,5 +1,5 @@
-import { Timeline } from "@/components/timeline";
-import { Headline } from "@/components/headline";
+import { Timeline } from "@/components/ui/timeline";
+import { Headline } from "@/components/shared/headline";
 import Image from "next/image";
 import { ReactNode } from "react";
 

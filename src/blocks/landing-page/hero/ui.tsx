@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import { Badge } from "@/components/ui/badge";
-import { ProductHuntBadge } from "@/components/product-hunt-badge";
-import { Icons, Variant } from "@/components/icons";
+import { ProductHuntBadge } from "@/components/shared/product-hunt-badge";
+import { Icons, Variant } from "@/components/shared/icons";
 import { getChildrenByType } from "@/lib/get-children-by-type";
 
 interface HeroAuthSectionProps {

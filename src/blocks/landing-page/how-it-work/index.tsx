@@ -1,5 +1,5 @@
-import { HowItWork as Component, HowItWorkProps } from "@/blocks/landing-page/how-it-work/ui";
+import { HowItWork, HowItWorkProps } from "@/blocks/landing-page/how-it-work/ui";
 
-export function HowItWork(props: HowItWorkProps) {
-  return <Component {...props} />;
+export function HowItWorkContainer(props: HowItWorkProps) {
+  return <HowItWork {...props} />;
 }

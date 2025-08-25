@@ -1,5 +1,5 @@
-import { Footer as Component, FooterProps } from "@/blocks/landing-page/footer/ui";
+import { Footer, FooterProps } from "@/blocks/landing-page/footer/ui";
 
-export function Footer(props: FooterProps) {
-  return <Component {...props} />;
+export function FooterContainer(props: FooterProps) {
+  return <Footer {...props} />;
 }

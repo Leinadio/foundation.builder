@@ -1,5 +1,5 @@
-import { Feature as Component } from "@/blocks/landing-page/feature-with-image-comparison/ui";
+import { Feature } from "@/blocks/landing-page/feature-with-image-comparison/ui";
 
-export function FeatureWithImageComparison() {
-  return <Component />;
+export function FeatureWithImageComparisonContainer() {
+  return <Feature />;
 }

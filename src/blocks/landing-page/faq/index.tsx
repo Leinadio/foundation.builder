@@ -1,5 +1,5 @@
-import { Faq as Component, FaqProps } from "@/blocks/landing-page/faq/ui";
+import { Faq, FaqProps } from "@/blocks/landing-page/faq/ui";
 
-export function FAQ(props: FaqProps) {
-  return <Component {...props} />;
+export function FaqContainer(props: FaqProps) {
+  return <Faq {...props} />;
 }

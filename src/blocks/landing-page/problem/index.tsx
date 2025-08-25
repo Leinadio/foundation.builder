@@ -1,5 +1,5 @@
-import { Problem as ProblemUI, ProblemProps } from "@/components/ui/problem";
+import { Problem, ProblemProps } from "@/blocks/landing-page/problem/ui";
 
-export function Problem(props: ProblemProps) {
-  return <ProblemUI {...props} />;
+export function ProblemContainer(props: ProblemProps) {
+  return <Problem {...props} />;
 }

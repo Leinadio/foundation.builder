@@ -6,7 +6,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ReactNode } from "react";
-import { Headline } from "@/components/headline";
+import { Headline } from "@/components/shared/headline";
 
 export interface PricingPlan {
   name: string;
@@ -27,8 +27,20 @@ export interface PricingProps {
 }
 
 function PricingCards({ isYearly, pricingPlans }: { isYearly: boolean; pricingPlans: PricingPlan[] }) {
+  function getGridColumns() {
+    if (pricingPlans.length === 3) return "md:grid-cols-3";
+    if (pricingPlans.length === 2) return "md:grid-cols-2";
+    return "md:grid-cols-1";
+  }
+
+  function getMaxWidth() {
+    if (pricingPlans.length === 3) return "md:max-w-6xl";
+    if (pricingPlans.length === 2) return "md:max-w-4xl";
+    return "md:max-w-2xl";
+  }
+
   return (
-    <div className="grid md:grid-cols-3 gap-8 mx-auto">
+    <div className={`grid ${getGridColumns()} gap-8 ${getMaxWidth()} mx-auto`}>
       {pricingPlans.map((plan, index) => {
         const price = isYearly ? plan.yearlyPrice : plan.monthlyPrice;
         const period = isYearly ? "an" : "mois";

@@ -8,7 +8,7 @@ import { IconBoxAlignRightFilled } from "@tabler/icons-react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid";
-import { Headline } from "@/components/headline";
+import { Headline } from "@/components/shared/headline";
 import { FeatureHoverItem, FeaturesSectionWithHoverEffects } from "@/components/ui/feature-section-with-hover-effects";
 import { ReactNode } from "react";
 

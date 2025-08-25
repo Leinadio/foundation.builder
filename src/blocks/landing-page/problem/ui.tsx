@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { Headline } from "@/components/headline";
+import { Headline } from "@/components/shared/headline";
 
 export interface ProblemStep {
   emoji: string;

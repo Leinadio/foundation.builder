@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { X, Check, LucideIcon } from "lucide-react";
-import { Headline } from "@/components/headline";
+import { Headline } from "@/components/shared/headline";
 
 export interface Scenario {
   icon: LucideIcon;

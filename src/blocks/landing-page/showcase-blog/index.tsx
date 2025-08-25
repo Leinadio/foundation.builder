@@ -1,5 +1,5 @@
-import { ShowcaseBlog as Component, ShowcaseBlogProps } from "@/blocks/landing-page/showcase-blog/ui";
+import { ShowcaseBlog, ShowcaseBlogProps } from "@/blocks/landing-page/showcase-blog/ui";
 
-export function ShowcaseBlog(props: ShowcaseBlogProps) {
-  return <Component {...props} />;
+export function ShowcaseBlogContainer(props: ShowcaseBlogProps) {
+  return <ShowcaseBlog {...props} />;
 }

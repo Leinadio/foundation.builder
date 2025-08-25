@@ -1,5 +1,5 @@
-import { FeatureBentoGrid as Component, FeatureBentoGridProps } from "@/blocks/landing-page/feature-bento-grid/ui";
+import { FeatureBentoGrid, FeatureBentoGridProps } from "@/blocks/landing-page/feature-bento-grid/ui";
 
-export function FeatureBentoGrid(props: FeatureBentoGridProps) {
-  return <Component {...props} />;
+export function FeatureBentoGridContainer(props: FeatureBentoGridProps) {
+  return <FeatureBentoGrid {...props} />;
 }

@@ -1,12 +1,12 @@
-import { HeroRow as HeroRowComponent, HeroRowProps } from "@/blocks/landing-page/hero-row/ui";
-import { HeroUserActionsContainer } from "@/components/hero-user-actions";
+import { HeroRow, HeroRowProps } from "@/blocks/landing-page/hero-row/ui";
+import { HeroUserActionsContainer } from "@/components/auth/hero-user-actions";
 
-export function HeroRow(props: HeroRowProps) {
+export function HeroRowContainer(props: HeroRowProps) {
   return (
-    <HeroRowComponent {...props}>
-      <HeroRowComponent.CtaSection>
+    <HeroRow {...props}>
+      <HeroRow.CtaSection>
         <HeroUserActionsContainer url="/app" />
-      </HeroRowComponent.CtaSection>
-    </HeroRowComponent>
+      </HeroRow.CtaSection>
+    </HeroRow>
   );
 }

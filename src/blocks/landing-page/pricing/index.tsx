@@ -1,5 +1,5 @@
-import { Pricing as Component, PricingProps } from "@/blocks/landing-page/pricing/ui";
+import { Pricing, PricingProps } from "@/blocks/landing-page/pricing/ui";
 
-export function Pricing(props: PricingProps) {
-  return <Component {...props} />;
+export function PricingContainer(props: PricingProps) {
+  return <Pricing {...props} />;
 }

@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button";
 import { Menu } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { getChildrenByType } from "@/lib/get-children-by-type";
-import { AnimatedThemeToggler } from "@/components/magicui/animated-theme-toggler";
+import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler";
 
 interface NavLink {
   id: string;
@@ -70,7 +70,6 @@ export function Header({ navigationLinks, children }: HeaderProps) {
                   </NavigationMenuLink>
                 </NavigationMenuItem>
               ))}
-              <AnimatedThemeToggler />
             </NavigationMenuList>
           </NavigationMenu>
 

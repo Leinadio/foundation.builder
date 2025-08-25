@@ -1,4 +1,4 @@
-import { Headline } from "@/components/headline";
+import { Headline } from "@/components/shared/headline";
 import { ReactNode } from "react";
 
 export interface CompanySize {

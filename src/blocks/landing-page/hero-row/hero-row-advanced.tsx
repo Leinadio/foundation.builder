@@ -1,8 +1,8 @@
 import { HeroRow as HeroRowComponent, HeroRowProps } from "@/blocks/landing-page/hero-row/ui";
-import { HeroUserActionsContainer } from "@/components/hero-user-actions";
-import { Icons, Variant } from "@/components/ui/icons";
+import { HeroUserActionsContainer } from "@/components/auth/hero-user-actions";
+import { Icons, Variant } from "@/components/shared/icons";
 
-export function HeroRowAdvanced(props: HeroRowProps) {
+export function HeroRowAdvancedContainer(props: HeroRowProps) {
   return (
     <HeroRowComponent {...props}>
       <HeroRowComponent.CtaSection>

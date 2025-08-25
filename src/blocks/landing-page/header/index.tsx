@@ -1,12 +1,12 @@
-import { Header as HeaderComponent, HeaderProps } from "@/blocks/landing-page/header/ui";
-import { HeaderUserActionsContainer } from "@/components/header-user-actions";
+import { Header, HeaderProps } from "@/blocks/landing-page/header/ui";
+import { HeaderUserActionsContainer } from "@/components/auth/header-user-actions";
 
-export async function Header(props: HeaderProps) {
+export async function HeaderContainer(props: HeaderProps) {
   return (
-    <HeaderComponent {...props}>
-      <HeaderComponent.AuthSection>
+    <Header {...props}>
+      <Header.AuthSection>
         <HeaderUserActionsContainer />
-      </HeaderComponent.AuthSection>
-    </HeaderComponent>
+      </Header.AuthSection>
+    </Header>
   );
 }
