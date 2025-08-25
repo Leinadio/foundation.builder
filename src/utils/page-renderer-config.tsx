@@ -1,4 +1,4 @@
-import { SectionConfig } from "@/components/common/DynamicRenderer";
+import { SectionConfig } from "@/components/dynamic-renderer";
 import {
   Clock,
   Frown,
@@ -60,7 +60,7 @@ export const pageConfig: SectionConfig[] = [
     components: [
       {
         id: "video",
-        component: "Video",
+        component: "HeroVideo",
         props: {
           videoSrc: "/videos/hero_en.mp4",
           thumbnailSrc: "/videos/hero_en_thumbnail.png",

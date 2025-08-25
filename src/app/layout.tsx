@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ThemeProvider } from "@/components/common/ThemeProvider";
+import { ThemeProvider } from "@/components/next-theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
 import { Bricolage_Grotesque, Bellefair } from "next/font/google";

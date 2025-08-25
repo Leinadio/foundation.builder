@@ -1,4 +1,4 @@
-import { SignUpBlock } from "@/components/auth";
+import { SignUpSection } from "@/blocks/auth";
 import { authServiceInstance } from "@/core/server/di-container-server";
 import { redirect } from "next/navigation";
 
@@ -9,5 +9,5 @@ export default async function SignUpPage() {
     redirect("/app");
   }
 
-  return <SignUpBlock />;
+  return <SignUpSection />;
 }

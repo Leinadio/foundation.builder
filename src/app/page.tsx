@@ -1,5 +1,5 @@
 import { pageConfig } from "@/utils/page-renderer-config";
-import { DynamicRenderer } from "@/components/common/DynamicRenderer";
+import { DynamicRenderer } from "@/components/dynamic-renderer";
 
 export default async function Home() {
   return <DynamicRenderer sections={pageConfig} />;

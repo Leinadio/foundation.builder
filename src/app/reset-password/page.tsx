@@ -1,4 +1,4 @@
-import { ChangePasswordBlock } from "@/components/auth/ChangePasswordBlock";
+import { ChangePasswordSection } from "@/blocks/auth";
 import { authServiceInstance } from "@/core/server/di-container-server";
 import { redirect } from "next/navigation";
 
@@ -28,5 +28,5 @@ export default async function ResetPasswordPage({ searchParams }: ResetPasswordP
     redirect("/forgot-password");
   }
 
-  return <ChangePasswordBlock />;
+  return <ChangePasswordSection />;
 }
