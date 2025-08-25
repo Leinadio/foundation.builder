@@ -1,4 +1,16 @@
 import { SectionConfig } from "@/components/common/DynamicRenderer";
+import {
+  Clock,
+  Frown,
+  AlertTriangle,
+  TrendingDown,
+  Users,
+  Zap,
+  Smile,
+  Shield,
+  TrendingUp,
+  UserCheck,
+} from "lucide-react";
 
 export const pageConfig: SectionConfig[] = [
   {
@@ -50,7 +62,9 @@ export const pageConfig: SectionConfig[] = [
         id: "video",
         component: "Video",
         props: {
-          // Vidéo de démo de l'extension
+          videoSrc: "/videos/hero_en.mp4",
+          thumbnailSrc: "/videos/hero_en_thumbnail.png",
+          thumbnailAlt: "Dummy Video Thumbnail",
         },
       },
     ],
@@ -85,6 +99,74 @@ export const pageConfig: SectionConfig[] = [
               title: "Manque de professionnalisme perçu",
               description: "Perte de clients potentiels",
               emoji: "😰",
+            },
+          ],
+        },
+      },
+    ],
+  },
+  {
+    type: "section",
+    components: [
+      {
+        id: "with-without",
+        component: "WithWithout",
+        props: {
+          title: "Transformez votre façon de travailler",
+          description: "Découvrez l'impact concret de notre solution sur votre quotidien professionnel",
+          badgeText: "Transformez votre façon de travailler",
+          beforeScenarios: [
+            {
+              icon: Clock,
+              title: "Perte de temps considérable",
+              description: "Plusieurs heures perdues chaque semaine à chercher des informations dispersées",
+            },
+            {
+              icon: Frown,
+              title: "Frustration quotidienne",
+              description: "Stress et irritation face aux processus manuels répétitifs et chronophages",
+            },
+            {
+              icon: AlertTriangle,
+              title: "Erreurs fréquentes",
+              description: "Risques d'erreurs humaines dans la saisie et le traitement des données",
+            },
+            {
+              icon: TrendingDown,
+              title: "Productivité limitée",
+              description: "Difficultés à suivre les performances et à identifier les axes d'amélioration",
+            },
+            {
+              icon: Users,
+              title: "Communication fragmentée",
+              description: "Informations éparpillées entre différents outils et équipes",
+            },
+          ],
+          afterScenarios: [
+            {
+              icon: Zap,
+              title: "Efficacité maximale",
+              description: "Automatisation des tâches répétitives, gain de 80% de temps sur les processus",
+            },
+            {
+              icon: Smile,
+              title: "Satisfaction au travail",
+              description: "Interface intuitive et workflows optimisés pour une expérience utilisateur fluide",
+            },
+            {
+              icon: Shield,
+              title: "Fiabilité garantie",
+              description: "Validation automatique et contrôles intégrés pour éliminer les erreurs",
+            },
+            {
+              icon: TrendingUp,
+              title: "Performance optimisée",
+              description: "Tableaux de bord en temps réel et analytics avancés pour piloter l'activité",
+            },
+            {
+              icon: UserCheck,
+              title: "Collaboration renforcée",
+              description: "Centralisation des données et outils de collaboration intégrés",
             },
           ],
         },
@@ -198,6 +280,11 @@ export const pageConfig: SectionConfig[] = [
             },
           ],
         },
+      },
+      {
+        id: "image-comparison",
+        component: "ImageComparison",
+        props: {},
       },
       {
         id: "fonctionnalites",

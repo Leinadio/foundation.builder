@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { Badge } from "@/components/ui/badge";
 import { GripVertical } from "lucide-react";
+import { Headline } from "@/components/ui/headline";
 
 function Feature() {
   const [inset, setInset] = useState<number>(50);
@@ -29,15 +29,11 @@ function Feature() {
     <div className="w-full">
       <div className="mx-auto">
         <div className="flex flex-col gap-4">
-          <div>
-            <Badge>Platform</Badge>
-          </div>
-          <div className="flex gap-2 flex-col">
-            <h2 className="text-3xl md:text-5xl tracking-tighter lg:max-w-xl font-regular">Something new!</h2>
-            <p className="text-lg max-w-xl lg:max-w-xl leading-relaxed tracking-tight text-muted-foreground">
-              Managing a small business today is already tough.
-            </p>
-          </div>
+          <Headline
+            title="Comparez les devis"
+            description="Comparez les devis générés par l’extension avec les devis manuels."
+            badge={{ text: "Platform", isBadge: false }}
+          />
           <div className="pt-12 w-full">
             <div
               className="relative aspect-video w-full h-full overflow-hidden rounded-2xl select-none"

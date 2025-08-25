@@ -14,6 +14,8 @@ import { FAQ } from "@/components/landing/FAQ";
 import { Video } from "@/components/landing/Video";
 import { HeroRowAdvanced } from "@/components/landing/HeroRowAdvanced";
 import { HeroRow } from "@/components/landing/HeroRow";
+import { ImageComparison } from "@/components/landing/ImageComparison";
+import { WithWithout } from "@/components/landing/WithWithout";
 
 export type ComponentConfig = {
   component: string;
@@ -45,6 +47,8 @@ const componentsMap: Record<string, React.ComponentType<any>> = {
   Footer,
   FAQ,
   Video,
+  ImageComparison,
+  WithWithout,
 };
 
 export function DynamicRenderer({ sections }: { sections: SectionConfig[] }): ReactNode {

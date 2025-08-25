@@ -1,13 +1,19 @@
 import HeroVideoDialog from "@/components/ui/hero-video-dialog";
 
-export function Video() {
+interface VideoProps {
+  videoSrc: string;
+  thumbnailSrc: string;
+  thumbnailAlt: string;
+}
+
+export function Video({ videoSrc, thumbnailSrc, thumbnailAlt }: VideoProps) {
   return (
     <HeroVideoDialog
       className="block"
       animationStyle="from-center"
-      videoSrc="/videos/hero_en.mp4"
-      thumbnailSrc="/videos/hero_en_thumbnail.png"
-      thumbnailAlt="Dummy Video Thumbnail"
+      videoSrc={videoSrc}
+      thumbnailSrc={thumbnailSrc}
+      thumbnailAlt={thumbnailAlt}
     />
   );
 }

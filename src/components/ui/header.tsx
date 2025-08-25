@@ -15,11 +15,11 @@ import {
   SheetTrigger,
   SheetClose,
 } from "@/components/ui/sheet";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Menu } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { getChildrenByType } from "@/utils/get-children-by-type";
+import { AnimatedThemeToggler } from "@/components/magicui/animated-theme-toggler";
 
 interface NavLink {
   id: string;
@@ -80,18 +80,21 @@ export function Header({ navigationLinks, children }: HeaderProps) {
             </NavigationMenuList>
           </NavigationMenu>
 
+          <AnimatedThemeToggler />
+
           <div className="flex items-center gap-4">{authSection?.props.children}</div>
         </div>
 
-        <div className="md:hidden ml-auto">
+        <div className="md:hidden ml-auto flex items-center gap-4">
+          <AnimatedThemeToggler className="w-full" />
           <Sheet>
             <SheetTrigger asChild className="md:hidden">
-              <Button variant="ghost" size="sm" className="p-2">
+              <Button variant="ghost" size="lg" className="p-2">
                 <Menu className="h-5 w-5" />
                 <span className="sr-only">Ouvrir le menu</span>
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-[300px] sm:w-[400px]">
+            <SheetContent side="right" className="w-[300px] sm:w-[400px] p-4">
               <SheetHeader>
                 <SheetTitle className="text-left">Navigation</SheetTitle>
                 <SheetDescription className="text-left">Accédez rapidement aux différentes sections</SheetDescription>
@@ -108,9 +111,6 @@ export function Header({ navigationLinks, children }: HeaderProps) {
               </nav>
 
               <div className="mt-8 pt-8 border-t border-border space-y-4">
-                <Badge variant="secondary" className="w-fit">
-                  Authentification
-                </Badge>
                 <div className="flex flex-col space-y-3">{authSectionMobile?.props.children}</div>
               </div>
             </SheetContent>

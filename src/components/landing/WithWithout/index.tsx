@@ -1,5 +1,5 @@
-import { Component } from "./component";
+import { Component, WithWithoutProps } from "./component";
 
-export function WithWithout() {
-  return <Component />;
+export function WithWithout(props: WithWithoutProps) {
+  return <Component {...props} />;
 }
