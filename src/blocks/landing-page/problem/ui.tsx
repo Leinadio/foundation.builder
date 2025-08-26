@@ -11,7 +11,7 @@ export interface ProblemProps {
   steps?: ProblemStep[];
   title: string | ReactNode;
   description: string;
-  badge: { text: string; isBadge: boolean };
+  badgeText: string;
 }
 
 const defaultSteps: ProblemStep[] = [
@@ -32,7 +32,7 @@ const defaultSteps: ProblemStep[] = [
   },
 ];
 
-function ProblemStepCard({ step }: { step: ProblemStep }): ReactNode {
+function ProblemStepCard({ step }: { step: ProblemStep }) {
   return (
     <div className="flex flex-col items-center text-center gap-4 w-64">
       <div className="text-6xl mb-2">{step.emoji}</div>
@@ -59,19 +59,17 @@ function Arrow() {
   );
 }
 
-export function Problem({ title, description, badge, steps = defaultSteps }: ProblemProps) {
+export function Problem({ title, description, badgeText, steps = defaultSteps }: ProblemProps) {
   return (
     <div className="flex flex-col gap-20 bg-muted py-20">
-      <Headline title={title} description={description} badge={{ text: badge.text, isBadge: badge.isBadge }} />
+      <Headline title={title} description={description} badge={{ text: badgeText, isBadge: false }} />
       <div className="py-8 rounded-xl flex flex-col md:flex-row items-center justify-center">
-        {steps.map(
-          (step: ProblemStep, index: number): ReactNode => (
-            <div key={`step-${index}`} className="flex flex-col md:flex-row items-center">
-              <ProblemStepCard step={step} />
-              {index < steps.length - 1 && <Arrow />}
-            </div>
-          )
-        )}
+        {steps.map((step, index) => (
+          <div key={`step-${index}`} className="flex flex-col md:flex-row items-center">
+            <ProblemStepCard step={step} />
+            {index < steps.length - 1 && <Arrow />}
+          </div>
+        ))}
       </div>
     </div>
   );

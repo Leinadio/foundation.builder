@@ -79,7 +79,7 @@ export const pageRenderConfig: SectionConfig[] = [
           title: "Le problème",
           description:
             "En tant que freelance, répondre rapidement et professionnellement aux demandes clients est essentiel, mais chronophage. Chaque minute compte.",
-          badge: { text: "RÉALITÉ DU TERRAIN", isBadge: false },
+          badgeText: "RÉALITÉ DU TERRAIN",
           steps: [
             {
               title: "Temps perdu à créer des devis manuellement",
