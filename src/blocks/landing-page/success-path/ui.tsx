@@ -1,16 +1,7 @@
 import { Timeline } from "@/components/ui/timeline";
 import { Headline } from "@/components/shared/headline";
 import { ReactNode } from "react";
-import { CheckCircle, TrendingUp, Users, Zap } from "lucide-react";
-
-type IconName = "CheckCircle" | "Users" | "Zap" | "TrendingUp";
-
-export const iconMap: Record<IconName, React.ComponentType<{ className?: string }>> = {
-  CheckCircle,
-  Users,
-  Zap,
-  TrendingUp,
-};
+import { CheckCircle, LucideIcon, TrendingUp, Users, Zap } from "lucide-react";
 
 interface TaskListProps {
   paragraphs?: string[];
@@ -20,7 +11,7 @@ interface TaskListProps {
 
 function TaskList({ paragraphs, features, summary }: TaskListProps) {
   const featuresContent = (features ?? []).map((feature, idx) => {
-    const Icon = feature.icon ? iconMap[feature.icon] : undefined;
+    const Icon: LucideIcon | undefined = feature.icon;
     return (
       <div key={`f-${idx}`} className={`flex items-center gap-3 p-3 bg-primary/10 rounded-lg`}>
         {Icon ? <Icon className={`w-5 h-5 text-primary`} /> : null}
@@ -29,7 +20,7 @@ function TaskList({ paragraphs, features, summary }: TaskListProps) {
     );
   });
 
-  const SummaryIcon = summary?.icon ? iconMap[summary.icon] : undefined;
+  const SummaryIcon: LucideIcon | undefined = summary?.icon;
 
   return (
     <div>
@@ -56,7 +47,7 @@ interface CardListProps {
 
 function CardList({ paragraphs, features, summary }: CardListProps) {
   const featuresContent = (features ?? []).map((feature, idx) => {
-    const Icon = feature.icon ? iconMap[feature.icon] : undefined;
+    const Icon: LucideIcon | undefined = feature.icon;
     return (
       <div
         key={`f-${idx}`}
@@ -68,7 +59,7 @@ function CardList({ paragraphs, features, summary }: CardListProps) {
     );
   });
 
-  const SummaryIcon = summary?.icon ? iconMap[summary.icon] : undefined;
+  const SummaryIcon: LucideIcon | undefined = summary?.icon;
 
   return (
     <div>
@@ -100,7 +91,7 @@ function BulletsList({ paragraphs, bullets, summary }: BulletsListProps) {
     </div>
   ));
 
-  const SummaryIcon = summary?.icon ? iconMap[summary.icon] : undefined;
+  const SummaryIcon: LucideIcon | undefined = summary?.icon;
 
   return (
     <div>
@@ -120,12 +111,12 @@ function BulletsList({ paragraphs, bullets, summary }: BulletsListProps) {
 }
 
 export interface SuccessPathFeature {
-  icon?: IconName;
+  icon?: LucideIcon;
   text: string;
 }
 
 export interface SuccessPathSummary {
-  icon?: IconName;
+  icon?: LucideIcon;
   label: string;
   text: string;
 }
@@ -143,7 +134,7 @@ export interface SuccessPathItem {
 export interface SuccessPathProps {
   title?: ReactNode;
   description?: string;
-  badge?: { text: string; isBadge: boolean };
+  badgeText?: string;
   fromColor?: string;
   viaColor?: string;
   data?: SuccessPathItem[];
@@ -157,13 +148,13 @@ const defaultData: SuccessPathItem[] = [
       "Avec une structure organisée, chaque tâche trouve sa place et chaque membre de l'équipe sait exactement quoi faire et quand.",
     ],
     features: [
-      { icon: "CheckCircle", text: "Tâches priorisées automatiquement" },
-      { icon: "CheckCircle", text: "Délais respectés à 95%" },
-      { icon: "CheckCircle", text: "Communication centralisée" },
+      { icon: CheckCircle, text: "Tâches priorisées automatiquement" },
+      { icon: CheckCircle, text: "Délais respectés à 95%" },
+      { icon: CheckCircle, text: "Communication centralisée" },
     ],
     featuresLayout: "list",
     summary: {
-      icon: "TrendingUp",
+      icon: TrendingUp,
       label: "Résultat",
       text: "+65% de productivité en équipe dès la première semaine",
     },
@@ -175,12 +166,12 @@ const defaultData: SuccessPathItem[] = [
       "Fini les malentendus et les tâches dupliquées. L'équipe travaille en harmonie avec une visibilité complète sur l'avancement.",
     ],
     features: [
-      { icon: "Users", text: "Équipe synchronisée" },
-      { icon: "Zap", text: "Réactivité maximale" },
+      { icon: Users, text: "Équipe synchronisée" },
+      { icon: Zap, text: "Réactivité maximale" },
     ],
     featuresLayout: "grid",
     summary: {
-      icon: "TrendingUp",
+      icon: TrendingUp,
       label: "Impact",
       text: "Réduction de 80% des réunions inutiles et des emails de suivi",
     },
@@ -199,7 +190,7 @@ const defaultData: SuccessPathItem[] = [
       "Investisseurs confiants",
     ],
     summary: {
-      icon: "TrendingUp",
+      icon: TrendingUp,
       label: "Transformation",
       text: "De 85% d'échecs à 90% de réussite : rejoignez les startups qui réussissent",
     },
@@ -227,7 +218,7 @@ export function SuccessPath({
     </>
   ),
   description = "Découvrez comment transformer le chaos en machine à succès. Voici le chemin que suivent les fondateurs qui réussissent.",
-  badge = { text: "TRANSFORMATION RÉUSSIE", isBadge: true },
+  badgeText = "TRANSFORMATION RÉUSSIE",
   fromColor = "from-primary",
   viaColor = "via-primary/80",
   data = defaultData,
@@ -239,7 +230,7 @@ export function SuccessPath({
 
   return (
     <section className="flex flex-col gap-20 md:gap-24">
-      <Headline title={title} description={description} badge={badge} />
+      <Headline title={title} description={description} badge={{ text: badgeText, isBadge: false }} />
 
       <div className="relative w-full overflow-clip">
         <Timeline data={timelineData} fromColor={fromColor} viaColor={viaColor} />

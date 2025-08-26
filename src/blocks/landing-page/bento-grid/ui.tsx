@@ -1,10 +1,21 @@
 "use client";
 
-import { IconClipboardCopy } from "@tabler/icons-react";
-import { IconFileBroken } from "@tabler/icons-react";
-import { IconSignature } from "@tabler/icons-react";
-import { IconTableColumn } from "@tabler/icons-react";
-import { IconBoxAlignRightFilled } from "@tabler/icons-react";
+import {
+  IconClipboardCopy,
+  IconFileBroken,
+  IconSignature,
+  IconTableColumn,
+  IconBoxAlignRightFilled,
+  TablerIcon,
+  IconTerminal2,
+  IconEaseInOut,
+  IconCurrencyDollar,
+  IconCloud,
+  IconRouteAltLeft,
+  IconHelp,
+  IconAdjustmentsBolt,
+  IconHeart,
+} from "@tabler/icons-react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid";
@@ -282,21 +293,6 @@ export const SkeletonFive = () => {
   );
 };
 
-type BentoIconName =
-  | "IconClipboardCopy"
-  | "IconFileBroken"
-  | "IconSignature"
-  | "IconTableColumn"
-  | "IconBoxAlignRightFilled";
-
-const bentoIconMap: Record<BentoIconName, React.ComponentType<{ className?: string }>> = {
-  IconClipboardCopy,
-  IconFileBroken,
-  IconSignature,
-  IconTableColumn,
-  IconBoxAlignRightFilled,
-};
-
 type SkeletonName = "SkeletonOne" | "SkeletonTwo" | "SkeletonThree" | "SkeletonFour" | "SkeletonFive";
 
 export const skeletonMap: Record<SkeletonName, React.ComponentType> = {
@@ -312,13 +308,13 @@ export interface BentoGridItemData {
   description: string;
   skeleton: SkeletonName;
   className?: string;
-  icon?: BentoIconName;
+  icon?: TablerIcon;
 }
 
 export interface FeatureBentoGridProps {
   title?: string | ReactNode;
   description?: string;
-  badge?: { text: string; isBadge: boolean };
+  badgeText?: string;
   bentoItems?: BentoGridItemData[];
   hoverFeatures?: FeatureHoverItem[];
 }
@@ -327,42 +323,42 @@ const defaultHoverFeatures: FeatureHoverItem[] = [
   {
     title: "Built for developers",
     description: "Built for engineers, developers, dreamers, thinkers and doers.",
-    icon: "IconTerminal2",
+    icon: IconTerminal2,
   },
   {
     title: "Ease of use",
     description: "It's as easy as using an Apple, and as expensive as buying one.",
-    icon: "IconEaseInOut",
+    icon: IconEaseInOut,
   },
   {
     title: "Pricing like no other",
     description: "Our prices are best in the market. No cap, no lock, no credit card required.",
-    icon: "IconCurrencyDollar",
+    icon: IconCurrencyDollar,
   },
   {
     title: "100% Uptime guarantee",
     description: "We just cannot be taken down by anyone.",
-    icon: "IconCloud",
+    icon: IconCloud,
   },
   {
     title: "Multi-tenant Architecture",
     description: "You can simply share passwords instead of buying new seats",
-    icon: "IconRouteAltLeft",
+    icon: IconRouteAltLeft,
   },
   {
     title: "24/7 Customer Support",
     description: "We are available a 100% of the time. Atleast our AI Agents are.",
-    icon: "IconHelp",
+    icon: IconHelp,
   },
   {
     title: "Money back guarantee",
     description: "If you donot like EveryAI, we will convince you to like us.",
-    icon: "IconAdjustmentsBolt",
+    icon: IconAdjustmentsBolt,
   },
   {
     title: "And everything else",
     description: "I just ran out of copy ideas. Accept my sincere apologies",
-    icon: "IconHeart",
+    icon: IconHeart,
   },
 ];
 
@@ -372,52 +368,52 @@ const defaultBentoItems: BentoGridItemData[] = [
     description: "Experience the power of AI in generating unique content.",
     skeleton: "SkeletonOne",
     className: "md:col-span-1",
-    icon: "IconClipboardCopy",
+    icon: IconClipboardCopy,
   },
   {
     title: "Automated Proofreading",
     description: "Let AI handle the proofreading of your documents.",
     skeleton: "SkeletonTwo",
     className: "md:col-span-1",
-    icon: "IconFileBroken",
+    icon: IconFileBroken,
   },
   {
     title: "Contextual Suggestions",
     description: "Get AI-powered suggestions based on your writing context.",
     skeleton: "SkeletonThree",
     className: "md:col-span-1",
-    icon: "IconSignature",
+    icon: IconSignature,
   },
   {
     title: "Sentiment Analysis",
     description: "Understand the sentiment of your text with AI analysis.",
     skeleton: "SkeletonFour",
     className: "md:col-span-2",
-    icon: "IconTableColumn",
+    icon: IconTableColumn,
   },
   {
     title: "Text Summarization",
     description: "Summarize your lengthy documents with AI technology.",
     skeleton: "SkeletonFive",
     className: "md:col-span-1",
-    icon: "IconBoxAlignRightFilled",
+    icon: IconBoxAlignRightFilled,
   },
 ];
 
 export function FeatureBentoGrid({
   title = "What you can do with AI",
   description = "AI is a powerful tool that can help you with your work.",
-  badge = { text: "AI", isBadge: false },
+  badgeText = "AI",
   bentoItems = defaultBentoItems,
   hoverFeatures = defaultHoverFeatures,
 }: FeatureBentoGridProps) {
   return (
     <section className="w-full flex flex-col gap-8 md:gap-24">
-      <Headline title={title} description={description} badge={badge} />
+      <Headline title={title} description={description} badge={{ text: badgeText, isBadge: false }} />
       <BentoGrid>
         {bentoItems.map((item, i) => {
           const SkeletonComponent = skeletonMap[item.skeleton];
-          const IconComponent = item.icon ? bentoIconMap[item.icon] : null;
+          const IconComponent: TablerIcon | undefined = item.icon;
 
           return (
             <BentoGridItem

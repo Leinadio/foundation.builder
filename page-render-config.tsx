@@ -10,7 +10,26 @@ import {
   Shield,
   TrendingUp,
   UserCheck,
+  Eye,
+  Inbox,
+  Bell,
+  FileText,
+  PenTool,
+  Send,
+  Table,
+  CheckCircle,
 } from "lucide-react";
+import {
+  IconMailSearch,
+  IconFileDescription,
+  IconSend,
+  IconAlarm,
+  IconBriefcase,
+  IconBolt,
+  IconFeather,
+  IconHeadphones,
+  IconLayoutDashboard,
+} from "@tabler/icons-react";
 
 export const pageRenderConfig: SectionConfig[] = [
   {
@@ -186,7 +205,6 @@ export const pageRenderConfig: SectionConfig[] = [
           description:
             "L’extension détecte automatiquement les emails de prospection et crée un devis professionnel en quelques secondes.",
           badgeText: "LA SOLUTION",
-          color: "primary",
           fromColor: "from-primary",
           viaColor: "via-primary",
           data: [
@@ -197,11 +215,11 @@ export const pageRenderConfig: SectionConfig[] = [
                 "L'extension lit les nouveaux emails et reconnaît automatiquement les demandes de prestation.",
               ],
               features: [
-                { icon: "Eye", text: "Analyse automatique de l'email" },
-                { icon: "Inbox", text: "Déclenchement contextuel" },
+                { icon: Eye, text: "Analyse automatique de l'email" },
+                { icon: Inbox, text: "Déclenchement contextuel" },
               ],
               summary: {
-                icon: "Bell",
+                icon: Bell,
                 label: "Gain de temps",
                 text: "-80% de temps passé à trier et répondre",
               },
@@ -213,11 +231,11 @@ export const pageRenderConfig: SectionConfig[] = [
                 "Un devis est généré sur la base de vos tarifs pré-enregistrés, personnalisable en un clic avant envoi.",
               ],
               features: [
-                { icon: "FileText", text: "Devis PDF prêt à être envoyé" },
-                { icon: "PenTool", text: "Templates configurables" },
+                { icon: FileText, text: "Devis PDF prêt à être envoyé" },
+                { icon: PenTool, text: "Templates configurables" },
               ],
               summary: {
-                icon: "Send",
+                icon: Send,
                 label: "Conversion",
                 text: "+40% de réponses client obtenues",
               },
@@ -227,12 +245,12 @@ export const pageRenderConfig: SectionConfig[] = [
               title: "Suivi intégré",
               paragraphs: ["Gardez une trace de vos demandes, devis envoyés et relances automatiques possibles."],
               features: [
-                { icon: "Table", text: "Tableau de bord" },
-                { icon: "Bell", text: "Notifications de lecture" },
-                { icon: "Clock", text: "Relance automatique après X jours" },
+                { icon: Table, text: "Tableau de bord" },
+                { icon: Bell, text: "Notifications de lecture" },
+                { icon: Clock, text: "Relance automatique après X jours" },
               ],
               summary: {
-                icon: "CheckCircle",
+                icon: CheckCircle,
                 label: "Impact",
                 text: "Réduction de 80% des réunions inutiles et des emails de suivi",
               },
@@ -288,65 +306,64 @@ export const pageRenderConfig: SectionConfig[] = [
         props: {
           title: "Ce que l’extension peut faire pour vous",
           description: "Tout ce qu’il vous faut pour faire bonne impression, sans effort.",
-          badge: { text: "FONCTIONNALITÉS", isBadge: false },
-          color: "primary",
+          badgeText: "FONCTIONNALITÉS",
           bentoItems: [
             {
               title: "Détection intelligente d’email",
               description: "Comprend automatiquement les demandes client",
               skeleton: "SkeletonOne",
               className: "md:col-span-1",
-              icon: "IconMailSearch",
+              icon: IconMailSearch,
             },
             {
               title: "Génération de devis",
               description: "Créez un devis PDF à partir de modèles personnalisés",
               skeleton: "SkeletonTwo",
               className: "md:col-span-1",
-              icon: "IconFileDescription",
+              icon: IconFileDescription,
             },
             {
               title: "Réponse en 1 clic",
               description: "Un bouton intégré dans Gmail pour envoyer le devis",
               skeleton: "SkeletonThree",
               className: "md:col-span-1",
-              icon: "IconSend",
+              icon: IconSend,
             },
             {
               title: "Dashboard de suivi",
               description: "Visualisez vos prospects, devis envoyés, relances à faire",
               skeleton: "SkeletonFour",
               className: "md:col-span-2",
-              icon: "IconLayoutDashboard",
+              icon: IconLayoutDashboard,
             },
             {
               title: "Relance automatique",
               description: "Relance configurable après 2, 3 ou 5 jours",
               skeleton: "SkeletonFive",
               className: "md:col-span-1",
-              icon: "IconAlarm",
+              icon: IconAlarm,
             },
           ],
           hoverFeatures: [
             {
               title: "Pensé pour les freelances",
               description: "Gérez votre prospection sans perdre de temps",
-              icon: "IconBriefcase",
+              icon: IconBriefcase,
             },
             {
               title: "Simple & rapide",
               description: "Pas de formation requise. C’est plug & play.",
-              icon: "IconBolt",
+              icon: IconBolt,
             },
             {
               title: "Extension légère",
               description: "Aucun ralentissement de votre navigateur",
-              icon: "IconFeather",
+              icon: IconFeather,
             },
             {
               title: "Support en ligne 24/7",
               description: "Une équipe (ou un bot) à votre écoute",
-              icon: "IconHeadphones",
+              icon: IconHeadphones,
             },
           ],
         },
