@@ -32,7 +32,7 @@ const defaultSteps: ProblemStep[] = [
   },
 ];
 
-function ProblemStepCard({ step }: { step: ProblemStep }) {
+function ProblemStepCard({ step }: { step: ProblemStep }): ReactNode {
   return (
     <div className="flex flex-col items-center text-center gap-4 w-64">
       <div className="text-6xl mb-2">{step.emoji}</div>
@@ -64,12 +64,14 @@ export function Problem({ title, description, badge, steps = defaultSteps }: Pro
     <div className="flex flex-col gap-20 bg-muted py-20">
       <Headline title={title} description={description} badge={{ text: badge.text, isBadge: badge.isBadge }} />
       <div className="py-8 rounded-xl flex flex-col md:flex-row items-center justify-center">
-        {steps.map((step, index) => (
-          <div key={`step-${index}`} className="flex flex-col md:flex-row items-center">
-            <ProblemStepCard step={step} />
-            {index < steps.length - 1 && <Arrow />}
-          </div>
-        ))}
+        {steps.map(
+          (step: ProblemStep, index: number): ReactNode => (
+            <div key={`step-${index}`} className="flex flex-col md:flex-row items-center">
+              <ProblemStepCard step={step} />
+              {index < steps.length - 1 && <Arrow />}
+            </div>
+          )
+        )}
       </div>
     </div>
   );

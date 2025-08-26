@@ -18,17 +18,11 @@ import {
   WithWithoutContainer,
   HeroVideoContainer,
 } from "@/blocks/landing-page";
-
-export type ComponentConfig = {
-  component: string;
-  props: Record<string, unknown>;
-  id?: string;
-  wrapperClass?: string;
-};
+import { ComponentBlock } from "@/components/config/dynamic-renderer/type";
 
 export type SectionConfig = {
   type: "header" | "section" | "section-full-width" | "section-full-width-with-background" | "footer";
-  components: ComponentConfig[];
+  components: ComponentBlock[];
 };
 
 // Mapping des composants

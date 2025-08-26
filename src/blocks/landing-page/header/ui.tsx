@@ -14,15 +14,13 @@ import { cn } from "@/lib/utils";
 import { getChildrenByType } from "@/lib/get-children-by-type";
 import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler";
 
-interface NavLink {
-  id: string;
-  label: string;
-  href: string;
-}
-
 export interface HeaderProps {
-  navigationLinks: NavLink[];
-  children: ReactNode;
+  navigationLinks: {
+    id: string;
+    label: string;
+    href: string;
+  }[];
+  children?: ReactNode;
 }
 
 interface HeaderAuthSectionProps {
@@ -33,15 +31,21 @@ interface HeaderAuthSectionMobileProps {
   children: ReactNode;
 }
 
-function HeaderAuthSection({ children }: HeaderAuthSectionProps) {
+function HeaderAuthSection({ children }: HeaderAuthSectionProps): ReactNode | null {
+  if (!children) {
+    return null;
+  }
   return <>{children}</>;
 }
 
-function HeaderAuthSectionMobile({ children }: HeaderAuthSectionMobileProps) {
+function HeaderAuthSectionMobile({ children }: HeaderAuthSectionMobileProps): ReactNode | null {
+  if (!children) {
+    return null;
+  }
   return <>{children}</>;
 }
 
-export function Header({ navigationLinks, children }: HeaderProps) {
+export function Header({ navigationLinks, children }: HeaderProps): ReactNode {
   const authSection = getChildrenByType<HeaderAuthSectionProps>(children, HeaderAuthSection);
   const authSectionMobile = getChildrenByType<HeaderAuthSectionMobileProps>(children, HeaderAuthSectionMobile);
 
@@ -87,11 +91,6 @@ export function Header({ navigationLinks, children }: HeaderProps) {
               </Button>
             </SheetTrigger>
             <SheetContent side="right" className="w-[300px] sm:w-[400px]">
-              {/* <SheetHeader>
-                <SheetTitle className="text-left">Navigation</SheetTitle>
-                <SheetDescription className="text-left">Accédez rapidement aux différentes sections</SheetDescription>
-              </SheetHeader> */}
-
               <nav className="flex flex-col space-y-4 mt-8">
                 {navigationLinks.map((link) => (
                   <SheetClose asChild key={link.id}>

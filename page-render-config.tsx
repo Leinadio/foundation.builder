@@ -82,20 +82,17 @@ export const pageRenderConfig: SectionConfig[] = [
           badge: { text: "RÉALITÉ DU TERRAIN", isBadge: false },
           steps: [
             {
-              step: "1",
               title: "Temps perdu à créer des devis manuellement",
               description: "Risque d'oublier de répondre",
               emoji: "😰",
             },
             {
-              step: "2",
               title: "Risque d'oublier de répondre",
               description: "Manque de professionnalisme perçu",
               emoji: "😔",
             },
 
             {
-              step: "3",
               title: "Manque de professionnalisme perçu",
               description: "Perte de clients potentiels",
               emoji: "😰",
@@ -249,7 +246,6 @@ export const pageRenderConfig: SectionConfig[] = [
         props: {
           title: "Comment ça marche",
           description: "3 étapes simples pour automatiser votre prospection",
-          color: "primary",
           badgeText: "PROCESS",
           steps: [
             {
@@ -283,12 +279,12 @@ export const pageRenderConfig: SectionConfig[] = [
       },
       {
         id: "image-comparison",
-        component: "FeatureWithImageComparisonContainer",
-        props: {},
+        component: "ImageComparisonContainer",
+        props: null,
       },
       {
         id: "fonctionnalites",
-        component: "FeatureBentoGridContainer",
+        component: "BentoGridContainer",
         props: {
           title: "Ce que l’extension peut faire pour vous",
           description: "Tout ce qu’il vous faut pour faire bonne impression, sans effort.",
@@ -366,8 +362,7 @@ export const pageRenderConfig: SectionConfig[] = [
         props: {
           title: "Conçu pour les freelances, consultants et indépendants",
           description: "Vous échangez avec des clients par email ? L’extension est faite pour vous.",
-          badge: { text: "POUR QUI", isBadge: false },
-          color: "primary",
+          badgeText: "POUR QUI",
           companySizes: [
             {
               id: "freelances",
