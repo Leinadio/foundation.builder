@@ -2,18 +2,16 @@
 import { useScroll, useTransform, motion } from "motion/react";
 import React, { useEffect, useRef, useState } from "react";
 
-interface TimelineEntry {
+export interface TimelineEntry {
   title: string;
   content: React.ReactNode;
 }
 
 interface TimelineProps {
   data: TimelineEntry[];
-  fromColor?: string;
-  viaColor?: string;
 }
 
-export const Timeline = ({ data, fromColor = "from-purple-500", viaColor = "via-red-500" }: TimelineProps) => {
+export const Timeline = ({ data }: TimelineProps) => {
   const ref = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [height, setHeight] = useState(0);
@@ -56,7 +54,7 @@ export const Timeline = ({ data, fromColor = "from-purple-500", viaColor = "via-
               <h3 className="md:hidden block text-2xl mb-4 text-left font-bold text-neutral-500 dark:text-neutral-500">
                 {item.title}
               </h3>
-              {item.content}{" "}
+              {item.content}
             </div>
           </div>
         ))}
@@ -71,7 +69,7 @@ export const Timeline = ({ data, fromColor = "from-purple-500", viaColor = "via-
               height: heightTransform,
               opacity: opacityTransform,
             }}
-            className={`absolute inset-x-0 top-0 w-[2px] bg-gradient-to-t ${fromColor} ${viaColor} to-transparent from-[0%] via-[10%] rounded-full`}
+            className={`absolute inset-x-0 top-0 w-[2px] bg-gradient-to-t from-primary via-primary/80 to-transparent from-[0%] via-[10%] rounded-full`}
           />
         </div>
       </div>

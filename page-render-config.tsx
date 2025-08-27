@@ -205,11 +205,8 @@ export const pageRenderConfig: SectionConfig[] = [
           description:
             "L’extension détecte automatiquement les emails de prospection et crée un devis professionnel en quelques secondes.",
           badgeText: "LA SOLUTION",
-          fromColor: "from-primary",
-          viaColor: "via-primary",
           data: [
             {
-              type: "task-list",
               title: "Détection intelligente",
               paragraphs: [
                 "L'extension lit les nouveaux emails et reconnaît automatiquement les demandes de prestation.",
@@ -219,13 +216,12 @@ export const pageRenderConfig: SectionConfig[] = [
                 { icon: <Inbox className="w-5 h-5 text-primary" />, text: "Déclenchement contextuel" },
               ],
               summary: {
-                icon: <Bell className="w-5 h-5 text-primary" />,
+                icon: <Bell className="w-5 h-5 text-primary-foreground" />,
                 label: "Gain de temps",
                 text: "-80% de temps passé à trier et répondre",
               },
             },
             {
-              type: "task-list",
               title: "Devis instantané",
               paragraphs: [
                 "Un devis est généré sur la base de vos tarifs pré-enregistrés, personnalisable en un clic avant envoi.",
@@ -235,13 +231,12 @@ export const pageRenderConfig: SectionConfig[] = [
                 { icon: <PenTool className="w-5 h-5 text-primary" />, text: "Templates configurables" },
               ],
               summary: {
-                icon: <Send className="w-5 h-5 text-primary" />,
+                icon: <Send className="w-5 h-5 text-primary-foreground" />,
                 label: "Conversion",
                 text: "+40% de réponses client obtenues",
               },
             },
             {
-              type: "task-list",
               title: "Suivi intégré",
               paragraphs: ["Gardez une trace de vos demandes, devis envoyés et relances automatiques possibles."],
               features: [
@@ -250,7 +245,7 @@ export const pageRenderConfig: SectionConfig[] = [
                 { icon: <Clock className="w-5 h-5 text-primary" />, text: "Relance automatique après X jours" },
               ],
               summary: {
-                icon: <CheckCircle className="w-5 h-5 text-primary" />,
+                icon: <CheckCircle className="w-5 h-5 text-primary-foreground" />,
                 label: "Impact",
                 text: "Réduction de 80% des réunions inutiles et des emails de suivi",
               },

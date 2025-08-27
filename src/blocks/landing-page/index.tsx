@@ -3,7 +3,6 @@ export * from "./hero";
 export * from "./how-it-work";
 export * from "./hero-row";
 export * from "./problem";
-export * from "./startup-struggles";
 export * from "./success-path";
 export * from "./bento-grid";
 export * from "./for-who";
