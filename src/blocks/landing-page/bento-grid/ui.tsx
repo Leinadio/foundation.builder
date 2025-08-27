@@ -1,27 +1,11 @@
 "use client";
 
-import {
-  IconClipboardCopy,
-  IconFileBroken,
-  IconSignature,
-  IconTableColumn,
-  IconBoxAlignRightFilled,
-  TablerIcon,
-  IconTerminal2,
-  IconEaseInOut,
-  IconCurrencyDollar,
-  IconCloud,
-  IconRouteAltLeft,
-  IconHelp,
-  IconAdjustmentsBolt,
-  IconHeart,
-} from "@tabler/icons-react";
+import { ReactNode } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid";
 import { Headline } from "@/components/shared/headline";
 import { FeatureHoverItem, FeaturesSectionWithHoverEffects } from "@/components/ui/feature-section-with-hover-effects";
-import { ReactNode } from "react";
 
 export const SkeletonOne = () => {
   const variants = {
@@ -308,7 +292,7 @@ export interface BentoGridItemData {
   description: string;
   skeleton: SkeletonName;
   className?: string;
-  icon?: TablerIcon;
+  icon?: ReactNode;
 }
 
 export interface FeatureBentoGridProps {
@@ -319,93 +303,12 @@ export interface FeatureBentoGridProps {
   hoverFeatures?: FeatureHoverItem[];
 }
 
-const defaultHoverFeatures: FeatureHoverItem[] = [
-  {
-    title: "Built for developers",
-    description: "Built for engineers, developers, dreamers, thinkers and doers.",
-    icon: IconTerminal2,
-  },
-  {
-    title: "Ease of use",
-    description: "It's as easy as using an Apple, and as expensive as buying one.",
-    icon: IconEaseInOut,
-  },
-  {
-    title: "Pricing like no other",
-    description: "Our prices are best in the market. No cap, no lock, no credit card required.",
-    icon: IconCurrencyDollar,
-  },
-  {
-    title: "100% Uptime guarantee",
-    description: "We just cannot be taken down by anyone.",
-    icon: IconCloud,
-  },
-  {
-    title: "Multi-tenant Architecture",
-    description: "You can simply share passwords instead of buying new seats",
-    icon: IconRouteAltLeft,
-  },
-  {
-    title: "24/7 Customer Support",
-    description: "We are available a 100% of the time. Atleast our AI Agents are.",
-    icon: IconHelp,
-  },
-  {
-    title: "Money back guarantee",
-    description: "If you donot like EveryAI, we will convince you to like us.",
-    icon: IconAdjustmentsBolt,
-  },
-  {
-    title: "And everything else",
-    description: "I just ran out of copy ideas. Accept my sincere apologies",
-    icon: IconHeart,
-  },
-];
-
-const defaultBentoItems: BentoGridItemData[] = [
-  {
-    title: "AI Content Generation",
-    description: "Experience the power of AI in generating unique content.",
-    skeleton: "SkeletonOne",
-    className: "md:col-span-1",
-    icon: IconClipboardCopy,
-  },
-  {
-    title: "Automated Proofreading",
-    description: "Let AI handle the proofreading of your documents.",
-    skeleton: "SkeletonTwo",
-    className: "md:col-span-1",
-    icon: IconFileBroken,
-  },
-  {
-    title: "Contextual Suggestions",
-    description: "Get AI-powered suggestions based on your writing context.",
-    skeleton: "SkeletonThree",
-    className: "md:col-span-1",
-    icon: IconSignature,
-  },
-  {
-    title: "Sentiment Analysis",
-    description: "Understand the sentiment of your text with AI analysis.",
-    skeleton: "SkeletonFour",
-    className: "md:col-span-2",
-    icon: IconTableColumn,
-  },
-  {
-    title: "Text Summarization",
-    description: "Summarize your lengthy documents with AI technology.",
-    skeleton: "SkeletonFive",
-    className: "md:col-span-1",
-    icon: IconBoxAlignRightFilled,
-  },
-];
-
 export function FeatureBentoGrid({
   title = "What you can do with AI",
   description = "AI is a powerful tool that can help you with your work.",
   badgeText = "AI",
-  bentoItems = defaultBentoItems,
-  hoverFeatures = defaultHoverFeatures,
+  bentoItems = [],
+  hoverFeatures = [],
 }: FeatureBentoGridProps) {
   return (
     <section className="w-full flex flex-col gap-8 md:gap-24">
@@ -413,7 +316,6 @@ export function FeatureBentoGrid({
       <BentoGrid>
         {bentoItems.map((item, i) => {
           const SkeletonComponent = skeletonMap[item.skeleton];
-          const IconComponent: TablerIcon | undefined = item.icon;
 
           return (
             <BentoGridItem
@@ -421,7 +323,7 @@ export function FeatureBentoGrid({
               title={item.title}
               description={<span className="text-sm">{item.description}</span>}
               header={<SkeletonComponent />}
-              icon={IconComponent ? <IconComponent className="h-4 w-4 text-neutral-500" /> : undefined}
+              icon={item.icon}
               className={item.className || ""}
             />
           );

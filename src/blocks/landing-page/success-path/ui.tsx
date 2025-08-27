@@ -1,7 +1,6 @@
 import { Timeline } from "@/components/ui/timeline";
 import { Headline } from "@/components/shared/headline";
 import { ReactNode } from "react";
-import { CheckCircle, LucideIcon, TrendingUp, Users, Zap } from "lucide-react";
 
 interface TaskListProps {
   paragraphs?: string[];
@@ -11,16 +10,13 @@ interface TaskListProps {
 
 function TaskList({ paragraphs, features, summary }: TaskListProps) {
   const featuresContent = (features ?? []).map((feature, idx) => {
-    const Icon: LucideIcon | undefined = feature.icon;
     return (
       <div key={`f-${idx}`} className={`flex items-center gap-3 p-3 bg-primary/10 rounded-lg`}>
-        {Icon ? <Icon className={`w-5 h-5 text-primary`} /> : null}
+        {feature.icon}
         <span className="text-base font-medium">{feature.text}</span>
       </div>
     );
   });
-
-  const SummaryIcon: LucideIcon | undefined = summary?.icon;
 
   return (
     <div>
@@ -29,7 +25,7 @@ function TaskList({ paragraphs, features, summary }: TaskListProps) {
       {summary ? (
         <div className={`mt-6 p-4 bg-primary/80 rounded-lg`}>
           <div className="flex items-center gap-2 mb-2">
-            {SummaryIcon ? <SummaryIcon className={`w-4 h-4 text-primary-foreground`} /> : null}
+            {summary?.icon}
             <span className={`text-base font-semibold text-primary-foreground`}>{summary.label}</span>
           </div>
           <p className={`text-base text-primary-foreground/80`}>{summary.text}</p>
@@ -47,19 +43,16 @@ interface CardListProps {
 
 function CardList({ paragraphs, features, summary }: CardListProps) {
   const featuresContent = (features ?? []).map((feature, idx) => {
-    const Icon: LucideIcon | undefined = feature.icon;
     return (
       <div
         key={`f-${idx}`}
         className={`p-4 flex items-center gap-3 border border-primary dark:border-primary/30 rounded-lg`}
       >
-        {Icon ? <Icon className={`w-5 h-5 text-primary flex-shrink-0`} /> : null}
+        {feature.icon}
         <span className="text-base font-medium">{feature.text}</span>
       </div>
     );
   });
-
-  const SummaryIcon: LucideIcon | undefined = summary?.icon;
 
   return (
     <div>
@@ -68,7 +61,7 @@ function CardList({ paragraphs, features, summary }: CardListProps) {
       {summary ? (
         <div className={`mt-6 p-4 bg-primary/80 rounded-lg`}>
           <div className="flex items-center gap-2 mb-2">
-            {SummaryIcon ? <SummaryIcon className={`w-4 h-4 text-primary-foreground`} /> : null}
+            {summary?.icon}
             <span className={`text-base font-semibold text-primary-foreground`}>{summary.label}</span>
           </div>
           <p className={`text-base text-primary-foreground`}>{summary.text}</p>
@@ -91,8 +84,6 @@ function BulletsList({ paragraphs, bullets, summary }: BulletsListProps) {
     </div>
   ));
 
-  const SummaryIcon: LucideIcon | undefined = summary?.icon;
-
   return (
     <div>
       {(paragraphs ?? []).length > 0 ? <p className="mb-8 text-sm md:text-lg">{paragraphs?.[0]}</p> : null}
@@ -100,7 +91,7 @@ function BulletsList({ paragraphs, bullets, summary }: BulletsListProps) {
       {summary ? (
         <div className={`mt-6 p-4 bg-primary/80 rounded-lg`}>
           <div className="flex items-center gap-2 mb-2">
-            {SummaryIcon ? <SummaryIcon className={`w-4 h-4 text-primary-foreground`} /> : null}
+            {summary?.icon}
             <span className={`text-base font-semibold text-primary-foreground`}>{summary.label}</span>
           </div>
           <p className={`text-base text-primary-foreground`}>{summary.text}</p>
@@ -111,12 +102,12 @@ function BulletsList({ paragraphs, bullets, summary }: BulletsListProps) {
 }
 
 export interface SuccessPathFeature {
-  icon?: LucideIcon;
+  icon?: ReactNode;
   text: string;
 }
 
 export interface SuccessPathSummary {
-  icon?: LucideIcon;
+  icon?: ReactNode;
   label: string;
   text: string;
 }
@@ -139,63 +130,6 @@ export interface SuccessPathProps {
   viaColor?: string;
   data?: SuccessPathItem[];
 }
-
-const defaultData: SuccessPathItem[] = [
-  {
-    type: "task-list",
-    title: "Organisation claire",
-    paragraphs: [
-      "Avec une structure organisée, chaque tâche trouve sa place et chaque membre de l'équipe sait exactement quoi faire et quand.",
-    ],
-    features: [
-      { icon: CheckCircle, text: "Tâches priorisées automatiquement" },
-      { icon: CheckCircle, text: "Délais respectés à 95%" },
-      { icon: CheckCircle, text: "Communication centralisée" },
-    ],
-    featuresLayout: "list",
-    summary: {
-      icon: TrendingUp,
-      label: "Résultat",
-      text: "+65% de productivité en équipe dès la première semaine",
-    },
-  },
-  {
-    type: "card-list",
-    title: "Collaboration fluide",
-    paragraphs: [
-      "Fini les malentendus et les tâches dupliquées. L'équipe travaille en harmonie avec une visibilité complète sur l'avancement.",
-    ],
-    features: [
-      { icon: Users, text: "Équipe synchronisée" },
-      { icon: Zap, text: "Réactivité maximale" },
-    ],
-    featuresLayout: "grid",
-    summary: {
-      icon: TrendingUp,
-      label: "Impact",
-      text: "Réduction de 80% des réunions inutiles et des emails de suivi",
-    },
-  },
-  {
-    type: "bullets-list",
-    title: "Croissance accélérée",
-    paragraphs: [
-      "Avec les bonnes fondations, votre startup peut enfin se concentrer sur ce qui compte : créer de la valeur et grandir.",
-    ],
-    bullets: [
-      "Focus retrouvé sur le produit",
-      "Équipe motivée et alignée",
-      "Livraisons dans les temps",
-      "Clients satisfaits et fidèles",
-      "Investisseurs confiants",
-    ],
-    summary: {
-      icon: TrendingUp,
-      label: "Transformation",
-      text: "De 85% d'échecs à 90% de réussite : rejoignez les startups qui réussissent",
-    },
-  },
-];
 
 const displayEntryContent = ({ entry }: { entry: SuccessPathItem }): ReactNode => {
   switch (entry.type) {
@@ -221,7 +155,7 @@ export function SuccessPath({
   badgeText = "TRANSFORMATION RÉUSSIE",
   fromColor = "from-primary",
   viaColor = "via-primary/80",
-  data = defaultData,
+  data = [],
 }: SuccessPathProps) {
   const timelineData = data.map((entry) => ({
     title: entry.title,
