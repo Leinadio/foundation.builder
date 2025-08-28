@@ -3,6 +3,7 @@ import { ThemeProvider } from "@/components/shared";
 import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
 import { Bricolage_Grotesque, Bellefair } from "next/font/google";
+import PlausibleProvider from "next-plausible";
 
 const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
@@ -27,6 +28,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <PlausibleProvider
+          domain="womi-validateidea.com"
+          customDomain="http://localhost:3000/"
+          trackOutboundLinks={true}
+          taggedEvents={true}
+          trackLocalhost={true}
+        />
+      </head>
       <body className={`antialiased ${bricolage.variable} ${bellefair.variable} font-sans`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           {children}
