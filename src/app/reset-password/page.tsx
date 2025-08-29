@@ -3,10 +3,10 @@ import { authServiceInstance } from "@/core/server/di-container-server";
 import { redirect } from "next/navigation";
 
 interface ResetPasswordPageProps {
-  searchParams: {
+  searchParams: Promise<{
     token?: string;
     error?: string;
-  };
+  }>;
 }
 
 export default async function ResetPasswordPage({ searchParams }: ResetPasswordPageProps) {
