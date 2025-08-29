@@ -3,25 +3,26 @@ import { PaymentRepository } from "@/core/server/ports/out/payment.repository";
 import { PaymentIntent, PaymentRequest, PaymentSession, CreateSessionRequest } from "@/core/models/payment";
 
 export class StripePaymentRepositoryImpl implements PaymentRepository {
-  private readonly stripe: Stripe;
+  private readonly stripe: Stripe | null = null;
 
   public constructor() {
-    this.ensureStripeSecretKey();
-    this.stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
-      apiVersion: "2025-07-30.basil",
-    });
+    if (process.env.STRIPE_SECRET_KEY) {
+      this.stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+        apiVersion: "2025-07-30.basil",
+      });
+    }
   }
 
-  private ensureStripeSecretKey(): void {
-    console.log("process.env.STRIPE_SECRET_KEY", process.env.STRIPE_SECRET_KEY);
-    if (!process.env.STRIPE_SECRET_KEY) {
-      return;
-      // throw new Error("STRIPE_SECRET_KEY n'est pas définie");
+  private ensureStripeAvailable(): void {
+    if (!this.stripe) {
+      throw new Error("Stripe n'est pas configuré. Vérifiez que STRIPE_SECRET_KEY est définie.");
     }
   }
 
   public async createPaymentIntent(request: PaymentRequest): Promise<PaymentIntent> {
-    const paymentIntent = await this.stripe.paymentIntents.create({
+    this.ensureStripeAvailable();
+
+    const paymentIntent = await this.stripe!.paymentIntents.create({
       amount: request.amount,
       currency: request.currency,
       description: request.description,
@@ -33,19 +34,25 @@ export class StripePaymentRepositoryImpl implements PaymentRepository {
   }
 
   public async confirmPayment(paymentIntentId: string): Promise<PaymentIntent> {
-    const paymentIntent = await this.stripe.paymentIntents.confirm(paymentIntentId);
+    this.ensureStripeAvailable();
+
+    const paymentIntent = await this.stripe!.paymentIntents.confirm(paymentIntentId);
     return this.mapStripePaymentIntent(paymentIntent);
   }
 
   public async createCheckoutSession(request: CreateSessionRequest): Promise<PaymentSession> {
+    this.ensureStripeAvailable();
+
     const sessionData = this.buildSessionData(request);
-    const session = await this.stripe.checkout.sessions.create(sessionData);
+    const session = await this.stripe!.checkout.sessions.create(sessionData);
     return this.mapStripeSession(session, request.amount, request.currency);
   }
 
   public async retrievePaymentIntent(paymentIntentId: string): Promise<PaymentIntent | null> {
+    this.ensureStripeAvailable();
+
     try {
-      const paymentIntent = await this.stripe.paymentIntents.retrieve(paymentIntentId);
+      const paymentIntent = await this.stripe!.paymentIntents.retrieve(paymentIntentId);
       return this.mapStripePaymentIntent(paymentIntent);
     } catch (error) {
       this.logStripeError("récupération du PaymentIntent", error);
@@ -54,8 +61,10 @@ export class StripePaymentRepositoryImpl implements PaymentRepository {
   }
 
   public async retrieveSession(sessionId: string): Promise<PaymentSession | null> {
+    this.ensureStripeAvailable();
+
     try {
-      const session = await this.stripe.checkout.sessions.retrieve(sessionId);
+      const session = await this.stripe!.checkout.sessions.retrieve(sessionId);
       return this.mapStripeSession(session, session.amount_total, session.currency);
     } catch (error) {
       this.logStripeError("récupération de la session", error);
