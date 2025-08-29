@@ -2,14 +2,19 @@ import { EmailRepository } from "@/core/server/ports/out/email.repository";
 import { Resend } from "resend";
 
 export class ResendEmailRepositoryImpl implements EmailRepository {
-  private readonly resend: Resend;
+  private readonly resend: Resend | null = null;
 
   public constructor() {
     const apiKey = process.env.RESEND_API_KEY;
-    if (!apiKey) {
-      throw new Error("RESEND_API_KEY n'est pas définie dans les variables d'environnement");
+    if (apiKey) {
+      this.resend = new Resend(apiKey);
     }
-    this.resend = new Resend(apiKey);
+  }
+
+  private ensureResendAvailable(): void {
+    if (!this.resend) {
+      throw new Error("Resend n'est pas configuré. Vérifiez que RESEND_API_KEY est définie.");
+    }
   }
 
   public async sendVerificationEmail({
@@ -21,7 +26,9 @@ export class ResendEmailRepositoryImpl implements EmailRepository {
     name: string;
     url: string;
   }): Promise<void> {
-    await this.resend.emails.send({
+    this.ensureResendAvailable();
+
+    await this.resend!.emails.send({
       from: process.env.RESEND_FROM_EMAIL || "noreply@example.com",
       to: [email],
       subject: "Vérifiez votre adresse email",
@@ -38,7 +45,9 @@ export class ResendEmailRepositoryImpl implements EmailRepository {
     name: string;
     url: string;
   }): Promise<void> {
-    await this.resend.emails.send({
+    this.ensureResendAvailable();
+
+    await this.resend!.emails.send({
       from: process.env.RESEND_FROM_EMAIL || "noreply@example.com",
       to: [email],
       subject: "Réinitialiser votre mot de passe",

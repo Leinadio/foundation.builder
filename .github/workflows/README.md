@@ -31,6 +31,18 @@ Dans votre repository GitHub, allez dans **Settings > Secrets and variables > Ac
 - `FIREBASE_AUTH_DOMAIN` : Domaine d'authentification Firebase
 - `FIREBASE_PROJECT_ID` : ID du projet Firebase
 
+#### Secrets Resend
+
+- `RESEND_API_KEY` : Clé API Resend pour l'envoi d'emails
+
+#### Secrets Better Auth
+
+- `DATABASE_URL` : URL de connexion à la base de données PostgreSQL
+- `GOOGLE_CLIENT_ID` : ID client Google OAuth
+- `GOOGLE_CLIENT_SECRET` : Secret client Google OAuth
+- `GITHUB_CLIENT_ID` : ID client GitHub OAuth
+- `GITHUB_CLIENT_SECRET` : Secret client GitHub OAuth
+
 ### 3. Générer un token Vercel
 
 1. Dans Vercel, allez dans **Settings > Tokens**
@@ -64,3 +76,8 @@ Assurez-vous que toutes les variables d'environnement nécessaires sont configur
 
 - Vérifiez que `STRIPE_SECRET_KEY` est bien configuré dans les secrets GitHub
 - Le repository Stripe est maintenant configuré pour ne pas planter le build si la clé n'est pas disponible
+
+### Erreur "RESEND_API_KEY n'est pas définie"
+
+- Vérifiez que `RESEND_API_KEY` est bien configuré dans les secrets GitHub
+- Le repository Resend est maintenant configuré pour ne pas planter le build si la clé n'est pas disponible
