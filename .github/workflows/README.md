@@ -1,6 +1,49 @@
 # Configuration du déploiement Vercel
 
-Ce workflow GitHub Actions déploie automatiquement votre application sur Vercel à chaque push sur la branche `main`.
+Ce projet utilise une stratégie de déploiement en deux étapes pour séparer le développement de la production.
+
+## 🚀 Stratégie de déploiement
+
+### **Développement (dev) :** Déploiement automatique
+
+- ✅ Déploiement automatique sur `dev` → environnement de développement
+- ✅ Tests et validation continus
+- ✅ Déploiement rapide pour les développeurs
+- ✅ Workflow : `deploy-vercel.yml`
+
+### **Production (prod) :** Déploiement manuel contrôlé
+
+- 🔒 Déploiement manuel uniquement avec validation
+- 🔒 Tests supplémentaires avant mise en production
+- 🔒 Validation des variables d'environnement
+- 🔒 Rollback facile en cas de problème
+- 🔒 Workflow : `deploy-prod.yml`
+
+## 📋 Workflows disponibles
+
+### 1. Déploiement automatique (dev)
+
+**Fichier :** `.github/workflows/deploy-vercel.yml`
+
+- Se déclenche automatiquement sur push/PR vers `dev`
+- Déploie sur l'environnement de développement Vercel
+- Inclut linting et build
+
+### 2. Déploiement manuel en production
+
+**Fichier :** `.github/workflows/deploy-prod.yml`
+
+- Déclenchement manuel uniquement
+- Validation complète avant déploiement
+- Déploiement sur l'environnement de production Vercel
+
+## 🔧 Comment déployer en production
+
+1. Allez dans **Actions** de votre repository GitHub
+2. Sélectionnez le workflow **"Deploy to Production"**
+3. Cliquez sur **"Run workflow"**
+4. Cochez **"Confirmer le déploiement en production"**
+5. Cliquez sur **"Run workflow"**
 
 ## Configuration requise
 
