@@ -30,8 +30,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <PlausibleProvider
-          domain="womi-validateidea.com"
-          customDomain="http://localhost:3000/"
+          domain={process.env.NEXT_PUBLIC_BASE_DOMAIN || ""}
           trackOutboundLinks={true}
           taggedEvents={true}
           trackLocalhost={true}

@@ -45,24 +45,24 @@ export const pageRenderConfig: SectionConfig[] = [
           ],
         },
       },
-      {
-        component: "HeroRowAdvancedContainer",
-        props: {
-          badge: "💼 Pour les freelances",
-          title: "Envoyez un ",
-          description:
-            "Notre extension Chrome détecte les demandes entrantes et génère un devis instantanément, prêt à être envoyé. Gagnez du temps, professionnalisez vos échanges, et ne ratez plus jamais une opportunité.",
-        },
-      },
-      {
-        component: "HeroRowContainer",
-        props: {
-          badge: "💼 Pour les freelances",
-          title: "Envoyez un devis automatiquement dès qu'un client vous contacte",
-          description:
-            "Notre extension Chrome détecte les demandes entrantes et génère un devis instantanément, prêt à être envoyé. Gagnez du temps, professionnalisez vos échanges, et ne ratez plus jamais une opportunité.",
-        },
-      },
+      // {
+      //   component: "HeroRowAdvancedContainer",
+      //   props: {
+      //     badge: "💼 Pour les freelances",
+      //     title: "Envoyez un devis automatiquement dès qu'un client vous contacte",
+      //     description:
+      //       "Notre extension Chrome détecte les demandes entrantes et génère un devis instantanément, prêt à être envoyé. Gagnez du temps, professionnalisez vos échanges, et ne ratez plus jamais une opportunité.",
+      //   },
+      // },
+      // {
+      //   component: "HeroRowContainer",
+      //   props: {
+      //     badge: "💼 Pour les freelances",
+      //     title: "Envoyez un devis automatiquement dès qu'un client vous contacte",
+      //     description:
+      //       "Notre extension Chrome détecte les demandes entrantes et génère un devis instantanément, prêt à être envoyé. Gagnez du temps, professionnalisez vos échanges, et ne ratez plus jamais une opportunité.",
+      //   },
+      // },
       {
         component: "HeroContainer",
         props: {
