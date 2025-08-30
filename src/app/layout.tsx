@@ -30,7 +30,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <PlausibleProvider
-          domain="womi-leinadio-leinadios-projects.vercel.app"
+          domain={process.env.NEXT_PUBLIC_BASE_DOMAIN || ""}
           trackOutboundLinks={true}
           taggedEvents={true}
           trackLocalhost={true}
