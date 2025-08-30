@@ -30,8 +30,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <PlausibleProvider
-          domain="womi-validateidea.com"
-          customDomain="http://localhost:3000/"
+          domain="womi-leinadio-leinadios-projects.vercel.app"
           trackOutboundLinks={true}
           taggedEvents={true}
           trackLocalhost={true}
