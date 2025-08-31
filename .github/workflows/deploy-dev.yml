@@ -1,4 +1,4 @@
-name: Deploy to Vercel
+name: Deploy to Dev
 
 on:
   push:
@@ -17,7 +17,49 @@ on:
           - prod
 
 jobs:
-  deploy:
+  validate:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch' && inputs.environment == 'prod'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run linting
+        run: npm run lint
+
+      - name: Run type checking
+        run: npm run build
+
+      - name: Validate environment variables
+        run: |
+          echo "🔍 Validation des variables d'environnement..."
+          if [ -z "${{ secrets.STRIPE_SECRET_KEY }}" ]; then
+            echo "❌ STRIPE_SECRET_KEY manquante"
+            exit 1
+          fi
+          if [ -z "${{ secrets.RESEND_API_KEY }}" ]; then
+            echo "❌ RESEND_API_KEY manquante"
+            exit 1
+          fi
+          if [ -z "${{ secrets.DATABASE_URL }}" ]; then
+            echo "❌ DATABASE_URL manquante"
+            exit 1
+          fi
+          echo "✅ Toutes les variables d'environnement sont configurées"
+
+  deploy-dev:
+    needs: [validate]
+    if: github.event_name != 'workflow_dispatch' || inputs.environment != 'prod'
     runs-on: ubuntu-latest
     environment: "dev"
 
@@ -56,4 +98,3 @@ jobs:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-          vercel-args: ${{ github.event_name == 'workflow_dispatch' && inputs.environment == 'prod' && '--prod' || '' }}
