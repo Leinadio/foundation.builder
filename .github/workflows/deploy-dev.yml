@@ -5,21 +5,11 @@ on:
     branches: [dev]
   pull_request:
     branches: [dev]
-  workflow_dispatch:
-    inputs:
-      environment:
-        description: "Environnement de déploiement"
-        required: true
-        default: "dev"
-        type: choice
-        options:
-          - dev
-          - prod
 
 jobs:
   validate:
     runs-on: ubuntu-latest
-    if: github.event_name == 'workflow_dispatch' && inputs.environment == 'prod'
+    environment: "dev"
 
     steps:
       - name: Checkout code
@@ -59,7 +49,6 @@ jobs:
 
   deploy-dev:
     needs: [validate]
-    if: github.event_name != 'workflow_dispatch' || inputs.environment != 'prod'
     runs-on: ubuntu-latest
     environment: "dev"
 
