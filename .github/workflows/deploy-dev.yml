@@ -41,7 +41,7 @@ jobs:
             echo "❌ RESEND_API_KEY manquante"
             exit 1
           fi
-          if [ -z "${{ secrets.DATABASE_URL }}" ]; then
+          if [ -z "${{ vars.DATABASE_URL }}" ]; then
             echo "❌ DATABASE_URL manquante"
             exit 1
           fi
@@ -71,12 +71,12 @@ jobs:
       - name: Build project
         env:
           STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
-          NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY }}
+          NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: ${{ vars.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY }}
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          DATABASE_URL: ${{ vars.DATABASE_URL }}
+          GOOGLE_CLIENT_ID: ${{ vars.GOOGLE_CLIENT_ID }}
           GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
-          AUTH_GITHUB_CLIENT_ID: ${{ secrets.GITHUB_CLIENT_ID }}
+          AUTH_GITHUB_CLIENT_ID: ${{ vars.GITHUB_CLIENT_ID }}
           AUTH_GITHUB_CLIENT_SECRET: ${{ secrets.GITHUB_CLIENT_SECRET }}
           BETTER_AUTH_SECRET: ${{ secrets.BETTER_AUTH_SECRET }}
         run: npm run build
