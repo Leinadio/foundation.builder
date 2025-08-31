@@ -9,14 +9,11 @@ on:
         type: boolean
         default: false
 
-env:
-  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-
 jobs:
   validate:
     runs-on: ubuntu-latest
     if: inputs.confirm_deploy == true
+    environment: "prod"
 
     steps:
       - name: Checkout code
@@ -48,7 +45,7 @@ jobs:
             echo "❌ RESEND_API_KEY manquante"
             exit 1
           fi
-          if [ -z "${{ secrets.DATABASE_URL }}" ]; then
+          if [ -z "${{ vars.DATABASE_URL }}" ]; then
             echo "❌ DATABASE_URL manquante"
             exit 1
           fi
@@ -58,6 +55,7 @@ jobs:
     needs: validate
     runs-on: ubuntu-latest
     if: inputs.confirm_deploy == true
+    environment: "prod"
 
     steps:
       - name: Checkout code
@@ -75,15 +73,12 @@ jobs:
       - name: Build project
         env:
           STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
-          NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY }}
-          FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
-          FIREBASE_AUTH_DOMAIN: ${{ secrets.FIREBASE_AUTH_DOMAIN }}
-          FIREBASE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
+          NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: ${{ vars.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY }}
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          DATABASE_URL: ${{ vars.DATABASE_URL }}
+          GOOGLE_CLIENT_ID: ${{ vars.GOOGLE_CLIENT_ID }}
           GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
-          AUTH_GITHUB_CLIENT_ID: ${{ secrets.GITHUB_CLIENT_ID }}
+          AUTH_GITHUB_CLIENT_ID: ${{ vars.GITHUB_CLIENT_ID }}
           AUTH_GITHUB_CLIENT_SECRET: ${{ secrets.GITHUB_CLIENT_SECRET }}
           BETTER_AUTH_SECRET: ${{ secrets.BETTER_AUTH_SECRET }}
         run: npm run build
