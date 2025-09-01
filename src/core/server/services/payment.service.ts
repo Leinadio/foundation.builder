@@ -3,6 +3,9 @@ import {
   PaymentRequest,
   PaymentSession,
   CreateSessionRequest,
+  Subscription,
+  CreateSubscriptionRequest,
+  CreateSubscriptionSessionRequest,
   isValidPaymentRequest,
 } from "@/core/models/payment";
 import { PaymentPortIn } from "@/core/server/ports/in/payment.port";
@@ -51,5 +54,42 @@ export class PaymentService implements PaymentPortIn {
       throw new Error("ID de session requis");
     }
     return this.paymentRepo.retrieveSession(sessionId);
+  }
+
+  public async createSubscription(request: CreateSubscriptionRequest): Promise<Subscription> {
+    if (!request.priceId) {
+      throw new Error("ID du prix requis pour créer un abonnement");
+    }
+    if (!request.customerId) {
+      throw new Error("ID du client requis pour créer un abonnement");
+    }
+    return this.paymentRepo.createSubscription(request);
+  }
+
+  public async createSubscriptionSession(request: CreateSubscriptionSessionRequest): Promise<PaymentSession> {
+    if (!request.priceId) {
+      throw new Error("ID du prix requis pour créer une session d'abonnement");
+    }
+    if (!request.successUrl) {
+      throw new Error("URL de succès requise");
+    }
+    if (!request.cancelUrl) {
+      throw new Error("URL d'annulation requise");
+    }
+    return this.paymentRepo.createSubscriptionSession(request);
+  }
+
+  public async retrieveSubscription(subscriptionId: string): Promise<Subscription | null> {
+    if (!subscriptionId) {
+      throw new Error("ID d'abonnement requis");
+    }
+    return this.paymentRepo.retrieveSubscription(subscriptionId);
+  }
+
+  public async cancelSubscription(subscriptionId: string): Promise<Subscription> {
+    if (!subscriptionId) {
+      throw new Error("ID d'abonnement requis");
+    }
+    return this.paymentRepo.cancelSubscription(subscriptionId);
   }
 }

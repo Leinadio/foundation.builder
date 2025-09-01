@@ -32,6 +32,28 @@ export type CreateSessionRequest = {
   metadata?: Record<string, string>;
 };
 
+export type Subscription = {
+  id: string;
+  status: string;
+  currentPeriodStart: number;
+  currentPeriodEnd: number;
+  cancelAtPeriodEnd: boolean;
+  metadata?: Record<string, string>;
+};
+
+export type CreateSubscriptionRequest = {
+  priceId: string;
+  customerId?: string;
+  metadata?: Record<string, string>;
+};
+
+export type CreateSubscriptionSessionRequest = {
+  priceId: string;
+  successUrl: string;
+  cancelUrl: string;
+  metadata?: Record<string, string>;
+};
+
 export function isValidPaymentRequest(request: PaymentRequest): boolean {
   return request.amount > 0 && request.currency.length === 3;
 }
