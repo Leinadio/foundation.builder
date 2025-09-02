@@ -410,11 +410,15 @@ export const pageRenderConfig: SectionConfig[] = [
               name: "Gratuit",
               monthlyPrice: "0",
               yearlyPrice: "0",
-              description: "Testez l’extension sans engagement",
+              description: "Testez l'extension sans engagement",
               features: ["Jusqu'à 5 devis / mois", "1 modèle de devis", "Support email"],
               limitations: ["Pas de relance automatique", "Dashboard limité"],
               buttonText: "Commencer gratuitement",
               popular: false,
+              priceId: {
+                monthly: "",
+                yearly: "",
+              },
             },
             {
               name: "Pro",
@@ -431,6 +435,10 @@ export const pageRenderConfig: SectionConfig[] = [
               limitations: [],
               buttonText: "Passer à Pro",
               popular: true,
+              priceId: {
+                monthly: "price_1RBkO6GqH2dPvOOj9dfbflvK",
+                yearly: "price_1RBkNPGqH2dPvOOjPLZAStnB_yearly",
+              },
             },
           ],
         },
