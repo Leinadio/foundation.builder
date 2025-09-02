@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { paymentServiceInstance } from "@/core/server/di-container-server";
 
-export async function GET({ params }: { params: Promise<{ id: string }> }) {
+export async function GET(_: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
     const { id } = await params;
     const subscription = await paymentServiceInstance.retrieveSubscription(id);
@@ -17,7 +17,7 @@ export async function GET({ params }: { params: Promise<{ id: string }> }) {
   }
 }
 
-export async function DELETE({ params }: { params: Promise<{ id: string }> }) {
+export async function DELETE(_: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
     const { id } = await params;
     const subscription = await paymentServiceInstance.cancelSubscription(id);
