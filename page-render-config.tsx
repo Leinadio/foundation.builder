@@ -5,31 +5,18 @@ import {
   AlertTriangle,
   TrendingDown,
   Users,
-  Zap,
-  Smile,
-  Shield,
-  TrendingUp,
-  UserCheck,
   Eye,
-  Inbox,
-  Bell,
-  FileText,
   PenTool,
-  Send,
-  Table,
   CheckCircle,
+  Heart,
+  Camera,
+  Share2,
+  Download,
+  Frame,
+  Sparkles,
+  Gift,
 } from "lucide-react";
-import {
-  IconAlarm,
-  IconLayoutDashboard,
-  IconMailSearch,
-  IconSend,
-  IconFileDescription,
-  IconBriefcase,
-  IconBolt,
-  IconFeather,
-  IconHeadphones,
-} from "@tabler/icons-react";
+import { IconPhoto, IconMessage, IconShare, IconFrame, IconStar } from "@tabler/icons-react";
 
 export const pageRenderConfig: SectionConfig[] = [
   {
@@ -45,31 +32,21 @@ export const pageRenderConfig: SectionConfig[] = [
           ],
         },
       },
-      // {
-      //   component: "HeroRowAdvancedContainer",
-      //   props: {
-      //     badge: "💼 Pour les freelances",
-      //     title: "Envoyez un devis automatiquement dès qu'un client vous contacte",
-      //     description:
-      //       "Notre extension Chrome détecte les demandes entrantes et génère un devis instantanément, prêt à être envoyé. Gagnez du temps, professionnalisez vos échanges, et ne ratez plus jamais une opportunité.",
-      //   },
-      // },
-      // {
-      //   component: "HeroRowContainer",
-      //   props: {
-      //     badge: "💼 Pour les freelances",
-      //     title: "Envoyez un devis automatiquement dès qu'un client vous contacte",
-      //     description:
-      //       "Notre extension Chrome détecte les demandes entrantes et génère un devis instantanément, prêt à être envoyé. Gagnez du temps, professionnalisez vos échanges, et ne ratez plus jamais une opportunité.",
-      //   },
-      // },
       {
         component: "HeroContainer",
         props: {
-          badge: "💼 Pour les freelances",
-          title: "Envoyez un devis automatiquement dès qu’un client vous contacte",
+          badge: "💕 Pour les couples et amis",
+          title: (
+            <span className="inline-block">
+              Transformez vos conversations{" "}
+              <span className="inline-block decoration-primary relative ">
+                <span className="relative z-10 text-white">en souvenirs précieux</span>
+                <span className="bottom-0 absolute bg-primary h-4 md:h-full md:-bottom-0.5 -inset-x-2 "></span>
+              </span>
+            </span>
+          ),
           description:
-            "Notre extension Chrome détecte les demandes entrantes et génère un devis instantanément, prêt à être envoyé. Gagnez du temps, professionnalisez vos échanges, et ne ratez plus jamais une opportunité.",
+            "Capturez les moments drôles, touchants ou mémorables de vos conversations et affichez-les dans de magnifiques cadres photo personnalisés. Gardez vos échanges les plus précieux pour toujours.",
         },
       },
     ],
@@ -81,9 +58,9 @@ export const pageRenderConfig: SectionConfig[] = [
         id: "video",
         component: "HeroVideoContainer",
         props: {
-          videoSrc: "/videos/hero_en.mp4",
-          thumbnailSrc: "/videos/hero_en_thumbnail.png",
-          thumbnailAlt: "Dummy Video Thumbnail",
+          videoSrc: "/videos/hero_conversation_frame.mp4",
+          thumbnailSrc: "/videos/hero_conversation_frame_thumbnail.png",
+          thumbnailAlt: "Démo du service de cadre photo conversations",
         },
       },
     ],
@@ -97,24 +74,23 @@ export const pageRenderConfig: SectionConfig[] = [
         props: {
           title: "Le problème",
           description:
-            "En tant que freelance, répondre rapidement et professionnellement aux demandes clients est essentiel, mais chronophage. Chaque minute compte.",
-          badgeText: "RÉALITÉ DU TERRAIN",
+            "Les plus beaux moments de nos relations se perdent dans le flux infini des messages. Ces petites phrases qui nous font sourire, ces déclarations d'amour, ces blagues entre amis... ils méritent mieux qu'un simple screenshot oublié dans la galerie.",
+          badgeText: "MOMENTS PERDUS",
           steps: [
             {
-              title: "Temps perdu à créer des devis manuellement",
-              description: "Risque d'oublier de répondre",
-              emoji: "😰",
+              title: "Conversations oubliées dans le téléphone",
+              description: "Messages précieux perdus dans le scroll infini",
+              emoji: "📱",
             },
             {
-              title: "Risque d'oublier de répondre",
-              description: "Manque de professionnalisme perçu",
-              emoji: "😔",
+              title: "Screenshots sans vie stockés",
+              description: "Photos brutes qui ne rendent pas justice aux moments",
+              emoji: "📸",
             },
-
             {
-              title: "Manque de professionnalisme perçu",
-              description: "Perte de clients potentiels",
-              emoji: "😰",
+              title: "Souvenirs non valorisés",
+              description: "Aucun moyen de célébrer ces petits bonheurs du quotidien",
+              emoji: "💔",
             },
           ],
         },
@@ -128,61 +104,61 @@ export const pageRenderConfig: SectionConfig[] = [
         id: "with-without",
         component: "WithWithoutContainer",
         props: {
-          title: "Transformez votre façon de travailler",
-          description: "Découvrez l'impact concret de notre solution sur votre quotidien professionnel",
-          badgeText: "Transformez votre façon de travailler",
+          title: "Donnez vie à vos conversations",
+          description: "Découvrez comment transformer vos messages en véritables œuvres d'art à exposer",
+          badgeText: "Donnez vie à vos conversations",
           beforeScenarios: [
             {
               icon: Clock,
-              title: "Perte de temps considérable",
-              description: "Plusieurs heures perdues chaque semaine à chercher des informations dispersées",
+              title: "Messages qui se perdent",
+              description: "Conversations importantes noyées dans le flux quotidien des messages",
             },
             {
               icon: Frown,
-              title: "Frustration quotidienne",
-              description: "Stress et irritation face aux processus manuels répétitifs et chronophages",
+              title: "Screenshots sans âme",
+              description: "Captures d'écran brutes qui ne rendent pas justice à vos moments précieux",
             },
             {
               icon: AlertTriangle,
-              title: "Erreurs fréquentes",
-              description: "Risques d'erreurs humaines dans la saisie et le traitement des données",
+              title: "Souvenirs oubliés",
+              description: "Mémoires numériques qui restent cachées dans votre téléphone",
             },
             {
               icon: TrendingDown,
-              title: "Productivité limitée",
-              description: "Difficultés à suivre les performances et à identifier les axes d'amélioration",
+              title: "Pas de valorisation",
+              description: "Aucun moyen de célébrer et partager ces moments spéciaux",
             },
             {
               icon: Users,
-              title: "Communication fragmentée",
-              description: "Informations éparpillées entre différents outils et équipes",
+              title: "Expérience dispersée",
+              description: "Difficile de retrouver et organiser vos échanges favoris",
             },
           ],
           afterScenarios: [
             {
-              icon: Zap,
-              title: "Efficacité maximale",
-              description: "Automatisation des tâches répétitives, gain de 80% de temps sur les processus",
+              icon: Sparkles,
+              title: "Conversations sublimées",
+              description: "Transformez vos messages en magnifiques créations artistiques à encadrer",
             },
             {
-              icon: Smile,
-              title: "Satisfaction au travail",
-              description: "Interface intuitive et workflows optimisés pour une expérience utilisateur fluide",
+              icon: Heart,
+              title: "Souvenirs précieux",
+              description: "Créez des objets tangibles qui célèrent vos relations les plus chères",
             },
             {
-              icon: Shield,
-              title: "Fiabilité garantie",
-              description: "Validation automatique et contrôles intégrés pour éliminer les erreurs",
+              icon: Frame,
+              title: "Décoration personnelle",
+              description: "Exposez chez vous les moments qui vous font sourire au quotidien",
             },
             {
-              icon: TrendingUp,
-              title: "Performance optimisée",
-              description: "Tableaux de bord en temps réel et analytics avancés pour piloter l'activité",
+              icon: Gift,
+              title: "Cadeaux uniques",
+              description: "Offrez des présents personnalisés qui touchent vraiment le cœur",
             },
             {
-              icon: UserCheck,
-              title: "Collaboration renforcée",
-              description: "Centralisation des données et outils de collaboration intégrés",
+              icon: Share2,
+              title: "Partage facilité",
+              description: "Partagez vos créations sur les réseaux ou gardez-les pour vous",
             },
           ],
         },
@@ -198,56 +174,58 @@ export const pageRenderConfig: SectionConfig[] = [
         props: {
           title: (
             <>
-              Automatisez vos <span className="text-primary">devis</span>, boostez votre{" "}
-              <span className="text-primary">réactivité</span>
+              Capturez vos <span className="text-primary">conversations</span>, créez vos{" "}
+              <span className="text-primary">souvenirs</span>
             </>
           ),
           description:
-            "L’extension détecte automatiquement les emails de prospection et crée un devis professionnel en quelques secondes.",
+            "Notre service transforme vos messages en magnifiques cadres photo personnalisés, prêts à être exposés ou offerts.",
           badgeText: "LA SOLUTION",
           data: [
             {
-              title: "Détection intelligente",
+              title: "Capture intelligente",
               paragraphs: [
-                "L'extension lit les nouveaux emails et reconnaît automatiquement les demandes de prestation.",
+                "Uploadez une capture d'écran de votre conversation et notre IA analyse automatiquement le contenu pour créer une mise en page optimale.",
               ],
               features: [
-                { icon: <Eye className="w-5 h-5 text-primary" />, text: "Analyse automatique de l'email" },
-                { icon: <Inbox className="w-5 h-5 text-primary" />, text: "Déclenchement contextuel" },
+                { icon: <Camera className="w-5 h-5 text-primary" />, text: "Reconnaissance automatique des messages" },
+                { icon: <Eye className="w-5 h-5 text-primary" />, text: "Analyse du contexte et des émotions" },
               ],
               summary: {
-                icon: <Bell className="w-5 h-5 text-primary-foreground" />,
-                label: "Gain de temps",
-                text: "-80% de temps passé à trier et répondre",
+                icon: <Sparkles className="w-5 h-5 text-primary-foreground" />,
+                label: "Intelligence",
+                text: "Transformation automatique en 10 secondes",
               },
             },
             {
-              title: "Devis instantané",
+              title: "Personnalisation créative",
               paragraphs: [
-                "Un devis est généré sur la base de vos tarifs pré-enregistrés, personnalisable en un clic avant envoi.",
+                "Choisissez parmi nos templates exclusifs, personnalisez les couleurs, polices et ajoutez des éléments décoratifs pour un rendu unique.",
               ],
               features: [
-                { icon: <FileText className="w-5 h-5 text-primary" />, text: "Devis PDF prêt à être envoyé" },
-                { icon: <PenTool className="w-5 h-5 text-primary" />, text: "Templates configurables" },
+                { icon: <Frame className="w-5 h-5 text-primary" />, text: "50+ templates artistiques" },
+                { icon: <PenTool className="w-5 h-5 text-primary" />, text: "Personnalisation complète" },
               ],
               summary: {
-                icon: <Send className="w-5 h-5 text-primary-foreground" />,
-                label: "Conversion",
-                text: "+40% de réponses client obtenues",
+                icon: <Heart className="w-5 h-5 text-primary-foreground" />,
+                label: "Créativité",
+                text: "Designs uniques adaptés à votre style",
               },
             },
             {
-              title: "Suivi intégré",
-              paragraphs: ["Gardez une trace de vos demandes, devis envoyés et relances automatiques possibles."],
+              title: "Impression haute qualité",
+              paragraphs: [
+                "Recevez votre cadre imprimé en haute définition sur papier photo premium, prêt à accrocher ou à offrir.",
+              ],
               features: [
-                { icon: <Table className="w-5 h-5 text-primary" />, text: "Tableau de bord" },
-                { icon: <Bell className="w-5 h-5 text-primary" />, text: "Notifications de lecture" },
-                { icon: <Clock className="w-5 h-5 text-primary" />, text: "Relance automatique après X jours" },
+                { icon: <Download className="w-5 h-5 text-primary" />, text: "Fichiers HD téléchargeables" },
+                { icon: <Gift className="w-5 h-5 text-primary" />, text: "Service d'impression et livraison" },
+                { icon: <Share2 className="w-5 h-5 text-primary" />, text: "Partage sur réseaux sociaux" },
               ],
               summary: {
                 icon: <CheckCircle className="w-5 h-5 text-primary-foreground" />,
-                label: "Impact",
-                text: "Réduction de 80% des réunions inutiles et des emails de suivi",
+                label: "Qualité",
+                text: "Rendu professionnel garanti, livraison en 3-5 jours",
               },
             },
           ],
@@ -258,107 +236,100 @@ export const pageRenderConfig: SectionConfig[] = [
         component: "HowItWorkContainer",
         props: {
           title: "Comment ça marche",
-          description: "3 étapes simples pour automatiser votre prospection",
-          badgeText: "PROCESS",
+          description: "3 étapes simples pour créer votre cadre photo conversation",
+          badgeText: "PROCESSUS",
           steps: [
             {
               step: "1",
-              title: "Installez l’extension",
-              description: "Disponible sur le Chrome Web Store. L’installation prend moins d’une minute.",
-              objective: "🚀 Démarrage rapide et sans friction",
-              image: { src: "/images/step1_fr.png", alt: "Installation de l'extension" },
+              title: "Uploadez votre conversation",
+              description:
+                "Prenez une capture d'écran de votre conversation favorite et uploadez-la sur notre plateforme. Formats acceptés : PNG, JPG, HEIC.",
+              objective: "📱 Compatible avec tous les types de messages",
+              image: {
+                src: "/images/upload_conversation.png",
+                alt: "Upload de conversation",
+              },
               layout: "text-image",
             },
             {
               step: "2",
-              title: "Connectez votre email",
+              title: "Personnalisez votre design",
               description:
-                "L’extension lit uniquement les emails entrants contenant des mots-clés liés aux prestations (ex : devis, freelance, mission...).",
-              objective: "🔐 Respect total de votre vie privée",
-              image: { src: "/images/step2_fr.png", alt: "Connexion à Gmail" },
+                "Choisissez un template, ajustez les couleurs, polices et décorations. Prévisualisez le rendu final en temps réel.",
+              objective: "🎨 Créativité illimitée",
+              image: {
+                src: "/images/customize_design.png",
+                alt: "Personnalisation du design",
+              },
               layout: "image-text",
             },
             {
               step: "3",
-              title: "Envoyez un devis automatiquement",
+              title: "Commandez votre cadre",
               description:
-                "Vous recevez une notification et pouvez valider ou ajuster le devis avant l’envoi automatique.",
-              objective: "📄 Gain de temps & plus de clients",
-              image: { src: "/images/step3_fr.png", alt: "Création de devis automatique" },
+                "Téléchargez votre création en HD ou commandez l'impression sur papier premium avec cadre inclus. Livraison à domicile.",
+              objective: "🎁 Souvenir tangible prêt à offrir",
+              image: {
+                src: "/images/final_frame.png",
+                alt: "Cadre photo final",
+              },
               layout: "text-image",
             },
           ],
         },
       },
       {
-        id: "image-comparison",
-        component: "ImageComparisonContainer",
-        props: null,
-      },
-      {
         id: "fonctionnalites",
         component: "BentoGridContainer",
         props: {
-          title: "Ce que l’extension peut faire pour vous",
-          description: "Tout ce qu’il vous faut pour faire bonne impression, sans effort.",
+          title: "Tout pour créer le cadre parfait",
+          description: "Des outils puissants pour transformer vos conversations en œuvres d'art",
           badgeText: "FONCTIONNALITÉS",
           bentoItems: [
             {
-              title: "Détection intelligente d’email",
-              description: "Comprend automatiquement les demandes client",
-              skeleton: "SkeletonOne",
+              title: "IA de mise en page",
+              description: "Analyse automatique et optimisation de la présentation de vos messages",
               className: "md:col-span-1",
-              icon: <IconMailSearch />,
+              header: (
+                <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-purple-200 dark:from-purple-900 dark:to-purple-800 to-purple-100"></div>
+              ),
+              icon: <IconMessage />,
             },
             {
-              title: "Génération de devis",
-              description: "Créez un devis PDF à partir de modèles personnalisés",
-              skeleton: "SkeletonTwo",
+              title: "Templates artistiques",
+              description: "Plus de 50 designs créés par des artistes professionnels",
               className: "md:col-span-1",
-              icon: <IconFileDescription />,
+              header: (
+                <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-pink-200 dark:from-pink-900 dark:to-pink-800 to-pink-100"></div>
+              ),
+              icon: <IconFrame />,
             },
             {
-              title: "Réponse en 1 clic",
-              description: "Un bouton intégré dans Gmail pour envoyer le devis",
-              skeleton: "SkeletonThree",
+              title: "Partage instantané",
+              description: "Partagez vos créations sur les réseaux sociaux en un clic",
               className: "md:col-span-1",
-              icon: <IconSend />,
+              header: (
+                <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-blue-200 dark:from-blue-900 dark:to-blue-800 to-blue-100"></div>
+              ),
+              icon: <IconShare />,
             },
             {
-              title: "Dashboard de suivi",
-              description: "Visualisez vos prospects, devis envoyés, relances à faire",
-              skeleton: "SkeletonFour",
+              title: "Galerie personnelle",
+              description: "Sauvegardez toutes vos créations dans votre espace personnel",
               className: "md:col-span-2",
-              icon: <IconLayoutDashboard />,
+              header: (
+                <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-green-200 dark:from-green-900 dark:to-green-800 to-green-100"></div>
+              ),
+              icon: <IconPhoto />,
             },
             {
-              title: "Relance automatique",
-              description: "Relance configurable après 2, 3 ou 5 jours",
-              skeleton: "SkeletonFive",
+              title: "Impression premium",
+              description: "Service d'impression haute qualité avec livraison incluse",
               className: "md:col-span-1",
-              icon: <IconAlarm />,
-            },
-          ],
-          hoverFeatures: [
-            {
-              title: "Pensé pour les freelances",
-              description: "Gérez votre prospection sans perdre de temps",
-              icon: <IconBriefcase />,
-            },
-            {
-              title: "Simple & rapide",
-              description: "Pas de formation requise. C’est plug & play.",
-              icon: <IconBolt />,
-            },
-            {
-              title: "Extension légère",
-              description: "Aucun ralentissement de votre navigateur",
-              icon: <IconFeather />,
-            },
-            {
-              title: "Support en ligne 24/7",
-              description: "Une équipe (ou un bot) à votre écoute",
-              icon: <IconHeadphones />,
+              header: (
+                <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-orange-200 dark:from-orange-900 dark:to-orange-800 to-orange-100"></div>
+              ),
+              icon: <IconStar />,
             },
           ],
         },
@@ -372,24 +343,28 @@ export const pageRenderConfig: SectionConfig[] = [
         id: "for-who",
         component: "ForWhoContainer",
         props: {
-          title: "Conçu pour les freelances, consultants et indépendants",
-          description: "Vous échangez avec des clients par email ? L’extension est faite pour vous.",
+          title: "Pour tous ceux qui chérissent leurs relations",
+          description:
+            "Que vous soyez en couple, entre amis ou en famille, gardez vos plus beaux échanges pour l'éternité.",
           badgeText: "POUR QUI",
           companySizes: [
             {
-              id: "freelances",
-              title: "Développeurs, designers, rédacteurs…",
-              description: "Automatisez vos devis sans créer un CRM complet ou perdre du temps à chaque échange.",
+              id: "couples",
+              title: "Couples amoureux",
+              description:
+                "Immortalisez vos déclarations d'amour, vos petits mots doux et vos moments de complicité quotidienne.",
             },
             {
-              id: "consultants",
-              title: "Consultants et experts métiers",
-              description: "Montrez votre professionnalisme dès le premier mail avec des devis soignés et rapides.",
+              id: "amis",
+              title: "Groupes d'amis",
+              description:
+                "Capturez vos blagues internes, vos souvenirs partagés et ces conversations qui vous font pleurer de rire.",
             },
             {
-              id: "agences",
-              title: "Petites agences ou collectifs",
-              description: "Standardisez vos devis et gagnez du temps sur la gestion client.",
+              id: "famille",
+              title: "Familles unies",
+              description:
+                "Préservez les échanges touchants avec vos proches, les premiers mots de bébé ou les conseils des grands-parents.",
             },
           ],
         },
@@ -403,34 +378,48 @@ export const pageRenderConfig: SectionConfig[] = [
         id: "tarifs",
         component: "PricingContainer",
         props: {
-          title: "Des tarifs simples, sans surprise",
-          description: "Commencez gratuitement, puis passez à Pro quand vous êtes prêt.",
+          title: "Des créations à la portée de tous",
+          description: "Créez gratuitement, imprimez quand vous voulez",
           pricingPlans: [
             {
               name: "Gratuit",
               monthlyPrice: "0",
               yearlyPrice: "0",
-              description: "Testez l’extension sans engagement",
-              features: ["Jusqu'à 5 devis / mois", "1 modèle de devis", "Support email"],
-              limitations: ["Pas de relance automatique", "Dashboard limité"],
+              description: "Créez et téléchargez vos designs",
+              features: [
+                "3 créations gratuites par mois",
+                "Téléchargement HD",
+                "10 templates de base",
+                "Partage sur réseaux sociaux",
+              ],
+              limitations: ["Filigrane sur les téléchargements", "Templates premium non inclus"],
               buttonText: "Commencer gratuitement",
               popular: false,
+              priceId: {
+                monthly: "",
+                yearly: "",
+              },
             },
             {
-              name: "Pro",
-              monthlyPrice: "12",
-              yearlyPrice: "120",
-              description: "Le pack parfait pour les freelances",
+              name: "Premium",
+              monthlyPrice: "9",
+              yearlyPrice: "90",
+              description: "L'accès complet à tous nos outils",
               features: [
-                "Devis illimités",
-                "Dashboard complet",
-                "Relances automatiques",
-                "Modèles personnalisés",
+                "Créations illimitées",
+                "Tous les templates premium",
+                "Téléchargement HD sans filigrane",
+                "Impression haute qualité",
+                "Livraison à domicile",
                 "Support prioritaire",
               ],
               limitations: [],
-              buttonText: "Passer à Pro",
+              buttonText: "Passer à Premium",
               popular: true,
+              priceId: {
+                monthly: "price_1S2YxmGqH2dPvOOj4yzU2265",
+                yearly: "price_1S2YxmGqH2dPvOOj4yzU2265",
+              },
             },
           ],
         },
@@ -442,24 +431,31 @@ export const pageRenderConfig: SectionConfig[] = [
           badge: "FAQ",
           heading: "Des questions ?",
           headingHighlight: "On vous répond",
-          description: "Si vous ne trouvez pas votre réponse ici, contactez-nous à support@devisauto.app",
+          description: "Si vous ne trouvez pas votre réponse ici, contactez-nous à support@cadreconversation.fr",
           items: [
             {
               id: "faq-1",
-              question: "Comment l'extension détecte-t-elle les emails pertinents ?",
+              question: "Quels types de conversations puis-je transformer ?",
               answer:
-                "Elle utilise des mots-clés et des patterns pour repérer les emails clients qui nécessitent un devis.",
+                "Nous supportons tous les formats : SMS, WhatsApp, Messenger, Instagram DM, Telegram, et bien d'autres. Il suffit d'une capture d'écran.",
             },
             {
               id: "faq-2",
-              question: "Puis-je modifier un devis avant de l’envoyer ?",
-              answer: "Oui, chaque devis est généré mais peut être modifié avant envoi.",
+              question: "Mes conversations restent-elles privées ?",
+              answer:
+                "Absolument ! Vos conversations ne sont jamais stockées. Elles sont traitées temporairement pour créer votre design puis supprimées immédiatement.",
             },
             {
               id: "faq-3",
-              question: "Est-ce que l’extension lit tous mes emails ?",
+              question: "Puis-je modifier ma création après l'avoir générée ?",
               answer:
-                "Non. Elle ne lit que les emails entrants dans Gmail et n’analyse que ceux nécessaires à son fonctionnement.",
+                "Oui, vous pouvez modifier les couleurs, polices, décorations et même changer de template à tout moment avant la commande finale.",
+            },
+            {
+              id: "faq-4",
+              question: "Quels sont les délais de livraison ?",
+              answer:
+                "Pour l'impression, comptez 3-5 jours ouvrés en France métropolitaine. Le téléchargement HD est instantané.",
             },
           ],
         },
@@ -474,20 +470,20 @@ export const pageRenderConfig: SectionConfig[] = [
         component: "FooterContainer",
         props: {
           callToAction: {
-            badge: "🚀 Prêt à automatiser vos devis ?",
-            title: "Ne perdez plus une minute sur vos devis",
+            badge: "💕 Prêt à créer votre premier cadre ?",
+            title: "Transformez vos conversations en souvenirs",
             description:
-              "Laissez l’extension s’en occuper pour vous. Vos prospects n’ont jamais été aussi bien traités.",
-            primaryButtonText: "Installer l’extension",
-            secondaryButtonText: "Voir une démo",
+              "Ne laissez plus vos plus beaux échanges se perdre dans l'oubli. Créez dès maintenant votre première œuvre d'art personnalisée.",
+            primaryButtonText: "Créer mon cadre",
+            secondaryButtonText: "Voir des exemples",
           },
           footerLinks: {
             product: {
               title: "Produit",
               links: [
                 { name: "Fonctionnalités", href: "#fonctionnalites" },
+                { name: "Templates", href: "#templates" },
                 { name: "Tarifs", href: "#tarifs" },
-                { name: "Télécharger", href: "#download" },
               ],
             },
             company: {
@@ -502,7 +498,8 @@ export const pageRenderConfig: SectionConfig[] = [
               title: "Support",
               links: [
                 { name: "Contact", href: "#contact" },
-                { name: "Centre d’aide", href: "#faq" },
+                { name: "Centre d'aide", href: "#faq" },
+                { name: "Tutoriels", href: "#tutorials" },
               ],
             },
             legal: {
@@ -514,14 +511,14 @@ export const pageRenderConfig: SectionConfig[] = [
             },
           },
           socialLinks: [
-            { name: "Twitter", href: "#" },
-            { name: "LinkedIn", href: "#" },
-            { name: "GitHub", href: "#" },
+            { name: "Instagram", href: "#" },
+            { name: "Pinterest", href: "#" },
+            { name: "TikTok", href: "#" },
           ],
           companyInfo: {
-            name: "DevisAuto",
-            logo: "DA",
-            copyright: "© 2025 DevisAuto. Tous droits réservés.",
+            name: "CadreConversation",
+            logo: "CC",
+            copyright: "© 2025 CadreConversation. Tous droits réservés.",
           },
         },
       },

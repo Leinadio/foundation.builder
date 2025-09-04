@@ -1,6 +1,14 @@
 import Stripe from "stripe";
 import { PaymentRepository } from "@/core/server/ports/out/payment.repository";
-import { PaymentIntent, PaymentRequest, PaymentSession, CreateSessionRequest } from "@/core/models/payment";
+import {
+  PaymentIntent,
+  PaymentRequest,
+  PaymentSession,
+  CreateSessionRequest,
+  Subscription,
+  CreateSubscriptionRequest,
+  CreateSubscriptionSessionRequest,
+} from "@/core/models/payment";
 
 export class StripePaymentRepositoryImpl implements PaymentRepository {
   private readonly stripe: Stripe | null = null;
@@ -44,6 +52,7 @@ export class StripePaymentRepositoryImpl implements PaymentRepository {
     this.ensureStripeAvailable();
 
     const sessionData = this.buildSessionData(request);
+    console.log("sessionData : ", sessionData);
     const session = await this.stripe!.checkout.sessions.create(sessionData);
     return this.mapStripeSession(session, request.amount, request.currency);
   }
@@ -70,6 +79,65 @@ export class StripePaymentRepositoryImpl implements PaymentRepository {
       this.logStripeError("récupération de la session", error);
       return null;
     }
+  }
+
+  public async createSubscription(request: CreateSubscriptionRequest): Promise<Subscription> {
+    this.ensureStripeAvailable();
+
+    if (!request.customerId) {
+      throw new Error("customerId est requis pour créer un abonnement");
+    }
+
+    const subscription = await this.stripe!.subscriptions.create({
+      customer: request.customerId,
+      items: [{ price: request.priceId }],
+      metadata: request.metadata,
+    });
+
+    return this.mapStripeSubscription(subscription);
+  }
+
+  public async createSubscriptionSession(request: CreateSubscriptionSessionRequest): Promise<PaymentSession> {
+    console.log("request : ", request);
+    this.ensureStripeAvailable();
+
+    const session = await this.stripe!.checkout.sessions.create({
+      mode: "subscription",
+      success_url: request.successUrl,
+      cancel_url: request.cancelUrl,
+      metadata: request.metadata,
+      line_items: [
+        {
+          price: request.priceId,
+          quantity: 1,
+        },
+      ],
+    });
+    console.log("session : ", session);
+
+    return this.mapStripeSession(session);
+  }
+
+  public async retrieveSubscription(subscriptionId: string): Promise<Subscription | null> {
+    this.ensureStripeAvailable();
+
+    try {
+      const subscription = await this.stripe!.subscriptions.retrieve(subscriptionId);
+      return this.mapStripeSubscription(subscription);
+    } catch (error) {
+      this.logStripeError("récupération de l'abonnement", error);
+      return null;
+    }
+  }
+
+  public async cancelSubscription(subscriptionId: string): Promise<Subscription> {
+    this.ensureStripeAvailable();
+
+    const subscription = await this.stripe!.subscriptions.update(subscriptionId, {
+      cancel_at_period_end: true,
+    });
+
+    return this.mapStripeSubscription(subscription);
   }
 
   private buildSessionData(request: CreateSessionRequest): Stripe.Checkout.SessionCreateParams {
@@ -139,6 +207,22 @@ export class StripePaymentRepositoryImpl implements PaymentRepository {
       currency: typeof currency === "string" ? currency : "eur",
       status: session.status ?? "open",
       metadata: (session.metadata as Record<string, string>) ?? undefined,
+    };
+  }
+
+  private mapStripeSubscription(subscription: Stripe.Subscription): Subscription {
+    const stripeSubscription = subscription as Stripe.Subscription & {
+      current_period_start: number;
+      current_period_end: number;
+    };
+
+    return {
+      id: subscription.id,
+      status: subscription.status,
+      currentPeriodStart: stripeSubscription.current_period_start,
+      currentPeriodEnd: stripeSubscription.current_period_end,
+      cancelAtPeriodEnd: subscription.cancel_at_period_end,
+      metadata: subscription.metadata ?? undefined,
     };
   }
 

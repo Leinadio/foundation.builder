@@ -1,5 +1,3 @@
-"use client";
-
 import { Check, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -17,6 +15,10 @@ export interface PricingPlan {
   limitations: string[];
   buttonText: string;
   popular: boolean;
+  priceId?: {
+    monthly: string;
+    yearly: string;
+  };
 }
 
 export interface PricingProps {
@@ -24,9 +26,18 @@ export interface PricingProps {
   description?: string;
   badgeText?: string;
   pricingPlans?: PricingPlan[];
+  onSubscribe?: (planName: string, isYearly: boolean) => void;
 }
 
-function PricingCards({ isYearly, pricingPlans }: { isYearly: boolean; pricingPlans: PricingPlan[] }) {
+function PricingCards({
+  isYearly,
+  pricingPlans,
+  onSubscribe,
+}: {
+  isYearly: boolean;
+  pricingPlans: PricingPlan[];
+  onSubscribe?: (planName: string, isYearly: boolean) => void;
+}) {
   function getGridColumns() {
     if (pricingPlans.length === 3) return "md:grid-cols-3";
     if (pricingPlans.length === 2) return "md:grid-cols-2";
@@ -88,7 +99,12 @@ function PricingCards({ isYearly, pricingPlans }: { isYearly: boolean; pricingPl
             </CardContent>
 
             <CardFooter className={`mt-auto pt-6 ${index === 1 ? "pb-2" : "pb-0"}`}>
-              <Button className="w-full" variant={plan.popular ? "default" : "outline"} size="lg">
+              <Button
+                className="w-full"
+                variant={plan.popular ? "default" : "outline"}
+                size="lg"
+                onClick={() => onSubscribe?.(plan.name, isYearly)}
+              >
                 {plan.buttonText}
               </Button>
             </CardFooter>
@@ -152,6 +168,7 @@ export function Pricing({
   description = "Des tarifs simples et transparents qui s'adaptent à vos besoins. Commencez gratuitement et évoluez selon votre croissance.",
   badgeText = "TARIFS",
   pricingPlans = defaultPricingPlans,
+  onSubscribe,
 }: PricingProps) {
   return (
     <section>
@@ -170,11 +187,11 @@ export function Pricing({
           </div>
 
           <TabsContent value="monthly" className="mt-0">
-            <PricingCards isYearly={false} pricingPlans={pricingPlans} />
+            <PricingCards isYearly={false} pricingPlans={pricingPlans} onSubscribe={onSubscribe} />
           </TabsContent>
 
           <TabsContent value="yearly" className="mt-0">
-            <PricingCards isYearly={true} pricingPlans={pricingPlans} />
+            <PricingCards isYearly={true} pricingPlans={pricingPlans} onSubscribe={onSubscribe} />
           </TabsContent>
         </Tabs>
       </div>

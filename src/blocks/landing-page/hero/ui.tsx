@@ -14,7 +14,7 @@ function HeroCtaSection({ children }: HeroAuthSectionProps) {
 
 export interface HeroProps {
   badge: string;
-  title: string;
+  title: ReactNode;
   titleHighlight?: string;
   description: string;
   children?: ReactNode;
@@ -24,9 +24,11 @@ export function Hero({ badge, title, titleHighlight, description, children }: He
   const authSection = getChildrenByType<HeroAuthSectionProps>(children, HeroCtaSection);
 
   return (
-    <section className="px-8 pt-24 md:pt-36 justify-center text-center flex flex-col mx-auto max-w-5xl items-center gap-5">
-      <Badge variant="default">{badge}</Badge>
-      <ProductHuntBadge />
+    <section className="px-8 pt-24 md:pt-20 justify-center text-center flex flex-col mx-auto max-w-5xl items-center gap-10">
+      <div className="flex flex-col items-center gap-4">
+        <Badge variant="default">{badge}</Badge>
+        <ProductHuntBadge />
+      </div>
       <h1 className="text-4xl md:text-6xl font-semibold text-foreground">
         {title}
         {titleHighlight && <span className="text-primary ml-2">{titleHighlight}</span>}

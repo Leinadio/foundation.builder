@@ -36,6 +36,7 @@ export function CheckoutButtonContainer({
         // Redirection vers la page de checkout Stripe
         window.location.href = result.url;
       } else {
+        console.error("Erreur lors du checkout:", result);
         throw new Error(result.error);
       }
     } catch (error) {
