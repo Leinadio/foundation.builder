@@ -44,7 +44,7 @@ export function PricingContainer(props: PricingProps) {
           successUrl: `${window.location.origin}/success?plan=${planName.toLowerCase()}&period=${
             isYearly ? "yearly" : "monthly"
           }`,
-          cancelUrl: `${window.location.origin}/pricing`,
+          cancelUrl: `${window.location.origin}`,
           metadata: {
             planName,
             period: isYearly ? "yearly" : "monthly",
@@ -52,7 +52,7 @@ export function PricingContainer(props: PricingProps) {
           },
         }),
       });
-
+      console.log("response : ", response);
       if (!response.ok) {
         throw new Error("Erreur lors de la création de la session");
       }

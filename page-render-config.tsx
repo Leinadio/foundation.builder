@@ -417,8 +417,8 @@ export const pageRenderConfig: SectionConfig[] = [
               buttonText: "Passer à Premium",
               popular: true,
               priceId: {
-                monthly: "price_premium_monthly",
-                yearly: "price_premium_yearly",
+                monthly: "price_1S2YxmGqH2dPvOOj4yzU2265",
+                yearly: "price_1S2YxmGqH2dPvOOj4yzU2265",
               },
             },
           ],

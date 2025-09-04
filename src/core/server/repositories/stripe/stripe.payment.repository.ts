@@ -98,6 +98,7 @@ export class StripePaymentRepositoryImpl implements PaymentRepository {
   }
 
   public async createSubscriptionSession(request: CreateSubscriptionSessionRequest): Promise<PaymentSession> {
+    console.log("request : ", request);
     this.ensureStripeAvailable();
 
     const session = await this.stripe!.checkout.sessions.create({
@@ -112,6 +113,7 @@ export class StripePaymentRepositoryImpl implements PaymentRepository {
         },
       ],
     });
+    console.log("session : ", session);
 
     return this.mapStripeSession(session);
   }

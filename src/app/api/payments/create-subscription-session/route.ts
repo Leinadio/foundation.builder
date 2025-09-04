@@ -19,6 +19,7 @@ export async function POST(request: Request) {
       cancelUrl,
       metadata,
     });
+    console.log("session Service : ", session);
 
     return NextResponse.json(session);
   } catch (error: unknown) {
