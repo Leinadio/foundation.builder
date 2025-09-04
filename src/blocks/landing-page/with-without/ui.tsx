@@ -31,29 +31,22 @@ export function WithWithout({
 
       <div className="grid lg:grid-cols-2 gap-8">
         {/* Sans le produit */}
-        <Card className="border-none bg-red-50/50">
+        <Card className="border-red-900 rounded-4xl bg-red-50/50 dark:bg-red-950/20">
           <CardHeader className="text-center">
-            <CardTitle className="text-2xl text-red-800 flex items-center gap-2 justify-center">
-              <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center">
-                <X className="w-6 h-6 text-red-600" />
+            <CardTitle className="text-2xl text-red-800 dark:text-red-100 flex items-center gap-2 justify-center">
+              <div className="w-8 h-8 bg-red-100 dark:bg-red-900 rounded-full flex items-center justify-center">
+                <X className="w-6 h-6 text-red-600 dark:text-red-300" />
               </div>
               Sans notre solution
             </CardTitle>
           </CardHeader>
-          <CardContent className="space-y-4">
-            {beforeScenarios.map((scenario, index) => {
+          <CardContent className="space-y-6">
+            {beforeScenarios.map((scenario) => {
               const IconComponent = scenario.icon;
               return (
-                <div key={index} className="flex gap-4 p-4 bg-white rounded-lg border border-red-100">
-                  <div className="flex-shrink-0">
-                    <div className="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center">
-                      <IconComponent className="w-5 h-5 text-red-600" />
-                    </div>
-                  </div>
-                  <div className="flex flex-col gap-2">
-                    <h4 className="font-semibold text-red-800">{scenario.title}</h4>
-                    <p className="text-sm text-red-700">{scenario.description}</p>
-                  </div>
+                <div key={scenario.title} className="flex items-center gap-4">
+                  <IconComponent className="w-8 h-8 text-red-600 dark:text-red-300" />
+                  <p className="text-lg text-red-700 dark:text-red-300">{scenario.description}</p>
                 </div>
               );
             })}
@@ -61,29 +54,22 @@ export function WithWithout({
         </Card>
 
         {/* Avec le produit */}
-        <Card className="border-none bg-green-50/50">
+        <Card className="border-green-900 rounded-4xl bg-green-50/50 dark:bg-green-950/20">
           <CardHeader className="text-center">
-            <CardTitle className="text-2xl text-green-800 flex items-center gap-2 justify-center">
-              <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
-                <Check className="w-6 h-6 text-green-600" />
+            <CardTitle className="text-2xl text-green-800 dark:text-green-100 flex items-center gap-2 justify-center">
+              <div className="w-8 h-8 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center">
+                <Check className="w-6 h-6 text-green-600 dark:text-green-300" />
               </div>
               Avec notre solution
             </CardTitle>
           </CardHeader>
-          <CardContent className="space-y-4">
+          <CardContent className="space-y-6">
             {afterScenarios.map((scenario, index) => {
               const IconComponent = scenario.icon;
               return (
-                <div key={index} className="flex gap-4 p-4 bg-white rounded-lg border border-green-100">
-                  <div className="flex-shrink-0">
-                    <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
-                      <IconComponent className="w-5 h-5 text-green-600" />
-                    </div>
-                  </div>
-                  <div className="flex flex-col gap-2">
-                    <h4 className="font-semibold text-green-800">{scenario.title}</h4>
-                    <p className="text-sm text-green-700">{scenario.description}</p>
-                  </div>
+                <div key={index} className="flex items-center gap-4">
+                  <IconComponent className="w-8 h-8 text-green-600 dark:text-green-300" />
+                  <p className="text-lg text-green-700 dark:text-green-300">{scenario.description}</p>
                 </div>
               );
             })}
