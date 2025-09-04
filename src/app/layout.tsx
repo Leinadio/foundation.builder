@@ -4,6 +4,7 @@ import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
 import { Bricolage_Grotesque, Bellefair } from "next/font/google";
 import PlausibleProvider from "next-plausible";
+import { RootProvider } from "fumadocs-ui/provider";
 
 const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
@@ -37,10 +38,12 @@ export default function RootLayout({
         />
       </head>
       <body className={`antialiased ${bricolage.variable} ${bellefair.variable} font-sans`}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          {children}
-          <Toaster richColors position="top-right" />
-        </ThemeProvider>
+        <RootProvider>
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+            {children}
+            <Toaster richColors position="top-right" />
+          </ThemeProvider>
+        </RootProvider>
       </body>
     </html>
   );
