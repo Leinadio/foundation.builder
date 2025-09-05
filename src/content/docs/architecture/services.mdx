@@ -1,0 +1,126 @@
+---
+title: Services métier
+description: Comprendre les services métier dans l'architecture hexagonale de Foundation Builder
+---
+
+# Services métier
+
+Les services constituent le cœur de la logique métier de l'application. Ils implémentent les ports d'entrée (in) et orchestrent les opérations complexes en utilisant les repositories via les ports de sortie (out). Chaque service est responsable d'un domaine métier spécifique.
+
+---
+
+## Rôle des services
+
+### Logique métier pure
+
+Les services encapsulent la logique métier pure, sans dépendances techniques. Ils se concentrent uniquement sur les règles et processus métier de l'application.
+
+### Orchestration des opérations
+
+Les services orchestrent les opérations complexes en coordonnant plusieurs repositories et en appliquant les règles métier nécessaires.
+
+### Implémentation des ports
+
+Les services implémentent les ports d'entrée (in), définissant ainsi l'interface publique de l'application pour un domaine donné.
+
+---
+
+## Structure des services
+
+### Injection de dépendances
+
+Les services reçoivent leurs dépendances (repositories) via leur constructeur :
+
+```typescript
+export class AuthService implements AuthPortIn {
+  private readonly authRepo: AuthRepository;
+
+  public constructor(authRepo: AuthRepository) {
+    this.authRepo = authRepo;
+  }
+}
+```
+
+### Méthodes métier
+
+Chaque service expose des méthodes qui correspondent aux cas d'usage métier :
+
+```typescript
+public async loginWithEmail(email: string, password: string): Promise<User | null> {
+  return this.authRepo.loginWithEmail(email, password);
+}
+
+public async registerWithEmail(
+  email: string,
+  password: string,
+  name: string
+): Promise<{ user: User | null; requiresVerification: boolean }> {
+  return this.authRepo.registerWithEmail(email, password, name);
+}
+```
+
+---
+
+## Avantages des services
+
+### Séparation des responsabilités
+
+Chaque service est responsable d'un domaine métier spécifique, facilitant la maintenance et l'évolution du code.
+
+### Testabilité
+
+Les services sont facilement testables grâce à l'injection de dépendances et à l'abstraction des repositories.
+
+### Réutilisabilité
+
+La logique métier encapsulée dans les services peut être réutilisée dans différents contextes.
+
+### Indépendance technologique
+
+Les services ne dépendent que des interfaces (ports), pas des implémentations concrètes.
+
+---
+
+## Bonnes pratiques
+
+### Nommage des services
+
+Utilisez des noms qui reflètent clairement la responsabilité métier :
+
+- `AuthService` pour l'authentification
+- `PaymentService` pour les paiements
+- `EmailService` pour l'envoi d'emails
+
+### Validation des données
+
+Validez toujours les données d'entrée avant de les traiter :
+
+```typescript
+public async createUser(user: User): Promise<void> {
+  if (!isValidUser(user)) {
+    throw new Error("Email invalide");
+  }
+  // ...
+}
+```
+
+### Gestion des erreurs
+
+Implémentez une gestion d'erreurs cohérente et informative :
+
+```typescript
+public async createPaymentIntent(request: PaymentRequest): Promise<PaymentIntent> {
+  if (!isValidPaymentRequest(request)) {
+    throw new Error("Requête de paiement invalide");
+  }
+  // ...
+}
+```
+
+### Méthodes pures
+
+Privilégiez les méthodes pures qui ne modifient pas l'état et retournent des résultats prévisibles.
+
+### Documentation
+
+Documentez clairement le comportement de chaque méthode et les paramètres attendus.

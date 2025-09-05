@@ -1,0 +1,542 @@
+---
+title: API Endpoints
+description: Documentation des API endpoints de Foundation Builder
+---
+
+# API Endpoints
+
+Foundation Builder expose une API REST complète pour l'authentification, la gestion des utilisateurs et les paiements.
+
+## 🔐 Authentification
+
+### POST /api/auth/signin
+
+Connexion d'un utilisateur.
+
+**Body:**
+
+```json
+{
+  "email": "user@example.com",
+  "password": "password123"
+}
+```
+
+**Response:**
+
+```json
+{
+  "success": true,
+  "data": {
+    "user": {
+      "id": "user_123",
+      "email": "user@example.com",
+      "name": "John Doe"
+    },
+    "session": {
+      "id": "session_123",
+      "expiresAt": "2024-01-01T00:00:00Z"
+    },
+    "token": "jwt_token_here"
+  }
+}
+```
+
+### POST /api/auth/signup
+
+Inscription d'un nouvel utilisateur.
+
+**Body:**
+
+```json
+{
+  "email": "user@example.com",
+  "password": "password123",
+  "name": "John Doe"
+}
+```
+
+**Response:**
+
+```json
+{
+  "success": true,
+  "data": {
+    "user": {
+      "id": "user_123",
+      "email": "user@example.com",
+      "name": "John Doe"
+    },
+    "session": {
+      "id": "session_123",
+      "expiresAt": "2024-01-01T00:00:00Z"
+    }
+  }
+}
+```
+
+### POST /api/auth/signout
+
+Déconnexion de l'utilisateur.
+
+**Headers:**
+
+```
+Authorization: Bearer <token>
+```
+
+**Response:**
+
+```json
+{
+  "success": true,
+  "message": "Déconnexion réussie"
+}
+```
+
+### POST /api/auth/reset-password
+
+Demande de réinitialisation de mot de passe.
+
+**Body:**
+
+```json
+{
+  "email": "user@example.com"
+}
+```
+
+**Response:**
+
+```json
+{
+  "success": true,
+  "message": "Email de réinitialisation envoyé"
+}
+```
+
+### POST /api/auth/verify-email
+
+Vérification d'adresse email.
+
+**Body:**
+
+```json
+{
+  "token": "verification_token"
+}
+```
+
+**Response:**
+
+```json
+{
+  "success": true,
+  "message": "Email vérifié avec succès"
+}
+```
+
+## 👤 Utilisateurs
+
+### GET /api/users
+
+Récupération de la liste des utilisateurs (admin).
+
+**Headers:**
+
+```
+Authorization: Bearer <admin_token>
+```
+
+**Query Parameters:**
+
+- `page` (optional): Numéro de page (défaut: 1)
+- `limit` (optional): Nombre d'éléments par page (défaut: 10)
+- `search` (optional): Recherche par nom ou email
+
+**Response:**
+
+```json
+{
+  "success": true,
+  "data": {
+    "users": [
+      {
+        "id": "user_123",
+        "email": "user@example.com",
+        "name": "John Doe",
+        "createdAt": "2024-01-01T00:00:00Z"
+      }
+    ],
+    "pagination": {
+      "page": 1,
+      "limit": 10,
+      "total": 100,
+      "totalPages": 10
+    }
+  }
+}
+```
+
+### GET /api/users/[id]
+
+Récupération d'un utilisateur par ID.
+
+**Headers:**
+
+```
+Authorization: Bearer <token>
+```
+
+**Response:**
+
+```json
+{
+  "success": true,
+  "data": {
+    "id": "user_123",
+    "email": "user@example.com",
+    "name": "John Doe",
+    "profile": {
+      "avatar": "https://example.com/avatar.jpg",
+      "bio": "Développeur passionné"
+    },
+    "subscription": {
+      "status": "active",
+      "plan": "pro",
+      "expiresAt": "2024-12-31T23:59:59Z"
+    },
+    "createdAt": "2024-01-01T00:00:00Z",
+    "updatedAt": "2024-01-01T00:00:00Z"
+  }
+}
+```
+
+### PUT /api/users/[id]
+
+Mise à jour d'un utilisateur.
+
+**Headers:**
+
+```
+Authorization: Bearer <token>
+```
+
+**Body:**
+
+```json
+{
+  "name": "John Updated",
+  "profile": {
+    "bio": "Nouvelle bio"
+  }
+}
+```
+
+**Response:**
+
+```json
+{
+  "success": true,
+  "data": {
+    "id": "user_123",
+    "email": "user@example.com",
+    "name": "John Updated",
+    "profile": {
+      "bio": "Nouvelle bio"
+    },
+    "updatedAt": "2024-01-01T00:00:00Z"
+  }
+}
+```
+
+### DELETE /api/users/[id]
+
+Suppression d'un utilisateur.
+
+**Headers:**
+
+```
+Authorization: Bearer <token>
+```
+
+**Response:**
+
+```json
+{
+  "success": true,
+  "message": "Utilisateur supprimé avec succès"
+}
+```
+
+## 💳 Paiements
+
+### POST /api/payments/create-intent
+
+Création d'un Payment Intent Stripe.
+
+**Headers:**
+
+```
+Authorization: Bearer <token>
+```
+
+**Body:**
+
+```json
+{
+  "amount": 2999,
+  "currency": "eur",
+  "description": "Abonnement Pro"
+}
+```
+
+**Response:**
+
+```json
+{
+  "success": true,
+  "data": {
+    "clientSecret": "pi_123_secret_456",
+    "paymentIntentId": "pi_1234567890"
+  }
+}
+```
+
+### POST /api/payments/create-session
+
+Création d'une Checkout Session Stripe.
+
+**Headers:**
+
+```
+Authorization: Bearer <token>
+```
+
+**Body:**
+
+```json
+{
+  "priceId": "price_1234567890",
+  "successUrl": "https://example.com/success",
+  "cancelUrl": "https://example.com/cancel"
+}
+```
+
+**Response:**
+
+```json
+{
+  "success": true,
+  "data": {
+    "sessionId": "cs_1234567890",
+    "url": "https://checkout.stripe.com/pay/cs_1234567890"
+  }
+}
+```
+
+### POST /api/payments/create-subscription
+
+Création d'un abonnement.
+
+**Headers:**
+
+```
+Authorization: Bearer <token>
+```
+
+**Body:**
+
+```json
+{
+  "priceId": "price_1234567890",
+  "paymentMethodId": "pm_1234567890"
+}
+```
+
+**Response:**
+
+```json
+{
+  "success": true,
+  "data": {
+    "subscriptionId": "sub_1234567890",
+    "status": "active",
+    "currentPeriodEnd": "2024-02-01T00:00:00Z"
+  }
+}
+```
+
+### GET /api/payments/subscriptions/[id]
+
+Récupération d'un abonnement.
+
+**Headers:**
+
+```
+Authorization: Bearer <token>
+```
+
+**Response:**
+
+```json
+{
+  "success": true,
+  "data": {
+    "id": "sub_1234567890",
+    "status": "active",
+    "currentPeriodStart": "2024-01-01T00:00:00Z",
+    "currentPeriodEnd": "2024-02-01T00:00:00Z",
+    "plan": {
+      "id": "price_1234567890",
+      "name": "Plan Pro",
+      "amount": 2999,
+      "currency": "eur",
+      "interval": "month"
+    }
+  }
+}
+```
+
+### POST /api/payments/confirm
+
+Confirmation d'un paiement.
+
+**Headers:**
+
+```
+Authorization: Bearer <token>
+```
+
+**Body:**
+
+```json
+{
+  "paymentIntentId": "pi_1234567890"
+}
+```
+
+**Response:**
+
+```json
+{
+  "success": true,
+  "data": {
+    "status": "succeeded",
+    "amount": 2999,
+    "currency": "eur"
+  }
+}
+```
+
+## 🔍 Recherche
+
+### GET /api/search
+
+Recherche dans la documentation (si activée).
+
+**Query Parameters:**
+
+- `q` (required): Terme de recherche
+- `limit` (optional): Nombre de résultats (défaut: 10)
+
+**Response:**
+
+```json
+{
+  "success": true,
+  "data": {
+    "results": [
+      {
+        "title": "Guide de démarrage",
+        "description": "Configuration et premier projet",
+        "url": "/docs/getting-started",
+        "score": 0.95
+      }
+    ],
+    "total": 1,
+    "query": "démarrage"
+  }
+}
+```
+
+## 📊 Codes d'erreur
+
+### Codes de statut HTTP
+
+- `200` - Succès
+- `201` - Créé avec succès
+- `400` - Requête invalide
+- `401` - Non authentifié
+- `403` - Accès interdit
+- `404` - Ressource non trouvée
+- `409` - Conflit (ex: email déjà utilisé)
+- `422` - Données de validation invalides
+- `500` - Erreur serveur
+
+### Format des erreurs
+
+```json
+{
+  "success": false,
+  "error": {
+    "code": "VALIDATION_ERROR",
+    "message": "Les données fournies sont invalides",
+    "details": [
+      {
+        "field": "email",
+        "message": "Format d'email invalide"
+      }
+    ]
+  }
+}
+```
+
+## 🔒 Authentification
+
+### JWT Token
+
+L'API utilise des tokens JWT pour l'authentification. Incluez le token dans l'en-tête `Authorization` :
+
+```
+Authorization: Bearer <your_jwt_token>
+```
+
+### Refresh Token
+
+Pour renouveler un token expiré :
+
+```json
+{
+  "refreshToken": "your_refresh_token"
+}
+```
+
+## 📝 Rate Limiting
+
+L'API implémente un rate limiting pour protéger contre les abus :
+
+- **Authentification** : 5 tentatives par minute par IP
+- **API générale** : 100 requêtes par minute par utilisateur
+- **Paiements** : 10 requêtes par minute par utilisateur
+
+## 🧪 Tests
+
+### Collection Postman
+
+Une collection Postman est disponible pour tester l'API :
+
+```bash
+# Importer la collection
+curl -o postman-collection.json https://api.example.com/postman-collection
+```
+
+### Variables d'environnement
+
+Configurez ces variables pour les tests :
+
+```bash
+API_BASE_URL=http://localhost:3000/api
+API_TOKEN=your_test_token
+STRIPE_TEST_KEY=sk_test_...
+```

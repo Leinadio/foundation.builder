@@ -5,4 +5,4 @@ export default async function Home() {
   return <DynamicRenderer sections={pageRenderConfig} />;
 }
 
-// App
+// Montrer un exemple de code dans Architecture hexagonale

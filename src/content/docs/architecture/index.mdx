@@ -1,0 +1,77 @@
+---
+title: Architecture Hexagonale
+description: Foundation Builder implémente une architecture hexagonale (Clean Architecture / Ports & Adapters) qui sépare clairement la logique métier des détails techniques et des dépendances externes. Cette approche garantit une application maintenable, testable et évolutive.
+defaultOpen: true
+---
+
+![Architecture hexagonale de Foundation Builder](/images/architecture_hexagonale.png)
+
+---
+
+## Séparation Client/Server
+
+L'architecture hexagonale est dupliquée dans deux environnements distincts : le **client** et le **server**. Chaque environnement possède sa propre implémentation complète de l'architecture hexagonale, avec ses services, ports, repositories et conteneur d'injection de dépendances (DI Container).
+
+Les dossiers `client/` et `server/` sont structurellement identiques et suivent les mêmes principes architecturaux. La seule différence réside dans leur environnement d'exécution : le client s'exécute dans le navigateur (frontend) tandis que le server s'exécute sur le serveur (backend). Cette duplication garantit une cohérence architecturale et permet une gestion optimale des responsabilités selon le contexte d'exécution.
+
+<div style={{ textAlign: "center", margin: "2rem 0" }}>
+  <img
+    src="/images/difference_client_server.png"
+    alt="Architecture hexagonale de Foundation Builder"
+    style={{ maxWidth: "600px", width: "100%", height: "auto" }}
+  />
+</div>
+
+---
+
+## Injection de dépendances
+
+Chaque couche (client et server) instancie son propre conteneur d'injection de dépendances qui se charge d'initialiser les services et repositories nécessaires. Le DI Container orchestre la création des instances et gère leurs dépendances, permettant une configuration centralisée et une inversion de contrôle efficace.
+
+---
+
+## Ports In et Out
+
+L'utilisation de l'application se fait exclusivement par l'intermédiaire d'abstractions définies dans les ports. Les ports d'entrée (in) définissent les contrats que l'application expose, tandis que les ports de sortie (out) définissent les contrats des dépendances externes.
+
+Cette abstraction garantit que la logique métier ne dépend jamais directement des détails d'implémentation. Les services utilisent uniquement les interfaces définies dans les ports, ce qui rend le code plus robuste et plus facile à maintenir.
+
+---
+
+## Services métier
+
+Les services constituent le cœur de la logique métier de l'application. Ils implémentent les ports d'entrée (in) et orchestrent les opérations complexes en utilisant les repositories via les ports de sortie (out). Chaque service est responsable d'un domaine métier spécifique, comme l'authentification, la gestion des utilisateurs, ou les paiements.
+
+Les services encapsulent la logique métier pure, sans dépendances techniques. Ils reçoivent les repositories en injection de dépendances via leur constructeur, ce qui permet de les tester facilement en utilisant des mocks. Cette approche garantit que la logique métier reste indépendante des détails d'implémentation des repositories.
+
+---
+
+## Repositories et implémentations
+
+Les repositories constituent la couche d'accès aux données et aux services externes. Ils implémentent les ports de sortie (out) et encapsulent toutes les interactions avec les systèmes externes comme les bases de données, les APIs de paiement, ou les services d'authentification. Chaque repository est responsable d'un domaine spécifique de persistance ou d'intégration.
+
+Les repositories cachent toute la complexité technique liée aux systèmes externes. Ils convertissent les objets métier en formats utilisables par les APIs externes, et inversement. Cela permet à la logique métier de rester indépendante de la technologie utilisée. Grâce à cette séparation, on peut changer l’implémentation technique sans modifier le reste de l’application.
+
+Chaque repository possède plusieurs implémentations possibles pour un même port. Par exemple, le repository d'authentification peut être implémenté avec Firebase, Supabase, ou Better Auth. Le choix de l'implémentation se fait au niveau du conteneur d'injection de dépendances, permettant une configuration flexible selon l'environnement ou les besoins du projet.
+
+Les repositories gèrent également la gestion d'erreurs et la transformation des données. Ils convertissent les erreurs spécifiques des systèmes externes en erreurs métier compréhensibles, et mappent les réponses externes vers les modèles métier de l'application. Cette couche de traduction garantit une interface cohérente et prévisible pour les services.
+
+---
+
+## Modèles métier
+
+Les modèles constituent le cœur conceptuel de l'application et représentent les entités métier du domaine. Ils définissent la structure des données et encapsulent les règles de validation spécifiques au métier. Chaque modèle correspond à une entité importante de l'application, comme les utilisateurs, les paiements, ou les sessions.
+
+Les modèles sont partagés entre les couches client et server, garantissant une cohérence des données à travers toute l'application. Ils définissent les types TypeScript stricts et incluent des fonctions de validation pour s'assurer que les données respectent les contraintes métier. Cette centralisation évite les incohérences et facilite la maintenance.
+
+Les modèles sont indépendants de toute technologie ou infrastructure. Ils ne contiennent aucune logique technique et se concentrent uniquement sur la représentation des concepts métier. Cette pureté permet une réutilisation maximale et garantit que les règles métier restent cohérentes quel que soit l'environnement d'exécution.
+
+---
+
+## Avantages de cette architecture
+
+L'architecture hexagonale offre plusieurs avantages significatifs. Elle permet une séparation claire des responsabilités, rendant le code plus lisible et plus facile à comprendre. La testabilité est grandement améliorée grâce à l'injection de dépendances et à l'abstraction des ports.
+
+Cette approche facilite également l'évolution de l'application. Changer d'implémentation pour une dépendance externe (par exemple, passer de Firebase à Supabase) ne nécessite que de modifier l'implémentation du repository correspondant, sans toucher à la logique métier.
+
+L'architecture garantit également une meilleure maintenabilité du code. Les développeurs peuvent travailler sur différentes parties de l'application sans risquer de casser d'autres composants, et les nouvelles fonctionnalités peuvent être ajoutées de manière modulaire.

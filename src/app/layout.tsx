@@ -38,12 +38,10 @@ export default function RootLayout({
         />
       </head>
       <body className={`antialiased ${bricolage.variable} ${bellefair.variable} font-sans`}>
-        <RootProvider>
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-            {children}
-            <Toaster richColors position="top-right" />
-          </ThemeProvider>
-        </RootProvider>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          <RootProvider>{children}</RootProvider>
+          <Toaster richColors position="top-right" />
+        </ThemeProvider>
       </body>
     </html>
   );
