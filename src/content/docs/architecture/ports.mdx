@@ -1,0 +1,142 @@
+---
+title: Ports In et Out
+description: Comprendre les ports d'entrée et de sortie dans l'architecture hexagonale de Foundation Builder
+---
+
+# Ports In et Out
+
+Les ports constituent le système d'abstraction central de l'architecture hexagonale. Ils définissent les contrats d'interface entre la logique métier et les couches externes, garantissant une séparation claire des responsabilités et une indépendance technologique.
+
+## Ports d'entrée (In)
+
+Les ports d'entrée définissent les contrats que l'application expose vers l'extérieur. Ils représentent les cas d'usage métier et constituent l'interface publique de vos services.
+
+### Caractéristiques des ports In
+
+- **Interface publique** : Ils définissent ce que l'application peut faire
+- **Contrats métier** : Ils expriment les opérations du domaine métier
+- **Implémentation par les services** : Les services métier implémentent ces interfaces
+- **Indépendance technique** : Ils ne dépendent d'aucune technologie externe
+
+### Exemple de port In
+
+```typescript
+export interface AuthPortIn {
+  // Connexion et inscription avec email/mot de passe
+  loginWithEmail(email: string, password: string): Promise<User | null>;
+  registerWithEmail(
+    email: string,
+    password: string,
+    name: string
+  ): Promise<{ user: User | null; requiresVerification: boolean }>;
+
+  // Connexion sociale
+  loginWithGoogle(): Promise<null>;
+  loginWithGithub(): Promise<null>;
+
+  // Gestion des mots de passe
+  forgotPassword(email: string): Promise<void>;
+  resetPassword(token: string, password: string): Promise<boolean>;
+
+  // Vérification email
+  verifyEmail(token: string): Promise<boolean>;
+  resendVerificationEmail(email: string): Promise<void>;
+
+  // Session et déconnexion
+  getCurrentUser(): Promise<User | null>;
+  logout(): Promise<void>;
+  onAuthStateChanged(callback: (user: User | null) => void): void;
+}
+```
+
+## Ports de sortie (Out)
+
+Les ports de sortie définissent les contrats des dépendances externes que l'application utilise. Ils représentent les interfaces que vos repositories doivent implémenter.
+
+### Caractéristiques des ports Out
+
+- **Interface des dépendances** : Ils définissent ce dont l'application a besoin de l'extérieur
+- **Contrats techniques** : Ils expriment les opérations sur les systèmes externes
+- **Implémentation par les repositories** : Les repositories implémentent ces interfaces
+- **Abstraction des détails** : Ils cachent la complexité des systèmes externes
+
+### Exemple de port Out
+
+```typescript
+export interface AuthRepository {
+  loginWithEmail(email: string, password: string): Promise<User | null>;
+  registerWithEmail(
+    email: string,
+    password: string,
+    name: string
+  ): Promise<{ user: User | null; requiresVerification: boolean }>;
+  loginWithGoogle(): Promise<null>;
+  loginWithGithub(): Promise<null>;
+  forgotPassword(email: string): Promise<void>;
+  resetPassword(token: string, password: string): Promise<boolean>;
+  verifyEmail(token: string): Promise<boolean>;
+  resendVerificationEmail(email: string): Promise<void>;
+  getCurrentUser(): Promise<User | null>;
+  logout(): Promise<void>;
+  onAuthStateChanged(callback: (user: User | null) => void): void;
+}
+```
+
+## Organisation des ports
+
+### Structure des dossiers
+
+```
+src/core/
+├── client/
+│   └── ports/
+│       ├── in/          # Ports d'entrée client
+│       └── out/         # Ports de sortie client
+└── server/
+    └── ports/
+        ├── in/          # Ports d'entrée server
+        └── out/         # Ports de sortie server
+```
+
+### Séparation Client/Server
+
+Chaque couche (client et server) possède ses propres ports adaptés à son environnement :
+
+- **Ports client** : Optimisés pour les interactions frontend et l'état local
+- **Ports server** : Optimisés pour les opérations backend et la persistance
+
+## Avantages des ports
+
+### Indépendance technologique
+
+Les ports permettent de changer d'implémentation sans impacter la logique métier. Par exemple, passer de Firebase à Supabase ne nécessite que de modifier l'implémentation du repository.
+
+### Testabilité
+
+Les ports facilitent les tests en permettant d'utiliser des mocks pour les dépendances externes.
+
+### Maintenabilité
+
+La séparation claire des responsabilités rend le code plus facile à comprendre et à maintenir.
+
+### Évolutivité
+
+L'ajout de nouvelles fonctionnalités se fait de manière modulaire en étendant les ports existants ou en créant de nouveaux ports.
+
+## Bonnes pratiques
+
+### Nommage des ports
+
+- **Ports In** : Utilisez des noms qui expriment l'intention métier (ex: `AuthPortIn`, `UserPortIn`)
+- **Ports Out** : Utilisez des noms qui expriment la responsabilité technique (ex: `AuthRepository`, `EmailRepository`)
+
+### Définition des contrats
+
+- **Types stricts** : Utilisez des types TypeScript stricts pour les paramètres et retours
+- **Documentation** : Commentez les méthodes pour expliquer leur comportement
+- **Cohérence** : Maintenez une cohérence dans la définition des interfaces
+
+### Gestion des erreurs
+
+- **Erreurs métier** : Les ports In peuvent lever des erreurs métier compréhensibles
+- **Abstraction des erreurs** : Les ports Out abstraient les erreurs techniques des systèmes externes

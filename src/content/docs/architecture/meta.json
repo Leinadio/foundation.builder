@@ -1,0 +1,6 @@
+{
+  "title": "Architecture",
+  "icon": "Dna",
+  "pages": ["index", "ports"],
+  "defaultOpen": true
+}
