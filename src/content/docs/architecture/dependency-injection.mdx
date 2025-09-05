@@ -24,6 +24,24 @@ L'injection de dépendances inverse le contrôle de la création des objets. Au 
 
 ---
 
+## Configuration des dépendances
+
+### Ordre d'initialisation
+
+1. **Repositories** : Les repositories sont créés en premier
+2. **Services** : Les services sont instanciés avec l’injection de leurs dépendances, qui sont des repositories.
+3. **Enregistrement** : Les services sont enregistrés dans le conteneur
+
+### Gestion des erreurs
+
+Le système de DI gère les erreurs de configuration :
+
+- **Service non trouvé** : Lance une erreur explicite si un service n'est pas enregistré
+- **Type safety** : TypeScript garantit la cohérence des types
+- **Validation** : Vérification de l'existence des services au runtime
+
+---
+
 ## DI Container Client
 
 Le conteneur client gère les services et repositories optimisés pour l'environnement frontend.
@@ -154,71 +172,3 @@ export async function POST(request: Request) {
   // ...
 }
 ```
-
----
-
-## Configuration des dépendances
-
-### Ordre d'initialisation
-
-1. **Repositories** : Les repositories sont créés en premier
-2. **Services** : Les services sont instanciés avec l’injection de leurs dépendances, qui sont des repositories.
-3. **Enregistrement** : Les services sont enregistrés dans le conteneur
-
-### Gestion des erreurs
-
-Le système de DI gère les erreurs de configuration :
-
-- **Service non trouvé** : Lance une erreur explicite si un service n'est pas enregistré
-- **Type safety** : TypeScript garantit la cohérence des types
-- **Validation** : Vérification de l'existence des services au runtime
-
----
-
-## Avantages de cette approche
-
-### Séparation des responsabilités
-
-Chaque DI container est responsable de son environnement :
-
-- **Client** : Optimisé pour les interactions frontend
-- **Server** : Optimisé pour les opérations backend
-
-### Configuration centralisée
-
-Toute la configuration des dépendances est centralisée dans les DI containers, facilitant la maintenance et les modifications.
-
-### Testabilité
-
-Les DI containers facilitent les tests en permettant de remplacer facilement les dépendances par des mocks.
-
-### Type Safety
-
-TypeScript garantit la cohérence des types entre les services et leurs interfaces.
-
----
-
-## Bonnes pratiques
-
-### Nommage des services
-
-Utilisez des noms explicites qui reflètent la responsabilité du service :
-
-- `AuthService` pour l'authentification
-- `PaymentService` pour les paiements
-- `EmailService` pour l'envoi d'emails
-
-### Gestion des erreurs
-
-Implémentez une gestion d'erreurs robuste dans les DI containers pour faciliter le débogage.
-
-### Configuration par environnement
-
-Adaptez la configuration des repositories selon l'environnement :
-
-- **Développement** : Utilisez des services de test ou des mocks
-- **Production** : Utilisez les vrais services externes
-
-### Tests unitaires
-
-Utilisez des DI containers de test avec des mocks pour isoler les tests des dépendances externes.
