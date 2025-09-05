@@ -1,0 +1,180 @@
+---
+title: Repositories et implémentations
+description: Comprendre les repositories et leurs implémentations dans l'architecture hexagonale de Foundation Builder
+---
+
+# Repositories
+
+Les repositories constituent la couche d'accès aux données et aux services externes. Ils implémentent les ports de sortie (out) et encapsulent toutes les interactions avec les systèmes externes, garantissant que la logique métier reste indépendante des détails techniques.
+
+---
+
+## Rôle des repositories
+
+### Abstraction des dépendances externes
+
+Les repositories abstraient complètement les détails techniques des systèmes externes. Ils transforment les objets métier en formats compatibles avec les APIs externes et vice versa, garantissant que la logique métier reste indépendante des spécificités techniques.
+
+### Interface uniforme
+
+Chaque repository implémente une interface définie dans les ports de sortie, fournissant une interface uniforme pour accéder aux données, peu importe la technologie sous-jacente utilisée.
+
+### Gestion des erreurs
+
+Les repositories gèrent la conversion des erreurs spécifiques des systèmes externes en erreurs métier compréhensibles, et mappent les réponses externes vers les modèles métier de l'application.
+
+---
+
+## Structure des repositories
+
+### Implémentation des ports
+
+Chaque repository implémente un port de sortie spécifique :
+
+```typescript
+export class StripePaymentRepositoryImpl implements PaymentRepository {
+  private readonly stripe: Stripe | null = null;
+
+  public constructor() {
+    if (process.env.STRIPE_SECRET_KEY) {
+      this.stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+        apiVersion: "2025-07-30.basil",
+      });
+    }
+  }
+
+  public async createPaymentIntent(request: PaymentRequest): Promise<PaymentIntent> {
+    this.ensureStripeAvailable();
+    const paymentIntent = await this.stripe!.paymentIntents.create({
+      amount: request.amount,
+      currency: request.currency,
+      description: request.description,
+      metadata: request.metadata,
+      automatic_payment_methods: { enabled: true },
+    });
+    return this.mapStripePaymentIntent(paymentIntent);
+  }
+}
+```
+
+### Configuration des services externes
+
+Les repositories gèrent la configuration et l'initialisation des services externes :
+
+```typescript
+export class ResendEmailRepositoryImpl implements EmailRepository {
+  private readonly resend: Resend | null = null;
+
+  public constructor() {
+    const apiKey = process.env.RESEND_API_KEY;
+    if (apiKey) {
+      this.resend = new Resend(apiKey);
+    }
+  }
+
+  private ensureResendAvailable(): void {
+    if (!this.resend) {
+      throw new Error("Resend n'est pas configuré. Vérifiez que RESEND_API_KEY est définie.");
+    }
+  }
+}
+```
+
+---
+
+## Transformation des données
+
+### Mapping vers les modèles métier
+
+Les repositories convertissent les réponses des systèmes externes vers les modèles métier de l'application :
+
+```typescript
+private mapStripePaymentIntent(paymentIntent: Stripe.PaymentIntent): PaymentIntent {
+  if (!paymentIntent.client_secret) {
+    throw new Error("Le client_secret du PaymentIntent est manquant");
+  }
+  return {
+    id: paymentIntent.id,
+    clientSecret: paymentIntent.client_secret,
+    amount: paymentIntent.amount,
+    currency: paymentIntent.currency,
+    status: paymentIntent.status,
+    metadata: paymentIntent.metadata ?? undefined,
+  };
+}
+```
+
+### Validation des données
+
+Les repositories valident les données reçues des systèmes externes avant de les transformer :
+
+```typescript
+private firebaseUserToUser(firebaseUser: FirebaseUser | null): User | null {
+  if (!firebaseUser) return null;
+  return {
+    id: firebaseUser.uid,
+    email: firebaseUser.email || "",
+    displayName: firebaseUser.displayName || "",
+    photoURL: firebaseUser.photoURL || "",
+    purchasedReports: 0,
+    updatedAt: new Date().toISOString(),
+    usedReports: 0,
+  };
+}
+```
+
+---
+
+## Gestion des erreurs
+
+### Conversion des erreurs
+
+Les repositories convertissent les erreurs spécifiques des systèmes externes en erreurs métier compréhensibles :
+
+```typescript
+private logStripeError(context: string, error: unknown): void {
+  if (error instanceof Error) {
+    console.error(`Erreur lors de la ${context}:`, error.message);
+    return;
+  }
+  console.error(`Erreur inconnue lors de la ${context}:`, error);
+}
+```
+
+### Gestion des erreurs de configuration
+
+Les repositories gèrent les erreurs de configuration des services externes :
+
+```typescript
+private ensureStripeAvailable(): void {
+  if (!this.stripe) {
+    throw new Error("Stripe n'est pas configuré. Vérifiez que STRIPE_SECRET_KEY est définie.");
+  }
+}
+```
+
+---
+
+## Flexibilité d'implémentation
+
+### Implémentations multiples
+
+Chaque repository peut avoir plusieurs implémentations pour un même port. Par exemple, le repository d'authentification peut être implémenté avec Firebase, Supabase, ou Better Auth.
+
+Le choix de l'implémentation se fait au niveau du conteneur d'injection de dépendances, permettant une configuration flexible selon l'environnement ou les besoins du projet.
+
+Changer d'implémentation pour une dépendance externe ne nécessite que de modifier l'implémentation du repository correspondant, sans toucher à la logique métier.
+
+---
+
+## Avantages des repositories
+
+### Indépendance technologique
+
+Les repositories permettent de changer d'implémentation sans impacter la logique métier. Par exemple, passer de Firebase à Supabase ne nécessite que de modifier l'implémentation du repository correspondant.
+
+Les repositories facilitent les tests en permettant d'utiliser des mocks pour les dépendances externes.
+
+La séparation claire des responsabilités rend le code plus facile à comprendre et à maintenir.
+
+L'ajout de nouvelles fonctionnalités se fait de manière modulaire en étendant les repositories existants ou en créant de nouveaux repositories.
