@@ -1,0 +1,327 @@
+---
+title: Services et cas d'usage
+description: Logique métier et cas d'usage de Foundation Builder
+---
+
+# Services et cas d'usage
+
+Foundation Builder implémente une logique métier robuste suivant l'architecture hexagonale, avec des services clairs et des cas d'usage bien définis.
+
+## 🏗️ Architecture des services
+
+### Structure des services
+
+```
+src/core/
+├── services/           # Cas d'usage et logique métier
+│   ├── auth.service.ts
+│   ├── user.service.ts
+│   ├── email.service.ts
+│   └── payment.service.ts
+├── ports/             # Interfaces de contrat
+│   ├── in/            # Ports entrants
+│   └── out/           # Ports sortants
+└── models/            # Entités métier
+    ├── user.ts
+    ├── session.ts
+    └── payment.ts
+```
+
+## 🔐 Service d'authentification
+
+### AuthService
+
+Gère l'authentification des utilisateurs avec support multi-provider.
+
+```typescript
+// src/core/services/auth.service.ts
+export class AuthService implements AuthPort {
+  constructor(private authRepository: AuthRepository, private emailService: EmailService) {}
+
+  async signIn(email: string, password: string): Promise<AuthResult> {
+    // Validation des données
+    if (!this.isValidEmail(email)) {
+      throw new ValidationError("Email invalide");
+    }
+
+    // Authentification
+    const user = await this.authRepository.findUserByEmail(email);
+    if (!user || !(await this.verifyPassword(password, user.passwordHash))) {
+      throw new AuthenticationError("Identifiants invalides");
+    }
+
+    // Création de la session
+    const session = await this.createSession(user);
+
+    return {
+      user: this.mapUserToDTO(user),
+      session,
+      token: this.generateToken(session),
+    };
+  }
+
+  async signUp(email: string, password: string, userData: UserData): Promise<AuthResult> {
+    // Validation
+    await this.validateSignUpData(email, password, userData);
+
+    // Vérification de l'unicité
+    const existingUser = await this.authRepository.findUserByEmail(email);
+    if (existingUser) {
+      throw new ConflictError("Utilisateur déjà existant");
+    }
+
+    // Création de l'utilisateur
+    const user = await this.createUser(email, password, userData);
+
+    // Envoi de l'email de confirmation
+    await this.emailService.sendWelcomeEmail(user.email, user.name);
+
+    return this.signIn(email, password);
+  }
+}
+```
+
+### Cas d'usage d'authentification
+
+- **Connexion** : Email/mot de passe, Google, GitHub
+- **Inscription** : Validation, vérification d'unicité
+- **Déconnexion** : Nettoyage des sessions
+- **Récupération de mot de passe** : Email de réinitialisation
+- **Vérification d'email** : Confirmation d'adresse email
+
+## 👤 Service d'utilisateur
+
+### UserService
+
+Gère les données et préférences des utilisateurs.
+
+```typescript
+// src/core/services/user.service.ts
+export class UserService implements UserPort {
+  constructor(private userRepository: UserRepository) {}
+
+  async updateProfile(userId: string, profileData: ProfileData): Promise<User> {
+    // Validation des données
+    this.validateProfileData(profileData);
+
+    // Récupération de l'utilisateur
+    const user = await this.userRepository.findById(userId);
+    if (!user) {
+      throw new NotFoundError("Utilisateur non trouvé");
+    }
+
+    // Mise à jour
+    const updatedUser = { ...user, ...profileData };
+    return await this.userRepository.update(updatedUser);
+  }
+
+  async deleteAccount(userId: string): Promise<void> {
+    // Vérification de l'utilisateur
+    const user = await this.userRepository.findById(userId);
+    if (!user) {
+      throw new NotFoundError("Utilisateur non trouvé");
+    }
+
+    // Suppression des données associées
+    await this.userRepository.deleteAllUserData(userId);
+
+    // Suppression de l'utilisateur
+    await this.userRepository.delete(userId);
+  }
+}
+```
+
+### Cas d'usage utilisateur
+
+- **Profil** : Mise à jour des informations personnelles
+- **Préférences** : Configuration des paramètres
+- **Suppression de compte** : Suppression complète des données
+- **Historique** : Gestion de l'historique des actions
+
+## 💳 Service de paiement
+
+### PaymentService
+
+Gère les paiements et abonnements avec Stripe.
+
+```typescript
+// src/core/services/payment.service.ts
+export class PaymentService implements PaymentPort {
+  constructor(private paymentRepository: PaymentRepository, private userRepository: UserRepository) {}
+
+  async createPaymentIntent(userId: string, amount: number, currency: string): Promise<PaymentIntent> {
+    // Validation
+    if (amount <= 0) {
+      throw new ValidationError("Montant invalide");
+    }
+
+    // Récupération de l'utilisateur
+    const user = await this.userRepository.findById(userId);
+    if (!user) {
+      throw new NotFoundError("Utilisateur non trouvé");
+    }
+
+    // Création du Payment Intent
+    const paymentIntent = await this.paymentRepository.createPaymentIntent({
+      amount: this.convertToCents(amount),
+      currency,
+      customer: user.stripeCustomerId,
+      metadata: { userId },
+    });
+
+    return this.mapToPaymentIntentDTO(paymentIntent);
+  }
+
+  async createSubscription(userId: string, priceId: string): Promise<Subscription> {
+    const user = await this.userRepository.findById(userId);
+    if (!user) {
+      throw new NotFoundError("Utilisateur non trouvé");
+    }
+
+    // Création de l'abonnement
+    const subscription = await this.paymentRepository.createSubscription({
+      customer: user.stripeCustomerId,
+      items: [{ price: priceId }],
+      metadata: { userId },
+    });
+
+    // Mise à jour du statut utilisateur
+    await this.userRepository.updateSubscriptionStatus(userId, subscription.status);
+
+    return this.mapToSubscriptionDTO(subscription);
+  }
+}
+```
+
+### Cas d'usage de paiement
+
+- **Paiement unique** : Payment Intents pour les achats ponctuels
+- **Abonnements** : Gestion des abonnements récurrents
+- **Webhooks** : Traitement des événements Stripe
+- **Remboursements** : Gestion des remboursements
+- **Facturation** : Génération des factures
+
+## 📧 Service d'email
+
+### EmailService
+
+Gère l'envoi d'emails transactionnels.
+
+```typescript
+// src/core/services/email.service.ts
+export class EmailService implements EmailPort {
+  constructor(private emailRepository: EmailRepository) {}
+
+  async sendWelcomeEmail(email: string, name: string): Promise<void> {
+    const template = await this.getEmailTemplate("welcome");
+    const content = this.renderTemplate(template, { name });
+
+    await this.emailRepository.send({
+      to: email,
+      subject: "Bienvenue sur Foundation Builder",
+      html: content,
+    });
+  }
+
+  async sendPasswordResetEmail(email: string, resetToken: string): Promise<void> {
+    const resetUrl = `${process.env.APP_URL}/reset-password?token=${resetToken}`;
+
+    await this.emailRepository.send({
+      to: email,
+      subject: "Réinitialisation de votre mot de passe",
+      html: this.renderPasswordResetTemplate(resetUrl),
+    });
+  }
+}
+```
+
+### Cas d'usage d'email
+
+- **Bienvenue** : Email de confirmation d'inscription
+- **Réinitialisation** : Email de récupération de mot de passe
+- **Notifications** : Alertes et notifications importantes
+- **Marketing** : Emails promotionnels (optionnel)
+
+## 🔄 Injection de dépendances
+
+### Configuration des services
+
+```typescript
+// src/lib/di-container/di-container.ts
+export const container = {
+  // Services
+  authService: () => new AuthService(container.authRepository(), container.emailService()),
+  userService: () => new UserService(container.userRepository()),
+  paymentService: () => new PaymentService(container.paymentRepository(), container.userRepository()),
+  emailService: () => new EmailService(container.emailRepository()),
+
+  // Repositories
+  authRepository: () => new FirebaseAuthRepository(),
+  userRepository: () => new FirestoreUserRepository(),
+  paymentRepository: () => new StripePaymentRepository(),
+  emailRepository: () => new ResendEmailRepository(),
+};
+```
+
+## 🧪 Tests des services
+
+### Tests unitaires
+
+```typescript
+// tests/services/auth.service.test.ts
+describe("AuthService", () => {
+  let authService: AuthService;
+  let mockAuthRepository: jest.Mocked<AuthRepository>;
+
+  beforeEach(() => {
+    mockAuthRepository = createMockAuthRepository();
+    authService = new AuthService(mockAuthRepository);
+  });
+
+  it("should sign in user with valid credentials", async () => {
+    // Arrange
+    const email = "test@example.com";
+    const password = "password123";
+    mockAuthRepository.findUserByEmail.mockResolvedValue(mockUser);
+
+    // Act
+    const result = await authService.signIn(email, password);
+
+    // Assert
+    expect(result.user.email).toBe(email);
+    expect(mockAuthRepository.findUserByEmail).toHaveBeenCalledWith(email);
+  });
+});
+```
+
+## 📊 Monitoring et logs
+
+### Logging des services
+
+```typescript
+// src/core/services/base.service.ts
+export abstract class BaseService {
+  protected logger: Logger;
+
+  constructor(serviceName: string) {
+    this.logger = new Logger(serviceName);
+  }
+
+  protected logError(error: Error, context: any): void {
+    this.logger.error(error.message, { error, context });
+  }
+
+  protected logInfo(message: string, data?: any): void {
+    this.logger.info(message, data);
+  }
+}
+```
+
+## 🚀 Performance
+
+### Optimisations
+
+- **Cache** : Mise en cache des données fréquemment utilisées
+- **Pagination** : Pagination des listes importantes
+- **Lazy loading** : Chargement à la demande
+- **Connection pooling** : Pool de connexions pour les bases de données
