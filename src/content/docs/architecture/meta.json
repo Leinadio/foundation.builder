@@ -1,6 +1,6 @@
 {
   "title": "Architecture",
   "icon": "Dna",
-  "pages": ["index", "ports"],
+  "pages": ["index", "client-server", "ports"],
   "defaultOpen": true
 }

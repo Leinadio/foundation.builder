@@ -1,0 +1,116 @@
+---
+title: Séparation Client/Server
+description: Comprendre la duplication de l'architecture hexagonale entre les environnements client et server dans Foundation Builder
+---
+
+---
+
+# Séparation Client/Server
+
+Foundation Builder implémente une architecture hexagonale dupliquée dans deux environnements distincts : le **client** et le **server**. Cette approche garantit une cohérence architecturale tout en optimisant les performances selon le contexte d'exécution.
+
+---
+
+## Concept de duplication
+
+### Architecture identique
+
+Les dossiers `client/` et `server/` sont structurellement identiques et suivent exactement les mêmes principes architecturaux :
+
+- **Services métier** : Logique métier pure dans les deux environnements
+- **Ports In/Out** : Mêmes contrats d'interface
+- **Repositories** : Même abstraction des dépendances externes
+- **DI Container** : Même système d'injection de dépendances
+- **Modèles** : Mêmes entités métier partagées
+
+### Différence d'environnement
+
+La seule différence réside dans l'environnement d'exécution :
+
+- **Client** : S'exécute dans le navigateur (frontend)
+- **Server** : S'exécute sur le serveur (backend)
+
+---
+
+## Structure des dossiers
+
+```
+src/core/
+├── client/                    # Environnement client
+│   ├── di-container-client.ts
+│   ├── ports/
+│   │   ├── in/               # Ports d'entrée client
+│   │   └── out/              # Ports de sortie client
+│   ├── repositories/         # Implémentations client
+│   │   ├── better-auth/
+│   │   ├── firebase/
+│   │   ├── firestore/
+│   │   └── supabase/
+│   └── services/             # Services métier client
+│       ├── auth.service.ts
+│       └── user.service.ts
+├── server/                   # Environnement server
+│   ├── di-container-server.ts
+│   ├── ports/
+│   │   ├── in/               # Ports d'entrée server
+│   │   └── out/              # Ports de sortie server
+│   ├── repositories/         # Implémentations server
+│   │   ├── better-auth/
+│   │   ├── resend/
+│   │   └── stripe/
+│   └── services/             # Services métier server
+│       ├── auth.service.ts
+│       ├── email.service.ts
+│       └── payment.service.ts
+└── models/                   # Modèles partagés
+    ├── user.ts
+    ├── session.ts
+    └── payment.ts
+```
+
+---
+
+## Avantages de cette approche
+
+### Cohérence architecturale
+
+La duplication garantit que les mêmes principes architecturaux sont appliqués partout, facilitant la compréhension et la maintenance du code.
+
+### Optimisation des performances
+
+Chaque environnement peut être optimisé pour ses contraintes spécifiques :
+
+- **Client** : Optimisé pour la réactivité et l'expérience utilisateur
+- **Server** : Optimisé pour la sécurité et la persistance des données
+
+### Indépendance des environnements
+
+Les deux environnements peuvent évoluer indépendamment sans impacter l'autre, permettant une flexibilité maximale.
+
+### Réutilisabilité du code
+
+Les modèles métier sont partagés, évitant la duplication de la logique de validation et des types.
+
+---
+
+## Bonnes pratiques
+
+### Séparation des responsabilités
+
+- **Client** : Se concentre sur l'interface utilisateur et l'état local
+- **Server** : Se concentre sur la logique métier complexe et la persistance
+
+### Partage des modèles
+
+Utilisez les modèles partagés pour garantir la cohérence des données entre client et server.
+
+### Configuration adaptée
+
+Adaptez les repositories selon l'environnement :
+
+- **Client** : Repositories optimisés pour les interactions frontend
+- **Server** : Repositories optimisés pour la sécurité et la persistance
+
+### Tests indépendants
+
+Testez chaque environnement indépendamment en utilisant des mocks appropriés pour les dépendances externes.

@@ -3,9 +3,13 @@ title: Ports In et Out
 description: Comprendre les ports d'entrée et de sortie dans l'architecture hexagonale de Foundation Builder
 ---
 
+---
+
 # Ports In et Out
 
 Les ports constituent le système d'abstraction central de l'architecture hexagonale. Ils définissent les contrats d'interface entre la logique métier et les couches externes, garantissant une séparation claire des responsabilités et une indépendance technologique.
+
+---
 
 ## Ports d'entrée (In)
 
@@ -49,6 +53,8 @@ export interface AuthPortIn {
 }
 ```
 
+---
+
 ## Ports de sortie (Out)
 
 Les ports de sortie définissent les contrats des dépendances externes que l'application utilise. Ils représentent les interfaces que vos repositories doivent implémenter.
@@ -82,6 +88,8 @@ export interface AuthRepository {
 }
 ```
 
+---
+
 ## Organisation des ports
 
 ### Structure des dossiers
@@ -105,6 +113,8 @@ Chaque couche (client et server) possède ses propres ports adaptés à son envi
 - **Ports client** : Optimisés pour les interactions frontend et l'état local
 - **Ports server** : Optimisés pour les opérations backend et la persistance
 
+---
+
 ## Avantages des ports
 
 ### Indépendance technologique
@@ -122,6 +132,8 @@ La séparation claire des responsabilités rend le code plus facile à comprendr
 ### Évolutivité
 
 L'ajout de nouvelles fonctionnalités se fait de manière modulaire en étendant les ports existants ou en créant de nouveaux ports.
+
+---
 
 ## Bonnes pratiques
 

@@ -6,6 +6,8 @@ defaultOpen: true
 
 ![Architecture hexagonale de Foundation Builder](/images/architecture_hexagonale.png)
 
+---
+
 ## Séparation Client/Server
 
 L'architecture hexagonale est dupliquée dans deux environnements distincts : le **client** et le **server**. Chaque environnement possède sa propre implémentation complète de l'architecture hexagonale, avec ses services, ports, repositories et conteneur d'injection de dépendances (DI Container).
@@ -20,9 +22,13 @@ Les dossiers `client/` et `server/` sont structurellement identiques et suivent 
   />
 </div>
 
+---
+
 ## Injection de dépendances
 
 Chaque couche (client et server) instancie son propre conteneur d'injection de dépendances qui se charge d'initialiser les services et repositories nécessaires. Le DI Container orchestre la création des instances et gère leurs dépendances, permettant une configuration centralisée et une inversion de contrôle efficace.
+
+---
 
 ## Ports In et Out
 
@@ -30,11 +36,15 @@ L'utilisation de l'application se fait exclusivement par l'intermédiaire d'abst
 
 Cette abstraction garantit que la logique métier ne dépend jamais directement des détails d'implémentation. Les services utilisent uniquement les interfaces définies dans les ports, ce qui rend le code plus robuste et plus facile à maintenir.
 
+---
+
 ## Services métier
 
 Les services constituent le cœur de la logique métier de l'application. Ils implémentent les ports d'entrée (in) et orchestrent les opérations complexes en utilisant les repositories via les ports de sortie (out). Chaque service est responsable d'un domaine métier spécifique, comme l'authentification, la gestion des utilisateurs, ou les paiements.
 
 Les services encapsulent la logique métier pure, sans dépendances techniques. Ils reçoivent les repositories en injection de dépendances via leur constructeur, ce qui permet de les tester facilement en utilisant des mocks. Cette approche garantit que la logique métier reste indépendante des détails d'implémentation des repositories.
+
+---
 
 ## Repositories et implémentations
 
@@ -46,6 +56,8 @@ Chaque repository possède plusieurs implémentations possibles pour un même po
 
 Les repositories gèrent également la gestion d'erreurs et la transformation des données. Ils convertissent les erreurs spécifiques des systèmes externes en erreurs métier compréhensibles, et mappent les réponses externes vers les modèles métier de l'application. Cette couche de traduction garantit une interface cohérente et prévisible pour les services.
 
+---
+
 ## Modèles métier
 
 Les modèles constituent le cœur conceptuel de l'application et représentent les entités métier du domaine. Ils définissent la structure des données et encapsulent les règles de validation spécifiques au métier. Chaque modèle correspond à une entité importante de l'application, comme les utilisateurs, les paiements, ou les sessions.
@@ -53,6 +65,8 @@ Les modèles constituent le cœur conceptuel de l'application et représentent l
 Les modèles sont partagés entre les couches client et server, garantissant une cohérence des données à travers toute l'application. Ils définissent les types TypeScript stricts et incluent des fonctions de validation pour s'assurer que les données respectent les contraintes métier. Cette centralisation évite les incohérences et facilite la maintenance.
 
 Les modèles sont indépendants de toute technologie ou infrastructure. Ils ne contiennent aucune logique technique et se concentrent uniquement sur la représentation des concepts métier. Cette pureté permet une réutilisation maximale et garantit que les règles métier restent cohérentes quel que soit l'environnement d'exécution.
+
+---
 
 ## Avantages de cette architecture
 
