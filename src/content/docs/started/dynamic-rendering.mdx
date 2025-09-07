@@ -1,0 +1,269 @@
+---
+title: Rendu dynamique
+description: Comprendre l'utilisation du rendu dynamique avec page-render-config.tsx et le composant index.tsx
+---
+
+# Rendu dynamique
+
+Foundation Builder utilise un système de rendu dynamique basé sur la configuration qui permet de créer des **landing pages** complexes sans écrire de code React traditionnel. Ce système utilise `page-render-config.tsx` pour définir la structure et `index.tsx` pour le rendu.
+
+> **Note importante** : Le rendu dynamique est spécifiquement conçu pour la landing page. Les autres pages de l'application ne contiennent pas de rendu dynamique.
+
+---
+
+## Vue d'ensemble
+
+### Principe du rendu dynamique
+
+Le rendu dynamique est spécialement conçu pour les landing pages et permet de :
+
+- **Séparer la logique de présentation** de la logique métier
+- **Configurer les landing pages** via des fichiers de configuration TypeScript
+- **Réutiliser les composants** de manière déclarative
+- **Faciliter la maintenance** et l'évolution des landing pages
+
+### Architecture
+
+```
+page-render-config.tsx  →  Configuration des sections
+         ↓
+    index.tsx          →  Rendu dynamique des composants
+         ↓
+   Composants UI       →  Affichage final
+```
+
+---
+
+## Avantages du système
+
+### Maintenance facilitée
+
+Le système de rendu dynamique facilite grandement la maintenance des pages. Toutes les modifications se font dans le fichier `page-render-config.tsx`, centralisant ainsi la configuration de l'interface utilisateur. Cette approche élimine le besoin d'écrire du code React traditionnel, remplaçant la logique de présentation par une configuration pure en TypeScript. La réorganisation des sections devient un jeu d'enfant : il suffit de déplacer les objets dans le tableau de configuration pour réorganiser complètement la page.
+
+### Évolutivité
+
+Le système offre une excellente évolutivité pour l'ajout de nouvelles fonctionnalités. L'ajout de nouveaux composants se fait simplement en les incluant dans le mapping des composants, sans modification du code de rendu. De nouveaux types de sections peuvent être facilement ajoutés pour répondre à des besoins de layout spécifiques. La configuration flexible des propriétés permet d'adapter les composants existants à de nouveaux cas d'usage sans modification du code source.
+
+### Performance
+
+Le système de rendu dynamique est optimisé pour les performances. Les composants sont chargés à la demande, réduisant le temps de chargement initial de la page. Le code splitting est automatiquement géré, séparant les bundles selon les composants utilisés. Le lazy loading des sections permet de différer le chargement des éléments non critiques, améliorant ainsi l'expérience utilisateur sur les connexions lentes.
+
+---
+
+## Configuration avec page-render-config.tsx
+
+### Structure de base
+
+Le fichier `page-render-config.tsx` exporte un tableau de configurations de sections. Chaque sections correspond à un blocks/ de la landing page
+
+```typescript
+export const pageRenderConfig: SectionConfig[] = [
+  {
+    type: "header",
+    components: [
+      {
+        component: "HeaderContainer",
+        props: {
+          navigationLinks: [
+            { id: "fonctionnalites", label: "Fonctionnalités", href: "#fonctionnalites" },
+            { id: "tarifs", label: "Tarifs", href: "#tarifs" },
+          ],
+        },
+      },
+    ],
+  },
+  {
+    type: "section",
+    components: [
+      {
+        id: "hero",
+        component: "HeroContainer",
+        props: {
+          title: "Votre titre principal",
+          description: "Description de votre produit",
+        },
+      },
+    ],
+  },
+];
+```
+
+### Types de sections
+
+#### Header
+
+```typescript
+{
+  type: "header",
+  components: [
+    {
+      component: "HeaderContainer",
+      props: {
+        navigationLinks: [...],
+      },
+    },
+  ],
+}
+```
+
+#### Section standard
+
+```typescript
+{
+  type: "section",
+  components: [
+    {
+      id: "unique-id",
+      component: "ComponentName",
+      props: {
+        // Propriétés du composant
+      },
+    },
+  ],
+}
+```
+
+#### Section pleine largeur
+
+```typescript
+{
+  type: "section-full-width",
+  components: [
+    {
+      id: "unique-id",
+      component: "ComponentName",
+      props: {
+        // Propriétés du composant
+      },
+    },
+  ],
+}
+```
+
+#### Section avec arrière-plan
+
+```typescript
+{
+  type: "section-full-width-with-background",
+  components: [
+    {
+      id: "unique-id",
+      component: "ComponentName",
+      props: {
+        // Propriétés du composant
+      },
+    },
+  ],
+}
+```
+
+#### Footer
+
+```typescript
+{
+  type: "footer",
+  components: [
+    {
+      component: "FooterContainer",
+      props: {
+        // Propriétés du footer
+      },
+    },
+  ],
+}
+```
+
+---
+
+## Règles importantes
+
+### Utilisation des Container
+
+**⚠️ Important** : Il faut absolument utiliser les **Container** des composants dans la configuration, pas les composants UI directs.
+
+```typescript
+// ✅ Correct - Utiliser les Container
+{
+  component: "HeroContainer",     // Container avec logique métier
+  props: { ... }
+}
+
+// ❌ Incorrect - Ne pas utiliser les composants UI directs
+{
+  component: "Hero",              // Composant UI pur
+  props: { ... }
+}
+```
+
+### Différence entre Container et UI
+
+- **Container** (ex: `HeroContainer`) : Composants dans `blocks/` avec logique métier et état
+- **UI** (ex: `Hero`) : Composants dans `components/` avec interface pure
+
+Les Container sont conçus pour le rendu dynamique et incluent :
+
+- La logique métier nécessaire
+- La gestion d'état
+- Les props adaptées au système de configuration
+- L'intégration avec les services
+
+---
+
+## Utilisation pratique
+
+### 1. Modifier une section existante
+
+Pour modifier une section, éditez directement `page-render-config.tsx` :
+
+```typescript
+// Modifier le titre de la section hero
+{
+  type: "section",
+  components: [
+    {
+      id: "hero",
+      component: "HeroContainer",
+      props: {
+        title: "Nouveau titre",
+        description: "Nouvelle description",
+      },
+    },
+  ],
+}
+```
+
+### 2. Ajouter une nouvelle section
+
+```typescript
+// Ajouter une nouvelle section
+{
+  type: "section",
+  components: [
+    {
+      id: "nouvelle-section",
+      component: "NouveauComposant",
+      props: {
+        title: "Titre de la nouvelle section",
+        content: "Contenu de la section",
+      },
+    },
+  ],
+}
+```
+
+### 3. Réorganiser les sections
+
+Déplacez simplement les objets dans le tableau `pageRenderConfig` :
+
+```typescript
+export const pageRenderConfig: SectionConfig[] = [
+  // Section 1
+  { type: "header", components: [...] },
+
+  // Section 2 (déplacée)
+  { type: "section", components: [...] },
+
+  // Section 3
+  { type: "footer", components: [...] },
+];
+```
