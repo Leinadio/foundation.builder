@@ -1,0 +1,291 @@
+---
+title: Composants UI
+description: Comprendre l'utilisation des composants UI dans Foundation Builder
+---
+
+# Composants UI
+
+Foundation Builder utilise une architecture de composants UI organisée en deux niveaux principaux : les **blocks** (sections de page) et les **components** (éléments d'interface). Cette organisation permet une réutilisation optimale et une maintenance facilitée.
+
+---
+
+## Vue d'ensemble
+
+### Architecture des composants
+
+```
+foundation.ui (registry shadcn)  →  Composants de base
+         ↓
+   components/                   →  Éléments UI réutilisables
+         ↓
+     blocks/                     →  Sections de page complètes
+         ↓
+   index.tsx                     →  Logique métier et orchestration
+```
+
+### Types de composants
+
+- **UI Components** (`ui.tsx`) : Composants d'interface pure, téléchargés depuis le registry shadcn
+- **Container Components** (`index.tsx`) : Composants avec logique métier et orchestration
+- **Blocks** : Sections complètes de page (Hero, WithWithout, etc.)
+- **Components** : Éléments d'interface composant les blocks
+
+---
+
+## Structure des composants
+
+### Fichiers ui.tsx
+
+Les fichiers `ui.tsx` contiennent les composants d'interface pure, généralement téléchargés depuis le registry shadcn de `foundation.ui` ou d'autres registries.
+
+```typescript
+// Exemple : components/ui/button.tsx
+import * as React from "react";
+import { Slot } from "@radix-ui/react-slot";
+import { cva, type VariantProps } from "class-variance-authority";
+
+const buttonVariants = cva("inline-flex items-center justify-center rounded-md text-sm font-medium", {
+  variants: {
+    variant: {
+      default: "bg-primary text-primary-foreground hover:bg-primary/90",
+      destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
+    },
+    size: {
+      default: "h-10 px-4 py-2",
+      sm: "h-9 rounded-md px-3",
+    },
+  },
+  defaultVariants: {
+    variant: "default",
+    size: "default",
+  },
+});
+
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    VariantProps<typeof buttonVariants> {
+  asChild?: boolean;
+}
+
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ className, variant, size, asChild = false, ...props }, ref) => {
+    const Comp = asChild ? Slot : "button";
+    return <Comp className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props} />;
+  }
+);
+Button.displayName = "Button";
+
+export { Button, buttonVariants };
+```
+
+### Fichiers index.tsx
+
+Les fichiers `index.tsx` contiennent la logique métier et l'orchestration des composants UI.
+
+```typescript
+// Exemple : blocks/hero/index.tsx
+"use client";
+
+import { Hero } from "./ui";
+import { useAuth } from "@/hooks/use-auth";
+import { Button } from "@/components/ui/button";
+
+interface HeroContainerProps {
+  title: string;
+  description: string;
+  ctaText?: string;
+  ctaHref?: string;
+}
+
+export function HeroContainer({ title, description, ctaText = "Commencer", ctaHref = "/sign-up" }: HeroContainerProps) {
+  const { user, isLoading } = useAuth();
+
+  const handleCtaClick = () => {
+    if (user) {
+      // Logique pour utilisateur connecté
+      window.location.href = "/dashboard";
+    } else {
+      // Logique pour utilisateur non connecté
+      window.location.href = ctaHref;
+    }
+  };
+
+  return (
+    <Hero
+      title={title}
+      description={description}
+      cta={
+        <Button onClick={handleCtaClick} disabled={isLoading} size="lg">
+          {isLoading ? "Chargement..." : ctaText}
+        </Button>
+      }
+    />
+  );
+}
+```
+
+---
+
+## Organisation des composants
+
+### Dossier blocks/
+
+Les blocks représentent les **sections complètes** d'une page, généralement utilisées dans les landing pages.
+
+```
+blocks/
+├── hero/
+│   ├── index.tsx          # HeroContainer - Logique métier
+│   └── ui.tsx             # Hero - Interface pure
+├── with-without/
+│   ├── index.tsx          # WithWithoutContainer
+│   └── ui.tsx             # WithWithout
+└── features/
+    ├── index.tsx          # FeaturesContainer
+    └── ui.tsx             # Features
+```
+
+#### Exemples de blocks
+
+- **Hero** : Section principale d'accueil
+- **WithWithout** : Comparaison avant/après
+- **Features** : Liste des fonctionnalités
+- **Pricing** : Section de tarification
+- **Testimonials** : Témoignages clients
+
+### Dossier components/
+
+Les components sont des **éléments d'interface** réutilisables qui composent les blocks.
+
+```
+components/
+├── ui/                    # Composants shadcn
+│   ├── button.tsx
+│   ├── card.tsx
+│   └── input.tsx
+├── layout/                # Composants de mise en page
+│   ├── header.tsx
+│   ├── footer.tsx
+│   └── navigation.tsx
+└── forms/                 # Composants de formulaire
+    ├── login-form.tsx
+    └── contact-form.tsx
+```
+
+#### Exemples de components
+
+- **Button** : Bouton réutilisable
+- **Card** : Carte de contenu
+- **Input** : Champ de saisie
+- **Header** : En-tête de page
+- **Navigation** : Menu de navigation
+
+---
+
+## Utilisation dans le rendu dynamique
+
+### Configuration des blocks
+
+Dans `page-render-config.tsx`, utilisez toujours les **Container** (index.tsx) :
+
+```typescript
+export const pageRenderConfig: SectionConfig[] = [
+  {
+    type: "section",
+    components: [
+      {
+        id: "hero",
+        component: "HeroContainer", // ✅ Container avec logique
+        props: {
+          title: "Votre titre",
+          description: "Votre description",
+          ctaText: "Commencer",
+          ctaHref: "/sign-up",
+        },
+      },
+    ],
+  },
+  {
+    type: "section",
+    components: [
+      {
+        id: "features",
+        component: "FeaturesContainer", // ✅ Container avec logique
+        props: {
+          features: [
+            { title: "Fonctionnalité 1", description: "..." },
+            { title: "Fonctionnalité 2", description: "..." },
+          ],
+        },
+      },
+    ],
+  },
+];
+```
+
+### Règles importantes
+
+- **Toujours utiliser les Container** dans la configuration
+- **Ne jamais utiliser les UI directs** dans le rendu dynamique
+- **Les Container gèrent la logique métier** et l'état
+- **Les UI sont des composants purs** sans logique
+
+---
+
+## Bonnes pratiques
+
+### Séparation des responsabilités
+
+- **ui.tsx** : Interface pure, props simples, pas de logique métier
+- **index.tsx** : Logique métier, gestion d'état, orchestration des services
+
+### Réutilisabilité
+
+- **Components** : Réutilisables dans tous les contextes
+- **Blocks** : Réutilisables dans les landing pages
+- **UI** : Réutilisables partout dans l'application
+
+### Maintenance
+
+- **Modifications UI** : Toujours dans les fichiers `ui.tsx`
+- **Modifications logique** : Toujours dans les fichiers `index.tsx`
+- **Nouveaux composants** : Commencer par `ui.tsx`, puis `index.tsx`
+
+### Naming conventions
+
+- **Container** : `[Name]Container` (ex: `HeroContainer`)
+- **UI** : `[Name]` (ex: `Hero`)
+- **Fichiers** : `index.tsx` et `ui.tsx`
+
+---
+
+## Intégration avec les services
+
+Les Container peuvent intégrer les services de l'architecture hexagonale :
+
+```typescript
+// Exemple d'intégration avec les services
+export function PricingContainer({ plans }: PricingContainerProps) {
+  const { user } = useAuth();
+  const { createCheckoutSession } = usePayment();
+
+  const handleSubscribe = async (planId: string) => {
+    if (!user) {
+      // Rediriger vers la connexion
+      window.location.href = "/sign-in";
+      return;
+    }
+
+    try {
+      const session = await createCheckoutSession(planId);
+      window.location.href = session.url;
+    } catch (error) {
+      console.error("Erreur lors de la création de la session", error);
+    }
+  };
+
+  return <Pricing plans={plans} onSubscribe={handleSubscribe} isAuthenticated={!!user} />;
+}
+```
+
+Cette architecture permet une séparation claire entre l'interface utilisateur et la logique métier, facilitant la maintenance et l'évolution des composants.
