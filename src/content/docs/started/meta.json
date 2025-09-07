@@ -1,0 +1,6 @@
+{
+  "title": "Bien démarrer",
+  "icon": "Rocket",
+  "pages": ["installation", "dynamic-rendering"],
+  "defaultOpen": true
+}
