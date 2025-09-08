@@ -1,0 +1,98 @@
+---
+title: Analytics
+description: Comprendre comment intégrer Analytics dans Foundation Builder
+---
+
+## 1. Créer le site dans Plausible
+
+Aller dans Plausible > "Add Website"
+
+![Architecture hexagonale de Foundation Builder](/images/docs/analytics_plausible_1.png)
+
+---
+
+## 2. Ajouter votre domaine
+
+- Indiquez votre domaine (ex: `example.com`).
+- Pour un développement local, conservez votre domaine de prod; l'application est configurée pour traquer en local.
+- Continuer avec l'installation de Plausible via next-plausible.
+
+![Architecture hexagonale de Foundation Builder](/images/docs/analytics_plausible_2.png)
+
+---
+
+## 3. Pour l'installation de next-plausible, renseigner la variable d'environnement
+
+Foundation Builder lit le domaine public depuis `NEXT_PUBLIC_BASE_DOMAIN` pour initialiser Plausible.
+
+```bash
+NEXT_PUBLIC_BASE_DOMAIN=example.com
+```
+
+---
+
+## 4. Intégration côté application
+
+L'intégration de Plausible est déjà en place dans le layout racine via `next-plausible`.
+[Documentation next-plausible](https://www.npmjs.com/package/next-plausible)
+
+```typescript
+// app/layout.tsx (extrait)
+<PlausibleProvider
+  domain={process.env.NEXT_PUBLIC_BASE_DOMAIN || ""}
+  trackOutboundLinks={true}
+  taggedEvents={true}
+  trackLocalhost={true}
+/>
+```
+
+Options activées:
+
+- `trackOutboundLinks`: suivi des clics vers des liens externes
+- `taggedEvents`: support des événements via attributs HTML
+- `trackLocalhost`: suivi activé en local (utile pour vérifier l'intégration)
+
+---
+
+## 5. Suivre des événements personnalisés
+
+Créer des événements personnalisés depuis l'interface de Plausible:
+
+![Architecture hexagonale de Foundation Builder](/images/docs/analytics_plausible_3.png)
+
+Deux approches sont supportées:
+
+### a) Hook `usePlausible`
+
+```typescript
+// Exemple dans un Client Component
+import { usePlausible } from "next-plausible";
+
+export function CtaButton() {
+  const plausible = usePlausible();
+  return (
+    <button
+      onClick={() => {
+        plausible("Signup Start", { props: { plan: "pro" } });
+      }}
+    >
+      Commencer
+    </button>
+  );
+}
+```
+
+### b) Attributs d'événements balisés
+
+```tsx
+// Tout élément peut porter un nom d'événement
+<button className="plausible-event-name=Signup+Start">Commencer</button>
+```
+
+Un exemple est déjà présent dans le bloc `Hero`:
+
+```typescript
+// blocks/landing-page/hero/index.tsx (extrait)
+const plausible = usePlausible();
+plausible("Best Test");
+```
