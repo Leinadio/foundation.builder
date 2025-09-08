@@ -52,7 +52,6 @@ export class StripePaymentRepositoryImpl implements PaymentRepository {
     this.ensureStripeAvailable();
 
     const sessionData = this.buildSessionData(request);
-    console.log("sessionData : ", sessionData);
     const session = await this.stripe!.checkout.sessions.create(sessionData);
     return this.mapStripeSession(session, request.amount, request.currency);
   }

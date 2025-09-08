@@ -11,25 +11,14 @@ Foundation Builder utilise un système de rendu dynamique basé sur la configura
 
 ---
 
-## Vue d'ensemble
-
-### Principe du rendu dynamique
-
-Le rendu dynamique est spécialement conçu pour les landing pages et permet de :
-
-- **Séparer la logique de présentation** de la logique métier
-- **Configurer les landing pages** via des fichiers de configuration TypeScript
-- **Réutiliser les composants** de manière déclarative
-- **Faciliter la maintenance** et l'évolution des landing pages
-
-### Architecture
+## Architecture
 
 ```
 page-render-config.tsx  →  Configuration des sections
          ↓
-    index.tsx          →  Rendu dynamique des composants
+    index.tsx           →  Rendu dynamique des composants
          ↓
-   Composants UI       →  Affichage final
+   Composants UI        →  Affichage final
 ```
 
 ---
@@ -38,15 +27,15 @@ page-render-config.tsx  →  Configuration des sections
 
 ### Maintenance facilitée
 
-Le système de rendu dynamique facilite grandement la maintenance des pages. Toutes les modifications se font dans le fichier `page-render-config.tsx`, centralisant ainsi la configuration de l'interface utilisateur. Cette approche élimine le besoin d'écrire du code React traditionnel, remplaçant la logique de présentation par une configuration pure en TypeScript. La réorganisation des sections devient un jeu d'enfant : il suffit de déplacer les objets dans le tableau de configuration pour réorganiser complètement la page.
+Le système de rendu dynamique facilite grandement la maintenance de la landing page. Toutes les modifications se font dans le fichier `page-render-config.tsx`, centralisant ainsi la configuration de l'interface utilisateur. Cette approche élimine le besoin d'écrire du code React traditionnel, remplaçant la logique de présentation par une configuration pure en TypeScript. La réorganisation des sections devient un jeu d'enfant : il suffit de déplacer les objets dans le tableau de configuration pour réorganiser complètement la landing page.
 
 ### Évolutivité
 
-Le système offre une excellente évolutivité pour l'ajout de nouvelles fonctionnalités. L'ajout de nouveaux composants se fait simplement en les incluant dans le mapping des composants, sans modification du code de rendu. De nouveaux types de sections peuvent être facilement ajoutés pour répondre à des besoins de layout spécifiques. La configuration flexible des propriétés permet d'adapter les composants existants à de nouveaux cas d'usage sans modification du code source.
+Le système offre une excellente évolutivité pour l'ajout de nouvelles fonctionnalités sur la landing page. L'ajout de nouveaux composants se fait simplement en les incluant dans le mapping des composants, sans modification du code de rendu. De nouveaux types de sections peuvent être facilement ajoutés pour répondre à des besoins de layout spécifiques. La configuration flexible des propriétés permet d'adapter les composants existants à de nouveaux cas d'usage sans modification du code source.
 
 ### Performance
 
-Le système de rendu dynamique est optimisé pour les performances. Les composants sont chargés à la demande, réduisant le temps de chargement initial de la page. Le code splitting est automatiquement géré, séparant les bundles selon les composants utilisés. Le lazy loading des sections permet de différer le chargement des éléments non critiques, améliorant ainsi l'expérience utilisateur sur les connexions lentes.
+Le système de rendu dynamique est optimisé pour les performances de la landing page. Les composants sont chargés à la demande, réduisant le temps de chargement initial. Le code splitting est automatiquement géré, séparant les bundles selon les composants utilisés. Le lazy loading des sections permet de différer le chargement des éléments non critiques, améliorant ainsi l'expérience utilisateur sur les connexions lentes.
 
 ---
 
@@ -88,9 +77,21 @@ export const pageRenderConfig: SectionConfig[] = [
 ];
 ```
 
-### Types de sections
+---
 
-#### Header
+## Types de sections
+
+Le système propose différents types de sections pour adapter la mise en page selon les besoins :
+
+- `header` : Section spéciale pour l'en-tête, occupe toute la largeur avec un style distinct
+- `section` : Section standard avec une largeur maximale contrainte et des marges horizontales
+- `section-full-width` : Section qui s'étend sur toute la largeur de l'écran sans contrainte
+- `footer` : Section spéciale pour le pied de page, occupe toute la largeur avec un style distinct
+- `background` : Section avec un arrière-plan personnalisé qui s'étend sur toute la largeur
+
+La configuration du type se fait simplement via la propriété `type` de chaque section :
+
+### Header
 
 ```typescript
 {
@@ -106,7 +107,7 @@ export const pageRenderConfig: SectionConfig[] = [
 }
 ```
 
-#### Section standard
+### Section standard
 
 ```typescript
 {
@@ -123,7 +124,7 @@ export const pageRenderConfig: SectionConfig[] = [
 }
 ```
 
-#### Section pleine largeur
+### Section pleine largeur
 
 ```typescript
 {
@@ -140,7 +141,7 @@ export const pageRenderConfig: SectionConfig[] = [
 }
 ```
 
-#### Section avec arrière-plan
+### Section avec arrière-plan
 
 ```typescript
 {
@@ -157,7 +158,7 @@ export const pageRenderConfig: SectionConfig[] = [
 }
 ```
 
-#### Footer
+### Footer
 
 ```typescript
 {

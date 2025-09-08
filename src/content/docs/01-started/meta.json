@@ -1,6 +1,6 @@
 {
   "title": "Bien démarrer",
   "icon": "Rocket",
-  "pages": ["installation", "dynamic-rendering", "ui-components"],
+  "pages": ["installation"],
   "defaultOpen": true
 }

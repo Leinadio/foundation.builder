@@ -1,0 +1,67 @@
+---
+title: Paiement Stripe
+description: Comprendre comment intégrer Stripe dans Foundation Builder
+---
+
+## Récupérer la clé secrète Stripe
+
+Afin de pouvoir utiliser Stripe, vous devez récupérer la clé secrète Stripe pour pouvoir créer des paiements et des abonnements.
+
+### 1. Dans la page d'accueil de Stripe, copier la clé secrète
+
+![Architecture hexagonale de Foundation Builder](/images/docs/payment_stripe_0.png)
+
+### 1. Ou aller dans Stripe > "Developeurs" > "Clés API"
+
+- Copier la clé secrète
+
+![Architecture hexagonale de Foundation Builder](/images/docs/payment_stripe_1.png)
+
+### 3. Renseigner la variable d'environnement
+
+- Ouvrir le fichier `.env` ou `.env.local`
+- Renseigner la variable d'environnement suivante:
+- `STRIPE_SECRET_KEY` : Clé secrète Stripe
+
+```bash
+STRIPE_SECRET_KEY=...
+```
+
+---
+
+## Créer un produit Stripe
+
+Afin de pouvoir créer des paiements et des abonnements, vous devez créer un produit Stripe.
+
+### 1. Aller dans Stripe > "Produits" > "Produits"
+
+![Architecture hexagonale de Foundation Builder](/images/docs/payment_stripe_2.png)
+
+### 2. Renseigner les informations du produit
+
+- Renseigner le nom du produit
+- Renseigner l'image
+- Choisir "Récurrent" ou "Ponctuel"
+- Renseigner le montant du produit
+- Cliquer sur "Ajouter le produit"
+
+![Architecture hexagonale de Foundation Builder](/images/docs/payment_stripe_3.png)
+![Architecture hexagonale de Foundation Builder](/images/docs/payment_stripe_4.png)
+
+### 3. Cliquer sur le tarif du produit
+
+![Architecture hexagonale de Foundation Builder](/images/docs/payment_stripe_5.png)
+
+### 4. Copier l'ID du tarif
+
+![Architecture hexagonale de Foundation Builder](/images/docs/payment_stripe_6.png)
+
+### 5. Renseigner la variable d'environnement
+
+- Ouvrir le fichier `.env` ou `.env.local`
+- Renseigner la variable d'environnement suivante:
+- `STRIPE_PRICE_ID` : ID du tarif
+
+```bash
+STRIPE_PRICE_ID=...
+```

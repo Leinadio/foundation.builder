@@ -1,0 +1,44 @@
+---
+title: Authentification Google
+description: Configuration de l'authentification Google de votre application.
+---
+
+## 1. Aller dans la Google Cloud Console > "API & Services" > "Identifiants"
+
+![Architecture hexagonale de Foundation Builder](/images/docs/auth_google_1.png)
+
+## 2. Cliquer sur "Créer des identifiants"
+
+![Architecture hexagonale de Foundation Builder](/images/docs/auth_google_2.png)
+
+## 3. Sélectionner "ID client OAuth"
+
+![Architecture hexagonale de Foundation Builder](/images/docs/auth_google_3.png)
+
+## 4. Renseigner les informations de l'application
+
+- Indiqués dans "URI de redirection autorisées" `http://localhost:3000/api/auth/callback/google` pour le développement local
+- Indiqués dans "URI de redirection autorisées" `https://example.com/api/auth/callback/google` pour la production
+- Cliquer sur "Créer"
+
+![Architecture hexagonale de Foundation Builder](/images/docs/auth_google_4.png)
+
+## 5. Copier les valeurs de "ID client" et "Code secret du client"
+
+![Architecture hexagonale de Foundation Builder](/images/docs/auth_google_5.png)
+
+## 6. Renseigner les variables d'environnement
+
+- Ouvrir le fichier `.env` ou `.env.local`
+- Renseigner les variables d'environnement suivantes:
+- `GOOGLE_CLIENT_ID` : ID client
+- `GOOGLE_CLIENT_SECRET` : Code secret du client
+
+```bash
+GOOGLE_CLIENT_ID=...
+GOOGLE_CLIENT_SECRET=...
+```
+
+## 7. Références
+
+- [Google avec Better-Auth](https://www.better-auth.com/docs/authentication/google)

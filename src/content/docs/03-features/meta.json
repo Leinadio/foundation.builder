@@ -1,0 +1,6 @@
+{
+  "title": "Fonctionnalités",
+  "icon": "LibraryBig",
+  "pages": ["dynamic-rendering", "auth-config", "auth-google", "auth-github", "payment-stripe"],
+  "defaultOpen": true
+}
