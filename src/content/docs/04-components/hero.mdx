@@ -7,6 +7,8 @@ description: Le composant Hero est un composant de landing page qui permet de pr
 
 Le composant Hero est une section d'accueil complète pour les landing pages. Il combine un titre, une description, des badges et un call-to-action dans une mise en page centrée et responsive.
 
+Vous pouvez tester le composant dans Storybook: [Hero Storybook](http://localhost:6006/?path=/story/blocks-landing-page-hero--default).
+
 ---
 
 ## Aperçu du composant
@@ -29,9 +31,21 @@ import { Button } from "@/components/ui/button";
 
 ---
 
-## Structure du composant
+## Utilisation dans index.tsx
 
-### Container (index.tsx)
+### Exemple par défaut (index.tsx)
+
+Le `HeroContainer` peut être utilisé sans aucune intégration avec les services :
+
+```typescript
+import { HeroContainer } from "@/blocks/landing-page/hero";
+
+export function MyPage() {
+  return <HeroContainer badge="Nouveau" title="Mon titre" titleHighlight="important" description="Ma description" />;
+}
+```
+
+### Exemple avec Plausible (index.tsx)
 
 Le `HeroContainer` gère la logique métier et l'intégration avec les services :
 
@@ -69,7 +83,37 @@ export function HeroContainer(props: HeroProps) {
 }
 ```
 
-### Interface UI (ui.tsx)
+---
+
+## Utilisation dans page-render-config.tsx
+
+### Dans le rendu dynamique
+
+```typescript
+// page-render-config.tsx
+export const pageRenderConfig: SectionConfig[] = [
+  {
+    type: "section",
+    components: [
+      {
+        id: "hero",
+        component: "HeroContainer", // ✅ Utiliser le Container
+        props: {
+          badge: "Nouveau",
+          title: "Construisez votre application",
+          titleHighlight: "rapidement",
+          description:
+            "Foundation Builder vous permet de créer des applications web modernes avec une architecture hexagonale.",
+        },
+      },
+    ],
+  },
+];
+```
+
+---
+
+## Structure du composant UI (ui.tsx)
 
 Le composant `Hero` définit l'interface utilisateur pure :
 
@@ -135,101 +179,6 @@ Hero.CtaSection = HeroCtaSection;
 
 ---
 
-## Utilisation
-
-### Dans le rendu dynamique
-
-```typescript
-// page-render-config.tsx
-export const pageRenderConfig: SectionConfig[] = [
-  {
-    type: "section",
-    components: [
-      {
-        id: "hero",
-        component: "HeroContainer", // ✅ Utiliser le Container
-        props: {
-          badge: "Nouveau",
-          title: "Construisez votre application",
-          titleHighlight: "rapidement",
-          description:
-            "Foundation Builder vous permet de créer des applications web modernes avec une architecture hexagonale.",
-        },
-      },
-    ],
-  },
-];
-```
-
-### Utilisation directe
-
-```typescript
-import { HeroContainer } from "@/blocks/landing-page/hero";
-
-export function MyPage() {
-  return <HeroContainer badge="Nouveau" title="Mon titre" titleHighlight="important" description="Ma description" />;
-}
-```
-
----
-
-## Personnalisation
-
-### Styles CSS
-
-Le composant utilise des classes Tailwind CSS personnalisables :
-
-- **Container** : `px-8 pt-24 md:pt-20 justify-center text-center flex flex-col mx-auto max-w-5xl items-center gap-10`
-- **Titre** : `text-4xl md:text-6xl font-semibold text-foreground`
-- **Titre en évidence** : `text-primary ml-2`
-- **Description** : `text-lg text-muted-foreground max-w-3xl`
-
-### Call-to-Action personnalisé
-
-```typescript
-<Hero badge="Nouveau" title="Mon titre" description="Ma description">
-  <Hero.CtaSection>
-    <div className="flex gap-4">
-      <Button variant="default">Action principale</Button>
-      <Button variant="outline">Action secondaire</Button>
-    </div>
-  </Hero.CtaSection>
-</Hero>
-```
-
----
-
-## Fonctionnalités
-
-### Analytics intégré
-
-Le Container intègre Plausible Analytics pour le tracking des interactions :
-
-```typescript
-const plausible = usePlausible();
-
-<Button
-  className="plausible-event-name=Best+Test"
-  onClick={() => {
-    plausible("Best Test");
-  }}
->
-  Commencer gratuitement
-</Button>;
-```
-
-### Navigation
-
-Le bouton CTA redirige vers `/app` par défaut, mais peut être personnalisé via les props.
-
-### Responsive Design
-
-- **Mobile** : Titre en `text-4xl`, padding adapté
-- **Desktop** : Titre en `text-6xl`, espacement optimisé
-- **Largeur maximale** : `max-w-5xl` pour une lecture confortable
-
----
-
 ## Bonnes pratiques
 
 ### Utilisation des Container
@@ -237,16 +186,3 @@ Le bouton CTA redirige vers `/app` par défaut, mais peut être personnalisé vi
 - **Toujours utiliser `HeroContainer`** dans le rendu dynamique
 - **Ne jamais utiliser `Hero` directement** dans la configuration
 - **Le Container gère la logique métier** et l'intégration des services
-
-### Contenu
-
-- **Titre** : Court et percutant (2-8 mots)
-- **Description** : Explicative mais concise (1-2 phrases)
-- **Badge** : Information pertinente (Nouveau, Bêta, etc.)
-- **CTA** : Action claire et motivante
-
-### Accessibilité
-
-- Le composant utilise des balises sémantiques (`<section>`, `<h1>`)
-- Les couleurs respectent les contrastes d'accessibilité
-- Le focus est géré par les composants Button intégrés

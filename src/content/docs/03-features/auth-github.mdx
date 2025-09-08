@@ -1,0 +1,50 @@
+---
+title: Authentification GitHub
+description: Configuration de l'authentification GitHub de votre application.
+---
+
+## 1. Aller dans GitHub > "Settings"
+
+![Architecture hexagonale de Foundation Builder](/images/docs/auth_github_1.png)
+
+## 2. Aller dans "Developer settings"
+
+![Architecture hexagonale de Foundation Builder](/images/docs/auth_github_2.png)
+
+## 3. Sélectionner "OAuth Apps" puis "New OAuth App"
+
+![Architecture hexagonale de Foundation Builder](/images/docs/auth_github_3.png)
+
+## 4. Renseigner les informations de l'application
+
+- Si il s'agit d'un développement local, indiquer dans "Homepage URL" `http://localhost:3000`
+- Si il s'agit d'une production, indiquer dans "Homepage URL" `https://example.com`
+- Indiqués dans "Authorization callback URL" `http://localhost:3000/api/auth/callback/github` pour le développement local
+- Indiqués dans "Authorization callback URL" `https://example.com/api/auth/callback/github` pour la production
+- Cliquer sur "Register application"
+
+![Architecture hexagonale de Foundation Builder](/images/docs/auth_github_4.png)
+
+## 5. Générer un nouveau client secret en cliquant sur "Generate a new client secret"
+
+![Architecture hexagonale de Foundation Builder](/images/docs/auth_github_5.png)
+
+## 6. Copier les valeurs de "Client ID" et "Client secret"
+
+![Architecture hexagonale de Foundation Builder](/images/docs/auth_github_6.png)
+
+## 7. Renseigner les variables d'environnement
+
+- Ouvrir le fichier `.env` ou `.env.local`
+- Renseigner les variables d'environnement suivantes:
+- `AUTH_GITHUB_CLIENT_ID` : ID client
+- `AUTH_GITHUB_CLIENT_SECRET` : Code secret du client
+
+```bash
+AUTH_GITHUB_CLIENT_ID=...
+AUTH_GITHUB_CLIENT_SECRET=...
+```
+
+## 7. Références
+
+- [GitHub avec Better-Auth](https://www.better-auth.com/docs/authentication/github)
