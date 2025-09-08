@@ -1,6 +1,15 @@
 {
   "title": "Fonctionnalités",
   "icon": "LibraryBig",
-  "pages": ["dynamic-rendering", "auth-config", "auth-google", "auth-github", "payment-stripe", "analytics"],
+  "pages": [
+    "dynamic-rendering",
+    "auth-config",
+    "auth-google",
+    "auth-github",
+    "payment-stripe",
+    "analytics",
+    "ci-cd",
+    "email-resend"
+  ],
   "defaultOpen": true
 }

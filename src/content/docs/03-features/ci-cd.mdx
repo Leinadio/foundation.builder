@@ -1,0 +1,105 @@
+---
+title: CI/CD (GitHub Actions & Vercel)
+description: Pipeline d'intégration et de déploiement continus avec GitHub Actions et Vercel
+---
+
+## Vue d'ensemble
+
+La CI/CD repose sur deux workflows GitHub Actions et un déploiement automatisé vers Vercel:
+
+- Dev: sur la branche `dev` (push/PR)
+- Prod: sur action manuelle (approval) avec `workflow_dispatch`
+
+Les workflows valident le code (lint, build, variables) puis déploient sur Vercel avec les credentials du projet.
+
+---
+
+## Workflow Dev
+
+Chemin: `.github/workflows/deploy-dev.yml`
+
+Déclencheurs:
+
+- `push` sur `dev`
+- `pull_request` vers `dev`
+
+Jobs:
+
+1. `validate` (environnement: `dev`)
+   - Checkout, Node 20, `npm ci`
+   - `npm run lint`
+   - `npm run build` (type-check)
+   - Validation des variables requises côté CI (doivent être présentes dans GitHub):
+     - `secrets.STRIPE_SECRET_KEY`
+     - `secrets.RESEND_API_KEY`
+     - `vars.DATABASE_URL`
+2. `deploy-dev` (nécessite `validate`)
+   - Checkout, Node 20, `npm ci`, `npm run lint`, `npm run build` avec env:
+     - `STRIPE_SECRET_KEY` → `${{ secrets.STRIPE_SECRET_KEY }}`
+     - `RESEND_API_KEY` → `${{ secrets.RESEND_API_KEY }}`
+     - `DATABASE_URL` → `${{ vars.DATABASE_URL }}`
+     - `GOOGLE_CLIENT_ID` → `${{ vars.GOOGLE_CLIENT_ID }}`
+     - `GOOGLE_CLIENT_SECRET` → `${{ secrets.GOOGLE_CLIENT_SECRET }}`
+     - `AUTH_GITHUB_CLIENT_ID` → `${{ vars.GITHUB_CLIENT_ID }}`
+     - `AUTH_GITHUB_CLIENT_SECRET` → `${{ secrets.GITHUB_CLIENT_SECRET }}`
+   - Déploiement Vercel via `amondnet/vercel-action@v25` avec:
+     - `VERCEL_TOKEN` (secret)
+     - `VERCEL_ORG_ID` (secret)
+     - `VERCEL_PROJECT_ID` (secret)
+
+---
+
+## Workflow Prod
+
+Chemin: `.github/workflows/deploy-prod.yml`
+
+Déclencheur:
+
+- `workflow_dispatch` avec confirmation `confirm_deploy: true`
+
+Jobs:
+
+1. `validate` (env: `prod`, conditionné par `confirm_deploy`)
+   - Checkout, Node 20, `npm ci`, `npm run lint`, `npm run build`
+   - Validation des variables (mêmes clés que pour `dev`)
+2. `deploy-prod` (nécessite `validate` et `confirm_deploy`)
+   - Checkout, Node 20, `npm ci`, `npm run build` avec les mêmes variables que `dev`
+   - Déploiement Vercel avec `--prod`
+   - Sortie de notification de succès
+
+---
+
+## Variables et Secrets requis (GitHub Repository Settings)
+
+Définissez ces clés dans votre dépôt GitHub:
+
+- Secrets:
+  - `STRIPE_SECRET_KEY`
+  - `RESEND_API_KEY`
+  - `GOOGLE_CLIENT_SECRET`
+  - `GITHUB_CLIENT_SECRET`
+  - `VERCEL_TOKEN`
+  - `VERCEL_ORG_ID`
+  - `VERCEL_PROJECT_ID`
+- Variables (Repository Variables — `vars`):
+  - `DATABASE_URL`
+  - `GOOGLE_CLIENT_ID`
+  - `GITHUB_CLIENT_ID` (utilisé comme `AUTH_GITHUB_CLIENT_ID` dans le build)
+
+Note: Les workflows exportent ces valeurs en variables d'environnement au moment du `build`.
+
+---
+
+## Comment déclencher les déploiements
+
+- Dev: poussez vos commits sur la branche `dev` ou ouvrez une PR vers `dev`.
+- Prod: onglet "Actions" > workflow "Deploy to Production" > "Run workflow" > cocher `confirm_deploy` > Run.
+
+---
+
+## Bonnes pratiques
+
+- Maintenir `npm run lint` et `npm run build` sans erreurs avant déploiement
+- Garder secrets et variables synchronisés entre GitHub et Vercel si utilisés côté runtime
+- Utiliser des environnements GitHub (`environment: dev/prod`) pour isoler les permissions
+- Limiter les droits du token Vercel au strict nécessaire
