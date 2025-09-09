@@ -1,0 +1,486 @@
+---
+title: SEO
+description: Optimiser le référencement de votre application SaaS avec Foundation Builder
+---
+
+# Optimisation SEO pour les applications SaaS
+
+Foundation Builder intègre nativement les meilleures pratiques SEO pour maximiser la visibilité de votre application SaaS dans les moteurs de recherche. Cette documentation couvre tous les aspects techniques et stratégiques du référencement.
+
+---
+
+## Architecture SEO de Foundation Builder
+
+### Métadonnées automatiques
+
+Foundation Builder génère automatiquement les métadonnées essentielles pour le SEO :
+
+- **Title** : Optimisé pour chaque page
+- **Description** : Meta description pertinente
+- **Open Graph** : Pour le partage sur les réseaux sociaux
+- **Twitter Cards** : Optimisation pour Twitter
+- **Canonical URLs** : Évite le contenu dupliqué
+- **Schema.org** : Données structurées pour les moteurs de recherche
+
+### Structure technique
+
+```
+app/
+├── layout.tsx          # Métadonnées globales
+├── page.tsx           # Page d'accueil optimisée
+├── sitemap.ts         # Génération automatique du sitemap
+├── robots.ts          # Configuration robots.txt
+└── [lang]/           # Support multilingue
+```
+
+---
+
+## Configuration des métadonnées
+
+### Métadonnées globales (layout.tsx)
+
+```typescript
+// app/layout.tsx
+export const metadata: Metadata = {
+  title: {
+    default: "Votre SaaS - Solution innovante",
+    template: "%s | Votre SaaS",
+  },
+  description: "Description de votre solution SaaS qui résout [problème spécifique]",
+  keywords: ["saas", "solution", "productivité", "innovation"],
+  authors: [{ name: "Votre Entreprise" }],
+  creator: "Votre Entreprise",
+  publisher: "Votre Entreprise",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  openGraph: {
+    type: "website",
+    locale: "fr_FR",
+    url: "https://votredomaine.com",
+    title: "Votre SaaS - Solution innovante",
+    description: "Description de votre solution SaaS",
+    siteName: "Votre SaaS",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Votre SaaS - Solution innovante",
+    description: "Description de votre solution SaaS",
+    creator: "@votrecompte",
+  },
+  verification: {
+    google: "votre-code-verification-google",
+    yandex: "votre-code-verification-yandex",
+  },
+};
+```
+
+### Métadonnées par page
+
+```typescript
+// app/page.tsx
+export const metadata: Metadata = {
+  title: "Accueil",
+  description: "Découvrez notre solution SaaS révolutionnaire qui transforme votre workflow",
+  openGraph: {
+    title: "Accueil - Votre SaaS",
+    description: "Découvrez notre solution SaaS révolutionnaire",
+    images: ["/images/og-homepage.jpg"],
+  },
+};
+```
+
+---
+
+## Optimisation du contenu
+
+### Structure des titres (H1, H2, H3)
+
+```tsx
+// Exemple dans un composant Hero
+export function Hero() {
+  return (
+    <section>
+      <h1>Transformez votre productivité avec notre SaaS</h1>
+      <h2>La solution tout-en-un pour [votre secteur]</h2>
+      <h3>Fonctionnalités clés</h3>
+    </section>
+  );
+}
+```
+
+### Optimisation des images
+
+```tsx
+import Image from "next/image";
+
+export function FeatureImage() {
+  return (
+    <Image
+      src="/images/feature-dashboard.jpg"
+      alt="Tableau de bord intuitif de notre solution SaaS"
+      width={800}
+      height={600}
+      priority={true} // Pour les images above-the-fold
+      placeholder="blur"
+      blurDataURL="data:image/jpeg;base64,..."
+    />
+  );
+}
+```
+
+### Liens internes optimisés
+
+```tsx
+import Link from "next/link";
+
+export function Navigation() {
+  return (
+    <nav>
+      <Link href="/fonctionnalites" title="Découvrir nos fonctionnalités">
+        Fonctionnalités
+      </Link>
+      <Link href="/tarifs" title="Voir nos tarifs et plans">
+        Tarifs
+      </Link>
+      <Link href="/contact" title="Nous contacter">
+        Contact
+      </Link>
+    </nav>
+  );
+}
+```
+
+---
+
+## Performance et Core Web Vitals
+
+### Optimisations Next.js
+
+```typescript
+// next.config.ts
+const nextConfig = {
+  // Compression
+  compress: true,
+
+  // Images optimisées
+  images: {
+    formats: ["image/webp", "image/avif"],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+  },
+
+  // Headers de performance
+  async headers() {
+    return [
+      {
+        source: "/(.*)",
+        headers: [
+          {
+            key: "X-Content-Type-Options",
+            value: "nosniff",
+          },
+          {
+            key: "X-Frame-Options",
+            value: "DENY",
+          },
+          {
+            key: "X-XSS-Protection",
+            value: "1; mode=block",
+          },
+        ],
+      },
+    ];
+  },
+};
+```
+
+### Lazy loading des composants
+
+```tsx
+import dynamic from "next/dynamic";
+
+// Chargement différé des composants lourds
+const HeavyComponent = dynamic(() => import("./HeavyComponent"), {
+  loading: () => <div>Chargement...</div>,
+  ssr: false, // Si le composant n'a pas besoin d'être rendu côté serveur
+});
+
+export function Page() {
+  return (
+    <div>
+      <h1>Contenu principal</h1>
+      <HeavyComponent />
+    </div>
+  );
+}
+```
+
+---
+
+## Sitemap et robots.txt
+
+### Sitemap automatique
+
+```typescript
+// app/sitemap.ts
+import { MetadataRoute } from "next";
+
+export default function sitemap(): MetadataRoute.Sitemap {
+  const baseUrl = "https://votredomaine.com";
+
+  return [
+    {
+      url: baseUrl,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 1,
+    },
+    {
+      url: `${baseUrl}/fonctionnalites`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/tarifs`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/blog`,
+      lastModified: new Date(),
+      changeFrequency: "daily",
+      priority: 0.7,
+    },
+  ];
+}
+```
+
+### Configuration robots.txt
+
+```typescript
+// app/robots.ts
+import { MetadataRoute } from "next";
+
+export default function robots(): MetadataRoute.Robots {
+  return {
+    rules: {
+      userAgent: "*",
+      allow: "/",
+      disallow: ["/admin/", "/api/", "/_next/"],
+    },
+    sitemap: "https://votredomaine.com/sitemap.xml",
+  };
+}
+```
+
+---
+
+## SEO multilingue
+
+### Configuration i18n
+
+```typescript
+// middleware.ts
+import { NextRequest, NextResponse } from "next/server";
+
+export function middleware(request: NextRequest) {
+  const pathname = request.nextUrl.pathname;
+
+  // Vérifier si le chemin contient déjà une langue
+  const pathnameIsMissingLocale = locales.every(
+    (locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
+  );
+
+  if (pathnameIsMissingLocale) {
+    return NextResponse.redirect(new URL(`/fr${pathname}`, request.url));
+  }
+}
+
+export const config = {
+  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
+};
+```
+
+### Métadonnées multilingues
+
+```typescript
+// app/[lang]/layout.tsx
+export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
+  const { lang } = params;
+
+  const translations = {
+    fr: {
+      title: "Votre SaaS - Solution française",
+      description: "Description en français",
+    },
+    en: {
+      title: "Your SaaS - French Solution",
+      description: "Description in English",
+    },
+  };
+
+  return {
+    title: translations[lang as keyof typeof translations]?.title,
+    description: translations[lang as keyof typeof translations]?.description,
+    alternates: {
+      canonical: `https://votredomaine.com/${lang}`,
+      languages: {
+        "fr-FR": "https://votredomaine.com/fr",
+        "en-US": "https://votredomaine.com/en",
+      },
+    },
+  };
+}
+```
+
+---
+
+## Analytics et monitoring SEO
+
+### Google Search Console
+
+```typescript
+// lib/analytics.ts
+export const gtag = {
+  // Configuration Google Analytics 4
+  GA_MEASUREMENT_ID: process.env.NEXT_PUBLIC_GA_ID,
+
+  // Événements SEO
+  trackPageView: (url: string) => {
+    if (typeof window !== "undefined" && window.gtag) {
+      window.gtag("config", gtag.GA_MEASUREMENT_ID, {
+        page_path: url,
+      });
+    }
+  },
+
+  // Tracking des conversions
+  trackConversion: (eventName: string, parameters: any) => {
+    if (typeof window !== "undefined" && window.gtag) {
+      window.gtag("event", eventName, parameters);
+    }
+  },
+};
+```
+
+### Monitoring des performances
+
+```typescript
+// lib/performance.ts
+export const reportWebVitals = (metric: any) => {
+  // Envoyer les Core Web Vitals à votre service d'analytics
+  if (metric.label === "web-vital") {
+    console.log(metric);
+    // Envoyer à votre service d'analytics
+  }
+};
+```
+
+---
+
+## Checklist SEO
+
+### ✅ Métadonnées
+
+- [ ] Title unique et optimisé pour chaque page
+- [ ] Meta description de 150-160 caractères
+- [ ] Open Graph configuré
+- [ ] Twitter Cards configurées
+- [ ] Canonical URLs définies
+
+### ✅ Contenu
+
+- [ ] Structure H1, H2, H3 logique
+- [ ] Mots-clés pertinents intégrés naturellement
+- [ ] Images avec alt text descriptif
+- [ ] Liens internes optimisés
+- [ ] Contenu unique et de qualité
+
+### ✅ Technique
+
+- [ ] Sitemap XML généré
+- [ ] Robots.txt configuré
+- [ ] URLs propres et SEO-friendly
+- [ ] Vitesse de chargement optimisée
+- [ ] Mobile-friendly (responsive)
+
+### ✅ Données structurées
+
+- [ ] Schema.org Organisation
+- [ ] Schema.org Produit/Service
+- [ ] FAQ Schema si applicable
+- [ ] Breadcrumbs Schema
+
+### ✅ Analytics
+
+- [ ] Google Analytics 4 configuré
+- [ ] Google Search Console connecté
+- [ ] Suivi des conversions
+- [ ] Monitoring des Core Web Vitals
+
+---
+
+## Outils recommandés
+
+### Validation et test
+
+- **Google Search Console** : Monitoring des performances
+- **Google PageSpeed Insights** : Test de vitesse
+- **Schema Markup Validator** : Validation des données structurées
+- **Screaming Frog** : Audit technique complet
+
+### Monitoring
+
+- **Google Analytics 4** : Analytics avancés
+- **Hotjar** : Heatmaps et enregistrements
+- **SEMrush** : Suivi des positions et mots-clés
+
+### Contenu
+
+- **Ahrefs** : Recherche de mots-clés
+- **Answer The Public** : Questions des utilisateurs
+- **Ubersuggest** : Suggestions de contenu
+
+---
+
+## Bonnes pratiques spécifiques SaaS
+
+### 1. Landing page optimisée
+
+- Mise en avant des bénéfices utilisateur
+- Témoignages et social proof
+- Call-to-action clairs et visibles
+- Démonstration du produit (vidéo/screenshots)
+
+### 2. Pages de fonctionnalités
+
+- Une page par fonctionnalité principale
+- Exemples concrets d'utilisation
+- Comparaisons avec la concurrence
+- Cas d'usage détaillés
+
+### 3. Blog et contenu
+
+- Articles de blog réguliers
+- Guides et tutoriels
+- Études de cas clients
+- Actualités du secteur
+
+### 4. Pages de tarification
+
+- Comparaison claire des plans
+- Calculatrice de ROI
+- FAQ spécifiques aux tarifs
+- Témoignages de clients payants
+
+Cette documentation vous donne tous les outils nécessaires pour optimiser le SEO de votre application SaaS avec Foundation Builder. L'architecture est conçue pour être performante et évolutive, vous permettant de vous concentrer sur votre contenu et votre stratégie marketing.
