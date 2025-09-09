@@ -1,0 +1,312 @@
+---
+title: Nom de domaine
+description: Comprendre comment configurer un domaine pour Foundation Builder
+---
+
+Voici une version vulgarisée, complète et illustrée en **Markdown**, comme demandé :
+
+---
+
+## Comprendre les types de records DNS
+
+Quand vous configurez un nom de domaine (par exemple via Namecheap, OVH ou Google Domains), vous devez souvent créer ou modifier des **enregistrements DNS**. Ces enregistrements servent à dire **quoi faire avec votre nom de domaine** : où diriger le trafic, comment gérer les emails, vérifier votre domaine, etc.
+
+Voici les principaux types de records DNS, expliqués simplement avec des exemples.
+
+---
+
+### A Record (Address)
+
+**But :** Redirige un nom de domaine vers une adresse **IPv4**.
+
+**Exemple :**
+
+```text
+example.com → 203.0.113.10
+```
+
+Cela signifie que quand un utilisateur tape `example.com`, il sera dirigé vers le serveur à l’adresse IP `203.0.113.10`.
+
+**Utilisation typique :** Héberger un site sur un serveur web avec une adresse IP fixe.
+
+---
+
+### AAAA Record
+
+**But :** Même principe que le A record, mais pour une adresse **IPv6**.
+
+**Exemple :**
+
+```text
+example.com → 2001:0db8:85a3::8a2e:0370:7334
+```
+
+**Remarque :** Moins courant que IPv4, mais de plus en plus utilisé avec la montée d’IPv6.
+
+---
+
+### CNAME Record (Canonical Name)
+
+**But :** Fait pointer un **sous-domaine** vers un **autre nom de domaine**, au lieu d’une adresse IP.
+
+**Exemple :**
+
+```text
+www.example.com → example.com
+docs.example.com → site-hosting-service.com
+```
+
+**Attention :** On **ne peut pas** utiliser un CNAME pour le domaine principal (`example.com`), uniquement pour les **sous-domaines** (`www`, `app`, `docs`, etc.).
+
+**Utilisation typique :**
+
+- Héberger `www.example.com` avec un CNAME vers `example.com`
+- Connecter `app.example.com` à une plateforme comme Vercel ou Framer
+
+---
+
+### MX Record (Mail Exchange)
+
+**But :** Un MX Record est un enregistrement DNS qui indique où doivent être envoyés les e-mails destinés à votre domaine. Il ne pointe pas vers un site web, mais vers un serveur de messagerie (Gmail, Outlook, etc.).
+
+**Pourquoi l’utiliser ?**:
+Quand quelqu’un envoie un email à contact@monentreprise.com, le serveur de messagerie du destinataire (ex : Gmail, Outlook, ProtonMail, etc.) interroge le DNS pour savoir:
+
+- « À quel serveur dois-je livrer ce message ? ».
+
+C’est le MX record qui répond à cette question.
+
+**Dans le cas de Resend**: Le MX record fourni par Resend (feedback-smtp.eu-west-...) n'est pas destiné à recevoir des emails "humains", mais à recevoir les notifications d’échec d’envoi (bounces), gérer les rapports de spam ou d’abus (complaints) et mieux monitorer la délivrabilité
+
+**Utilisation typique :** Configurer les emails professionnels (`contact@votredomaine.com`) avec un fournisseur de messagerie.
+
+---
+
+### TXT Record (Text)
+
+Lorsque tu utilises [Resend](https://resend.com) pour envoyer des emails depuis ton propre nom de domaine, tu dois configurer plusieurs **enregistrements DNS de type TXT**. Ces enregistrements permettent d’authentifier ton domaine, de signer tes emails et d’indiquer quels services sont autorisés à envoyer des emails pour ton compte.
+
+---
+
+#### 1. SPF Record (Sender Policy Framework)
+
+Le SPF permet de spécifier quels serveurs de messagerie sont autorisés à envoyer des emails pour ton domaine. Dans le cas de Resend (qui utilise Amazon SES), tu dois inclure Amazon SES dans ta politique SPF.
+
+```txt
+Type: TXT
+Host: send
+Value: v=spf1 include:amazonses.com ~all
+```
+
+**Explication** :
+
+- `v=spf1` : version du SPF.
+- `include:amazonses.com` : autorise Amazon SES (utilisé par Resend) à envoyer des emails.
+- `~all` : emails non conformes seront acceptés mais marqués comme suspects.
+
+---
+
+#### 2. DKIM Record (DomainKeys Identified Mail)
+
+Le DKIM permet à Resend de signer numériquement les emails. Cela garantit que le contenu n’a pas été modifié et que l’expéditeur est bien celui qu’il prétend être.
+
+```txt
+Type: TXT
+Host: resend._domainkey
+Value: p=MIGfMA0GCSqG... (clé fournie par Resend)
+```
+
+**Explication** :
+
+- Ce record est généré automatiquement par Resend.
+- Il contient une **clé publique** utilisée pour vérifier la signature des emails envoyés.
+
+---
+
+#### 3. DMARC Record (Domain-based Message Authentication, Reporting and Conformance)
+
+Le DMARC est une politique qui indique comment gérer les emails qui échouent aux vérifications SPF ou DKIM. Il est recommandé, mais pas toujours obligatoire.
+
+```txt
+Type: TXT
+Host: _dmarc
+Value: v=DMARC1; p=none; rua=mailto:admin@tondomaine.com;
+```
+
+**Explication des paramètres** :
+
+- `v=DMARC1` : version.
+- `p=none` : ne fait rien si l’email échoue (utile pour les tests).
+- `rua` : adresse email où seront envoyés les rapports d’échec.
+
+Tu peux plus tard changer la politique en `quarantine` (mettre en spam) ou `reject` (rejeter complètement).
+
+---
+
+### SRV Record (Service)
+
+**But :** Un SRV Record, c’est un type d'information que tu ajoutes à ton nom de domaine pour indiquer où se trouve un service précis, comme un serveur de chat, de jeu ou d’appel vocal. C’est un peu comme donner l’adresse exacte, le port d’entrée, et la priorité d’un service spécifique qu’un logiciel veut utiliser.
+
+**À quoi ça sert concrètement ? Imaginons que tu veux :**
+
+- Permettre à une application comme Microsoft Teams de trouver ton serveur d’appel.
+- Configurer un serveur Minecraft avec une adresse personnalisée comme play.monserveur.com.
+- Faire marcher une application de chat comme Jabber/XMPP.
+
+Dans ces cas, tu as besoin d’indiquer où le service est accessible (quel serveur, quel port, quelle priorité), et c’est exactement le rôle du SRV Record.
+
+**Est-ce que j’ai besoin d’un SRV Record pour mon site web ?**
+
+Non. Un site web classique (comme une landing page ou une app) n’utilise pas ce type de record. Le SRV Record est utile seulement si un service particulier (souvent une app ou un logiciel) te le demande.
+
+---
+
+### NS Record (Name Server)
+
+**But :** Indique **quels serveurs DNS** sont responsables de votre domaine.
+
+**Exemple :**
+
+```text
+example.com → ns1.vercel-dns.com
+             ns2.vercel-dns.com
+```
+
+**Utilisation typique :**
+
+- Lors du transfert d’un domaine vers un autre fournisseur (ex : de Namecheap vers Vercel)
+- Lorsqu’un hébergeur gère le DNS pour vous
+
+---
+
+### SOA Record (Start of Authority)
+
+**But :** Contient les **informations principales** sur votre zone DNS :
+
+- Nom du serveur principal
+- Email de l’administrateur
+- Numéro de série
+- Fréquence de mise à jour…
+
+**Géré automatiquement** par la plupart des fournisseurs DNS.
+
+**Utilisation typique :** Purement technique, vous n’avez presque jamais besoin d’y toucher.
+
+---
+
+### CAA Record (Certification Authority Authorization)
+
+**But :** Indique **quelles autorités de certification** (CA) sont autorisées à émettre des certificats SSL pour votre domaine.
+
+**Exemple :**
+
+```text
+example.com → letsencrypt.org
+```
+
+**Utilisation typique :**
+
+- Renforcer la sécurité des certificats SSL
+- Empêcher qu’une mauvaise autorité délivre un certificat pour votre domaine
+
+---
+
+### PTR Record (Pointer - Reverse DNS)
+
+**But :** Sert au **reverse DNS** : retrouver le nom de domaine à partir d’une IP.
+
+**Exemple :**
+
+```text
+203.0.113.10 → example.com
+```
+
+**Utilisation typique :**
+
+- Email professionnel (les serveurs mails vérifient parfois si votre IP a un PTR valide)
+- Configuré côté hébergeur, rarement dans votre panneau DNS
+
+---
+
+### Conseils rapides:
+
+- **Site web au niveau racine**: utilisez un record **A** (ou un record ALIAS/ANAME si disponible) vers l’IP cible. Sur certaines plateformes managées (comme Vercel), utilisez l’**Apex** proposé (ALIAS/ANAME) ou les A records fournis.
+- **Sous-domaines** (`www`, `app`, `docs`): utilisez **CNAME** vers la cible fournie par l’hébergeur.
+- **E‑mail**: configurez **MX**, puis **TXT** (SPF/DKIM/DMARC) selon votre fournisseur (Google Workspace, Microsoft 365, etc.).
+
+---
+
+## Connecter un domaine à votre projet (hébergé sur Vercel)
+
+L’ajout d’un domaine se fait en deux étapes:
+
+1. Créer les records chez votre registrar/DNS provider.
+2. Déclarer votre domaine dans Vercel.
+
+### 1) Créer les records chez votre DNS provider
+
+Rendez-vous dans l’interface DNS de votre registrar (OVH, Gandi, Cloudflare, Godaddy, etc.) et créez exactement les records demandés par Vercel.
+
+- Apex `example.com`: créez les **A** records (ou **ALIAS/ANAME**) fournis.
+- `www.example.com`: créez un **CNAME** vers la cible fournie par Vercel.
+
+### 2) Ajouter le domaine dans Vercel
+
+1. Ouvrez votre projet Vercel associé à Foundation Builder.
+2. Allez dans Settings → Domains → Add Domain → saisissez votre domaine (`example.com`).
+3. Vercel indiquera les records à créer (différents pour l’« apex » `example.com` et pour `www.example.com`).
+
+Vous verrez généralement:
+
+- Pour le domaine racine (apex) `example.com`: un ou plusieurs **A** records ou un **ALIAS/ANAME** (si supporté par votre DNS provider) pointant vers l’infrastructure Vercel.
+- Pour `www.example.com`: un **CNAME** vers une cible de type `cname.vercel-dns.com` (ou équivalent fourni).
+
+---
+
+## Scénarios avec NameCheap
+
+### 1. Accédez à l'interface NameCheap > "Manage"
+
+![Domain Name](/images/docs/domainname_namecheap_1.png)
+
+### 2. Naviguez vers la section "Advanced DNS"
+
+![Domain Name](/images/docs/domainname_namecheap_2.png)
+
+### 3. Cliquez sur "Add New Record" puis configurer les Records suivants:
+
+- Les Records proviennent de Vercel et de Resend
+- A Record: Pour le domaine racine (apex) `example.com`
+- CNAME Record www: Pour le sous-domaine `www.example.com`
+- CNAME Record app: Pour le sous-domaine `app.example.com`
+- TXT Record:
+
+![Domain Name](/images/docs/domainname_namecheap_3.png)
+
+### 4. Dans Vercel, Cliquer sur "Add Domain"
+
+- A Record: `example.com`
+- CNAME Record www: `www.example.com`
+- CNAME Record app: `app.example.com`
+
+![Domain Name](/images/docs/domainname_namecheap_4.png)
+
+---
+
+## Configuration de Resend avec un domaine personnalisé
+
+### 1. Aller dans Resend > "Domains" > "Add Domain"
+
+![Domain Name](/images/docs/domainname_resend_1.png)
+
+### 2. Renseigner le nom de domaine > "+ Add Domain"
+
+![Domain Name](/images/docs/domainname_resend_2.png)
+
+### 3. Copier les records MX, TXT
+
+![Domain Name](/images/docs/domainname_resend_3.png)
+
+### 4. Aller dans NameCheap et renseigner les records TXT, MX
+
+![Domain Name](/images/docs/domainname_resend_4.png)
