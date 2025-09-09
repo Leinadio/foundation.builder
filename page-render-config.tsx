@@ -17,6 +17,7 @@ import {
   Gift,
 } from "lucide-react";
 import { IconPhoto, IconMessage, IconShare, IconFrame, IconStar } from "@tabler/icons-react";
+import { Highlighter } from "@/components/magicui/highlighter";
 
 export const pageRenderConfig: SectionConfig[] = [
   {
@@ -38,11 +39,13 @@ export const pageRenderConfig: SectionConfig[] = [
           badge: "💕 Pour les couples et amis",
           title: (
             <span className="inline-block">
-              Transformez vos conversations{" "}
-              <span className="inline-block decoration-primary relative ">
-                <span className="relative z-10 text-white">en souvenirs précieux</span>
-                <span className="bottom-0 absolute bg-primary h-4 md:h-full md:-bottom-0.5 -inset-x-2 "></span>
-              </span>
+              <Highlighter action="underline" color="var(--primary)">
+                Transformez{" "}
+              </Highlighter>{" "}
+              vos conversations en souvenirs{" "}
+              <Highlighter action="highlight" color="var(--primary)">
+                <span className="text-white">précieux</span>
+              </Highlighter>{" "}
             </span>
           ),
           description:
@@ -330,6 +333,213 @@ export const pageRenderConfig: SectionConfig[] = [
                 <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-orange-200 dark:from-orange-900 dark:to-orange-800 to-orange-100"></div>
               ),
               icon: <IconStar />,
+            },
+          ],
+        },
+      },
+      {
+        id: "services",
+        component: "ServicesContainer",
+        props: {
+          title: "Solutions numériques complètes",
+          description:
+            "Tarification transparente pour des solutions numériques de classe mondiale adaptées à vos besoins spécifiques et objectifs de croissance.",
+          badgeText: "Nos Services",
+          services: [
+            {
+              icon: (
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                </svg>
+              ),
+              title: "Stratégie Produit",
+              timeline: "2-4 semaines",
+              description:
+                "De la recherche de marché aux personas utilisateurs, nous vous aidons à créer des produits qui comptent. Notre approche stratégique garantit que votre produit répond aux vrais besoins des utilisateurs.",
+              features: [
+                { text: "Recherche & Analyse de marché" },
+                { text: "Personas & Cartographie du parcours utilisateur" },
+                { text: "Analyse concurrentielle" },
+                { text: "Développement de roadmap produit" },
+              ],
+              deliverables: [
+                { text: "Document de stratégie" },
+                { text: "Rapport de recherche utilisateur" },
+                { text: "Roadmap & Planning" },
+              ],
+              price: "À partir de 5 000€",
+              priceNote: "Devis personnalisés disponibles",
+              buttonText: "Commencer",
+            },
+            {
+              icon: (
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M3 3h18v18H3zM7 7h10v10H7z" />
+                </svg>
+              ),
+              title: "Design",
+              timeline: "3-6 semaines",
+              description:
+                "Des designs beaux et fonctionnels qui créent des expériences utilisateur mémorables. Nous nous concentrons sur l'esthétique et l'utilisabilité pour créer des designs qui convertissent.",
+              features: [
+                { text: "Design UI/UX" },
+                { text: "Prototypage interactif" },
+                { text: "Création de système de design" },
+                { text: "Tests d'utilisabilité" },
+              ],
+              deliverables: [
+                { text: "Système de design" },
+                { text: "Prototypes interactifs" },
+                { text: "Spécifications de design" },
+              ],
+              price: "À partir de 8 000€",
+              priceNote: "Devis personnalisés disponibles",
+              buttonText: "Commencer →",
+            },
+            {
+              icon: (
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M9 12l2 2 4-4" />
+                  <path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z" />
+                </svg>
+              ),
+              title: "Développement Web",
+              timeline: "6-12 semaines",
+              description:
+                "Applications robustes et évolutives construites avec des technologies et frameworks modernes. Nous nous assurons que votre application est rapide, sécurisée et maintenable.",
+              features: [
+                { text: "Développement Frontend" },
+                { text: "Développement Backend" },
+                { text: "Intégration API" },
+                { text: "Optimisation des performances" },
+              ],
+              deliverables: [
+                { text: "Code source" },
+                { text: "Documentation technique" },
+                { text: "Guide de déploiement" },
+              ],
+              price: "À partir de 15 000€",
+              priceNote: "Devis personnalisés disponibles",
+              buttonText: "Commencer →",
+            },
+            {
+              icon: (
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M3 3h18v18H3zM7 7h10v10H7z" />
+                </svg>
+              ),
+              title: "Marketing",
+              timeline: "En continu",
+              description:
+                "Initiatives de croissance stratégiques pour faire évoluer votre produit et maximiser l'impact. Nous utilisons des approches basées sur les données pour optimiser vos efforts marketing.",
+              features: [
+                { text: "Stratégie & Implémentation SEO" },
+                { text: "Analytics & Suivi des performances" },
+                { text: "Tests A/B & Optimisation" },
+                { text: "Stratégie de marketing de contenu" },
+              ],
+              deliverables: [
+                { text: "Plan marketing" },
+                { text: "Tableau de bord Analytics" },
+                { text: "Rapports de performance" },
+              ],
+              price: "À partir de 3 000€/mois",
+              priceNote: "Devis personnalisés disponibles",
+              buttonText: "Commencer →",
+            },
+          ],
+          customSolutionTitle: "Besoin d'une solution personnalisée ?",
+          customSolutionDescription:
+            "Nous proposons des packages sur mesure combinant plusieurs services pour une transformation numérique complète.",
+          customSolutionButtonText: "Planifier une consultation →",
+        },
+      },
+    ],
+  },
+  {
+    type: "section-full-width",
+    components: [
+      {
+        id: "testimonials",
+        component: "TestimonialsContainer",
+        props: {
+          title: "Rencontrez nos clients satisfaits",
+          description: "Tous nos 1000+ clients sont satisfaits de nos services",
+          badgeText: "TÉMOIGNAGES",
+          ctaText: "Commencer gratuitement",
+          ctaHref: "/app",
+          testimonials: [
+            {
+              id: "1",
+              name: "Marie Dubois",
+              role: "CEO",
+              company: "TechStart",
+              content:
+                "Foundation Builder a révolutionné notre façon de développer nos produits. L'approche structurée nous a fait gagner des mois de développement.",
+              rating: 5,
+            },
+            {
+              id: "2",
+              name: "Jean Martin",
+              role: "CTO",
+              company: "InnovateLab",
+              content:
+                "Un outil exceptionnel qui nous permet de valider nos idées rapidement et efficacement. L'interface est intuitive et les résultats sont précis.",
+              rating: 5,
+            },
+            {
+              id: "3",
+              name: "Sophie Laurent",
+              role: "Product Manager",
+              company: "DigitalFlow",
+              content:
+                "Grâce à Foundation Builder, nous avons pu lancer notre produit 3 mois plus tôt que prévu. La qualité du code généré est impressionnante.",
+              rating: 5,
+            },
+            {
+              id: "4",
+              name: "Pierre Moreau",
+              role: "Développeur Senior",
+              company: "CodeCraft",
+              content:
+                "L'architecture hexagonale implémentée par Foundation Builder est parfaite. Le code est maintenable et évolutif.",
+              rating: 5,
+            },
+            {
+              id: "5",
+              name: "Emma Rousseau",
+              role: "Designer UX",
+              company: "CreativeStudio",
+              content:
+                "Les composants UI sont magnifiques et parfaitement intégrés. Foundation Builder respecte les meilleures pratiques de design.",
+              rating: 5,
+            },
+            {
+              id: "6",
+              name: "Thomas Bernard",
+              role: "Fondateur",
+              company: "StartupX",
+              content:
+                "Un boilerplate complet qui nous a fait économiser des semaines de configuration. Tout est prêt pour la production.",
+              rating: 5,
+            },
+            {
+              id: "7",
+              name: "Léa Petit",
+              role: "Lead Developer",
+              company: "WebAgency",
+              content:
+                "Foundation Builder nous a permis de livrer des projets de qualité professionnelle en un temps record. Je le recommande vivement.",
+              rating: 5,
+            },
+            {
+              id: "8",
+              name: "Alexandre Durand",
+              role: "Directeur Technique",
+              company: "TechCorp",
+              content:
+                "L'approche Clean Architecture est parfaitement implémentée. Nos développeurs sont plus productifs et le code est plus robuste.",
+              rating: 5,
             },
           ],
         },

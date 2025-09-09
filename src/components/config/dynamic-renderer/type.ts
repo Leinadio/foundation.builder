@@ -13,6 +13,8 @@ import {
   PricingContainerProps,
   FaqContainerProps,
   FooterContainerProps,
+  ServicesContainerProps,
+  TestimonialsContainerProps,
 } from "@/blocks/landing-page";
 
 type HeaderContainerBlock = {
@@ -105,6 +107,18 @@ type FooterContainerBlock = {
   props: FooterContainerProps;
 };
 
+type ServicesContainerBlock = {
+  id?: string;
+  component: "ServicesContainer";
+  props: ServicesContainerProps;
+};
+
+type TestimonialsContainerBlock = {
+  id?: string;
+  component: "TestimonialsContainer";
+  props: TestimonialsContainerProps;
+};
+
 export type ComponentBlock =
   | HeaderContainerBlock
   | HeroRowAdvancedContainerBlock
@@ -120,4 +134,6 @@ export type ComponentBlock =
   | ForWhoContainerBlock
   | PricingContainerBlock
   | FaqContainerBlock
-  | FooterContainerBlock;
+  | FooterContainerBlock
+  | ServicesContainerBlock
+  | TestimonialsContainerBlock;
