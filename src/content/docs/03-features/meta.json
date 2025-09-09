@@ -9,7 +9,8 @@
     "payment-stripe",
     "analytics",
     "ci-cd",
-    "email-resend"
+    "email-resend",
+    "domain-name"
   ],
   "defaultOpen": true
 }
