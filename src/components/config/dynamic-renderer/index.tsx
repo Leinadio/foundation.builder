@@ -16,6 +16,8 @@ import {
   ImageComparisonContainer,
   WithWithoutContainer,
   HeroVideoContainer,
+  ServicesContainer,
+  TestimonialsContainer,
 } from "@/blocks/landing-page";
 import { ComponentBlock } from "@/components/config/dynamic-renderer/type";
 
@@ -43,6 +45,8 @@ const componentsMap: Record<string, React.ComponentType<any>> = {
   HeroVideoContainer,
   ImageComparisonContainer,
   WithWithoutContainer,
+  ServicesContainer,
+  TestimonialsContainer,
 };
 
 export function DynamicRenderer({ sections }: { sections: SectionConfig[] }): ReactNode {

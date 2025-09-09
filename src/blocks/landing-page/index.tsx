@@ -14,3 +14,5 @@ export * from "./image-comparison";
 export * from "./with-without";
 export * from "./hero-row/hero-row-advanced";
 export * from "./hero-video";
+export * from "./services";
+export * from "./testimonials";
