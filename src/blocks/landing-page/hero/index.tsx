@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { usePlausible } from "next-plausible";
 import Link from "next/link";
 import { Sailboat } from "lucide-react";
+import { Waitlist } from "@/components/shared/waitlist";
 
 export type HeroContainerProps = HeroProps;
 
@@ -13,6 +14,8 @@ export function HeroContainer(props: HeroProps) {
   return (
     <Hero {...props}>
       <Hero.CtaSection>
+        <Waitlist />
+
         <Button
           className="plausible-event-name=Best+Test h-12 min-w-72 text-lg"
           onClick={() => {
