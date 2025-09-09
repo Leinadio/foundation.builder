@@ -3,6 +3,7 @@
   "icon": "LibraryBig",
   "pages": [
     "dynamic-rendering",
+    "ui-components",
     "auth-config",
     "auth-google",
     "auth-github",
@@ -10,7 +11,8 @@
     "analytics",
     "ci-cd",
     "email-resend",
-    "domain-name"
+    "domain-name",
+    "seo"
   ],
   "defaultOpen": true
 }
