@@ -39,11 +39,11 @@ export const pageRenderConfig: SectionConfig[] = [
           badge: "💕 Pour les couples et amis",
           title: (
             <span className="inline-block">
-              <Highlighter action="underline" color="var(--primary)">
+              <Highlighter action="underline" color="var(--ring)">
                 Transformez{" "}
               </Highlighter>{" "}
               vos conversations en souvenirs{" "}
-              <Highlighter action="highlight" color="var(--primary)">
+              <Highlighter action="highlight" color="var(--ring)">
                 <span className="text-white">précieux</span>
               </Highlighter>{" "}
             </span>
@@ -61,8 +61,8 @@ export const pageRenderConfig: SectionConfig[] = [
         id: "video",
         component: "HeroVideoContainer",
         props: {
-          videoSrc: "/videos/hero_conversation_frame.mp4",
-          thumbnailSrc: "/videos/hero_conversation_frame_thumbnail.png",
+          videoSrc: "/videos/hero_en.mp4",
+          thumbnailSrc: "/videos/hero_en_thumbnail.png",
           thumbnailAlt: "Démo du service de cadre photo conversations",
         },
       },
@@ -162,6 +162,42 @@ export const pageRenderConfig: SectionConfig[] = [
               icon: Share2,
               title: "Partage facilité",
               description: "Partagez vos créations sur les réseaux ou gardez-les pour vous",
+            },
+          ],
+        },
+      },
+      {
+        id: "stats",
+        component: "StatsContainer",
+        props: {
+          heading: "Des créations à la portée de tous",
+          description: "Créez gratuitement, imprimez quand vous voulez",
+          link: {
+            text: "Commencer gratuitement",
+            url: "/",
+          },
+          stats: [
+            {
+              id: "stat-1",
+              value: "250%+",
+              label: "Conversations transformées",
+            },
+            {
+              id: "stat-2",
+              value: "$2.5m",
+              label: "Clients satisfaits",
+            },
+
+            {
+              id: "stat-3",
+              value: "200+",
+              label: "Templates disponibles",
+            },
+
+            {
+              id: "stat-4",
+              value: "99.9%",
+              label: "Taux de satisfaction",
             },
           ],
         },

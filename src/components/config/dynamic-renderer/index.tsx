@@ -18,6 +18,7 @@ import {
   HeroVideoContainer,
   ServicesContainer,
   TestimonialsContainer,
+  StatsContainer,
 } from "@/blocks/landing-page";
 import { ComponentBlock } from "@/components/config/dynamic-renderer/type";
 
@@ -47,6 +48,7 @@ const componentsMap: Record<string, React.ComponentType<any>> = {
   WithWithoutContainer,
   ServicesContainer,
   TestimonialsContainer,
+  StatsContainer,
 };
 
 export function DynamicRenderer({ sections }: { sections: SectionConfig[] }): ReactNode {

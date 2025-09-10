@@ -20,7 +20,7 @@ export function Waitlist() {
       ></Script>
 
       <div
-        className="justify-center"
+        className="justify-center p-O"
         id="getWaitlistContainer"
         data-waitlist_id="31048"
         data-widget_type="WIDGET_3"

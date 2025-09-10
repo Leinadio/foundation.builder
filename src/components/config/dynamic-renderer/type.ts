@@ -15,6 +15,7 @@ import {
   FooterContainerProps,
   ServicesContainerProps,
   TestimonialsContainerProps,
+  StatsContainerProps,
 } from "@/blocks/landing-page";
 
 type HeaderContainerBlock = {
@@ -119,6 +120,12 @@ type TestimonialsContainerBlock = {
   props: TestimonialsContainerProps;
 };
 
+type StatsContainerBlock = {
+  id?: string;
+  component: "StatsContainer";
+  props: StatsContainerProps;
+};
+
 export type ComponentBlock =
   | HeaderContainerBlock
   | HeroRowAdvancedContainerBlock
@@ -136,4 +143,5 @@ export type ComponentBlock =
   | FaqContainerBlock
   | FooterContainerBlock
   | ServicesContainerBlock
-  | TestimonialsContainerBlock;
+  | TestimonialsContainerBlock
+  | StatsContainerBlock;
