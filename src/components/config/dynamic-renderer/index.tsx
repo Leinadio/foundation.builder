@@ -19,6 +19,7 @@ import {
   ServicesContainer,
   TestimonialsContainer,
   StatsContainer,
+  AboutContainer,
 } from "@/blocks/landing-page";
 import { ComponentBlock } from "@/components/config/dynamic-renderer/type";
 
@@ -49,6 +50,7 @@ const componentsMap: Record<string, React.ComponentType<any>> = {
   ServicesContainer,
   TestimonialsContainer,
   StatsContainer,
+  AboutContainer,
 };
 
 export function DynamicRenderer({ sections }: { sections: SectionConfig[] }): ReactNode {

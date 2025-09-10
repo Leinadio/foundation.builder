@@ -17,3 +17,4 @@ export * from "./hero-video";
 export * from "./services";
 export * from "./testimonials";
 export * from "./stats";
+export * from "./about";

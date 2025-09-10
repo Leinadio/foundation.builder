@@ -285,7 +285,7 @@ export const pageRenderConfig: SectionConfig[] = [
                 "Prenez une capture d'écran de votre conversation favorite et uploadez-la sur notre plateforme. Formats acceptés : PNG, JPG, HEIC.",
               objective: "📱 Compatible avec tous les types de messages",
               image: {
-                src: "/images/upload_conversation.png",
+                src: "/images/step1_fr.png",
                 alt: "Upload de conversation",
               },
               layout: "text-image",
@@ -297,7 +297,7 @@ export const pageRenderConfig: SectionConfig[] = [
                 "Choisissez un template, ajustez les couleurs, polices et décorations. Prévisualisez le rendu final en temps réel.",
               objective: "🎨 Créativité illimitée",
               image: {
-                src: "/images/customize_design.png",
+                src: "/images/step2_fr.png",
                 alt: "Personnalisation du design",
               },
               layout: "image-text",
@@ -309,7 +309,7 @@ export const pageRenderConfig: SectionConfig[] = [
                 "Téléchargez votre création en HD ou commandez l'impression sur papier premium avec cadre inclus. Livraison à domicile.",
               objective: "🎁 Souvenir tangible prêt à offrir",
               image: {
-                src: "/images/final_frame.png",
+                src: "/images/step3_fr.png",
                 alt: "Cadre photo final",
               },
               layout: "text-image",
@@ -488,6 +488,14 @@ export const pageRenderConfig: SectionConfig[] = [
           customSolutionDescription:
             "Nous proposons des packages sur mesure combinant plusieurs services pour une transformation numérique complète.",
           customSolutionButtonText: "Planifier une consultation →",
+        },
+      },
+      {
+        id: "about",
+        component: "AboutContainer",
+        props: {
+          title: "À propos de nous",
+          description: "Nous sommes une entreprise de développement web et mobile",
         },
       },
     ],
