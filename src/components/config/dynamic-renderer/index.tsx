@@ -87,7 +87,7 @@ export function DynamicRenderer({ sections }: { sections: SectionConfig[] }): Re
 
         if (section.type === "section-full-width") {
           return (
-            <div key={`full-width-${sectionIndex}`} className="w-full flex flex-col mt-40 gap-40">
+            <div key={`full-width-${sectionIndex}`} className="w-full flex flex-col px-4 md:px-0 mt-40 gap-40">
               {section.components.map((config, index) => {
                 const Component = componentsMap[config.component];
                 if (!Component) return null;

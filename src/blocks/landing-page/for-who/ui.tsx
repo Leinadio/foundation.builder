@@ -42,7 +42,7 @@ export function ForWho({
   companySizes = defaultCompanySizes,
 }: ForWhoProps) {
   return (
-    <section className="flex flex-col gap-8 md:gap-10">
+    <section className="flex flex-col gap-8 md:gap-10 px-4 md:px-0">
       <Headline title={title} description={description} badge={{ text: badgeText, isBadge: false }} />
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
