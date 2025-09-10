@@ -22,7 +22,7 @@ export function Headline({ title, description, badge }: HeadlineProps) {
     return <p className={`text-sm lg:text-lg text-primary font-semibold uppercase`}>{badge.text}</p>;
   };
   return (
-    <div className="flex flex-col items-center gap-4 text-center mb-0 max-w-5xl mx-auto">
+    <div className="flex flex-col items-center gap-2 text-center mb-0 max-w-5xl mx-auto">
       {displayBadge()}
       <h2 className="text-4xl md:text-6xl font-semibold text-foreground leading-tight">{title}</h2>
       <p className="text-xl md:text-2xl text-muted-foreground max-w-4xl">{description}</p>

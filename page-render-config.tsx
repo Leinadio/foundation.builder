@@ -39,11 +39,11 @@ export const pageRenderConfig: SectionConfig[] = [
           badge: "💕 Pour les couples et amis",
           title: (
             <span className="inline-block">
-              <Highlighter action="underline" color="var(--primary)">
+              <Highlighter action="underline" color="var(--ring)">
                 Transformez{" "}
               </Highlighter>{" "}
               vos conversations en souvenirs{" "}
-              <Highlighter action="highlight" color="var(--primary)">
+              <Highlighter action="highlight" color="var(--ring)">
                 <span className="text-white">précieux</span>
               </Highlighter>{" "}
             </span>
@@ -61,8 +61,8 @@ export const pageRenderConfig: SectionConfig[] = [
         id: "video",
         component: "HeroVideoContainer",
         props: {
-          videoSrc: "/videos/hero_conversation_frame.mp4",
-          thumbnailSrc: "/videos/hero_conversation_frame_thumbnail.png",
+          videoSrc: "/videos/hero_en.mp4",
+          thumbnailSrc: "/videos/hero_en_thumbnail.png",
           thumbnailAlt: "Démo du service de cadre photo conversations",
         },
       },
@@ -162,6 +162,42 @@ export const pageRenderConfig: SectionConfig[] = [
               icon: Share2,
               title: "Partage facilité",
               description: "Partagez vos créations sur les réseaux ou gardez-les pour vous",
+            },
+          ],
+        },
+      },
+      {
+        id: "stats",
+        component: "StatsContainer",
+        props: {
+          heading: "Des créations à la portée de tous",
+          description: "Créez gratuitement, imprimez quand vous voulez",
+          link: {
+            text: "Commencer gratuitement",
+            url: "/",
+          },
+          stats: [
+            {
+              id: "stat-1",
+              value: "250%+",
+              label: "Conversations transformées",
+            },
+            {
+              id: "stat-2",
+              value: "$2.5m",
+              label: "Clients satisfaits",
+            },
+
+            {
+              id: "stat-3",
+              value: "200+",
+              label: "Templates disponibles",
+            },
+
+            {
+              id: "stat-4",
+              value: "99.9%",
+              label: "Taux de satisfaction",
             },
           ],
         },
@@ -472,74 +508,58 @@ export const pageRenderConfig: SectionConfig[] = [
             {
               id: "1",
               name: "Marie Dubois",
-              role: "CEO",
-              company: "TechStart",
-              content:
+              title: "CEO",
+              quote:
                 "Foundation Builder a révolutionné notre façon de développer nos produits. L'approche structurée nous a fait gagner des mois de développement.",
-              rating: 5,
             },
             {
               id: "2",
               name: "Jean Martin",
-              role: "CTO",
-              company: "InnovateLab",
-              content:
+              title: "CTO",
+              quote:
                 "Un outil exceptionnel qui nous permet de valider nos idées rapidement et efficacement. L'interface est intuitive et les résultats sont précis.",
-              rating: 5,
             },
             {
               id: "3",
               name: "Sophie Laurent",
-              role: "Product Manager",
-              company: "DigitalFlow",
-              content:
+              title: "Product Manager",
+              quote:
                 "Grâce à Foundation Builder, nous avons pu lancer notre produit 3 mois plus tôt que prévu. La qualité du code généré est impressionnante.",
-              rating: 5,
             },
             {
               id: "4",
               name: "Pierre Moreau",
-              role: "Développeur Senior",
-              company: "CodeCraft",
-              content:
+              title: "Développeur Senior",
+              quote:
                 "L'architecture hexagonale implémentée par Foundation Builder est parfaite. Le code est maintenable et évolutif.",
-              rating: 5,
             },
             {
               id: "5",
               name: "Emma Rousseau",
-              role: "Designer UX",
-              company: "CreativeStudio",
-              content:
+              title: "Designer UX",
+              quote:
                 "Les composants UI sont magnifiques et parfaitement intégrés. Foundation Builder respecte les meilleures pratiques de design.",
-              rating: 5,
             },
             {
               id: "6",
               name: "Thomas Bernard",
-              role: "Fondateur",
-              company: "StartupX",
-              content:
+              title: "Fondateur",
+              quote:
                 "Un boilerplate complet qui nous a fait économiser des semaines de configuration. Tout est prêt pour la production.",
-              rating: 5,
             },
             {
               id: "7",
               name: "Léa Petit",
-              role: "Lead Developer",
-              company: "WebAgency",
-              content:
+              title: "Lead Developer",
+              quote:
                 "Foundation Builder nous a permis de livrer des projets de qualité professionnelle en un temps record. Je le recommande vivement.",
-              rating: 5,
             },
             {
               id: "8",
               name: "Alexandre Durand",
-              role: "Directeur Technique",
-              company: "TechCorp",
-              content:
+              title: "Directeur Technique",
+              quote:
                 "L'approche Clean Architecture est parfaitement implémentée. Nos développeurs sont plus productifs et le code est plus robuste.",
-              rating: 5,
             },
           ],
         },

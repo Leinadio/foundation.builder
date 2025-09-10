@@ -16,3 +16,4 @@ export * from "./hero-row/hero-row-advanced";
 export * from "./hero-video";
 export * from "./services";
 export * from "./testimonials";
+export * from "./stats";

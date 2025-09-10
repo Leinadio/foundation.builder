@@ -18,6 +18,7 @@ import {
   HeroVideoContainer,
   ServicesContainer,
   TestimonialsContainer,
+  StatsContainer,
 } from "@/blocks/landing-page";
 import { ComponentBlock } from "@/components/config/dynamic-renderer/type";
 
@@ -47,6 +48,7 @@ const componentsMap: Record<string, React.ComponentType<any>> = {
   WithWithoutContainer,
   ServicesContainer,
   TestimonialsContainer,
+  StatsContainer,
 };
 
 export function DynamicRenderer({ sections }: { sections: SectionConfig[] }): ReactNode {
@@ -67,7 +69,7 @@ export function DynamicRenderer({ sections }: { sections: SectionConfig[] }): Re
 
         if (section.type === "section") {
           return (
-            <div key={`section-${sectionIndex}`} className="px-5 lg:px-0 mx-auto max-w-6xl flex flex-col mt-32 gap-32">
+            <div key={`section-${sectionIndex}`} className="px-5 lg:px-0 mx-auto max-w-6xl flex flex-col mt-40 gap-40">
               {section.components.map((config, index) => {
                 const Component = componentsMap[config.component];
                 if (!Component) return null;
@@ -83,7 +85,7 @@ export function DynamicRenderer({ sections }: { sections: SectionConfig[] }): Re
 
         if (section.type === "section-full-width") {
           return (
-            <div key={`full-width-${sectionIndex}`} className="w-full flex flex-col mt-32 gap-32">
+            <div key={`full-width-${sectionIndex}`} className="w-full flex flex-col mt-40 gap-40">
               {section.components.map((config, index) => {
                 const Component = componentsMap[config.component];
                 if (!Component) return null;

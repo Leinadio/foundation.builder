@@ -24,7 +24,7 @@ export function Hero({ badge, title, titleHighlight, description, children }: He
   const authSection = getChildrenByType<HeroAuthSectionProps>(children, HeroCtaSection);
 
   return (
-    <section className="px-8 pt-24 md:pt-20 justify-center text-center flex flex-col mx-auto max-w-5xl items-center gap-10">
+    <section className="px-8 pt-24 md:pt-20 justify-center text-center flex flex-col mx-auto max-w-5xl items-center gap-6">
       <div className="flex flex-col items-center gap-4">
         <Badge variant="default">{badge}</Badge>
         <ProductHuntBadge />
