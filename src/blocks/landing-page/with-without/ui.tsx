@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { X, Check, LucideIcon } from "lucide-react";
+import { X, Check, LucideIcon, MoveDown, MoveUp } from "lucide-react";
 import { Headline } from "@/components/shared/headline";
 
 export interface Scenario {
@@ -31,22 +31,19 @@ export function WithWithout({
 
       <div className="grid lg:grid-cols-2 gap-8">
         {/* Sans le produit */}
-        <Card className="border-red-900 rounded-4xl bg-red-50/50 dark:bg-red-950/20">
+        <Card>
           <CardHeader className="text-center">
-            <CardTitle className="text-2xl text-red-800 dark:text-red-100 flex items-center gap-2 justify-center">
-              <div className="w-8 h-8 bg-red-100 dark:bg-red-900 rounded-full flex items-center justify-center">
-                <X className="w-6 h-6 text-red-600 dark:text-red-300" />
-              </div>
+            <CardTitle className="text-lg flex items-center gap-2 justify-center">
+              <X className="w-7 h-7 text-red-600 dark:text-red-300" />
               Sans notre solution
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-6">
             {beforeScenarios.map((scenario) => {
-              const IconComponent = scenario.icon;
               return (
                 <div key={scenario.title} className="flex items-center gap-4">
-                  <IconComponent className="w-8 h-8 text-red-600 dark:text-red-300" />
-                  <p className="text-lg text-red-700 dark:text-red-300">{scenario.description}</p>
+                  <MoveDown size={24} className="text-red-600" />
+                  <p className="text-lg">{scenario.description}</p>
                 </div>
               );
             })}
@@ -54,22 +51,19 @@ export function WithWithout({
         </Card>
 
         {/* Avec le produit */}
-        <Card className="border-green-900 rounded-4xl bg-green-50/50 dark:bg-green-950/20">
+        <Card className="border-primary bg-primary/10">
           <CardHeader className="text-center">
-            <CardTitle className="text-2xl text-green-800 dark:text-green-100 flex items-center gap-2 justify-center">
-              <div className="w-8 h-8 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center">
-                <Check className="w-6 h-6 text-green-600 dark:text-green-300" />
-              </div>
+            <CardTitle className="text-lg flex items-center gap-2 justify-center">
+              <Check className="w-7 h-7 text-green-600 dark:text-green-300" />
               Avec notre solution
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-6">
             {afterScenarios.map((scenario, index) => {
-              const IconComponent = scenario.icon;
               return (
-                <div key={index} className="flex items-center gap-4">
-                  <IconComponent className="w-8 h-8 text-green-600 dark:text-green-300" />
-                  <p className="text-lg text-green-700 dark:text-green-300">{scenario.description}</p>
+                <div key={index} className="flex items-start gap-4">
+                  <MoveUp size={24} className="text-green-600" />
+                  <p className="text-lg ">{scenario.description}</p>
                 </div>
               );
             })}

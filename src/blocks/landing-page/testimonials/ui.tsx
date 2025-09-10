@@ -100,7 +100,7 @@ export function Testimonials({
       </div>
 
       {/* Testimonials Scroll */}
-      <div className="h-[40rem] rounded-md flex flex-col antialiased bg-white dark:bg-black dark:bg-grid-white/[0.05] items-center justify-center relative overflow-hidden">
+      <div className="h-[40rem] rounded-md flex flex-col antialiased items-center justify-center relative overflow-hidden">
         <InfiniteMovingCards items={testimonials} speed="slow" direction="right" />
         <InfiniteMovingCards speed="slow" items={testimonials} direction="left" />
       </div>

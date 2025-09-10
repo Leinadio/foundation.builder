@@ -61,7 +61,7 @@ function Arrow() {
 
 export function Problem({ title, description, badgeText, steps = defaultSteps }: ProblemProps) {
   return (
-    <div className="flex flex-col gap-20 bg-muted py-20">
+    <div className="flex flex-col gap-20 bg-muted/30 dark:bg-muted py-20">
       <Headline title={title} description={description} badge={{ text: badgeText, isBadge: false }} />
       <div className="py-8 rounded-xl flex flex-col md:flex-row items-center justify-center">
         {steps.map((step, index) => (
