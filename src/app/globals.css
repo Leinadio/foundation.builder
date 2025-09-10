@@ -154,6 +154,14 @@
   --shadow-lg: var(--shadow-lg);
   --shadow-xl: var(--shadow-xl);
   --shadow-2xl: var(--shadow-2xl);
+
+  --animate-scroll: scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite;
+
+  @keyframes scroll {
+    to {
+      transform: translate(calc(-50% - 0.5rem));
+    }
+  }
 }
 
 body {
@@ -196,15 +204,6 @@ body {
 
   .animate-fade-in-up.delay-400 {
     animation-delay: 0.6s;
-  }
-
-  .animate-scroll {
-    animation: scroll-seamless 20s linear infinite;
-  }
-
-  .animate-scroll-paused {
-    animation: scroll-seamless 20s linear infinite;
-    animation-play-state: paused;
   }
 }
 
