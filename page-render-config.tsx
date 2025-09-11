@@ -17,7 +17,7 @@ import {
   Gift,
 } from "lucide-react";
 import { IconPhoto, IconMessage, IconShare, IconFrame, IconStar } from "@tabler/icons-react";
-import { Highlighter } from "@/components/magicui/highlighter";
+import { Highlighter } from "@/components/ui/highlighter";
 
 export const pageRenderConfig: SectionConfig[] = [
   {
@@ -172,10 +172,6 @@ export const pageRenderConfig: SectionConfig[] = [
         props: {
           heading: "Des créations à la portée de tous",
           description: "Créez gratuitement, imprimez quand vous voulez",
-          link: {
-            text: "Commencer gratuitement",
-            url: "/",
-          },
           stats: [
             {
               id: "stat-1",
@@ -585,24 +581,48 @@ export const pageRenderConfig: SectionConfig[] = [
           description:
             "Que vous soyez en couple, entre amis ou en famille, gardez vos plus beaux échanges pour l'éternité.",
           badgeText: "POUR QUI",
-          companySizes: [
+          companies: [
             {
-              id: "couples",
-              title: "Couples amoureux",
+              id: "startups",
+              name: "Startups & Scale-ups",
+              role: "Entrepreneurs innovants",
               description:
-                "Immortalisez vos déclarations d'amour, vos petits mots doux et vos moments de complicité quotidienne.",
+                "Validez rapidement vos idées produit et testez vos concepts avant d'investir massivement. Gagnez du temps et réduisez les risques.",
+              socialLinks: {
+                twitter: "#",
+                github: "#",
+              },
             },
             {
-              id: "amis",
-              title: "Groupes d'amis",
+              id: "agencies",
+              name: "Agences digitales",
+              role: "Professionnels du web",
               description:
-                "Capturez vos blagues internes, vos souvenirs partagés et ces conversations qui vous font pleurer de rire.",
+                "Gérez facilement la validation d'idées pour plusieurs clients et créez des rapports professionnels qui impressionnent vos prospects.",
+              socialLinks: {
+                twitter: "#",
+              },
             },
             {
-              id: "famille",
-              title: "Familles unies",
+              id: "ecommerce",
+              name: "E-commerce",
+              role: "Vendeurs en ligne",
               description:
-                "Préservez les échanges touchants avec vos proches, les premiers mots de bébé ou les conseils des grands-parents.",
+                "Boostez vos campagnes marketing avec une validation d'idées claire pour vos nouveaux produits et services avant leur lancement.",
+              socialLinks: {
+                twitter: "#",
+                github: "#",
+              },
+            },
+            {
+              id: "consultants",
+              name: "Consultants",
+              role: "Experts métier",
+              description:
+                "Aidez vos clients à prendre des décisions éclairées grâce à des analyses rapides et des validations métier structurées.",
+              socialLinks: {
+                twitter: "#",
+              },
             },
           ],
         },
