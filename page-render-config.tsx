@@ -506,8 +506,30 @@ export const pageRenderConfig: SectionConfig[] = [
           title: "Rencontrez nos clients satisfaits",
           description: "Tous nos 1000+ clients sont satisfaits de nos services",
           badgeText: "TÉMOIGNAGES",
-          ctaText: "Commencer gratuitement",
-          ctaHref: "/app",
+          stats: [
+            {
+              id: "stat-1",
+              value: "250%+",
+              label: "Conversations transformées",
+            },
+            {
+              id: "stat-2",
+              value: "$2.5m",
+              label: "Clients satisfaits",
+            },
+
+            {
+              id: "stat-3",
+              value: "200+",
+              label: "Templates disponibles",
+            },
+
+            {
+              id: "stat-4",
+              value: "99.9%",
+              label: "Taux de satisfaction",
+            },
+          ],
           testimonials: [
             {
               id: "1",
