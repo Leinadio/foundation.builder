@@ -1,138 +1,153 @@
-import { Headline } from "@/components/shared/headline";
 import { ReactNode } from "react";
+import { Github, Twitter } from "lucide-react";
+import Image from "next/image";
 
 export interface CompanySize {
   id: string;
-  title: string;
+  name: string;
+  role: string;
   description: string;
+  avatar?: string;
+  socialLinks?: {
+    twitter?: string;
+    github?: string;
+  };
 }
 
 export interface ForWhoProps {
   title?: string | ReactNode;
   description?: string;
   badgeText?: string;
-  companySizes?: CompanySize[];
+  companies?: CompanySize[];
 }
 
-const defaultCompanySizes: CompanySize[] = [
+const defaultCompanies: CompanySize[] = [
   {
     id: "startups",
-    title: "Pour les startups & scaleups",
+    name: "Startups & Scale-ups",
+    role: "Entrepreneurs innovants",
     description:
-      "Validation d'idées simplifiée. Testez vos concepts rapidement et validez votre marché avant d'investir.",
+      "Validez rapidement vos idées produit et testez vos concepts avant d'investir massivement. Gagnez du temps et réduisez les risques.",
+    socialLinks: {
+      twitter: "#",
+      github: "#",
+    },
   },
   {
     id: "agencies",
-    title: "Pour les agences",
+    name: "Agences digitales",
+    role: "Professionnels du web",
     description:
-      "Gérez facilement la validation d'idées pour plusieurs clients et créez des rapports professionnels qui impressionnent.",
+      "Gérez facilement la validation d'idées pour plusieurs clients et créez des rapports professionnels qui impressionnent vos prospects.",
+    socialLinks: {
+      twitter: "#",
+    },
   },
   {
     id: "ecommerce",
-    title: "Pour l'e-commerce",
+    name: "E-commerce",
+    role: "Vendeurs en ligne",
     description:
-      "Boostez vos campagnes marketing avec une validation d'idées claire pour vos nouveaux produits et services.",
+      "Boostez vos campagnes marketing avec une validation d'idées claire pour vos nouveaux produits et services avant leur lancement.",
+    socialLinks: {
+      twitter: "#",
+      github: "#",
+    },
+  },
+  {
+    id: "consultants",
+    name: "Consultants",
+    role: "Experts métier",
+    description:
+      "Aidez vos clients à prendre des décisions éclairées grâce à des analyses rapides et des validations métier structurées.",
+    socialLinks: {
+      twitter: "#",
+    },
   },
 ];
+
+function TeamMemberCard({ member }: { member: CompanySize }) {
+  return (
+    <div className="flex flex-col space-y-6">
+      {/* Avatar */}
+      <div className="w-20 h-20 rounded-full bg-gradient-to-br from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-800 flex items-center justify-center">
+        {member.avatar ? (
+          <Image
+            src={member.avatar}
+            alt={member.name}
+            width={80}
+            height={80}
+            className="w-full h-full rounded-full object-cover"
+          />
+        ) : (
+          <div className="w-12 h-12 rounded-full bg-black dark:bg-white flex items-center justify-center">
+            <span className="text-white dark:text-black font-bold text-lg">
+              {member.name
+                .split(" ")
+                .map((n) => n[0])
+                .join("")}
+            </span>
+          </div>
+        )}
+      </div>
+
+      {/* Info */}
+      <div className="space-y-4">
+        <div>
+          <h3 className="text-xl font-semibold text-foreground">{member.name}</h3>
+          <p className="text-sm text-muted-foreground font-medium">{member.role}</p>
+        </div>
+
+        <p className="text-sm text-muted-foreground leading-relaxed">{member.description}</p>
+
+        {/* Social Links */}
+        {member.socialLinks && (
+          <div className="flex items-center gap-3">
+            {member.socialLinks.twitter && (
+              <a
+                href={member.socialLinks.twitter}
+                className="text-muted-foreground hover:text-foreground transition-colors"
+                aria-label={`${member.name} Twitter`}
+              >
+                <Twitter className="w-4 h-4" />
+              </a>
+            )}
+            {member.socialLinks.github && (
+              <a
+                href={member.socialLinks.github}
+                className="text-muted-foreground hover:text-foreground transition-colors"
+                aria-label={`${member.name} GitHub`}
+              >
+                <Github className="w-4 h-4" />
+              </a>
+            )}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
 
 export function ForWho({
   title = "Conçu pour toutes les tailles d'entreprise",
   description = "Donnez à toute votre équipe le pouvoir de valider des idées en 3 minutes ou moins. Aucune compétence en business plan requise.",
   badgeText = "POUR QUI",
-  companySizes = defaultCompanySizes,
+  companies = defaultCompanies,
 }: ForWhoProps) {
   return (
-    <section className="flex flex-col gap-8 md:gap-10 px-4 md:px-0">
-      <Headline title={title} description={description} badge={{ text: badgeText, isBadge: false }} />
-
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-        {/* Image à gauche */}
-        <div className="relative">
-          <div className="bg-gradient-to-br from-slate-50 to-slate-100 rounded-2xl p-8 relative overflow-hidden">
-            {/* Interface mockup */}
-            <div className="bg-white rounded-lg shadow-lg p-6 relative z-10">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-              </div>
-
-              {/* Search bar */}
-              <div className="flex items-center gap-2 p-3 bg-slate-50 rounded-lg mb-4">
-                <span className="text-slate-400">+</span>
-                <span className="text-slate-500 text-sm">Search within organization</span>
-              </div>
-
-              {/* Organization info */}
-              <div className="flex items-center gap-2 mb-4">
-                <span className="text-slate-400">▼</span>
-                <span className="text-slate-500 text-sm">25 people in this organization</span>
-              </div>
-
-              <div className="space-y-3">
-                <div className="flex items-center gap-3 p-3 bg-slate-50 rounded-lg">
-                  <div className="w-8 h-8 bg-slate-800 rounded-full flex items-center justify-center">
-                    <span className="text-white text-sm font-semibold">DR</span>
-                  </div>
-                  <div className="flex-1">
-                    <div className="text-sm font-medium">Dylan Roberts</div>
-                    <div className="text-xs text-slate-500">dylan@tulado.com</div>
-                  </div>
-                  <div className="text-xs bg-slate-200 text-slate-700 px-2 py-1 rounded">Administrator</div>
-                  <div className="w-4 h-4 text-slate-400">✏️</div>
-                </div>
-
-                <div className="flex items-center gap-3 p-3 hover:bg-slate-50 rounded-lg">
-                  <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
-                    <span className="text-white text-sm font-semibold">OW</span>
-                  </div>
-                  <div className="flex-1">
-                    <div className="text-sm font-medium">Olivia Williams</div>
-                    <div className="text-xs text-slate-500">olivia@tulado.com</div>
-                  </div>
-                  <div className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center">
-                    <span className="text-white text-xs">✓</span>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-3 p-3 hover:bg-slate-50 rounded-lg">
-                  <div className="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center">
-                    <span className="text-white text-sm font-semibold">IJ</span>
-                  </div>
-                  <div className="flex-1">
-                    <div className="text-sm font-medium">Isabella Johnson</div>
-                    <div className="text-xs text-slate-500">isabella@tulado.com</div>
-                  </div>
-                  <div className="w-6 h-6 border-2 border-slate-300 rounded-full flex items-center justify-center">
-                    <span className="text-slate-400 text-xs">+</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Avatars flottants */}
-            <div className="absolute top-4 right-4 w-12 h-12 bg-blue-500 rounded-full border-4 border-white shadow-lg flex items-center justify-center">
-              <span className="text-white font-semibold text-sm">JS</span>
-            </div>
-            <div className="absolute bottom-4 left-4 w-10 h-10 bg-slate-400 rounded-full border-4 border-white shadow-lg"></div>
-            <div className="absolute top-20 left-8 w-8 h-8 bg-slate-300 rounded-full border-4 border-white shadow-lg"></div>
-            <div className="absolute bottom-20 right-8 w-10 h-10 bg-slate-600 rounded-full border-4 border-white shadow-lg"></div>
-            <div className="absolute bottom-32 right-16 w-12 h-12 bg-orange-400 rounded-full border-4 border-white shadow-lg"></div>
-          </div>
+    <section className="flex flex-col gap-8 md:gap-16 px-4 md:px-0">
+      <div className="text-left max-w-2xl">
+        <div className="inline-flex items-center gap-2 px-3 py-1 bg-muted rounded-full text-sm font-medium text-muted-foreground mb-6">
+          👥 {badgeText}
         </div>
+        <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">{title}</h2>
+        <p className="text-lg text-muted-foreground">{description}</p>
+      </div>
 
-        {/* Contenu à droite */}
-        <div className="space-y-8">
-          {companySizes.map((size) => (
-            <div key={size.id} className="flex gap-4">
-              <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-              <div>
-                <h3 className="text-xl font-semibold mb-2">{size.title}</h3>
-                <p className="leading-relaxed text-muted-foreground">{size.description}</p>
-              </div>
-            </div>
-          ))}
-        </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+        {companies.map((company) => (
+          <TeamMemberCard key={company.id} member={company} />
+        ))}
       </div>
     </section>
   );
