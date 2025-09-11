@@ -23,7 +23,7 @@ function HeroRowVisualSection({ children }: HeroRowVisualSectionProps) {
 
 export interface HeroRowProps {
   badge: string;
-  title: string;
+  title: ReactNode;
   description: string;
   children?: ReactNode;
   className?: string;
@@ -49,7 +49,7 @@ export function HeroRow({ badge, title, description, children, className }: Hero
     <section className={cn("px-8 pt-24 md:pt-36 mx-auto max-w-7xl", className)}>
       <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
         {/* Section de contenu - Gauche */}
-        <div className="flex-1 text-center lg:text-left space-y-6">
+        <div className="flex-1 text-center lg:text-left space-y-4">
           <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
             <Badge variant="default" className="animate-fade-in">
               {badge}
@@ -68,11 +68,6 @@ export function HeroRow({ badge, title, description, children, className }: Hero
           {ctaSection?.props.children && (
             <div className="animate-fade-in-up delay-300">{ctaSection.props.children}</div>
           )}
-
-          <div className="flex items-center justify-center lg:justify-start gap-2 text-sm text-muted-foreground animate-fade-in-up delay-400">
-            <Icons variant={Variant.ArrowDown1} className="w-4 h-4" />
-            <span>Découvrez comment ça fonctionne</span>
-          </div>
         </div>
 
         {/* Section visuelle - Droite */}

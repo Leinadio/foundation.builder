@@ -167,9 +167,9 @@ export function HowItWork({
 }: HowItWorkProps) {
   const rows = buildRows(steps);
   return (
-    <section className="flex flex-col gap-8 md:gap-10">
+    <section className="flex flex-col gap-8 md:gap-28">
       <Headline title={title} description={description} badge={{ text: badgeText, isBadge: false }} />
-      {rows}
+      <div className="flex flex-col gap-8 md:gap-16">{rows}</div>
     </section>
   );
 }
