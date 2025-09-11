@@ -17,7 +17,7 @@ import {
   Gift,
 } from "lucide-react";
 import { IconPhoto, IconMessage, IconShare, IconFrame, IconStar } from "@tabler/icons-react";
-import { Highlighter } from "@/components/magicui/highlighter";
+import { Highlighter } from "@/components/ui/highlighter";
 
 export const pageRenderConfig: SectionConfig[] = [
   {
